@@ -14,12 +14,14 @@ class CreateDoadorsTable extends Migration
     public function up()
     {
         Schema::create('doadors', function (Blueprint $table) {
+            $table->bigIncrements('Id');
             $table->string('Nome');
            $table->unique('E-mail');
            $table->string('CPF');
            $table->string('CNPJ');
            $table->string('Telefone');
-           $table->string("Instituicao");
+           $table->string('Instituicao');
+           $table->timestamps();
         });
     }
 

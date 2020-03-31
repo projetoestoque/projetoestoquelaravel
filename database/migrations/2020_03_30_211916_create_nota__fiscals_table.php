@@ -31,6 +31,6 @@ class CreateNotaFiscalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nota__fiscals');
+       Schema::dropIfExists('nota__fiscals');
     }
 }

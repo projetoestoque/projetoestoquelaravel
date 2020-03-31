@@ -18,5 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/produto', ['as'=> 'produto', 'uses'=>'CadastroController@produto']);
+Route::get('/doador', ['as'=> 'doador', 'uses'=>'CadastroController@doador']);
 
 Route::post('/produto/cadastrar', ['as'=> 'produto.cadastrar', 'uses'=>'CadastroController@cadastrarProduto']);
+Route::post('/doador/cadastrar', ['as'=> 'doador.cadastrar', 'uses'=>'CadastroController@cadastrarDoador']);
