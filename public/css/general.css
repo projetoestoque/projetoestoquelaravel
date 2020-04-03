@@ -1,0 +1,18 @@
+.nav-form{
+    height: 15px; line-height: 15px;
+    
+}
+.input-field input[type=text]:focus + label {
+    color: #0d47a1 ;
+}
+.input-field input[type=number]:focus + label {
+    color: #0d47a1 ;
+}
+.input-field input[type=text]:focus {
+     border-bottom: 1px solid #0d47a1 ;
+     box-shadow: 0 1px 0 0 #0d47a1 ;
+   }
+   .input-field input[type=number]:focus {
+    border-bottom: 1px solid #0d47a1 ;
+    box-shadow: 0 1px 0 0 #0d47a1 ;
+  }

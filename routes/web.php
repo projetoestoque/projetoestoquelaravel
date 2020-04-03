@@ -16,9 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/login', ['as'=> 'login', 'uses'=>'LoginController@index']);
+Route::post('/login/entrar', ['as'=> 'login.entrar', 'uses'=>'LoginController@entrar']);
+Route::get('/login/sair', ['as'=> 'login.sair', 'uses'=>'LoginController@sair']);
 
-Route::get('/produto', ['as'=> 'produto', 'uses'=>'CadastroController@produto']);
-Route::get('/doador', ['as'=> 'doador', 'uses'=>'CadastroController@doador']);
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('/produto', ['as'=> 'produto', 'uses'=>'CadastroController@produto']);
+    Route::get('/doador', ['as'=> 'doador', 'uses'=>'CadastroController@doador']);
 
-Route::post('/produto/cadastrar', ['as'=> 'produto.cadastrar', 'uses'=>'CadastroController@cadastrarProduto']);
-Route::post('/doador/cadastrar', ['as'=> 'doador.cadastrar', 'uses'=>'CadastroController@cadastrarDoador']);
+    Route::post('/produto/cadastrar', ['as'=> 'produto.cadastrar', 'uses'=>'CadastroController@cadastrarProduto']);
+    Route::post('/doador/cadastrar', ['as'=> 'doador.cadastrar', 'uses'=>'CadastroController@cadastrarDoador']);
+});
