@@ -1,94 +1,69 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('template.site')
 
-        <title>Laravel</title>
+@section('titulo','Doador')
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
+@section('conteudo')
+<br>
+<h3 class="center-align"><b>Cadastrar novo Doador</h3>
+<br>
+<div class="container z-depth-2 valing-wrapper">
+<nav class="nav-form blue darken-4" ></nav>
         <form action="{{route('doador.cadastrar')}}" method="post">
             {{csrf_field()}}
-        <h1>Nome</h1>
-        <input type="text" name="nome"> 
-        <label>Nome</label>
-        <h1>Email</h1>
-        <input type="text" name="E-mail"> 
-        <label>Email</label>
-        <h1>CPF</h1>
-        <input type="text" name="cpf"> 
-        <label>CPF</label>
-        <h1>CNPJ</h1>
-        <input type="text" name="cnpj"> 
-        <label>CNPJ</label>
-        <h1>Telefone</h1>
-        <input type="text" name="telefone"> 
-        <label>Telefone</label>
-        <h1>Instituição</h1>
-        <input type="text" name="instituicao"> 
-        <label>Instituição</label>
-        
-        
-        
+        <br>
+        <div class="row">
+            <div class="col s1"></div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix">mode_edit</i>
+                <input type="text" name="nome">
+                <label>Nome</label>
+            </div>
+            <div class="col s2"></div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix">mail</i>
+                <input type="email" class="E-mail">
+                <label>Email</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s1"></div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix">assignment_ind</i>
+                <input type="text" name="cpf">
+                <label>CPF</label>
+            </div>
+            <div class="col s2"></div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix">gavel</i>
+                <input type="text" class="cnpj">
+                <label>CNPJ</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s1"></div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix">call</i>
+                <input type="tel" name="telefone">
+                <label>Telefone</label>
+            </div>
+            <div class="col s2"></div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix">location_city</i>
+                <input type="text" class="instituicao">
+                <label>Instituição</label>
+            </div>
+        </div>
+        <div class="row valign center">
+            <button class="btn waves-effect waves-light blue darken-4"><b>Submit
+                    <i class="material-icons right">send</i>
+            </button>
+        </div>
+        <br>
 
-        <button>Cadastrar</button>
     </form>
-    </body>
-</html>
+    </div>
+    </div>
+    <br>
+    <br>
+    <br>
+@endsection

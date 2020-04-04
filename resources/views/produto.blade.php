@@ -1,97 +1,106 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('template.site')
 
-        <title>Laravel</title>
+@section('titulo','Produtos')
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+@section('conteudo')
+<br>
+<h3 class="center-align"><b>Cadastrar novo Produto</h3>
+<br>
+<div class="container z-depth-2 valing-wrapper">
+    <nav class="nav-form blue darken-4"></nav>
+    <form action="{{route('produto.cadastrar')}}" method="post">
+        {{csrf_field()}}
+        <br>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+        <div class="row">
+            <div class="col s1"></div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix">mode_edit</i>
+                <input type="text" name="nome">
+                <label>Nome</label>
+            </div>
+            <div class="col s2"></div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix">access_time</i>
+                <input type="text" class="datepicker">
+                <label>Vencimento</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s1"></div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix">plus_one</i>
+                <input type="number" name="quantidade">
+                <label>Quantidade</label>
+            </div>
+            <div class="col s2"></div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix">fitness_center</i>
+                <select name="medida">
+                    <option value="" disabled selected>Escolha a medida</option>
+                    <option value="kg">Kilo(Kg)</option>
+                    <option value="grama">Grama(g)</option>
+                    <option value="litro">Litro(l)</option>
+                </select>
+                <label>Medida</label>
+            </div>
+            <div class="col s1"></div>
+        </div>
 
-            .full-height {
-                height: 100vh;
-            }
+        <div class="row">
+            <div class="col s1"></div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix">domain</i>
+                <input type="number" name="codigo_barra">
+                <label>Codigo de barra</label>
+            </div>
+            <div class="col s2"></div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix">layers</i>
+                <select name="tipo">
+                    <option value="" disabled selected>Escolha o tipo do Produto</option>
+                    <option value="X">X</option>
+                    <option value="Y">Y</option>
+                </select>
+                <label>Doador</label>
+            </div>
+            <div class="col s1"></div>
+        </div>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <form action="{{route('produto.cadastrar')}}" method="post">
-            {{csrf_field()}}
-        <h1>Nome</h1>
-        <input type="text" name="nome"> 
-        <label>Nome</label>
-        <h1>Vencimento</h1>
-        <input type="text" name="vencimento"> 
-        <label>Vencimento</label>
-        <h1>Quantidade</h1>
-        <input type="number" name="quantidade"> 
-        <label>Quantidade</label>
-        <h1>Medida</h1>
-        <input type="text" name="medida"> 
-        <label>Medida</label>
-        <h1>Codigo_barra</h1>
-        <input type="number" name="codigo_barra"> 
-        <label>Codigo_barro</label>
-        <h1>Tipo</h1>
-        <input type="text" name="tipo"> 
-        <label>Tipo</label>
-        <h1>Marca</h1>
-        <input type="text" name="marca"> 
-        <label>Marca</label>
-        <h1>Doador</h1>
-        <input type="text" name="doador"> 
-        <label>Doador</label>
-
-        <button>Cadastrar</button>
+        <div class="row">
+            <div class="col s1"></div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix"> copyright</i>
+                <select name="marca">
+                    <option value="" disabled selected>Escolha a marca</option>
+                    <option value="X">Marca X</option>
+                    <option value="Y">Marca Y</option>
+                </select>
+                <label>Doador</label>
+            </div>
+            <div class="col s2"></div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix"> account_box</i>
+                <select name="doador">
+                    <option value="" disabled selected>Escolha o doador</option>
+                    <option value="0">0- Doador Anônimo</option>
+                    <option value="1">1- Recursos Próprios</option>
+                    <option value="2">2- Doador X</option>
+                </select>
+                <label>Doador</label>
+            </div>
+            <div class="col s1"></div>
+        </div>
+        <div class="row valign center">
+            <button class="btn waves-effect waves-light blue darken-4"><b>Submit
+                    <i class="material-icons right">send</i>
+            </button>
+        </div>
+        <br>
     </form>
-    </body>
-</html>
+</div>
+<br>
+<br>
+<br>
+@endsection
+
