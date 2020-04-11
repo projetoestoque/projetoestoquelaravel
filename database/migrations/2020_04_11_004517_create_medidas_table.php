@@ -15,11 +15,9 @@ class CreateMedidasTable extends Migration
     {
         Schema::create('medidas', function (Blueprint $table) {
             $table->bigIncrements('Id');
-            $table->unsignedBigInteger('Id_produto');
             $table->string('Medida');
             $table->timestamps();
             
-            $table->foreign('Id_produto')-> references('Id')->on('Produtos');
         });
     }
 

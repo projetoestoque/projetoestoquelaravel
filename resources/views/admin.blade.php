@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>HOME</title>
+        <title>Administrador</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -13,7 +13,7 @@
         
     </head>
     <body>
-        <h1>Página temporaria</h1>
+        <h1>Página temporaria do admin</h1>
         <button><a href="{{route('produto')}}">cadastro de produtos</a></button><br/>
         <button><a href="{{route('doador')}}">cadastro de doadores</a></button><br/>
         <button><a href="{{route('admin.marca')}}">cadastro de marcas</a></button><br/>

@@ -36,15 +36,13 @@ Route::post('/produto/cadastrar', ['as'=> 'produto.cadastrar', 'uses'=>'Cadastro
 Route::post('/doador/cadastrar', ['as'=> 'doador.cadastrar', 'uses'=>'CadastroController@cadastrarDoador']);
 
 
-	Route::get('/admin/marca', ['as'=> 'admin.marca', 'uses'=>'CadastroController@marca']);
-	Route::get('/admin/tipo', ['as'=> 'admin.tipo', 'uses'=>'CadastroController@tipo']);
-	Route::get('/admin/medida', ['as'=> 'admin.medida', 'uses'=>'CadastroController@medida']);
+Route::get('/admin/marca', ['as'=> 'admin.marca', 'uses'=>'CadastroController@marca']);
+Route::get('/admin/tipo', ['as'=> 'admin.tipo', 'uses'=>'CadastroController@tipo']);
+Route::get('/admin/medida', ['as'=> 'admin.medida', 'uses'=>'CadastroController@medida']);
 
-	Route::post('/admin/marca/cadastrar', ['as'=> 'admin.marca.cadastrar', 'uses'=>'CadastroController@marcaCadastrar']);
-	Route::post('/admin/tipo/cadastrar', ['as'=> 'admin.tipo.cadastrar', 'uses'=>'CadastroController@tipoCadastrar']);
-	Route::post('/admin/medida/cadastrar', ['as'=> 'admin.medida.cadastrar', 'uses'=>'CadastroController@produtoCadastrar']);
-
-
+Route::post('/admin/marca/cadastrar', ['as'=> 'admin.marca.cadastrar', 'uses'=>'CadastroController@cadastrarMarca']);
+Route::post('/admin/tipo/cadastrar', ['as'=> 'admin.tipo.cadastrar', 'uses'=>'CadastroController@cadastrarTipo']);
+Route::post('/admin/medida/cadastrar', ['as'=> 'admin.medida.cadastrar', 'uses'=>'CadastroController@cadastrarMedida']);
 
 
 Route::get('/admin', ['as'=> 'admin', 'uses'=>'AdminController@logado']);

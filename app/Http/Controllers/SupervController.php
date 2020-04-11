@@ -41,13 +41,18 @@ class SupervController extends Controller
         ];
 
         if (auth()->guard('superv')->attempt($credentiails)) {
-          return redirect('/superv');
+          return redirect()->route('superv');
         } else {
           return redirect('/superv/login')
             ->withErrors(['erros' => 'Login inválido !'])
             ->withInput();
         }
 
+    }
+
+    public function sair(){
+        auth()->guard('superv')->logout();
+        return redirect()->route('superv.login');
     }
 
     public function logado () {

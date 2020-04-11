@@ -15,10 +15,8 @@ class CreateTiposTable extends Migration
     {
         Schema::create('tipos', function (Blueprint $table) {
             $table->bigIncrements('Id');
-            $table->unsignedBigInteger('Id_produto');
-            $table->string('Tipo');
-
-            $table->foreign('Id_produto')->references('Id')->on('Produtos');
+	    $table->string('Tipo');
+	    $table->timestamps();
         });
     }
 

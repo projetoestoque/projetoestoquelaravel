@@ -42,7 +42,7 @@ class AdminController extends Controller
         ];
 
         if (auth()->guard('admin')->attempt($credentiails)) {
-          return redirect('/admin');
+          return redirect()->route('admin');
         } else {
           return redirect('/admin/login')
             ->withErrors(['erros' => 'Login inválido !'])
