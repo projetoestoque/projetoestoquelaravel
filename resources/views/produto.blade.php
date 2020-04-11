@@ -16,13 +16,13 @@
             <div class="col s1"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">mode_edit</i>
-                <input type="text" name="nome">
+                <input required type="text" name="nome">
                 <label>Nome</label>
             </div>
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">access_time</i>
-                <input type="text" class="datepicker">
+                <input required type="text" name="vencimento" class="datepicker">
                 <label>Vencimento</label>
             </div>
         </div>
@@ -30,13 +30,13 @@
             <div class="col s1"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">plus_one</i>
-                <input type="number" name="quantidade">
+                <input required type="number" name="quantidade">
                 <label>Quantidade</label>
             </div>
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">fitness_center</i>
-                <select name="medida">
+                <select required name="medida">
                     <option value="" disabled selected>Escolha a medida</option>
                     <option value="kg">Kilo(Kg)</option>
                     <option value="grama">Grama(g)</option>
@@ -51,13 +51,13 @@
             <div class="col s1"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">domain</i>
-                <input type="number" name="codigo_barra">
+                <input required type="number" name="codigo_barra">
                 <label>Codigo de barra</label>
             </div>
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">layers</i>
-                <select name="tipo">
+                <select required name="tipo">
                     <option value="" disabled selected>Escolha o tipo do Produto</option>
                     <option value="X">X</option>
                     <option value="Y">Y</option>
@@ -71,7 +71,7 @@
             <div class="col s1"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix"> copyright</i>
-                <select name="marca">
+                <select required name="marca">
                     <option value="" disabled selected>Escolha a marca</option>
                     <option value="X">Marca X</option>
                     <option value="Y">Marca Y</option>
@@ -81,7 +81,7 @@
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix"> account_box</i>
-                <select name="doador">
+                <select required name="doador">
                     <option value="" disabled selected>Escolha o doador</option>
                     <option value="0">0- Doador Anônimo</option>
                     <option value="1">1- Recursos Próprios</option>

@@ -12,7 +12,7 @@ class LoginController extends Controller
     }
     public function entrar(Request $req){
         $dados=$req->all();
-        if(Auth::attempt(['name'=>$dados['nome'],'password'=>$dados['senha']])){
+        if(Auth::attempt(['name'=>$dados['name'],'password'=>$dados['password']])){
             return redirect()->route('produto');
         }
         return redirect()->route('login');

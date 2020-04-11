@@ -11,6 +11,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call(UsuarioSeeder::class);
+        DB::table('admins')->insert([
+            'Nome'=>'Carlos Admin',
+            'Usuario'=>'administrador',
+            'password'=> Hash::make('administrador123'),
+        ]);
+        DB::table('supervs')->insert([
+            'Nome'=>'Carlos Sup',
+            'Usuario'=>'supervisor',
+            'password'=> Hash::make('supervisor123'),
+        ]);
+         //$this->call(AdministradorSeeder::class);
+         //$this->call(SupervisorSeeder::class);
     }
 }
