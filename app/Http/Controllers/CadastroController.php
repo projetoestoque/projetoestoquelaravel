@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Produto;
 use App\Doador;
+use App\Marca;
+use App\Tipo;
+use App\Medida;
 
 class CadastroController extends Controller
 {
@@ -15,10 +18,25 @@ class CadastroController extends Controller
 
     public function cadastrarProduto(Request $req)
     {
-    	$dados=$req->all();
-    	Produto::create($dados);
+    	$dados = $req->all();
+        Produto::create($dados);
+        
+        // $produto = new Produto;
+        // $produto->nome = $dados['nome'];
+        // $produto->vencimento = $dados['vencimento'];
+        // $produto->quantidade = $dados['quantidade'];
+        // $produto->medidade = $dados['medida'];
+        // $produto->codigo_barra = $dados['codigo_barra'];
+        // $produto->tipo = $dados['tipo'];
+        // $produto->marca = $dados['marca'];
+        // $produto->doador = $dados['doador'];
 
-    	return view('/produto');
+        
+        
+
+        //$produto->save();
+
+    	return redirect()->route('produto');
     }
 
     public function doador()
@@ -28,10 +46,36 @@ class CadastroController extends Controller
 
     public function cadastrarDoador(Request $req)
     {
-    	$dados=$req->all();
-    	Doador::create($dados);
+    	Doador::create($req->all());
 
-    	return view('/doador');
+    	return redirect()->route('doador');
+    }
+
+    public function marca () {
+        return view('admin.marca');
+    }
+
+    public function tipo () {
+        return view('admin.tipo');
+    }
+
+    public function medida () {
+        return view('admin.medida');
+    }
+
+    public function cadastrarMarca (Request $req) {
+        Marca::create($req->all());
+        return redirect()->route('admin.marca');
+    }
+
+     public function cadastrarTipo (Request $req) {
+        Tipo::create($req->all());
+        return redirect()->route('admin.tipo');
+    }
+
+    public function cadastrarMedida (Request $req) {
+        Medida::create($req->all());
+        return redirect()->route('admin.medida');
     }
 
 }

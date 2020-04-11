@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRelatoriosTable extends Migration
+class Relatorios extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateRelatoriosTable extends Migration
      */
     public function up()
     {
-        Schema::create('relatorios', function (Blueprint $table) {
+        Schema::create('Relatorios', function (Blueprint $table) {
             $table->bigIncrements('Id');
             $table->unsignedBigInteger('Id_estoque');
             $table->unsignedBigInteger('Id_produto');
@@ -23,8 +23,8 @@ class CreateRelatoriosTable extends Migration
             $table->string('Anual');
             $table->timestamps();
 
-            $table->foreign('Id_estoque')->references('Id')->on('Estoque');
-            $table->foreign('Id_produto')->references('Id')->on('Produto');
+            $table->foreign('Id_estoque')->references('Id')->on('Estoques');
+            $table->foreign('Id_produto')->references('Id')->on('Produtos');
         });
     }
 
@@ -35,6 +35,6 @@ class CreateRelatoriosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('relatorios');
+        Schema::dropIfExists('Relatorio');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddMedidaTableProdutos extends Migration
+class CreateTiposTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AddMedidaTableProdutos extends Migration
      */
     public function up()
     {
-        Schema::table('produtos', function (Blueprint $table) {
-            $table->string('Medida');
+        Schema::create('tipos', function (Blueprint $table) {
+            $table->bigIncrements('Id');
+	    $table->string('Tipo');
+	    $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ class AddMedidaTableProdutos extends Migration
      */
     public function down()
     {
-        Schema::table('produtos', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('tipos');
     }
 }

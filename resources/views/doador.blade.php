@@ -21,7 +21,7 @@
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">mail</i>
-                <input type="email" class="E-mail">
+                <input type="email" name="e-mail"  class="E-mail">
                 <label>Email</label>
             </div>
         </div>
@@ -35,7 +35,7 @@
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">gavel</i>
-                <input type="text" class="cnpj">
+                <input type="text" name="cnpj" class="cnpj">
                 <label>CNPJ</label>
             </div>
         </div>
@@ -49,7 +49,7 @@
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">location_city</i>
-                <input type="text" class="instituicao">
+                <input type="text" name="instituicao"  class="instituicao">
                 <label>Instituição</label>
             </div>
         </div>
