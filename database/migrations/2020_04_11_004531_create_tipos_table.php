@@ -18,7 +18,7 @@ class CreateTiposTable extends Migration
             $table->unsignedBigInteger('Id_produto');
             $table->string('Tipo');
 
-            $table->foreign('Id_produto')->references('Id')->on('Produto');
+            $table->foreign('Id_produto')->references('Id')->on('Produtos');
         });
     }
 

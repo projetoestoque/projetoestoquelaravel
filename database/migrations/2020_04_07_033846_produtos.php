@@ -13,12 +13,12 @@ class Produtos extends Migration
      */
     public function up()
     {
-        Schema::create('Produto', function (Blueprint $table) {
+        Schema::create('Produtos', function (Blueprint $table) {
             $table->bigIncrements('Id');
             $table->string('Nome');
             $table->string('Vencimento');
             $table->integer('Quantidade');
-            $table->decimal('Medidade');
+            $table->decimal('Medida');
             $table->integer('Codigo_barra');
             $table->string('Tipo');
             $table->string('Marca');

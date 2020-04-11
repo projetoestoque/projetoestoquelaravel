@@ -13,7 +13,7 @@ class Administradors extends Migration
      */
     public function up()
     {
-        Schema::create('Administrador', function (Blueprint $table) {
+        Schema::create('Administradors', function (Blueprint $table) {
             $table->bigIncrements('Id');
             $table->unsignedBigInteger('Id_estoque');
             $table->unsignedBigInteger('Id_produto');
@@ -30,15 +30,15 @@ class Administradors extends Migration
             $table->string('Senha');
             $table->rememberToken();
 
-            $table->foreign('Id_estoque')->references('Id')->on('Estoque');
-            $table->foreign('Id_produto')->references('Id')->on('Produto');
-            $table->foreign('Id_relatorio')->references('Id')->on('Relatorio');
-            $table->foreign('Id_nota_fiscal')->references('Id')->on('Nota_fiscal');
-            $table->foreign('Id_supervisor')->references('Id')->on('Supervisor');
-            $table->foreign('Id_doador')->references('Id')->on('Doador');
-            $table->foreign('Id_medida')->references('Id')->on('Medida');
-            $table->foreign('Id_tipo')->references('Id')->on('Tipo');
-            $table->foreign('Id_marca')->references('Id')->on('Marca');
+            $table->foreign('Id_estoque')->references('Id')->on('Estoques');
+            $table->foreign('Id_produto')->references('Id')->on('Produtos');
+            $table->foreign('Id_relatorio')->references('Id')->on('Relatorios');
+            $table->foreign('Id_nota_fiscal')->references('Id')->on('Nota_fiscals');
+            $table->foreign('Id_supervisor')->references('Id')->on('Supervisors');
+            $table->foreign('Id_doador')->references('Id')->on('Doadors');
+            $table->foreign('Id_medida')->references('Id')->on('Medidas');
+            $table->foreign('Id_tipo')->references('Id')->on('Tipos');
+            $table->foreign('Id_marca')->references('Id')->on('Marcas');
         });
     }
 

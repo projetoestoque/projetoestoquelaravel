@@ -18,7 +18,7 @@ class CreateMarcasTable extends Migration
             $table->unsignedBigInteger('Id_produto');
             $table->string('Marca');
 
-            $table->foreign('Id_produto')->references('Id')->on('Produto');
+            $table->foreign('Id_produto')->references('Id')->on('Produtos');
         });
     }
 

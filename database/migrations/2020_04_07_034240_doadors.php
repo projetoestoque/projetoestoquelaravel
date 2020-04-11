@@ -13,9 +13,8 @@ class Doadors extends Migration
      */
     public function up()
     {
-        Schema::create('Doador', function (Blueprint $table) {
+        Schema::create('Doadors', function (Blueprint $table) {
             $table->bigIncrements('Id');
-            $table->unsignedBigInteger('Id_produto');
             $table->string('Nome');
             $table->string('E-mail');
             $table->string('CPF');
@@ -23,8 +22,6 @@ class Doadors extends Migration
             $table->string('Telefone');
             $table->string('Instituicao');
             $table->timestamps();
-
-            $table->foreign('Id_produto')-> references('Id')->on('Produto');
         });
     }
 

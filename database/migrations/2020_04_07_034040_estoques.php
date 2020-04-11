@@ -13,12 +13,12 @@ class Estoques extends Migration
      */
     public function up()
     {
-        Schema::create('Estoque', function (Blueprint $table) {
+        Schema::create('Estoques', function (Blueprint $table) {
             $table->bigIncrements('Id');
             $table->unsignedBigInteger('Id_produto');
             $table->timestamps();
 
-            $table->foreign('Id_produto')->references('Id')->on('Produto');
+            $table->foreign('Id_produto')->references('Id')->on('Produtos');
         });
     }
 

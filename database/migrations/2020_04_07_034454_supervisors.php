@@ -13,7 +13,7 @@ class Supervisors extends Migration
      */
     public function up()
     {
-        Schema::create('Supervisor', function (Blueprint $table) {
+        Schema::create('Supervisors', function (Blueprint $table) {
             $table->bigIncrements('Id');
             $table->unsignedBigInteger('Id_estoque');
             $table->unsignedBigInteger('Id_produto');
@@ -27,11 +27,11 @@ class Supervisors extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('Id_estoque')->references('Id')->on('Estoque');
-            $table->foreign('Id_produto')->references('Id')->on('Produto');
-            $table->foreign('Id_relatorio')->references('Id')->on('Relatorio');
-            $table->foreign('Id_nota_fiscal')->references('Id')->on('Nota_fiscal');
-            $table->foreign('Id_doador')->references('Id')->on('Doador');
+            $table->foreign('Id_estoque')->references('Id')->on('Estoques');
+            $table->foreign('Id_produto')->references('Id')->on('Produtos');
+            $table->foreign('Id_relatorio')->references('Id')->on('Relatorios');
+            $table->foreign('Id_nota_fiscal')->references('Id')->on('Nota_fiscals');
+            $table->foreign('Id_doador')->references('Id')->on('Doadors');
         });
     }
 

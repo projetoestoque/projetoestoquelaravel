@@ -19,7 +19,7 @@ class CreateMedidasTable extends Migration
             $table->string('Medida');
             $table->timestamps();
             
-            $table->foreign('Id_produto')-> references('Id')->on('Produto');
+            $table->foreign('Id_produto')-> references('Id')->on('Produtos');
         });
     }
 

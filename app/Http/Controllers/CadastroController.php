@@ -34,9 +34,9 @@ class CadastroController extends Controller
         
         
 
-        $produto->save();
+        //$produto->save();
 
-    	return view('/produto');
+    	return redirect()->route('produto');
     }
 
     public function doador()
@@ -46,10 +46,9 @@ class CadastroController extends Controller
 
     public function cadastrarDoador(Request $req)
     {
-    	$dados=$req->all();
-    	Doador::create($dados);
+    	Doador::create($req->all());
 
-    	return view('/doador');
+    	return redirect()->route('doador');
     }
 
     public function marca () {
@@ -66,17 +65,17 @@ class CadastroController extends Controller
 
     public function cadastrarMarca (Request $req) {
         Marca::create($req->all());
-        return redirect('/');
+        return redirect()->route('admin.marca');
     }
 
      public function cadastrarTipo (Request $req) {
         Tipo::create($req->all());
-        return redirect('/');
+        return redirect()->route('admin.tipo');
     }
 
     public function cadastrarMedida (Request $req) {
         Medida::create($req->all());
-        return redirect('/');
+        return redirect()->route('admin.medida');
     }
 
 }
