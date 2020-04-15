@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Administradors extends Migration
+class CreateAdministradorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class Administradors extends Migration
      */
     public function up()
     {
-        Schema::create('Administradors', function (Blueprint $table) {
+        Schema::create('administradors', function (Blueprint $table) {
             $table->bigIncrements('Id');
             $table->unsignedBigInteger('Id_estoque');
             $table->unsignedBigInteger('Id_produto');
@@ -49,6 +49,6 @@ class Administradors extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Administrador');
+        Schema::dropIfExists('administradors');
     }
 }
