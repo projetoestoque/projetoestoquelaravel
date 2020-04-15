@@ -13,7 +13,7 @@ class CreateMedidasTable extends Migration
      */
     public function up()
     {
-        Schema::create('medidas', function (Blueprint $table) {
+        Schema::create('Medidas', function (Blueprint $table) {
             $table->bigIncrements('Id');
             $table->string('Medida');
             $table->timestamps();
