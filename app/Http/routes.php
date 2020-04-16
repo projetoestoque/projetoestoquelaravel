@@ -17,7 +17,7 @@
 		Router::get('/show-user','HomeController@index');
 
 		Router::get('/', function(){
-			return view('welcome')
+			return view('welcome');
 		});
 	});
 

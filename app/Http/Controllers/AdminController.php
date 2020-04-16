@@ -9,7 +9,7 @@ class AdminController extends Controller
 {
   	public function __construct() 
   	{
-
+         $this->middleware('auth:admin');
   	}
 
   	public function index()
@@ -52,6 +52,7 @@ class AdminController extends Controller
     }
 
     public function logado () {
+	    dd(auth()->guard('admin')->check());
         return view('admin');
     }
 

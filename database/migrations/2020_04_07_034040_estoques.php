@@ -13,12 +13,12 @@ class Estoques extends Migration
      */
     public function up()
     {
-        Schema::create('Estoques', function (Blueprint $table) {
+        Schema::create('estoques', function (Blueprint $table) {
             $table->bigIncrements('Id');
             $table->unsignedBigInteger('Id_produto');
             $table->timestamps();
 
-            $table->foreign('Id_produto')->references('Id')->on('Produtos');
+            $table->foreign('Id_produto')->references('Id')->on('produtos');
         });
     }
 
@@ -29,6 +29,6 @@ class Estoques extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Estoque');
+        Schema::dropIfExists('estoques');
     }
 }

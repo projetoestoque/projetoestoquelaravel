@@ -12,12 +12,32 @@ class UsuarioSeeder extends Seeder
      */
     public function run()
     {
-        $dados=[
-            'name'=>"admin",
-            'email'=>"admin@mail.com",
-            'password'=>bcrypt("admin"),
-        ];
-        User::create($dados);
-        echo "Usuário Criado";
+        $user = [
+
+[
+'name'=>'admin',
+'is_admin'=>'1',
+'password'=> bcrypt('admin'),
+],
+
+[
+
+'name'=>'supervisor',
+
+'is_admin'=>'0',
+
+'password'=> bcrypt('supervisor'),
+
+],
+
+];
+
+foreach ($user as $key => $value) {
+
+User::create($value);
+
+}
+
+
     }
 }

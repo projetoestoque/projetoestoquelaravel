@@ -10,22 +10,22 @@
             <div class="col s6 offset-s3 card z-depth-4">
                 <div class="card-content valign ">
                     <div>
-                    <h4 class="center-align"><b>Bem vindo admin!</h4>
+                    <h4 class="center-align"><b>Bem vindo de volta!</h4>
                     <h6 class="center-align">Entre para continuar</h6>
                     </div>
-                    <form class="col s12 " action="{{route('admin.login.entrar')}}" method="post">
+                    <form class="col s12 " action="{{route('login')}}" method="post">
                         {{ csrf_field() }}
                         <div class="row">
                           <div class="input-field col s12">
                             <i class="material-icons prefix">account_circle</i>
-                            <input id="email" name="nome" type="text" class="validate">
+                            <input id="email" name="name" type="text" class="validate">
                             <label for="email">Usuário</label>
                           </div>
                         </div>
                         <div class="row">
                           <div class="input-field col s12">
                            <i class="material-icons prefix">lock</i>
-                            <input id="password" name="senha" type="password" class="validate">
+                            <input id="password" name="password" type="password" class="validate">
                             <label for="password">Password</label>
                           </div>
                         </div>
