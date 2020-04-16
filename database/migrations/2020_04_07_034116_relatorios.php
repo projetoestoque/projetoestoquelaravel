@@ -13,7 +13,7 @@ class Relatorios extends Migration
      */
     public function up()
     {
-        Schema::create('Relatorios', function (Blueprint $table) {
+        Schema::create('relatorios', function (Blueprint $table) {
             $table->bigIncrements('Id');
             $table->unsignedBigInteger('Id_estoque');
             $table->unsignedBigInteger('Id_produto');
@@ -23,8 +23,8 @@ class Relatorios extends Migration
             $table->string('Anual');
             $table->timestamps();
 
-            $table->foreign('Id_estoque')->references('Id')->on('Estoques');
-            $table->foreign('Id_produto')->references('Id')->on('Produtos');
+            $table->foreign('Id_estoque')->references('Id')->on('estoques');
+            $table->foreign('Id_produto')->references('Id')->on('produtos');
         });
     }
 
@@ -35,6 +35,6 @@ class Relatorios extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Relatorio');
+        Schema::dropIfExists('relatorios');
     }
 }

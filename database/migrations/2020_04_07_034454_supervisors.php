@@ -13,7 +13,7 @@ class Supervisors extends Migration
      */
     public function up()
     {
-        Schema::create('Supervisors', function (Blueprint $table) {
+        Schema::create('supervisors', function (Blueprint $table) {
             $table->bigIncrements('Id');
             $table->unsignedBigInteger('Id_estoque');
             $table->unsignedBigInteger('Id_produto');
@@ -27,11 +27,11 @@ class Supervisors extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('Id_estoque')->references('Id')->on('Estoques');
-            $table->foreign('Id_produto')->references('Id')->on('Produtos');
-            $table->foreign('Id_relatorio')->references('Id')->on('Relatorios');
-            $table->foreign('Id_nota_fiscal')->references('Id')->on('Nota_fiscals');
-            $table->foreign('Id_doador')->references('Id')->on('Doadors');
+            $table->foreign('Id_estoque')->references('Id')->on('estoques');
+            $table->foreign('Id_produto')->references('Id')->on('produtos');
+            $table->foreign('Id_relatorio')->references('Id')->on('relatorios');
+           $table->foreign('Id_nota_fiscal')->references('Id')->on('nota_fiscals');
+            $table->foreign('Id_doador')->references('Id')->on('doadors');
         });
     }
 
@@ -42,7 +42,7 @@ class Supervisors extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Supervisor');
+        Schema::dropIfExists('supervisor');
     }
 }
 

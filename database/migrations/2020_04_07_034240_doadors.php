@@ -13,7 +13,7 @@ class Doadors extends Migration
      */
     public function up()
     {
-        Schema::create('Doadors', function (Blueprint $table) {
+        Schema::create('doadors', function (Blueprint $table) {
             $table->bigIncrements('Id');
             $table->string('Nome');
             $table->string('E-mail');

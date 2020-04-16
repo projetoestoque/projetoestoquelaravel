@@ -14,8 +14,7 @@
     </head>
     <body>
         <h1>Página temporaria</h1>
-        <button><a href="{{route('admin.login')}}">admin login<a/></button><br/>
-        <button><a href="{{route('superv.login')}}"> supervisor login</a></button><br/>
+        <button><a href="{{route('login')}}">Login<a/></button><br/>
 
         <button><a href="{{route('produto')}}">cadastro de produtos</a></button><br/>
         <button><a href="{{route('doador')}}">cadastro de doadores</a></button><br/>

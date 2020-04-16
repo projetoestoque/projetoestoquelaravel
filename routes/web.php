@@ -17,17 +17,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/', ['as' => 'home', 'uses' => function() {
+Route::get('/', ['as' => 'main', 'uses' => function() {
 	return view('welcome');
 }]);
 
-Route::get('/admin/login', ['as'=> 'admin.login', 'uses'=>'AdminController@login']);
-Route::post('/admin/login/entrar', ['as'=> 'admin.login.entrar', 'uses'=>'AdminController@postLogin']);
-Route::get('/admin/login/sair', ['as'=> 'admin.login.sair', 'uses'=>'AdminController@sair']);
+Route::group(['middleware' => 'is_admin'], function () {
+    Route::get('/admin/home', 'HomeController@adminHome')->name('admin.home');
 
-Route::get('/superv/login', ['as'=> 'superv.login', 'uses'=>'SupervController@login']);
-Route::post('/superv/login/entrar', ['as'=> 'superv.login.entrar', 'uses'=>'SupervController@postLogin']);
-Route::get('/superv/login/sair', ['as'=> 'superv.login.sair', 'uses'=>'SupervController@sair']);
+   Route::get('/admin/marca', ['as'=> 'admin.marca', 'uses'=>'CadastroController@marca']);
+   Route::get('/admin/tipo', ['as'=> 'admin.tipo', 'uses'=>'CadastroController@tipo']);
+   Route::get('/admin/medida', ['as'=> 'admin.medida', 'uses'=>'CadastroController@medida']);
+
+   Route::post('/admin/marca/cadastrar', ['as'=> 'admin.marca.cadastrar', 'uses'=>'CadastroController@cadastrarMarca']);
+   Route::post('/admin/tipo/cadastrar', ['as'=> 'admin.tipo.cadastrar', 'uses'=>'CadastroController@cadastrarTipo']);
+   Route::post('/admin/medida/cadastrar', ['as'=> 'admin.medida.cadastrar', 'uses'=>'CadastroController@cadastrarMedida']);
+});
+
 
 Route::get('/produto', ['as'=> 'produto', 'uses'=>'CadastroController@produto']);
 Route::get('/doador', ['as'=> 'doador', 'uses'=>'CadastroController@doador']);
@@ -35,15 +40,8 @@ Route::get('/doador', ['as'=> 'doador', 'uses'=>'CadastroController@doador']);
 Route::post('/produto/cadastrar', ['as'=> 'produto.cadastrar', 'uses'=>'CadastroController@cadastrarProduto']);
 Route::post('/doador/cadastrar', ['as'=> 'doador.cadastrar', 'uses'=>'CadastroController@cadastrarDoador']);
 
+]);
 
-Route::get('/admin/marca', ['as'=> 'admin.marca', 'uses'=>'CadastroController@marca']);
-Route::get('/admin/tipo', ['as'=> 'admin.tipo', 'uses'=>'CadastroController@tipo']);
-Route::get('/admin/medida', ['as'=> 'admin.medida', 'uses'=>'CadastroController@medida']);
+Auth::routes();
 
-Route::post('/admin/marca/cadastrar', ['as'=> 'admin.marca.cadastrar', 'uses'=>'CadastroController@cadastrarMarca']);
-Route::post('/admin/tipo/cadastrar', ['as'=> 'admin.tipo.cadastrar', 'uses'=>'CadastroController@cadastrarTipo']);
-Route::post('/admin/medida/cadastrar', ['as'=> 'admin.medida.cadastrar', 'uses'=>'CadastroController@cadastrarMedida']);
-
-
-Route::get('/admin', ['as'=> 'admin', 'uses'=>'AdminController@logado']);
-Route::get('/superv', ['as'=> 'superv', 'uses'=>'SupervController@logado']);
+Route::get('/home', 'HomeController@index')->name('home');

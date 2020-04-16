@@ -13,14 +13,14 @@ class NotaFiscals extends Migration
      */
     public function up()
     {
-        Schema::create('Nota_fiscals', function (Blueprint $table) {
+        Schema::create('nota_fiscals', function (Blueprint $table) {
             $table->bigIncrements('Id');
             $table->unsignedBigInteger('Id_produto');
             $table->string('Foto');
             $table->decimal('Valor');
             $table->timestamps();
 
-            $table->foreign('Id_produto')->references('Id')->on('Produtos');
+            $table->foreign('Id_produto')->references('Id')->on('produtos');
         });
     }
 
@@ -31,6 +31,6 @@ class NotaFiscals extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Nota_fiscal');
+        Schema::dropIfExists('nota_fiscal');
     }
 }

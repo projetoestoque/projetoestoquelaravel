@@ -21,12 +21,12 @@
        <ul class="right hide-on-med-and-down">  
          @if(Auth::guest())
            <li><a href="/">Home</a></li>
-           <li><a href="{{route('admin.login')}}">Login</a></li>
+           <li><a href="">Login</a></li>
          @else
            <li><a href=#>Menu</a></li>
            <li><a href=#>Produtos</a></li>
            <li><a href="#">Auditoria</a></li>
-           <li><a href="{{ route('admin.login.sair') }}">Sair</a></li>
+           <li><a href="">Sair</a></li>
          @endif
 
        </ul>
