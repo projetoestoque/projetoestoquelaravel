@@ -7,7 +7,8 @@
     $('select').formSelect();
     M.updateTextFields();
     $('.sidenav').sidenav();
-    
+    $('.parallax').parallax();
+    $('.modal').modal();
   });
 </script>
 </body>

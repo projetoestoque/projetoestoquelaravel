@@ -18,14 +18,14 @@
                         <div class="row">
                           <div class="input-field col s12">
                             <i class="material-icons prefix">account_circle</i>
-                            <input id="email" name="name" type="text" class="validate">
+                            <input id="email" name="name" type="text">
                             <label for="email">Usuário</label>
                           </div>
                         </div>
                         <div class="row">
                           <div class="input-field col s12">
                            <i class="material-icons prefix">lock</i>
-                            <input id="password" name="password" type="password" class="validate">
+                            <input id="password" name="password" type="password">
                             <label for="password">Password</label>
                           </div>
                         </div>

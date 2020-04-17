@@ -1,26 +1,14 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('template.site')
 
-        <title>HOME</title>
+@section('titulo','SysONG')
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
+@section('conteudo')
+<div class="parallax-container">
+      <div class="parallax"><img src="{{asset('SYsong.png')}}"></div>
+      <div class="fixed"><a class="btn-large waves-effect waves-light grey lighten-5 blue-text " href="{{route('login')}}">
+      <b>Login
+    <i class="material-icons blue-text  right ">person</i>
+  </a></div>
+</div>
+@endsection
         
-    </head>
-    <body>
-        <h1>Página temporaria</h1>
-        <button><a href="{{route('login')}}">Login<a/></button><br/>
-
-        <button><a href="{{route('produto')}}">cadastro de produtos</a></button><br/>
-        <button><a href="{{route('doador')}}">cadastro de doadores</a></button><br/>
-        
-        <button><a href="{{route('admin.marca')}}">cadastro de marcas</a></button><br/>
-        <button><a href="{{route('admin.tipo')}}">cardastro de tipos</a></button><br/>
-        <button><a href="{{route('admin.medida')}}">cadastro de medidas</a></button>
-    </body>
-</html>

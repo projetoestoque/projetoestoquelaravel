@@ -65,7 +65,6 @@ class CadastroController extends Controller
 
     public function cadastrarMarca (Request $req) {
         Marca::create($req->all());
-        return redirect()->route('admin.marca');
     }
 
      public function cadastrarTipo (Request $req) {

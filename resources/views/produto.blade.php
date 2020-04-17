@@ -62,7 +62,7 @@
                     <option value="X">X</option>
                     <option value="Y">Y</option>
                 </select>
-                <label>Doador</label>
+                <label>Tipo</label>
             </div>
             <div class="col s1"></div>
         </div>
@@ -76,7 +76,7 @@
                     <option value="X">Marca X</option>
                     <option value="Y">Marca Y</option>
                 </select>
-                <label>Doador</label>
+                <label>Marca</label>
             </div>
             <div class="col s2"></div>
             <div class="input-field col s4">

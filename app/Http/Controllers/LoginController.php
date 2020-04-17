@@ -21,4 +21,10 @@ class LoginController extends Controller
         Auth::logout();
         return redirect()->route('login');
     }
+    public function Cadastros(){
+        return view('admin/adminCadastros');
+      }
+    public function CadastrosSupervisor(){
+    return view('cadastros');
+    }
 }
