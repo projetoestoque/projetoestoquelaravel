@@ -14,11 +14,11 @@ class Estoques extends Migration
     public function up()
     {
         Schema::create('estoques', function (Blueprint $table) {
-            $table->bigIncrements('Id');
+            $table->increments('id');
             $table->unsignedBigInteger('Id_produto');
             $table->timestamps();
 
-            $table->foreign('Id_produto')->references('Id')->on('produtos');
+            $table->foreign('Id_produto')->references('id')->on('produtos');
         });
     }
 

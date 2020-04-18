@@ -14,13 +14,13 @@ class Doadors extends Migration
     public function up()
     {
         Schema::create('doadors', function (Blueprint $table) {
-            $table->bigIncrements('Id');
-            $table->string('Nome');
-            $table->string('E-mail');
-            $table->string('CPF');
-            $table->string('CNPJ');
-            $table->string('Telefone');
-            $table->string('Instituicao');
+            $table->bigIncrements('id');
+            $table->string('nome');
+            $table->string('e-mail');
+            $table->string('cpf');
+            $table->string('cnpj');
+            $table->string('telefone');
+            $table->string('instituicao');
             $table->timestamps();
         });
     }

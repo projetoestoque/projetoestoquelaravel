@@ -14,15 +14,15 @@ class Produtos extends Migration
     public function up()
     {
         Schema::create('produtos', function (Blueprint $table) {
-            $table->bigIncrements('Id');
-            $table->string('Nome');
-            $table->string('Vencimento');
-            $table->integer('Quantidade');
-            $table->string('Medida');
-            $table->integer('Codigo_barra');
-            $table->string('Tipo');
-            $table->string('Marca');
-            $table->string('Doador');
+            $table->increments('id');
+            $table->string('nome');
+            $table->string('vencimento');
+            $table->integer('quantidade');
+            $table->string('medida');
+            $table->integer('codigo_barra');
+            $table->string('tipo');
+            $table->string('marca');
+            $table->string('doador');
             $table->timestamps();
         });
     }

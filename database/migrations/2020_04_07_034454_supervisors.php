@@ -14,24 +14,24 @@ class Supervisors extends Migration
     public function up()
     {
         Schema::create('supervisors', function (Blueprint $table) {
-            $table->bigIncrements('Id');
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('Id_estoque');
             $table->unsignedBigInteger('Id_produto');
             $table->unsignedBigInteger('Id_relatorio');
             $table->unsignedBigInteger('Id_nota_fiscal');
             $table->unsignedBigInteger('Id_doador');
-            $table->string('Nome');
-            $table->string('Usuario')->unique();
+            $table->string('nome');
+            $table->string('usuario')->unique();
             $table->timestamp('Usuario_verified_at')->nullable();
-            $table->string('Senha');
+            $table->string('senha');
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('Id_estoque')->references('Id')->on('estoques');
-            $table->foreign('Id_produto')->references('Id')->on('produtos');
-            $table->foreign('Id_relatorio')->references('Id')->on('relatorios');
-           $table->foreign('Id_nota_fiscal')->references('Id')->on('nota_fiscals');
-            $table->foreign('Id_doador')->references('Id')->on('doadors');
+            $table->foreign('Id_estoque')->references('id')->on('estoques');
+            $table->foreign('Id_produto')->references('id')->on('produtos');
+            $table->foreign('Id_relatorio')->references('id')->on('relatorios');
+           $table->foreign('Id_nota_fiscal')->references('id')->on('nota_fiscals');
+            $table->foreign('Id_doador')->references('id')->on('doadors');
         });
     }
 

@@ -14,7 +14,7 @@ class CreateAdministradorsTable extends Migration
     public function up()
     {
         Schema::create('administradors', function (Blueprint $table) {
-            $table->bigIncrements('Id');
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('Id_estoque');
             $table->unsignedBigInteger('Id_produto');
             $table->unsignedBigInteger('Id_relatorio');
@@ -24,21 +24,21 @@ class CreateAdministradorsTable extends Migration
             $table->unsignedBigInteger('Id_medida');
             $table->unsignedBigInteger('Id_tipo');
             $table->unsignedBigInteger('Id_marca');
-            $table->string('Nome');
-            $table->string('Usuario')->unique();
+            $table->string('nome');
+            $table->string('usuario')->unique();
             $table->timestamp('Usuario_verified_at')->nullable();
-            $table->string('Senha');
+            $table->string('senha');
             $table->rememberToken();
 
-            $table->foreign('Id_estoque')->references('Id')->on('estoques');
-            $table->foreign('Id_produto')->references('Id')->on('produtos');
-            $table->foreign('Id_relatorio')->references('Id')->on('relatorios');
-            $table->foreign('Id_nota_fiscal')->references('Id')->on('nota_fiscals');
-            $table->foreign('Id_supervisor')->references('Id')->on('supervisors');
-            $table->foreign('Id_doador')->references('Id')->on('doadors');
-            $table->foreign('Id_medida')->references('Id')->on('medidas');
-            $table->foreign('Id_tipo')->references('Id')->on('tipos');
-            $table->foreign('Id_marca')->references('Id')->on('marcas');
+            $table->foreign('Id_estoque')->references('id')->on('estoques');
+            $table->foreign('Id_produto')->references('id')->on('produtos');
+            $table->foreign('Id_relatorio')->references('id')->on('relatorios');
+            $table->foreign('Id_nota_fiscal')->references('id')->on('nota_fiscals');
+            $table->foreign('Id_supervisor')->references('id')->on('supervisors');
+            $table->foreign('Id_doador')->references('id')->on('doadors');
+            $table->foreign('Id_medida')->references('id')->on('medidas');
+            $table->foreign('Id_tipo')->references('id')->on('tipos');
+            $table->foreign('Id_marca')->references('id')->on('marcas');
         });
     }
 

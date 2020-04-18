@@ -14,13 +14,13 @@ class NotaFiscals extends Migration
     public function up()
     {
         Schema::create('nota_fiscals', function (Blueprint $table) {
-            $table->bigIncrements('Id');
+            $table->increments('id');
             $table->unsignedBigInteger('Id_produto');
-            $table->string('Foto');
-            $table->decimal('Valor');
+            $table->string('foto');
+            $table->decimal('valor');
             $table->timestamps();
 
-            $table->foreign('Id_produto')->references('Id')->on('produtos');
+            $table->foreign('Id_produto')->references('id')->on('produtos');
         });
     }
 
