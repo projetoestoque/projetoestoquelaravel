@@ -15,13 +15,13 @@
             <div class="col s1"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">mode_edit</i>
-                <input type="text" name="nome">
+                <input required type="text" name="nome">
                 <label>Nome</label>
             </div>
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">mail</i>
-                <input type="email" name="e-mail"  class="E-mail">
+                <input value=" " type="email" name="e-mail" value=" " class="E-mail">
                 <label>Email</label>
             </div>
         </div>
@@ -29,13 +29,13 @@
             <div class="col s1"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">assignment_ind</i>
-                <input type="text" name="cpf">
+                <input value=" " type="text" name="cpf">
                 <label>CPF</label>
             </div>
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">gavel</i>
-                <input type="text" name="cnpj" class="cnpj">
+                <input value=" " type="text" name="cnpj" class="cnpj">
                 <label>CNPJ</label>
             </div>
         </div>
@@ -43,13 +43,13 @@
             <div class="col s1"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">call</i>
-                <input type="tel" name="telefone">
+                <input value=" " type="tel" name="telefone">
                 <label>Telefone</label>
             </div>
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">location_city</i>
-                <input type="text" name="instituicao"  class="instituicao">
+                <input value=" " type="text" name="instituicao"  class="instituicao">
                 <label>Instituição</label>
             </div>
         </div>
