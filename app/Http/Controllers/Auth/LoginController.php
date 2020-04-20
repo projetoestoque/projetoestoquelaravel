@@ -64,7 +64,7 @@ if (auth()->user()->is_admin == 1) {
 
 return redirect()->route('login')
 
-->with('error','Name or Password Are Wrong.');
+->with('error','O usuário ou senha inserido está incorreto.');
 
 }
 

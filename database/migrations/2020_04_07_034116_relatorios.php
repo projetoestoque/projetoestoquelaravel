@@ -14,17 +14,17 @@ class Relatorios extends Migration
     public function up()
     {
         Schema::create('relatorios', function (Blueprint $table) {
-            $table->bigIncrements('Id');
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('Id_estoque');
             $table->unsignedBigInteger('Id_produto');
-            $table->string('Diaria');
-            $table->string('Semanal');
-            $table->string('Mensal');
-            $table->string('Anual');
+            $table->string('diaria');
+            $table->string('semanal');
+            $table->string('mensal');
+            $table->string('anual');
             $table->timestamps();
 
-            $table->foreign('Id_estoque')->references('Id')->on('estoques');
-            $table->foreign('Id_produto')->references('Id')->on('produtos');
+            $table->foreign('Id_estoque')->references('id')->on('estoques');
+            $table->foreign('Id_produto')->references('id')->on('produtos');
         });
     }
 

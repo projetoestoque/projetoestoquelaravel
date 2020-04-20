@@ -37,10 +37,12 @@
             <div class="input-field col s4">
                 <i class="material-icons prefix">fitness_center</i>
                 <select required name="medida">
-                    <option value="" disabled selected>Escolha a medida</option>
-                    <option value="kg">Kilo(Kg)</option>
-                    <option value="grama">Grama(g)</option>
-                    <option value="litro">Litro(l)</option>
+                <option value="" disabled selected>Escolha a medida</option>
+                    @forelse($medidas as $medida)
+                    <option value="{{$medida->medida}}">{{$medida->medida}}</option>
+                    @empty
+                    <option value=" ">Sem Medidas</option>
+                    @endforelse
                 </select>
                 <label>Medida</label>
             </div>
@@ -59,10 +61,13 @@
                 <i class="material-icons prefix">layers</i>
                 <select required name="tipo">
                     <option value="" disabled selected>Escolha o tipo do Produto</option>
-                    <option value="X">X</option>
-                    <option value="Y">Y</option>
+                    @forelse($tipos as $tipo)
+                    <option value="{{$tipo->tipo}}">{{$tipo->tipo}}</option>
+                    @empty
+                    <option value=" ">Sem Tipos</option>
+                    @endforelse
                 </select>
-                <label>Doador</label>
+                <label>Tipo</label>
             </div>
             <div class="col s1"></div>
         </div>
@@ -73,19 +78,24 @@
                 <i class="material-icons prefix"> copyright</i>
                 <select required name="marca">
                     <option value="" disabled selected>Escolha a marca</option>
-                    <option value="X">Marca X</option>
-                    <option value="Y">Marca Y</option>
+                    @forelse($marcas as $marca)
+                    <option value="{{$marca->marca}}">{{$marca->marca}}</option>
+                    @empty
+                    <option value=" ">Sem Marcas</option>
+                    @endforelse
                 </select>
-                <label>Doador</label>
+                <label>Marca</label>
             </div>
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix"> account_box</i>
                 <select required name="doador">
                     <option value="" disabled selected>Escolha o doador</option>
-                    <option value="0">0- Doador Anônimo</option>
-                    <option value="1">1- Recursos Próprios</option>
-                    <option value="2">2- Doador X</option>
+                    @forelse($doadores as $doador)
+                    <option value="{{$doador->id}}">{{$doador->nome}}</option>
+                    @empty
+                    <option value="404">Sem Doadores</option>
+                    @endforelse
                 </select>
                 <label>Doador</label>
             </div>
