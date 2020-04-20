@@ -71,7 +71,7 @@ return [
             'database' => env('DB_DATABASE', 'laravel'),
             'username' => env('DB_USERNAME', 'postgres'),
             'password' => env('DB_PASSWORD', 'admin'),
-            'charset' => 'utf8',
+            'charset' => 'utf8mb4',
             'prefix' => '',
             'prefix_indexes' => true,
             'schema' => 'public',
