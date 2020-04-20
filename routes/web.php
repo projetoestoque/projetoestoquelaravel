@@ -23,7 +23,7 @@ Route::get('/', ['as' => 'main', 'uses' => function() {
 
 Route::group(['middleware' => 'is_admin'], function () {
     Route::get('/admin/home', 'HomeController@adminHome')->name('admin.home');
-    Route::get('/admin/cadastros', 'LoginController@Cadastros')->name('admin.cadastros');
+    Route::get('/admin/cadastros', 'CadastroController@Cadastros')->name('admin.cadastros');
 
    Route::get('/admin/marca', ['as'=> 'admin.marca', 'uses'=>'CadastroController@marca']);
    Route::get('/admin/tipo', ['as'=> 'admin.tipo', 'uses'=>'CadastroController@tipo']);
@@ -44,5 +44,5 @@ Route::post('/doador/cadastrar', ['as'=> 'doador.cadastrar', 'uses'=>'CadastroCo
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/home/cadastros', 'LoginController@CadastrosSupervisor')->name('superv.cadastros');
+Route::get('/home/cadastros', 'CadastroController@CadastrosSupervisor')->name('superv.cadastros');
 

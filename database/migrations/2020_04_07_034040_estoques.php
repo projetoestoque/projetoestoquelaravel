@@ -14,7 +14,7 @@ class Estoques extends Migration
     public function up()
     {
         Schema::create('estoques', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('Id_produto');
             $table->timestamps();
 

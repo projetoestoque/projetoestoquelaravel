@@ -1,15 +1,15 @@
 @extends('template.site')
 
 @section('titulo','Menu de Cadastros')
-
+@section('classBody','Background')
 @section('conteudo')
 <br>
 <br>
 <br>
 <div class="container ">
 <div class="row white-text ">
-            <a href="{{route('produto')}}" class="white-text">
-                <div class=" card-panel blue accent-1 col s5  ">
+            <a href="{{route('produto')}}" class="white-text ">
+                <div class=" card-panel  blue lighten-1 col s5 hoverable ">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col ">
@@ -23,7 +23,7 @@
             <div class="col s2">
             </div>
             <a href="{{route('doador')}}" class="white-text">
-                <div class=" card-panel blue accent-2 col s5">
+                <div class=" card-panel  blue darken-2 col s5 hoverable">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col ">

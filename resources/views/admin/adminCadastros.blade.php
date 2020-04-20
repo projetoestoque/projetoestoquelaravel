@@ -1,7 +1,7 @@
 @extends('template.site')
 
 @section('titulo','Menu de Cadastros')
-
+@section('classBody','Background')
 @section('conteudo')
 <br>
 <br>
@@ -9,7 +9,7 @@
 <div class="container ">
 <div class="row white-text ">
             <a href="{{route('produto')}}" class="white-text">
-                <div class=" card-panel blue accent-1 col s5  ">
+                <div class=" card-panel blue accent-1 col s5 hoverable ">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col ">
@@ -23,7 +23,7 @@
             <div class="col s2">
             </div>
             <a href="{{route('doador')}}" class="white-text">
-                <div class=" card-panel blue accent-2 col s5">
+                <div class=" card-panel blue accent-2 col s5 hoverable">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col ">
@@ -39,7 +39,7 @@
 </div>
 <div class="row white text">
 <a class="white-text modal-trigger" data-target="modal1">
-                <div class=" card-panel  light-blue darken-3 col s5">
+                <div class=" card-panel  light-blue darken-3 col s5 hoverable">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col">
@@ -52,7 +52,7 @@
             </a>
             <span class="col s2"></span>
             <a class="white-text hide-on-small-only modal-trigger" data-target="modal2">
-                <div class=" card-panel blue darken-4 col s5">
+                <div class=" card-panel blue darken-4 col s5 hoverable">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col ">
@@ -68,7 +68,7 @@
 <div class="row white text ">
 <span class="col s4"></span>
 <a class="white-text modal-trigger" data-target="modal3">
-                <div class=" card-panel  light-blue darken-3 col s4">
+                <div class=" card-panel  light-blue darken-3 col s4 hoverable">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col">
@@ -99,7 +99,7 @@
 <div id="modal2" class="modal">
 <div class="modal-content">
     <h4>Cadastro de Novo Tipo</h4>
-    <form method="post" action="#">
+    <form method="post" action="{{route('admin.tipo.cadastrar')}}">
         {{ csrf_field() }}
         <br>
         <div class="input-field col s12">
@@ -114,14 +114,14 @@
   </div>
 <div id="modal3" class="modal">
 <div class="modal-content">
-    <h4>Cadastro de Novo Tipo</h4>
-    <form method="post" action="#">
+    <h4>Cadastro de Medida</h4>
+    <form method="post" action="{{route('admin.medida.cadastrar')}}">
         {{ csrf_field() }}
         <br>
         <div class="input-field col s12">
             <i class="material-icons prefix">linear_scale</i>
-            <input id="tipo" name="tipo" type="text" placeholder="Quilo(kg)">
-            <label for="tipo">Nova Medida</label>
+            <input id="medida" name="medida" type="text" placeholder="Quilo(kg)">
+            <label for="medida">Nova Medida</label>
         </div>
         <br>
         <button class="modal-close btn waves-effect waves-light blue darken-2 ">Enviar</button>

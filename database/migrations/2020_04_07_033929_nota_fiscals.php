@@ -14,7 +14,7 @@ class NotaFiscals extends Migration
     public function up()
     {
         Schema::create('nota_fiscals', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('Id_produto');
             $table->string('foto');
             $table->decimal('valor');

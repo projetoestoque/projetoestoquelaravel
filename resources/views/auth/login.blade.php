@@ -1,7 +1,7 @@
 @extends('template.site')
 
 @section('titulo','Login')
-
+@section('classBody','Background3')
 @section('conteudo')
 <br>
 <br>
@@ -39,5 +39,10 @@
                 </div>
             </div>
     </div>
-
 @endsection
+@if (Session::has('error'))
+    <script>
+           var msg = '{{Session::get('error')}}';
+           alert(msg);
+    </script>
+   @endif
