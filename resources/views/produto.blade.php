@@ -41,7 +41,7 @@
                     @forelse($medidas as $medida)
                     <option value="{{$medida->medida}}">{{$medida->medida}}</option>
                     @empty
-                    <option value=" ">Sem Medidas</option>
+                    <option value="sem medida">Sem Medidas</option>
                     @endforelse
                 </select>
                 <label>Medida</label>
@@ -64,7 +64,7 @@
                     @forelse($tipos as $tipo)
                     <option value="{{$tipo->tipo}}">{{$tipo->tipo}}</option>
                     @empty
-                    <option value=" ">Sem Tipos</option>
+                    <option value="sem tipo">Sem Tipos</option>
                     @endforelse
                 </select>
                 <label>Tipo</label>
@@ -81,7 +81,7 @@
                     @forelse($marcas as $marca)
                     <option value="{{$marca->marca}}">{{$marca->marca}}</option>
                     @empty
-                    <option value=" ">Sem Marcas</option>
+                    <option value="sem marca">Sem Marcas</option>
                     @endforelse
                 </select>
                 <label>Marca</label>
@@ -94,7 +94,7 @@
                     @forelse($doadores as $doador)
                     <option value="{{$doador->id}}">{{$doador->nome}}</option>
                     @empty
-                    <option value="404">Sem Doadores</option>
+                    <option value="sem doador">Sem Doadores</option>
                     @endforelse
                 </select>
                 <label>Doador</label>
