@@ -21,7 +21,7 @@
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">mail</i>
-                <input value=" " type="email" name="e-mail" value=" " class="E-mail">
+                <input type="email" name="e-mail" value="x@x.com" class="E-mail">
                 <label>Email</label>
             </div>
         </div>
@@ -29,13 +29,13 @@
             <div class="col s1"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">assignment_ind</i>
-                <input value=" " type="text" name="cpf">
+                <input value="x" type="text" name="cpf">
                 <label>CPF</label>
             </div>
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">gavel</i>
-                <input value=" " type="text" name="cnpj" class="cnpj">
+                <input value="x" type="text" name="cnpj" class="cnpj">
                 <label>CNPJ</label>
             </div>
         </div>
@@ -43,13 +43,13 @@
             <div class="col s1"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">call</i>
-                <input value=" " type="tel" name="telefone">
+                <input value="x" type="tel" name="telefone">
                 <label>Telefone</label>
             </div>
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">location_city</i>
-                <input value=" " type="text" name="instituicao"  class="instituicao">
+                <input value="x" type="text" name="instituicao"  class="instituicao">
                 <label>Instituição</label>
             </div>
         </div>
