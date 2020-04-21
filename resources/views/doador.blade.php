@@ -1,13 +1,8 @@
 @extends('template.site')
 
 @section('titulo','Doador')
-   
+
 @section('conteudo')
-@if($errors->any())
-	<script>
-	    alert("{{$errors->first()}}")
-	</script>
-@endif
 <br>
 <h3 class="center-align"><b>Cadastrar novo Doador</h3>
 <br>
@@ -20,13 +15,13 @@
             <div class="col s1"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">mode_edit</i>
-                <input value="{{old('nome')}}" type="text" name="nome">
+                <input type="text" name="nome">
                 <label>Nome</label>
             </div>
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">mail</i>
-                <input type="email"  value="{{old('e-mail')}}" name="e-mail"  class="E-mail">
+                <input type="email" name="e-mail"  class="E-mail">
                 <label>Email</label>
             </div>
         </div>
@@ -34,13 +29,13 @@
             <div class="col s1"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">assignment_ind</i>
-                <input type="text" name="cpf" value="{{old('cpf')}}" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" placeholder="000.000.000-00">
+                <input type="text" name="cpf">
                 <label>CPF</label>
             </div>
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">gavel</i>
-		              <input type="text" name="cnpj" class="cnpj"  value="{{old('cnpj')}}" pattern="/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/" placeholder="41.081.376/0001-55">
+                <input type="text" name="cnpj" class="cnpj">
                 <label>CNPJ</label>
             </div>
         </div>
@@ -48,13 +43,13 @@
             <div class="col s1"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">call</i>
-                <input type="tel" name="telefone"  value="{{old('telefone')}}" maxlength="15" >
+                <input type="tel" name="telefone">
                 <label>Telefone</label>
             </div>
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">location_city</i>
-                <input type="text" name="instituicao" value="{{old('instituicao')}}"  class="instituicao">
+                <input type="text" name="instituicao"  class="instituicao">
                 <label>Instituição</label>
             </div>
         </div>
