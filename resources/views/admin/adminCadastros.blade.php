@@ -88,7 +88,7 @@
             <br>
             <div class="input-field col s12">
                 <i class="material-icons prefix">font_download</i>
-                <input name="marca" type="text">
+                <input required placeholder="marca" name="marca" type="text">
                 <label>Nome da Marca</label>
             </div>
             <br>
@@ -104,7 +104,7 @@
         <br>
         <div class="input-field col s12">
             <i class="material-icons prefix">label</i>
-            <input id="tipo" name="tipo" type="text">
+            <input requeired placeholder="tipo" id="tipo" name="tipo" type="text">
             <label for="tipo">Novo tipo de Produto</label>
         </div>
         <br>
@@ -120,7 +120,7 @@
         <br>
         <div class="input-field col s12">
             <i class="material-icons prefix">linear_scale</i>
-            <input id="medida" name="medida" type="text" placeholder="Quilo(kg)">
+            <input required id="medida" name="medida" type="text" placeholder="Quilo(kg)">
             <label for="medida">Nova Medida</label>
         </div>
         <br>

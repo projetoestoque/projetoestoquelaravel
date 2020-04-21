@@ -16,13 +16,13 @@
             <div class="col s1"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">mode_edit</i>
-                <input required type="text" name="nome">
+                <input required type="text" placeholder="nome" name="nome">
                 <label>Nome</label>
             </div>
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">access_time</i>
-                <input required type="text" name="vencimento" class="datepicker">
+                <input required type="text" name="vencimento" placeholder="00/00/0000" class="datepicker">
                 <label>Vencimento</label>
             </div>
         </div>
@@ -30,7 +30,7 @@
             <div class="col s1"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">plus_one</i>
-                <input required type="number" name="quantidade">
+                <input required type="number" placeholder="5" name="quantidade">
                 <label>Quantidade</label>
             </div>
             <div class="col s2"></div>
@@ -53,7 +53,7 @@
             <div class="col s1"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">domain</i>
-                <input required type="number" name="codigo_barra">
+                <input required type="number" placeholder="100000002" name="codigo_barra">
                 <label>Codigo de barra</label>
             </div>
             <div class="col s2"></div>
