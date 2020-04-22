@@ -7,6 +7,7 @@
   <script>
     alert("{{$errors->first()}}");
   </script>
+@endif
 <br>
 <br>
 <br>

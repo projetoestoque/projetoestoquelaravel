@@ -123,7 +123,7 @@ class CadastroController extends Controller
 
 				if(DB::table('marcas')->where('marca', $marca->marca)->exists())
 				{
-					return redirect()->route('admin.cadastros');
+					return redirect()->route('admin.cadastros')
 					->withErrors(["errors"=>["Marca já cadastrada"]]);
 				}
 				$marca->save();
@@ -136,7 +136,7 @@ class CadastroController extends Controller
 
 			 if(DB::table('tipos')->where('tipo', $tipo->tipo)->exists())
 			 {
-				 return redirect()->route('admin.cadastros');
+				 return redirect()->route('admin.cadastros')
 				 ->withErrors(["errors"=>["Tipo já cadastrado"]]);
 			 }
 			 $tipo->save();
@@ -149,7 +149,7 @@ class CadastroController extends Controller
 
 				if(DB::table('medidas')->where('medida', $medida->medida)->exists())
 				{
-					return redirect()->route('admin.cadastros');
+					return redirect()->route('admin.cadastros')
 					->withErrors(["errors"=>["Medida já cadastrada"]]);
 				}
 				$medida->save();
