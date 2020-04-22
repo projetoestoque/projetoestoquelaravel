@@ -3,6 +3,10 @@
 @section('titulo','Menu de Cadastros')
 @section('classBody','Background')
 @section('conteudo')
+@if($errors->any())
+  <script>
+    alert("{{$errors->first()}}");
+  </script>
 <br>
 <br>
 <br>
