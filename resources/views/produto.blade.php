@@ -91,8 +91,13 @@
                 <i class="material-icons prefix"> account_box</i>
                 <select required name="doador">
                     <option value="" disabled selected>Escolha o doador</option>
-                    @forelse($doadores as $doador)
+                    @forelse($doadoresFisicos as $doador)
                     <option value="{{$doador->id}}">{{$doador->nome}}</option>
+                    @empty
+                    <option value="sem doador">Sem Doadores</option>
+                    @endforelse
+                    @forelse($doadoresJuridicos as $doador)
+                    <option value="{{$doador->id}}">{{$doador->instituicao}}</option>
                     @empty
                     <option value="sem doador">Sem Doadores</option>
                     @endforelse

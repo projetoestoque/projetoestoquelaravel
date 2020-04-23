@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Produto;
-use App\Doador;
+use App\Doador_juridico;
+use App\Doador_fisico;
 use App\Marca;
 use App\Tipo;
 use App\Medida;
@@ -19,8 +20,9 @@ class CadastroController extends Controller
         $medidas=DB::table('medidas')->get();
         $tipos=DB::table('tipos')->get();
         $marcas=DB::table('marcas')->get();
-        $doadores=DB::table('doadors')->get();
-    	return view('produto',compact('medidas','tipos','marcas','doadores'));
+        $doadoresFisicos = DB::table('doador_fisicos')->get();
+        $doadoresJuridicos = DB::table('doador_juridicos')->get();
+    	return view('produto',compact('medidas','tipos','marcas','doadoresFisicos','doadoresJuridicos'));
     }
 
     public function cadastrarProduto(Request $req)
@@ -35,31 +37,9 @@ class CadastroController extends Controller
     	return view('doador');
     }
 
-    public function cadastrarDoador(Request $req)
+    public function doadorFisico(Request $req)
     {
-	   $cnpj = $req->get("cnpj");
 	   $cpf = $req->get("cpf");
-	    function validar_cnpj($cnpj) {
-    $cnpj = preg_replace('/[^0-9]/', '', (string) $cnpj);
-    // Valida tamanho
-	if (strlen($cnpj) != 14)		return false;
-	// Verifica se todos os digitos são iguais
-	if (preg_match('/(\d)\1{13}/', $cnpj))		return false;
-	// Valida primeiro dígito verificador
-	for ($i = 0, $j = 5, $soma = 0; $i < 12; $i++)	{
-	    $soma += $cnpj[$i] * $j;
-	    $j = ($j == 2) ? 9 : $j - 1;
-	}
-	$resto = $soma % 11;
-	if ($cnpj[12] != ($resto < 2 ? 0 : 11 - $resto))		return false;
-	// Valida segundo dígito verificador
-	for ($i = 0, $j = 6, $soma = 0; $i < 13; $i++)	{
-	    $soma += $cnpj[$i] * $j;
-	    $j = ($j == 2) ? 9 : $j - 1;
-	}
-	$resto = $soma % 11;
-	return $cnpj[13] == ($resto < 2 ? 0 : 11 - $resto);
-    }
 
 	 function validar_cpf($cpf) {
 	// Extrai somente os números
@@ -85,23 +65,48 @@ class CadastroController extends Controller
 	return true;
 	}
 
-	    if(validar_cpf($cnpj)) {
-		    Doador::create($req->all());
-		} else {
-			return redirect()->route("doador")
-			->withErrors(['errors' => ['CNPJ INFORMADO NÃO EXISTE']])
-			->withInput($req->input());
-		}
-
 		if(validar_cpf($cpf)) {
-		    Doador::create($req->all());
+		    Doador_fisico::create($req->all());
 		} else {
 			return redirect()->route("doador")
 			->withErrors(['errors' => ['CPF INFORMADO NÃO EXISTE']])
 			->withInput($req->input());
 		}
+    	return redirect()->route('doador');
+    }
 
+    public function doadorJuridico(Request $req)
+    {
+	   $cnpj = $req->get("cnpj");
+	    function validar_cnpj($cnpj) {
+    $cnpj = preg_replace('/[^0-9]/', '', (string) $cnpj);
+    // Valida tamanho
+	if (strlen($cnpj) != 14)		return false;
+	// Verifica se todos os digitos são iguais
+	if (preg_match('/(\d)\1{13}/', $cnpj))		return false;
+	// Valida primeiro dígito verificador
+	for ($i = 0, $j = 5, $soma = 0; $i < 12; $i++)	{
+	    $soma += $cnpj[$i] * $j;
+	    $j = ($j == 2) ? 9 : $j - 1;
+	}
+	$resto = $soma % 11;
+	if ($cnpj[12] != ($resto < 2 ? 0 : 11 - $resto))		return false;
+	// Valida segundo dígito verificador
+	for ($i = 0, $j = 6, $soma = 0; $i < 13; $i++)	{
+	    $soma += $cnpj[$i] * $j;
+	    $j = ($j == 2) ? 9 : $j - 1;
+	}
+	$resto = $soma % 11;
+	return $cnpj[13] == ($resto < 2 ? 0 : 11 - $resto);
+    }
 
+	    if(validar_cnpj($cnpj)) {
+		    Doador_juridico::create($req->all());
+		} else {
+			return redirect()->route("doador")
+			->withErrors(['errors' => ['CNPJ INFORMADO NÃO EXISTE']])
+			->withInput($req->input());
+		}
     	return redirect()->route('doador');
     }
 
