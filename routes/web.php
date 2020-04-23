@@ -38,8 +38,9 @@ Route::group(['middleware' => 'is_admin'], function () {
 Route::get('/produto', ['as'=> 'produto', 'uses'=>'CadastroController@produto']);
 Route::get('/doador', ['as'=> 'doador', 'uses'=>'CadastroController@doador']);
 
+Route::post('/doador/fisico', ['as'=> 'doador.fisico', 'uses'=>'CadastroController@doadorFisico']);
+Route::post('/doador/juridico', ['as'=> 'doador.juridico', 'uses'=>'CadastroController@doadorJuridico']);
 Route::post('/produto/cadastrar', ['as'=> 'produto.cadastrar', 'uses'=>'CadastroController@cadastrarProduto']);
-Route::post('/doador/cadastrar', ['as'=> 'doador.cadastrar', 'uses'=>'CadastroController@cadastrarDoador']);
 
 Auth::routes();
 
