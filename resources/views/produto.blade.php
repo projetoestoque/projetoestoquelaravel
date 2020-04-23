@@ -1,6 +1,8 @@
 @extends('template.site')
 
 @section('titulo','Produtos')
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> 
+<meta name="csrf-token" content="{{ csrf_token() }}" /> 
 
 @section('conteudo')
 <br>
@@ -16,7 +18,7 @@
             <div class="col s1"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">mode_edit</i>
-                <input required type="text" placeholder="nome" name="nome">
+                <input required type="text" placeholder="nome"  name="nome">
                 <label>Nome</label>
             </div>
             <div class="col s2"></div>
@@ -36,8 +38,8 @@
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">fitness_center</i>
-                <select required name="medida">
-                <option value="" disabled selected>Escolha a medida</option>
+                <select id="selectMedida" required name="medida">
+                <option  value="" disabled selected>Escolha a medida</option>
                     @forelse($medidas as $medida)
                     <option value="{{$medida->medida}}">{{$medida->medida}}</option>
                     @empty
@@ -45,6 +47,9 @@
                     @endforelse
                 </select>
                 <label>Medida</label>
+                @if(auth()->user()->is_admin)
+	                  <a data-target="modal2" class="modal-trigger"><span>Cadastrar Medida</span> </a>
+	            @endif
             </div>
             <div class="col s1"></div>
         </div>
@@ -59,7 +64,7 @@
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">layers</i>
-                <select required name="tipo">
+                <select id="selectTipo" required name="tipo">
                     <option value="" disabled selected>Escolha o tipo do Produto</option>
                     @forelse($tipos as $tipo)
                     <option value="{{$tipo->tipo}}">{{$tipo->tipo}}</option>
@@ -68,6 +73,9 @@
                     @endforelse
                 </select>
                 <label>Tipo</label>
+                @if(auth()->user()->is_admin)
+	                  <a data-target="modal3" class="modal-trigger"><span>Cadastrar Tipo</span> </a>
+	            @endif
             </div>
             <div class="col s1"></div>
         </div>
@@ -76,7 +84,7 @@
             <div class="col s1"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix"> copyright</i>
-                <select required name="marca">
+                <select required id="selectMarca" name="marca">
                     <option value="" disabled selected>Escolha a marca</option>
                     @forelse($marcas as $marca)
                     <option value="{{$marca->marca}}">{{$marca->marca}}</option>
@@ -85,21 +93,24 @@
                     @endforelse
                 </select>
                 <label>Marca</label>
+                @if(auth()->user()->is_admin)
+	                  <a data-target="modal1" class="modal-trigger"><span>Cadastrar Marca</span> </a>
+	            @endif
             </div>
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix"> account_box</i>
                 <select required name="doador">
                     <option value="" disabled selected>Escolha o doador</option>
+                    <option value="anonimo">Doador Anônimo</option>
                     @forelse($doadoresFisicos as $doador)
-                    <option value="{{$doador->id}}">{{$doador->nome}}</option>
+                    <option value="{{$doador->nome}}">{{$doador->nome}}</option>
                     @empty
                     <option value="sem doador">Sem Doadores</option>
                     @endforelse
                     @forelse($doadoresJuridicos as $doador)
-                    <option value="{{$doador->id}}">{{$doador->instituicao}}</option>
+                    <option value="{{$doador->instituicao}}">{{$doador->instituicao}}</option>
                     @empty
-                    <option value="sem doador">Sem Doadores</option>
                     @endforelse
                 </select>
                 <label>Doador</label>
@@ -117,5 +128,107 @@
 <br>
 <br>
 <br>
+<div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Cadastro de Nova Marca</h4>
+            <br>
+            <div class="input-field col s12">
+                <i class="material-icons prefix">font_download</i>
+                <input required placeholder="marca" id="modalMarca" type="text">
+                <label>Nome da Marca</label>
+            </div>
+            <br>
+            <button class="modal-close btn waves-effect waves-light blue darken-2 " id="marcaBtn">Enviar</button>
+    </div>
+</div>
+
+<div id="modal2" class="modal">
+    <div class="modal-content">
+      <h4>Cadastro de Nova Medida</h4>
+            <br>
+            <div class="input-field col s12">
+                <i class="material-icons prefix">font_download</i>
+                <input required placeholder="medida" id="modalMedida" type="text">
+                <label>Nome da Medida</label>
+            </div>
+            <br>
+            <button class="modal-close btn waves-effect waves-light blue darken-2 " id="medidaBtn">Enviar</button>
+    </div>
+</div>
+
+<div id="modal3" class="modal">
+    <div class="modal-content">
+      <h4>Cadastro de Novo Tipo</h4>
+            <br>
+            <div class="input-field col s12">
+                <i class="material-icons prefix">font_download</i>
+                <input required placeholder="tipo" id="modalTipo" type="text">
+                <label>Nome do Tipo</label>
+            </div>
+            <br>
+            <button class="modal-close btn waves-effect waves-light blue darken-2 " id="tipoBtn">Enviar</button>
+    </div>
+</div>
+
+<script>
+    $("#marcaBtn").click(function(){
+	var marca = $("#modalMarca").val();
+	if (marca == "") {
+		alert("Digite uma marca");
+		return false;
+	}
+	
+  $.get("{{url('/admin/marca/atualizar?marca=')}}" + marca, function(data, status){
+    if (data != false) {
+	    var newOption = new Option(data.marca, data.marca, false, false);
+       $('#selectMarca').append(newOption).trigger('change');
+       $('#selectMarca').formSelect();
+	    alert ("Marca cadastrada com sucesso !");
+	} else {
+	    alert("Marca já existe !");
+	}
+  });
+});
+
+$("#medidaBtn").click(function(){
+	var medida = $("#modalMedida").val();
+	if (medida == "") {
+		alert("Digite uma medida");
+		return false;
+	}
+	
+  $.get("{{url('/admin/medida/atualizar?medida=')}}" + medida, function(data, status){
+    if (data != false) {
+	    var newOption = new Option(data.medida, data.medida, false, false);
+       $('#selectMedida').append(newOption).trigger('change');
+       $('#selectMedida').formSelect();
+	    alert ("Medida cadastrada com sucesso !");
+	} else {
+	    alert("Medida já existe !");
+	}
+  });
+});
+
+$("#tipoBtn").click(function(){
+	var tipo = $("#modalTipo").val();
+	if (tipo == "") {
+		alert("Digite um tipo!!!");
+		return false;
+	}
+	
+  $.get("{{url('/admin/tipo/atualizar?tipo=')}}" + tipo, function(data, status){
+    if (data != false) {
+	    var newOption = new Option(data.tipo, data.tipo, false, false);
+       $('#selectTipo').append(newOption).trigger('change');
+       $('#selectTipo').formSelect();
+	    alert ("Tipo cadastrado com sucesso !");
+	} else {
+	    alert("Tipo já existe !");
+	}
+  });
+});
+</script>
+
+
 @endsection
 
