@@ -14,7 +14,6 @@ use DB;
 class CadastroController extends Controller
 {
 
-
     public function produto()
     {
         $medidas=DB::table('medidas')->get();
@@ -132,8 +131,47 @@ class CadastroController extends Controller
 					->withErrors(["errors"=>["Marca já cadastrada"]]);
 				}
 				$marca->save();
-				return redirect()->route('admin.cadastros');
+				return redirect()->back();
     }
+
+     public function marcaAtualizar() {
+	      $novaMarca= $_GET['marca'];
+          $marca = new Marca();
+			$marca->marca = strtolower($novaMarca);
+
+				if(DB::table('marcas')->where('marca', $marca->marca)->exists())
+				{
+					return false;
+				}
+				$marca->save();
+				return $marca;
+     }
+
+     public function tipoAtualizar() {
+	      $novoTipo= $_GET['tipo'];
+          $tipo = new Tipo();
+			$tipo->tipo = strtolower($novoTipo);
+
+				if(DB::table('tipos')->where('tipo', $tipo->tipo)->exists())
+				{
+					return false;
+				}
+				$tipo->save();
+				return $tipo;
+     }
+
+     public function medidaAtualizar() {
+	      $novaMedida= $_GET['medida'];
+          $medida = new Medida();
+			$medida->medida = strtolower($novaMedida);
+
+				if(DB::table('medidas')->where('medida', $medida->medida)->exists())
+				{
+					return false;
+				}
+				$medida->save();
+				return $medida;
+     }
 
      public function cadastrarTipo (Request $req) {
 			 $tipo = new Tipo();
@@ -145,7 +183,7 @@ class CadastroController extends Controller
 				 ->withErrors(["errors"=>["Tipo já cadastrado"]]);
 			 }
 			 $tipo->save();
-			 return redirect()->route('admin.cadastros');
+			 return redirect()->back();
     }
 
     public function cadastrarMedida (Request $req) {
@@ -158,12 +196,12 @@ class CadastroController extends Controller
 					->withErrors(["errors"=>["Medida já cadastrada"]]);
 				}
 				$medida->save();
-				return redirect()->route('admin.cadastros');
+				return redirect()->back();
     }
 
 			public function cadastrarRefeicao (Request $req){
 				Refeicao::create($req->all());
-				return redirect()->route('admin.cadastros');
+				return redirect()->back();
 			}
     public function Cadastros(){
         return view('admin/adminCadastros');

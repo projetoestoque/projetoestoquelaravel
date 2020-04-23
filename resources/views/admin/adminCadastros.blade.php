@@ -54,7 +54,7 @@
                         <span class="row"></span>
                         </div>
                 </div>
-            </a>
+        </a>
             <span class="col s2"></span>
             <a class="white-text hide-on-small-only modal-trigger" data-target="modal2">
                 <div class=" card-panel blue darken-4 col s5 hoverable">

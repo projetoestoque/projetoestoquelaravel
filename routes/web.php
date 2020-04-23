@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('ajaxRequest', 'CadastroController@ajax')->name('teste');
+
 Route::get('/', ['as' => 'main', 'uses' => function() {
 	return view('welcome');
 }]);
@@ -28,6 +30,10 @@ Route::group(['middleware' => 'is_admin'], function () {
    Route::get('/admin/marca', ['as'=> 'admin.marca', 'uses'=>'CadastroController@marca']);
    Route::get('/admin/tipo', ['as'=> 'admin.tipo', 'uses'=>'CadastroController@tipo']);
    Route::get('/admin/medida', ['as'=> 'admin.medida', 'uses'=>'CadastroController@medida']);
+
+   Route::get('/admin/marca/atualizar', 'CadastroController@marcaAtualizar')->name('marca.atualizar');
+   Route::get('/admin/medida/atualizar', 'CadastroController@medidaAtualizar')->name('medida.atualizar');
+   Route::get('/admin/tipo/atualizar', 'CadastroController@tipoAtualizar')->name('tipo.atualizar');
 
    Route::post('/admin/marca/cadastrar', ['as'=> 'admin.marca.cadastrar', 'uses'=>'CadastroController@cadastrarMarca']);
    Route::post('/admin/tipo/cadastrar', ['as'=> 'admin.tipo.cadastrar', 'uses'=>'CadastroController@cadastrarTipo']);
