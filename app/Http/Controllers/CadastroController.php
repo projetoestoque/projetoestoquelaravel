@@ -124,7 +124,7 @@ class CadastroController extends Controller
     public function cadastrarMarca (Request $req) {
         $marca = new Marca();
 				$marca->marca = strtolower($req->get('marca'));
-
+			
 				if(DB::table('marcas')->where('marca', $marca->marca)->exists())
 				{
 					return redirect()->route('admin.cadastros')

@@ -14,7 +14,7 @@
 <div class="container ">
 <div class="row white-text ">
             <a href="{{route('produto')}}" class="white-text">
-                <div class=" card-panel blue accent-1 col s5 hoverable ">
+                <div class=" card-panel blue accent-2 col s5 hoverable ">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col ">
@@ -44,7 +44,7 @@
 </div>
 <div class="row white text">
 <a class="white-text modal-trigger" data-target="modal1">
-                <div class=" card-panel  light-blue darken-3 col s5 hoverable">
+                <div class=" card-panel blue accent-2 col s5 hoverable">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col">
@@ -57,7 +57,7 @@
         </a>
             <span class="col s2"></span>
             <a class="white-text hide-on-small-only modal-trigger" data-target="modal2">
-                <div class=" card-panel blue darken-4 col s5 hoverable">
+                <div class=" card-panel blue accent-2 col s5 hoverable">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col ">
@@ -73,7 +73,7 @@
 <div class="row white text ">
 <span class="col s4"></span>
 <a class="white-text modal-trigger" data-target="modal3">
-                <div class=" card-panel  light-blue darken-3 col s4 hoverable">
+                <div class=" card-panel blue accent-2 col s4 hoverable">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col">
@@ -91,14 +91,15 @@
       <form method="post" action="{{route('admin.marca.cadastrar')}}">
             {{ csrf_field() }}
             <br>
-            <div class="input-field col s12">
+            <div class="input-field " >
                 <i class="material-icons prefix">font_download</i>
-                <input required placeholder="marca" name="marca" type="text">
-                <label>Nome da Marca</label>
+                <input required="required" placeholder="marca" name="marca" id="marcaInput" type="text">
+                <label for="marcaInput">First Name</label>
             </div>
             <br>
-            <button class="modal-close btn waves-effect waves-light blue darken-2 ">Enviar</button>
+            <button class="btn waves-effect waves-light blue darken-2 ">Enviar</button>
         </form>
+        <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
     </div>
 </div>
 <div id="modal2" class="modal">
@@ -107,14 +108,15 @@
     <form method="post" action="{{route('admin.tipo.cadastrar')}}">
         {{ csrf_field() }}
         <br>
-        <div class="input-field col s12">
+        <div class="input-field">
             <i class="material-icons prefix">label</i>
-            <input requeired placeholder="tipo" id="tipo" name="tipo" type="text">
+            <input required="required" placeholder="tipo" id="tipo" name="tipo" type="text">
             <label for="tipo">Novo tipo de Produto</label>
         </div>
         <br>
-        <button class="modal-close btn waves-effect waves-light blue darken-2 ">Enviar</button>
+        <button class="btn waves-effect waves-light blue darken-2 ">Enviar</button>
     </form>
+    <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
     </div>
   </div>
 <div id="modal3" class="modal">
@@ -123,14 +125,15 @@
     <form method="post" action="{{route('admin.medida.cadastrar')}}">
         {{ csrf_field() }}
         <br>
-        <div class="input-field col s12">
+        <div class="input-field">
             <i class="material-icons prefix">linear_scale</i>
-            <input required id="medida" name="medida" type="text" placeholder="Quilo(kg)">
+            <input required="required" id="medida" name="medida" type="text" placeholder="Quilo(kg)">
             <label for="medida">Nova Medida</label>
         </div>
         <br>
-        <button class="modal-close btn waves-effect waves-light blue darken-2 ">Enviar</button>
+        <button class="btn waves-effect waves-light blue darken-2 ">Enviar</button>
     </form>
+    <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
     </div>
   </div>
 </div>

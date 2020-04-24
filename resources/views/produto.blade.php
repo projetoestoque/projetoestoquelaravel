@@ -19,13 +19,13 @@
             <div class="input-field col s4">
                 <i class="material-icons prefix">mode_edit</i>
                 <input required type="text" placeholder="nome"  name="nome">
-                <label>Nome</label>
+                <label>Nome <span class="important">*</span></label>
             </div>
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">access_time</i>
                 <input required type="text" name="vencimento" placeholder="00/00/0000" class="datepicker">
-                <label>Vencimento</label>
+                <label>Vencimento <span class="important">*</span></label>
             </div>
         </div>
         <div class="row">
@@ -33,22 +33,24 @@
             <div class="input-field col s4">
                 <i class="material-icons prefix">plus_one</i>
                 <input required type="number" placeholder="5" name="quantidade">
-                <label>Quantidade</label>
+                <label>Quantidade <span class="important">*</span></label>
             </div>
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">fitness_center</i>
-                <select id="selectMedida" required name="medida">
-                <option  value="" disabled selected>Escolha a medida</option>
+                <select required="required" id="selectMedida" name="medida">
+                <option value="" disabled selected>Escolha a medida</option>
                     @forelse($medidas as $medida)
                     <option value="{{$medida->medida}}">{{$medida->medida}}</option>
                     @empty
                     <option value="sem medida">Sem Medidas</option>
                     @endforelse
                 </select>
-                <label>Medida</label>
+                <label>Medida<span class="important">*</span></label>
                 @if(auth()->user()->is_admin)
-	                  <a data-target="modal2" class="modal-trigger"><span>Cadastrar Medida</span> </a>
+	                  <a data-target="modal2" class="modal-trigger radius white-text">
+                      <i class="tiny material-icons ">add_circle_outline</i>
+                          <span>Cadastrar Medida</span> </a>
 	            @endif
             </div>
             <div class="col s1"></div>
@@ -59,12 +61,12 @@
             <div class="input-field col s4">
                 <i class="material-icons prefix">domain</i>
                 <input required type="number" placeholder="100000002" name="codigo_barra">
-                <label>Codigo de barra</label>
+                <label>Codigo de barra<span class="important">*</span></label>
             </div>
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">layers</i>
-                <select id="selectTipo" required name="tipo">
+                <select id="selectTipo" required="required" name="tipo">
                     <option value="" disabled selected>Escolha o tipo do Produto</option>
                     @forelse($tipos as $tipo)
                     <option value="{{$tipo->tipo}}">{{$tipo->tipo}}</option>
@@ -72,19 +74,20 @@
                     <option value="sem tipo">Sem Tipos</option>
                     @endforelse
                 </select>
-                <label>Tipo</label>
+                <label>Tipo<span class="important">*</span></label>
                 @if(auth()->user()->is_admin)
-	                  <a data-target="modal3" class="modal-trigger"><span>Cadastrar Tipo</span> </a>
+                 <a data-target="modal3" class="modal-trigger radius white-text">
+                      <i class="tiny material-icons ">add_circle_outline</i>
+                      <span>Cadastrar Tipo</span></a>
 	            @endif
             </div>
             <div class="col s1"></div>
         </div>
-
         <div class="row">
             <div class="col s1"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix"> copyright</i>
-                <select required id="selectMarca" name="marca">
+                <select required="required" id="selectMarca" name="marca">
                     <option value="" disabled selected>Escolha a marca</option>
                     @forelse($marcas as $marca)
                     <option value="{{$marca->marca}}">{{$marca->marca}}</option>
@@ -92,15 +95,17 @@
                     <option value="sem marca">Sem Marcas</option>
                     @endforelse
                 </select>
-                <label>Marca</label>
+                <label>Marca<span class="important">*</span></label>
                 @if(auth()->user()->is_admin)
-	                  <a data-target="modal1" class="modal-trigger"><span>Cadastrar Marca</span> </a>
+	                  <a data-target="modal1" class="modal-trigger radius white-text">
+                      <i class="tiny material-icons ">add_circle_outline</i>
+                      <span>Cadastrar Marca</span> </a>
 	            @endif
             </div>
             <div class="col s2"></div>
             <div class="input-field col s4">
                 <i class="material-icons prefix"> account_box</i>
-                <select required name="doador">
+                <select required="required" name="doador">
                     <option value="" disabled selected>Escolha o doador</option>
                     <option value="anonimo">Doador Anônimo</option>
                     @forelse($doadoresFisicos as $doador)
@@ -113,14 +118,23 @@
                     @empty
                     @endforelse
                 </select>
-                <label>Doador</label>
+                <label>Doador<span class="important">*</span></label>
+                @if(auth()->user()->is_admin)
+	                  <a href="{{route('doador')}}" class="modal-trigger radius white-text">
+                      <i class="tiny material-icons ">add_circle_outline</i>
+                      <span>Cadastrar Marca</span> </a>
+	            @endif
             </div>
             <div class="col s1"></div>
         </div>
+        <br>
         <div class="row valign center">
             <button class="btn waves-effect waves-light blue darken-4"><b>Submit
                     <i class="material-icons right">send</i>
             </button>
+            <br>
+            <br>
+            <label ><span class="important">*</span> Campos Obrigatórios</label>
         </div>
         <br>
     </form>

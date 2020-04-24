@@ -5,6 +5,7 @@
   $(document).ready(function(){
     $('.datepicker').datepicker();
     $('select').formSelect();
+    $("select[required]").css({display: "inline", height: 0, padding: 0, width: 0});
     M.updateTextFields();
     $('.sidenav').sidenav();
     $('.parallax').parallax();
