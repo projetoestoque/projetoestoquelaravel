@@ -164,7 +164,6 @@
                     <option value="LancheManha">Lanche da Manhã</option>
                     <option value="Almoco">Almoço</option>
                     <option value="LancheTarde">Lanche da Tarde</option>
-                    <option value="Janta">Janta</option>
                 </select>
             <label for="refeicao">Refeição do dia</label>
         </div>

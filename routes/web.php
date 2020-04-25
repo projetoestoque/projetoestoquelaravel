@@ -48,7 +48,7 @@ Route::get('/doador', ['as'=> 'doador', 'uses'=>'CadastroController@doador']);
 Route::post('/doador/fisico', ['as'=> 'doador.fisico', 'uses'=>'CadastroController@doadorFisico']);
 Route::post('/doador/juridico', ['as'=> 'doador.juridico', 'uses'=>'CadastroController@doadorJuridico']);
 Route::post('/produto/cadastrar', ['as'=> 'produto.cadastrar', 'uses'=>'CadastroController@cadastrarProduto']);
-
+Route::post('/refeicao/cadastros', ['as'=> 'refeicao.cadastrar', 'uses'=>'CadastroController@cadastrarRefeicao']);
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
