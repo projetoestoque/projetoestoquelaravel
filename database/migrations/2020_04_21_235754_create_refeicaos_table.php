@@ -16,8 +16,8 @@ class CreateRefeicaosTable extends Migration
         Schema::create('refeicaos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('refeicao');
-            $table->string('desperdicio');
-            $table->string('quantidade');
+            $table->double('desperdicio',8,2);
+            $table->integer('quantidade');
             $table->timestamps();
         });
     }
