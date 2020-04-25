@@ -9,6 +9,7 @@ use App\Doador_fisico;
 use App\Marca;
 use App\Tipo;
 use App\Medida;
+use App\Refeicao;
 use DB;
 
 class CadastroController extends Controller
@@ -199,10 +200,10 @@ class CadastroController extends Controller
 				return redirect()->back();
     }
 
-			public function cadastrarRefeicao (Request $req){
-				Refeicao::create($req->all());
-				return redirect()->back();
-			}
+	public function cadastrarRefeicao (Request $req){
+		Refeicao::create($req->all());
+		return redirect()->back();
+	}
     public function Cadastros(){
         return view('admin/adminCadastros');
       }
