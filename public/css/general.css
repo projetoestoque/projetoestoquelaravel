@@ -67,6 +67,10 @@ nav{
   width: 1100px;
   margin-left:150px;
 }
+.welcomeImgMobile{
+  float:left; 
+  width:350px;
+}
 .welcomeButton{
   float:left;
   margin-left:220px;
@@ -122,4 +126,24 @@ a.modal-trigger.radius{
   top:-35px;
   right:30px;
 }
-
+@media only screen and (max-width: 400px) {
+  .mobile-hide{ display: none !important; }
+  .alinhamento{
+    position: relative;
+    margin-left: 20%;
+    text-align: center;
+   }
+  .butao{
+    left:50px;
+  }
+  .welcomeButton{
+  margin-left: 100px;
+  margin-top:10px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .mobile{ display: inline !important; }
+  }
+  @media only screen and (min-width: 500px) {
+  .desktop-hide{ display: none !important; }
+  }

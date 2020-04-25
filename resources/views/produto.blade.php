@@ -15,28 +15,28 @@
         <br>
 
         <div class="row">
-            <div class="col s1"></div>
-            <div class="input-field col s4">
+            <div class="col l1"></div>
+            <div class="input-field col s12 l4">
                 <i class="material-icons prefix">mode_edit</i>
                 <input required type="text" placeholder="nome"  name="nome">
                 <label>Nome <span class="important">*</span></label>
             </div>
-            <div class="col s2"></div>
-            <div class="input-field col s4">
+            <div class="col l2"></div>
+            <div class="input-field col s12 l4">
                 <i class="material-icons prefix">access_time</i>
                 <input required type="text" name="vencimento" placeholder="00/00/0000" class="datepicker">
                 <label>Vencimento <span class="important">*</span></label>
             </div>
         </div>
         <div class="row">
-            <div class="col s1"></div>
-            <div class="input-field col s4">
+            <div class="col l1"></div>
+            <div class="input-field col s12 l4">
                 <i class="material-icons prefix">plus_one</i>
                 <input required type="number" placeholder="5" name="quantidade">
                 <label>Quantidade <span class="important">*</span></label>
             </div>
-            <div class="col s2"></div>
-            <div class="input-field col s4">
+            <div class="col l2"></div>
+            <div class="input-field col s12 l4">
                 <i class="material-icons prefix">fitness_center</i>
                 <select required="required" id="selectMedida" name="medida">
                 <option value="" disabled selected>Escolha a medida</option>
@@ -53,18 +53,18 @@
                           <span>Cadastrar Medida</span> </a>
 	            @endif
             </div>
-            <div class="col s1"></div>
+            <div class="col l1"></div>
         </div>
 
         <div class="row">
-            <div class="col s1"></div>
-            <div class="input-field col s4">
+            <div class="col l1"></div>
+            <div class="input-field col s12 l4">
                 <i class="material-icons prefix">domain</i>
                 <input required type="number" placeholder="100000002" name="codigo_barra">
                 <label>Codigo de barra<span class="important">*</span></label>
             </div>
-            <div class="col s2"></div>
-            <div class="input-field col s4">
+            <div class="col l2"></div>
+            <div class="input-field col s12 l4">
                 <i class="material-icons prefix">layers</i>
                 <select id="selectTipo" required="required" name="tipo">
                     <option value="" disabled selected>Escolha o tipo do Produto</option>
@@ -81,12 +81,30 @@
                       <span>Cadastrar Tipo</span></a>
 	            @endif
             </div>
-            <div class="col s1"></div>
+            <div class="col l1"></div>
         </div>
         <div class="row">
-            <div class="col s1"></div>
-            <div class="input-field col s4">
-                <i class="material-icons prefix"> copyright</i>
+            <div class="col l1"></div>
+            <div class="input-field col s12 l4">
+            <i class="material-icons prefix"> account_box</i>
+                <select required="required" name="doador">
+                    <option value="" disabled selected>Escolha o doador</option>
+                    <option value="anonimo">Doador Anônimo</option>
+                    @forelse($doadoresFisicos as $doador)
+                    <option value="{{$doador->nome}}">{{$doador->nome}}</option>
+                    @empty
+                    <option value="sem doador">Sem Doadores</option>
+                    @endforelse
+                    @forelse($doadoresJuridicos as $doador)
+                    <option value="{{$doador->instituicao}}">{{$doador->instituicao}}</option>
+                    @empty
+                    @endforelse
+                </select>
+                <label>Doador<span class="important">*</span></label>
+            </div>
+            <div class="col l2"></div>
+            <div class="input-field col s12 l4">
+            <i class="material-icons prefix"> copyright</i>
                 <select required="required" id="selectMarca" name="marca">
                     <option value="" disabled selected>Escolha a marca</option>
                     @forelse($marcas as $marca)
@@ -102,30 +120,7 @@
                       <span>Cadastrar Marca</span> </a>
 	            @endif
             </div>
-            <div class="col s2"></div>
-            <div class="input-field col s4">
-                <i class="material-icons prefix"> account_box</i>
-                <select required="required" name="doador">
-                    <option value="" disabled selected>Escolha o doador</option>
-                    <option value="anonimo">Doador Anônimo</option>
-                    @forelse($doadoresFisicos as $doador)
-                    <option value="{{$doador->nome}}">{{$doador->nome}}</option>
-                    @empty
-                    <option value="sem doador">Sem Doadores</option>
-                    @endforelse
-                    @forelse($doadoresJuridicos as $doador)
-                    <option value="{{$doador->instituicao}}">{{$doador->instituicao}}</option>
-                    @empty
-                    @endforelse
-                </select>
-                <label>Doador<span class="important">*</span></label>
-                @if(auth()->user()->is_admin)
-	                  <a href="{{route('doador')}}" class="modal-trigger radius white-text">
-                      <i class="tiny material-icons ">add_circle_outline</i>
-                      <span>Cadastrar Marca</span> </a>
-	            @endif
-            </div>
-            <div class="col s1"></div>
+            <div class="col l1"></div>
         </div>
         <br>
         <div class="row valign center">

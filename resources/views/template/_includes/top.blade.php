@@ -22,6 +22,7 @@
      <a href="/" class="brand-logo">
        SysONG<i class="material-icons ">filter_drama</i>
        </a>
+       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
        <ul class="right hide-on-med-and-down">  
            <li><a href="/">Home</a></li>
            <li><a href="{{route('login')}}">Login</a></li>
@@ -32,6 +33,7 @@
      <a href="/" class="brand-logo">
        SysONG<i class="material-icons ">filter_drama</i>
        </a>
+       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
        <ul class="right hide-on-med-and-down">  
        <li><a href="{{route ('admin.home') }}">Menu</a></li>
        <li><a href="{{ route('admin.cadastros')}}">Cadastros</a></li>
@@ -50,6 +52,7 @@
      <a href="/" class="brand-logo">
        SysONG<i class="material-icons ">filter_drama</i>
        </a>
+       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
        <ul class="right hide-on-med-and-down">  
        <li><a href="{{ route('home') }}">Menu</a></li>
        <li><a href="{{route('superv.cadastros')}}">Cadastros</a></li>
@@ -66,4 +69,36 @@
      </div>
    </div>
  </nav>
+ @guest
+ <ul class="sidenav" id="mobile-demo">
+    <li><a href="/">Home</a></li>
+    <li><a href="{{route('login')}}">Login</a></li>
+  </ul>
+  @elseif(Auth::user()->is_admin==true)
+  <ul class="sidenav" id="mobile-demo">
+  <li><a href="{{route ('admin.home') }}">Menu</a></li>
+       <li><a href="{{ route('admin.cadastros')}}">Cadastros</a></li>
+       <li>
+       <a class="dropdown-trigger"href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+       Logout<i class="material-icons right">power_settings_new</i>
+                                    </a>
+                                    </li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+  </ul>
+  @else
+  <ul class="sidenav" id="mobile-demo">
+  <li><a href="{{ route('home') }}">Menu</a></li>
+  <li><a href="{{route('superv.cadastros')}}">Cadastros</a></li>
+  <li>
+  <a class="dropdown-trigger"href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+  Logout<i class="material-icons right">power_settings_new</i>
+  </a>
+  </li>
+  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+      @csrf
+  </form>
+  </ul>
+ @endguest
 </header>

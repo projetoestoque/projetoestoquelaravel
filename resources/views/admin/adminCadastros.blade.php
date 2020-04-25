@@ -42,33 +42,35 @@
             <div class="col s1">
             </div>
 </div>
-<div class="row white text">
-<a class="white-text modal-trigger" data-target="modal1">
-                <div class=" card-panel blue accent-2 col s5 hoverable">
-                    <div class="row">
-                    <span class="row"></span>
-                        <div class="col">
-                            <i class="material-icons medium white-text ">copyright</i>
-                            <h6 class="no-padding txt-md">Cadastros de Marcas</h6>
-                        </div>
-                        <span class="row"></span>
-                        </div>
-                </div>
-        </a>
-            <span class="col s2"></span>
-            <a class="white-text hide-on-small-only modal-trigger" data-target="modal2">
-                <div class=" card-panel blue accent-2 col s5 hoverable">
+<div class="row white-text ">
+            <a class="white-text modal-trigger" data-target="modal1">
+                <div class=" card-panel blue accent-2 col s5 hoverable ">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col ">
-                            <i class="material-icons medium white-text pt-5">layers</i>
-                            <h6 class="no-padding txt-md">Cadastros de Tipos</h6>
+                            <i class="material-icons medium white-text pt-5">copyright</i>
+                            <h6 class="no-padding txt-md">Cadastros de Marcas</h6>
                         </div>
                         <span class="row"></span>
                     </div>
                 </div>
             </a>
-            <span class="col s1"></span>
+            <div class="col s2">
+            </div>
+            <a class="white-text modal-trigger" data-target="modal2">
+                <div class=" card-panel blue accent-2 col s5 hoverable">
+                    <div class="row">
+                    <span class="row"></span>
+                        <div class="col ">
+                            <i class="material-icons medium white-text pt-5">layers</i>
+                            <h6>Cadastros de Tipos</h6>
+                        </div>
+                        <span class="row"></span>
+                    </div>
+                </div>
+            </a>
+            <div class="col s1">
+            </div>
 </div>
 <div class="row white text ">
 <a class="white-text modal-trigger" data-target="modal3">

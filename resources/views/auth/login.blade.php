@@ -6,8 +6,8 @@
 <br>
 <br>
   <div class="container">
-    <div class="row valing-wrapper">
-            <div class="col s6 offset-s3 card z-depth-4">
+    <div class="row valing-wrapper ">
+            <div class="col s12 l6 offset-l3 card z-depth-4">
                 <div class="card-content valign ">
                     <div>
                     <h4 class="center-align"><b>Bem vindo de volta!</h4>
