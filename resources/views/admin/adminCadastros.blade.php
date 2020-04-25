@@ -157,8 +157,15 @@
         {{ csrf_field() }}
         <br>
         <div class="input-field">
-            <i class="material-icons prefix">restaurant_menu</i>
-            <input required="required" id="refeicao" name="refeicao" type="text" placeholder="Almoço">
+        <i class="material-icons prefix">restaurant_menu</i>
+                <select id="selectTipo" required="required"  name="refeicao">
+                    <option value="" disabled selected>Escolha a Refeição</option>
+                    <option value="Cafe">Café da Manhã</option>
+                    <option value="LancheManha">Lanche da Manhã</option>
+                    <option value="Almoco">Almoço</option>
+                    <option value="LancheTarde">Lanche da Tarde</option>
+                    <option value="Janta">Janta</option>
+                </select>
             <label for="refeicao">Refeição do dia</label>
         </div>
         <div class="input-field">
