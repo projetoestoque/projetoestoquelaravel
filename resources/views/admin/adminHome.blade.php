@@ -4,7 +4,7 @@
 @section('conteudo')
 <div class="mobile-hide"><img class="fluid1" src="{{asset('fluid1.png')}}"></div>
 <div>
-    <a href="{{URL::previous()}}" class="button">Voltar</a>
+    <button onclick="{{URL::previous()}}">Voltar</button>
 </div>
 <br>
 <h3 class=" alinhamento blue-text text-darken-4"><b>Olá, Admin! </h3>
