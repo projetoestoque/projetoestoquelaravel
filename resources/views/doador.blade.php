@@ -32,7 +32,7 @@
         <br>
 
         <div>
-            <a href="{{redirect()->back()}}" class="button">Voltar</a>
+            <a href="{{URL::previous()}}" class="button">Voltar</a>
         </div>
 
         <div class="row">

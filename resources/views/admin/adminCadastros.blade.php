@@ -10,9 +10,9 @@
 @endif
 <br>
 <br>
-  <div>
-      <a href="{{redirect()->back()}}" class="button">Voltar</a>
-  </div>
+<div>
+    <a href="{{URL::previous()}}" class="button">Voltar</a>
+</div>
 <br>
 <div class="container ">
 <div class="row white-text ">
