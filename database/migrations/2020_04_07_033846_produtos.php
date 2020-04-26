@@ -19,7 +19,7 @@ class Produtos extends Migration
             $table->string('vencimento');
             $table->integer('quantidade');
             $table->string('medida');
-            $table->integer('codigo_barra');
+            $table->string('codigo_barra');
             $table->string('tipo');
             $table->string('marca');
             $table->string('doador');
