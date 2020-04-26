@@ -105,11 +105,18 @@
       <form method="post" action="{{route('admin.marca.cadastrar')}}">
             {{ csrf_field() }}
             <br>
-            <div class="input-field " >
+            <div class="input-field" >
                 <i class="material-icons prefix">font_download</i>
                 <input required="required" placeholder="marca" name="marca" id="marcaInput" type="text">
-                <label for="marcaInput">First Name</label>
+                <label for="marcaInput">Nova marca
+                <div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">Marca é a marca específica do produto </span>
             </div>
+                </label>
+                
+            </div>
+            
             <br>
             <button class="btn waves-effect waves-light blue darken-2 ">Enviar</button>
         </form>
@@ -125,7 +132,12 @@
         <div class="input-field">
             <i class="material-icons prefix">label</i>
             <input required="required" placeholder="tipo" id="tipo" name="tipo" type="text">
-            <label for="tipo">Novo tipo de Produto</label>
+            <label for="tipo">Novo tipo de Produto
+            <div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">Tipo é a classificação geral do produto(Feijão,arroz,Açúcar) </span>
+            </div>
+            </label>
         </div>
         <br>
         <button class="btn waves-effect waves-light blue darken-2 ">Enviar</button>
@@ -142,7 +154,12 @@
         <div class="input-field">
             <i class="material-icons prefix">linear_scale</i>
             <input required="required" id="medida" name="medida" type="text" placeholder="Quilo(kg)">
-            <label for="medida">Nova Medida</label>
+            <label for="medida">Nova Medida
+            <div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">A medida é a quantidade de determinado item(Quilo,pacotes,gramas) </span>
+            </div>
+            </label>
         </div>
         <br>
         <button class="btn waves-effect waves-light blue darken-2 ">Enviar</button>
@@ -165,17 +182,32 @@
                     <option value="Almoco">Almoço</option>
                     <option value="LancheTarde">Lanche da Tarde</option>
                 </select>
-            <label for="refeicao">Refeição do dia</label>
+            <label for="refeicao">Refeição do dia
+            <div class="tooltip">
+                <i class="tiny material-icons">info_outline</i>
+                <span class="tooltiptext">Qual das refeições do dia esta sendo registrada </span>
+            </div>
+            </label>
         </div>
         <div class="input-field">
             <i class="material-icons prefix">archive</i>
             <input required="required" id="desperdicio" name="desperdicio" step="0.1" placeholder="2.5" type="number">
-            <label for="desperdicio">Desperdício em Kg </label>
+            <label for="desperdicio">Desperdício em Kg 
+            <div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">Quanto em quilos da refeição posta foi desperdiçada </span>
+            </div>
+            </label>
         </div>
         <div class="input-field">
             <i class="material-icons prefix">plus_one</i>
             <input required="required" id="quantidade" name="quantidade" type="number" placeholder="10">
-            <label for="quantidade">Quantidade servida</label>
+            <label for="quantidade">Quantidade servida
+            <div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">Quantas refeições foram posta </span>
+            </div>
+            </label>
         </div>
         <br>
         <button class="btn waves-effect waves-light blue darken-2 ">Enviar</button>

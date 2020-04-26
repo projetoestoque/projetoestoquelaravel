@@ -26,6 +26,7 @@
        <ul class="right hide-on-med-and-down">  
            <li><a href="/">Home</a></li>
            <li><a href="{{route('login')}}">Login</a></li>
+       </ul>
        @elseif(Auth::user()->is_admin==true)
         <nav>
         <div class="nav-wrapper" style="background:linear-gradient(to right, #30cfd0 0%, #330867 100%);"  >
@@ -35,8 +36,8 @@
        </a>
        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
        <ul class="right hide-on-med-and-down">  
-       <li><a href="{{route ('admin.home') }}">Menu</a></li>
-       <li><a href="{{ route('admin.cadastros')}}">Cadastros</a></li>
+       <li><a href="{{route ('admin.home') }}">Início</a></li>
+       <li><a class="dropdown-trigger" href="#" data-target="dropdown1">Menu<i class="material-icons right">arrow_drop_down</i></a></li>
        <li>
        <a class="dropdown-trigger"href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
        Logout<i class="material-icons right">power_settings_new</i>
@@ -45,6 +46,7 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+       </ul>                           
        @else
        <nav>
         <div class="nav-wrapper" style="background:linear-gradient(to right, #30cfd0 0%, #330867 100%);"  >
@@ -54,8 +56,8 @@
        </a>
        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
        <ul class="right hide-on-med-and-down">  
-       <li><a href="{{ route('home') }}">Menu</a></li>
-       <li><a href="{{route('superv.cadastros')}}">Cadastros</a></li>
+       <li><a href="{{ route('home') }}">Início</a></li>
+       <li><a class="dropdown-trigger" href="#" data-target="dropdown2">Menu<i class="material-icons right">arrow_drop_down</i></a></li>
        <li>
        <a class="dropdown-trigger"href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
        Logout<i class="material-icons right">power_settings_new</i>
@@ -77,7 +79,10 @@
   @elseif(Auth::user()->is_admin==true)
   <ul class="sidenav" id="mobile-demo">
   <li><a href="{{route ('admin.home') }}">Menu</a></li>
-       <li><a href="{{ route('admin.cadastros')}}">Cadastros</a></li>
+  <li ><a href="#">Listagem</a></li>
+  <li><a href="{{ route('admin.cadastros')}}">Cadastros</a></li>
+  <li><a href="#">Produtos Faltando</a></li>
+  <li><a href="#">Relatório</a></li>
        <li>
        <a class="dropdown-trigger"href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
        Logout<i class="material-icons right">power_settings_new</i>
@@ -90,7 +95,10 @@
   @else
   <ul class="sidenav" id="mobile-demo">
   <li><a href="{{ route('home') }}">Menu</a></li>
+  <li ><a href="#">Listagem</a></li>
   <li><a href="{{route('superv.cadastros')}}">Cadastros</a></li>
+  <li><a href="#">Produtos Faltando</a></li>
+  <li><a href="#">Relatório</a></li>
   <li>
   <a class="dropdown-trigger"href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
   Logout<i class="material-icons right">power_settings_new</i>
@@ -99,6 +107,18 @@
   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
       @csrf
   </form>
-  </ul>
+  </ul> 
  @endguest
+ <ul id="dropdown1" class="dropdown-content"  >
+    <li ><a href="#">Listagem</a></li>
+    <li><a href="{{ route('admin.cadastros')}}">Cadastros</a></li>
+    <li><a href="#">Produtos Faltando</a></li>
+    <li><a href="#">Relatório</a></li>
+  </ul> 
+  <ul id="dropdown2" class="dropdown-content"  >
+    <li ><a href="#">Listagem</a></li>
+    <li><a href="{{ route('superv.cadastros')}}">Cadastros</a></li>
+    <li><a href="#">Produtos Faltando</a></li>
+    <li><a href="#">Relatório</a></li>
+  </ul> 
 </header>
