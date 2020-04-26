@@ -103,7 +103,7 @@ class CadastroController extends Controller
 	    if(validar_cnpj($cnpj)) {
 		    Doador_juridico::create($req->all());
 		} else {
-			return redirect()->route("doador")
+			return redirect()->route('doador')
 			->withErrors(['errors' => ['CNPJ INFORMADO NÃO EXISTE']])
 			->withInput($req->input());
 		}

@@ -88,16 +88,18 @@
             <div class="input-field col s12 l4">
             <i class="material-icons prefix"> account_box</i>
                 <select required="required" name="doador">
-                    <option value="" disabled selected>Escolha o doador</option>
+                    <option value="" disabled selected>Escolha o doador físico</option>
                     <option value="anonimo">Doador Anônimo</option>
                     @forelse($doadoresFisicos as $doador)
-                    <option value="{{$doador->nome}}">{{$doador->nome}}</option>
+                    <option value="{{$doador->nome}}">{{$doador->id}} | {{$doador->nome}}</option>
                     @empty
-                    <option value="sem doador">Sem Doadores</option>
+                    <option value="sem doador">Sem doadores físicos</option>
                     @endforelse
+                     <option value="" disabled selected>Escolha o doador jurídico</option>
                     @forelse($doadoresJuridicos as $doador)
-                    <option value="{{$doador->instituicao}}">{{$doador->instituicao}}</option>
+                    <option value="{{$doador->instituicao}}">{{$doador->id}} | {{$doador->instituicao}}</option>
                     @empty
+                    <option value="sem doador">Sem doadores jurídicos</option>
                     @endforelse
                 </select>
                 <label>Doador<span class="important">*</span></label>
