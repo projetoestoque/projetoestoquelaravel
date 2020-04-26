@@ -10,6 +10,7 @@
     $('.sidenav').sidenav();
     $('.parallax').parallax();
     $('.modal').modal();
+    $(".dropdown-trigger").dropdown({ hover: true});
   });
 </script>
 </body>

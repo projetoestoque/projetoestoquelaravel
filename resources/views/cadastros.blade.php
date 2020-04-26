@@ -66,17 +66,32 @@
                     <option value="Almoco">Almoço</option>
                     <option value="LancheTarde">Lanche da Tarde</option>
                 </select>
-            <label for="refeicao">Refeição do dia</label>
+            <label for="refeicao">Refeição do dia
+            <div class="tooltip">
+                <i class="tiny material-icons">info_outline</i>
+                <span class="tooltiptext">Qual das refeições do dia esta sendo registrada </span>
+            </div>
+            </label>
         </div>
         <div class="input-field">
             <i class="material-icons prefix">archive</i>
             <input required="required" id="desperdicio" name="desperdicio" step="0.1" placeholder="2.5" type="number">
-            <label for="desperdicio">Desperdício em Kg </label>
+            <label for="desperdicio">Desperdício em Kg 
+            <div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">Quanto em quilos da refeição posta foi desperdiçada </span>
+            </div>
+            </label>
         </div>
         <div class="input-field">
             <i class="material-icons prefix">plus_one</i>
             <input required="required" id="quantidade" name="quantidade" type="number" placeholder="10">
-            <label for="quantidade">Quantidade servida</label>
+            <label for="quantidade">Quantidade servida
+                <div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">Quantas refeições foram posta </span>
+            </div>
+            </label>
         </div>
         <br>
         <button class="btn waves-effect waves-light blue darken-2 ">Enviar</button>

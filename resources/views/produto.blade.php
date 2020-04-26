@@ -39,7 +39,7 @@
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">fitness_center</i>
                 <select required="required" id="selectMedida" name="medida">
-                <option value="" disabled selected>Escolha a medida</option>
+                <option value="" disabled selected>Choose your option</option>
                     @forelse($medidas as $medida)
                     <option value="{{$medida->medida}}">{{$medida->medida}}</option>
                     @empty
@@ -51,9 +51,16 @@
 	                  <a data-target="modal2" class="modal-trigger radius white-text">
                       <i class="tiny material-icons ">add_circle_outline</i>
                           <span>Cadastrar Medida</span> </a>
-	            @endif
+                @endif
+                <div class="tooltip desktop-hide">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">A medida é a quantidade de determinado item(Quilo,pacotes,gramas) </span>
             </div>
-            <div class="col l1"></div>
+            </div>
+        <div class="mobile-hide"><div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">A medida é a quantidade de determinado item(Quilo,pacotes,gramas)      </span>
+            </div></div>
         </div>
 
         <div class="row">
@@ -79,23 +86,32 @@
                  <a data-target="modal3" class="modal-trigger radius white-text">
                       <i class="tiny material-icons ">add_circle_outline</i>
                       <span>Cadastrar Tipo</span></a>
-	            @endif
+                @endif
+                <div class="tooltip desktop-hide">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">Tipo é a classificação geral do produto(Feijão,arroz,Açúcar) </span>
             </div>
-            <div class="col l1"></div>
+            </div>
+            <div class="mobile-hide">
+            <div class="tooltip ">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">Tipo é a classificação geral do produto(Feijão,arroz,Açúcar)</span>
+            </div>
+            </div>
         </div>
         <div class="row">
             <div class="col l1"></div>
             <div class="input-field col s12 l4">
             <i class="material-icons prefix"> account_box</i>
                 <select required="required" name="doador">
-                    <option value="" disabled selected>Escolha o doador físico</option>
+                    <option value="" disabled selected>Escolha o doador</option>
                     <option value="anonimo">Doador Anônimo</option>
+                    <option value="recursos proprios">Recursos Próprios</option>
                     @forelse($doadoresFisicos as $doador)
                     <option value="{{$doador->nome}}">{{$doador->id}} | {{$doador->nome}}</option>
                     @empty
                     <option value="sem doador">Sem doadores físicos</option>
                     @endforelse
-                     <option value="" disabled selected>Escolha o doador jurídico</option>
                     @forelse($doadoresJuridicos as $doador)
                     <option value="{{$doador->instituicao}}">{{$doador->id}} | {{$doador->instituicao}}</option>
                     @empty
@@ -104,7 +120,16 @@
                 </select>
                 <label>Doador<span class="important">*</span></label>
             </div>
-            <div class="col l2"></div>
+            <div class="col l2">
+            <div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">O Doador é de quem recebeu o produto</span>
+            </div>
+            <div class="desktop-hide">
+                <br>
+            </div>
+            </div>
+            
             <div class="input-field col s12 l4">
             <i class="material-icons prefix"> copyright</i>
                 <select required="required" id="selectMarca" name="marca">
@@ -120,9 +145,18 @@
 	                  <a data-target="modal1" class="modal-trigger radius white-text">
                       <i class="tiny material-icons ">add_circle_outline</i>
                       <span>Cadastrar Marca</span> </a>
-	            @endif
+                @endif
+                <div class="tooltip desktop-hide">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">Marca é a marca específica do produto </span>
             </div>
-            <div class="col l1"></div>
+            </div>
+            <div class="mobile-hide">
+            <div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">Marca é a marca específica do produto </span>
+            </div>
+            </div>
         </div>
         <br>
         <div class="row valign center">
