@@ -11,7 +11,7 @@
 <br>
 <br>
 <div>
-    <a href="{{URL::previous()}}" class="button">Voltar</a>
+    <button onclick="{{URL::previous()}}">Voltar</button>
 </div>
 <br>
 <div class="container ">
