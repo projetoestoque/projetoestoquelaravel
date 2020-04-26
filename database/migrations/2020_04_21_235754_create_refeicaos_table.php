@@ -18,6 +18,7 @@ class CreateRefeicaosTable extends Migration
             $table->string('refeicao');
             $table->double('desperdicio',8,2);
             $table->integer('quantidade');
+            $table->date('data');
             $table->timestamps();
         });
     }
