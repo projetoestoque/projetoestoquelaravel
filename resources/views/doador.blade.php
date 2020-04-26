@@ -26,10 +26,15 @@
 <span class="butaoText"><b>Cadastrar Doador Jurídico</span></button>
 <div class="container z-depth-2 valing-wrapper">
 <nav id="nav" class="nav-form blue darken-4" ></nav>
-        
+
         <form action="{{route('doador.fisico')}}" method="post" id="formFisico">
             {{csrf_field()}}
         <br>
+
+        <div>
+            <a href="{{redirect()->back()}}" class="button">Voltar</a>
+        </div>
+
         <div class="row">
             <div class="col l1"></div>
             <div class="input-field col s12 l4">
@@ -58,6 +63,7 @@
                 <label>Telefone<span class="important">*</span></label>
         </div>
         </div>
+
         <div class="row valign center">
             <button class="btn waves-effect waves-light blue darken-4"><b>Submit
                     <i class="material-icons right">send</i>
@@ -107,6 +113,7 @@
                     <i class="material-icons right">send</i>
             </button>
             <br>
+
             <br>
             <label ><span class="important">*</span> Campos Obrigatórios</label>
         </div>
@@ -123,7 +130,7 @@
 	         document.getElementById("btnJuridico").style.display = "none";
 	         document.getElementById("nav").style.display = "block";
 		}
-		
+
 		function showJuridico() {
 		     document.getElementById("formJuridico").style.display = "block";
 	         document.getElementById("btnFisico").style.display = "none";

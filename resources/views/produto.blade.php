@@ -1,8 +1,8 @@
 @extends('template.site')
 
 @section('titulo','Produtos')
-<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> 
-<meta name="csrf-token" content="{{ csrf_token() }}" /> 
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 
 @section('conteudo')
 <br>
@@ -13,6 +13,10 @@
     <form action="{{route('produto.cadastrar')}}" method="post">
         {{csrf_field()}}
         <br>
+
+        <div>
+            <a href="{{redirect()->back()}}" class="button">Voltar</a>
+        </div>
 
         <div class="row">
             <div class="col l1"></div>
@@ -129,7 +133,7 @@
                 <br>
             </div>
             </div>
-            
+
             <div class="input-field col s12 l4">
             <i class="material-icons prefix"> copyright</i>
                 <select required="required" id="selectMarca" name="marca">
@@ -222,7 +226,7 @@
 		alert("Digite uma marca");
 		return false;
 	}
-	
+
   $.get("{{url('/admin/marca/atualizar?marca=')}}" + marca, function(data, status){
     if (data != false) {
 	    var newOption = new Option(data.marca, data.marca, false, false);
@@ -241,7 +245,7 @@ $("#medidaBtn").click(function(){
 		alert("Digite uma medida");
 		return false;
 	}
-	
+
   $.get("{{url('/admin/medida/atualizar?medida=')}}" + medida, function(data, status){
     if (data != false) {
 	    var newOption = new Option(data.medida, data.medida, false, false);
@@ -260,7 +264,7 @@ $("#tipoBtn").click(function(){
 		alert("Digite um tipo!!!");
 		return false;
 	}
-	
+
   $.get("{{url('/admin/tipo/atualizar?tipo=')}}" + tipo, function(data, status){
     if (data != false) {
 	    var newOption = new Option(data.tipo, data.tipo, false, false);
@@ -276,4 +280,3 @@ $("#tipoBtn").click(function(){
 
 
 @endsection
-

@@ -10,6 +10,9 @@
 @endif
 <br>
 <br>
+  <div>
+      <a href="{{redirect()->back()}}" class="button">Voltar</a>
+  </div>
 <br>
 <div class="container ">
 <div class="row white-text ">
@@ -114,9 +117,9 @@
                 <span class="tooltiptext">Marca é a marca específica do produto </span>
             </div>
                 </label>
-                
+
             </div>
-            
+
             <br>
             <button class="btn waves-effect waves-light blue darken-2 ">Enviar</button>
         </form>
@@ -192,7 +195,7 @@
         <div class="input-field">
             <i class="material-icons prefix">archive</i>
             <input required="required" id="desperdicio" name="desperdicio" step="0.1" placeholder="2.5" type="number">
-            <label for="desperdicio">Desperdício em Kg 
+            <label for="desperdicio">Desperdício em Kg
             <div class="tooltip">
                 <i class="material-icons">info_outline</i>
                 <span class="tooltiptext">Quanto em quilos da refeição posta foi desperdiçada </span>
@@ -218,4 +221,3 @@
 </div>
 </div>
 @endsection
-    
