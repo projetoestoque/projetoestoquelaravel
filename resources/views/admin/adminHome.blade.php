@@ -3,6 +3,9 @@
 @section('titulo','Menu')
 @section('conteudo')
 <div class="mobile-hide"><img class="fluid1" src="{{asset('fluid1.png')}}"></div>
+<div>
+    <a href="{{redirect()->back()}}" class="button">Voltar</a>
+</div>
 <br>
 <h3 class=" alinhamento blue-text text-darken-4"><b>Olá, Admin! </h3>
 <h5 class=" alinhamento blue-text text-darken-4 ">Escolha uma das opções abaixo: </h3>
@@ -74,5 +77,3 @@
 <br>
 <br>
 @endsection
-
-
