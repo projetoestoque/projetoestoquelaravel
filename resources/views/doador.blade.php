@@ -14,6 +14,12 @@
 	    alert("{{$errors->first()}}");
 	</script>
 @endif
+<div class="butaoEspaco">
+    <a href="{{URL::previous()}}" class="waves-effect waves-teal btn-flat cyan-text text-darken-4">
+    <i class="large material-icons">arrow_back</i>
+    <span class="ButtaoEspacoTexto"><b>Voltar</span>
+    </a>
+</div>
 <br>
 <h3 class="center-align"><b>Cadastrar novo Doador</h3>
 <br>
@@ -30,11 +36,6 @@
         <form action="{{route('doador.fisico')}}" method="post" id="formFisico">
             {{csrf_field()}}
         <br>
-
-        <div>
-            <button onclick="{{URL::previous()}}">Voltar</button>
-        </div>
-
         <div class="row">
             <div class="col l1"></div>
             <div class="input-field col s12 l4">
