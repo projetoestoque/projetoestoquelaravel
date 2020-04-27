@@ -8,11 +8,15 @@
     alert("{{$errors->first()}}");
   </script>
 @endif
-<br>
-<br>
-<div>
-    <button onclick="{{URL::previous()}}">Voltar</button>
+<div class="butaoEspaco">
+    <a href="{{URL::previous()}}" class="waves-effect waves-teal btn-flat cyan-text text-darken-4">
+    <i class="large material-icons">arrow_back</i>
+    <span class="ButtaoEspacoTexto"><b>Voltar</span>
+    </a>
 </div>
+<br>
+<br>
+
 <br>
 <div class="container ">
 <div class="row white-text ">
@@ -160,7 +164,7 @@
             <label for="medida">Nova Medida
             <div class="tooltip">
                 <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">A medida é a quantidade de determinado item(Quilo,pacotes,gramas) </span>
+                <span class="tooltiptext">A medida é a unidade de determinado item(Quilo,pacotes,gramas) </span>
             </div>
             </label>
         </div>

@@ -3,11 +3,14 @@
 @section('titulo','Menu de Cadastros')
 @section('classBody','Background')
 @section('conteudo')
-<br>
-<br>
-<div>
-    <button onclick="{{URL::previous()}}">Voltar</button>
+<div class="butaoEspaco">
+    <a href="{{URL::previous()}}" class="waves-effect waves-teal btn-flat cyan-text text-darken-4">
+    <i class="large material-icons">arrow_back</i>
+    <span class="ButtaoEspacoTexto"><b>Voltar</span>
+    </a>
 </div>
+<br>
+<br>
 <br>
 <div class="container ">
 <div class="row white-text ">

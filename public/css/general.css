@@ -166,6 +166,16 @@ a.modal-trigger.radius{
 .select-wrapper input.select-dropdown{
   z-index:0;
 }
+.butaoEspaco{
+  position: relative;
+  float:left;
+  top:1em;
+  left:12em;
+}
+.ButtaoEspacoTexto{
+  position: relative;
+  top:-4px;
+}
 @media only screen and (max-width: 400px) {
   .mobile-hide{ display: none !important; }
   .alinhamento{
@@ -179,6 +189,16 @@ a.modal-trigger.radius{
   .welcomeButton{
   margin-left: 0.5em;
   margin-top:2em;
+  }
+  .butaoEspaco{
+    left:9px;
+  }
+  .tooltip .tooltiptext {
+    left:10%;
+    margin-left: -170px;
+  }
+  .tooltip .tooltiptext::after {
+  margin-left: 25px;
   }
 }
 @media only screen and (max-width: 400px) {
