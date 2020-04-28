@@ -6,10 +6,17 @@
 
 @section('conteudo')
 <div class="butaoEspaco">
-    <a href="{{URL::previous()}}" class="waves-effect waves-teal btn-flat cyan-text text-darken-4">
+  @if(auth()->user()->is_admin)
+    <a href="{{ URL::route('admin.cadastros'); }}" class="waves-effect waves-teal btn-flat cyan-text text-darken-4">
     <i class="large material-icons">arrow_back</i>
     <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
+  @else
+    <a href="{{ URL::route('superv.cadastros'); }}" class="waves-effect waves-teal btn-flat cyan-text text-darken-4">
+    <i class="large material-icons">arrow_back</i>
+    <span class="ButtaoEspacoTexto"><b>Voltar</span>
+  </a>
+  @endif
 </div>
 <br>
 <h3 class="center-align"><b>Cadastrar novo Produto</h3>
