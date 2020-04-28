@@ -4,7 +4,7 @@
 @section('classBody','Background')
 @section('conteudo')
 <div class="butaoEspaco">
-    <a href="{{URL::previous()}}" class="waves-effect waves-teal btn-flat cyan-text text-darken-4">
+    <a href="{{ URL::route('home'); }}" class="waves-effect waves-teal btn-flat cyan-text text-darken-4">
     <i class="large material-icons">arrow_back</i>
     <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
