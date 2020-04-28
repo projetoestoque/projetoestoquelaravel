@@ -9,7 +9,7 @@
   </script>
 @endif
 <div class="butaoEspaco">
-    <a href="{{ URL::route('admin.home'); }}" class="waves-effect waves-teal btn-flat cyan-text text-darken-4">
+    <a href="{{ URL::route('admin.home') }}" class="waves-effect waves-teal btn-flat cyan-text text-darken-4">
     <i class="large material-icons">arrow_back</i>
     <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
