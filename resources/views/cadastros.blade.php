@@ -15,7 +15,7 @@
 <div class="container ">
 <div class="row white-text ">
             <a href="{{route('produto')}}" class="white-text ">
-                <div class=" card-panel  blue lighten-1 col s5 hoverable ">
+                <div class=" card-panel blue accent-2 col s5 hoverable ">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col ">
@@ -29,7 +29,7 @@
             <div class="col s2">
             </div>
             <a href="{{route('doador')}}" class="white-text">
-                <div class=" card-panel  blue darken-2 col s5 hoverable">
+                <div class=" card-panel blue accent-2 col s5 hoverable">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col ">
@@ -98,7 +98,17 @@
                 <span class="tooltiptext">Quantas refeições foram posta </span>
             </div>
             </label>
-        </div>
+            <div class="input-field">
+                <i class="material-icons prefix">access_time</i>
+                <input required type="text" id="data" name="data" placeholder="00/00/0000" class="datepicker">
+                <label for="data">Data da Refeição
+                <div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">A data que a refeição foi servida</span>
+                 </div>
+                </label>
+            </div>
+</div>
         <br>
         <button class="btn waves-effect waves-light blue darken-2 ">Enviar</button>
     </form>

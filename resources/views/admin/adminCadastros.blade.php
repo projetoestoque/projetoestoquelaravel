@@ -142,7 +142,7 @@
             <label for="tipo">Novo tipo de Produto
             <div class="tooltip">
                 <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">Tipo é a classificação geral do produto(Feijão,arroz,Açúcar) </span>
+                <span class="tooltiptext">Tipo é a categoria do produto(Alimento,higiene,escritório) </span>
             </div>
             </label>
         </div>
@@ -216,6 +216,16 @@
             </div>
             </label>
         </div>
+        <div class="input-field">
+                <i class="material-icons prefix">access_time</i>
+                <input required type="text" id="data" name="data" placeholder="00/00/0000" class="datepicker">
+                <label for="data">Data da Refeição
+                <div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">A data que a refeição foi servida</span>
+                 </div>
+                </label>
+            </div>
         <br>
         <button class="btn waves-effect waves-light blue darken-2 ">Enviar</button>
     </form>
