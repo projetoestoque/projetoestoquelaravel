@@ -66,12 +66,12 @@
                 @endif
                 <div class="tooltip desktop-hide">
                 <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">A medida é a quantidade de determinado item(Quilo,pacotes,gramas) </span>
+                <span class="tooltiptext">A medida é a unidade de determinado item(Quilo,pacotes,gramas) </span>
             </div>
             </div>
         <div class="mobile-hide"><div class="tooltip">
                 <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">A medida é a quantidade de determinado item(Quilo,pacotes,gramas)      </span>
+                <span class="tooltiptext">A medida é a unidade de determinado item(Quilo,pacotes,gramas)      </span>
             </div></div>
         </div>
 
@@ -101,13 +101,13 @@
                 @endif
                 <div class="tooltip desktop-hide">
                 <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">Tipo é a classificação geral do produto(Feijão,arroz,Açúcar) </span>
+                <span class="tooltiptext">Tipo é a categoria do produto(Alimento,higiene,escritório) </span>
             </div>
             </div>
             <div class="mobile-hide">
             <div class="tooltip ">
                 <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">Tipo é a classificação geral do produto(Feijão,arroz,Açúcar)</span>
+                <span class="tooltiptext">Tipo é a categoria do produto(Alimento,higiene,escritório)</span>
             </div>
             </div>
         </div>
@@ -131,15 +131,20 @@
                     @endforelse
                 </select>
                 <label>Doador<span class="important">*</span></label>
+                <div class="tooltip desktop-hide">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">A medida é a quantidade de determinado item(Quilo,pacotes,gramas) </span>
             </div>
+            </div>
+            
+            <div class="mobile-hide">
             <div class="col l2">
             <div class="tooltip">
                 <i class="material-icons">info_outline</i>
                 <span class="tooltiptext">O Doador é de quem recebeu o produto</span>
             </div>
-            <div class="desktop-hide">
-                <br>
             </div>
+           
             </div>
 
             <div class="input-field col s12 l4">

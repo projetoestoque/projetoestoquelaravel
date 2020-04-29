@@ -124,7 +124,6 @@ a.modal-trigger.radius{
 .tooltip{
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black;
   z-index: 1;
 }
 .tooltip .tooltiptext {
@@ -136,14 +135,12 @@ a.modal-trigger.radius{
   padding: 5px 0;
   border-radius: 6px;
 
-  /* Position the tooltip text */
   position: absolute;
   z-index: 1;
   bottom: 125%;
   left: 50%;
   margin-left: -60px;
 
-  /* Fade in tooltip */
   opacity: 0;
   transition: opacity 0.3s;
 }
@@ -157,8 +154,14 @@ a.modal-trigger.radius{
   border-style: solid;
   border-color: #555 transparent transparent transparent;
 }
-
-/* Show the tooltip text when you mouse over the tooltip container */
+.modal{
+  width: 70%;
+}
+.modal-overlay{
+  bottom:25%;
+  top:-5%;
+  width:125%;
+}
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
@@ -193,6 +196,9 @@ a.modal-trigger.radius{
   .butaoEspaco{
     left:9px;
   }
+  .tooltip.desktop-hide{
+    float:right;
+  }
   .tooltip .tooltiptext {
     left:10%;
     margin-left: -170px;
@@ -200,6 +206,10 @@ a.modal-trigger.radius{
   .tooltip .tooltiptext::after {
   margin-left: 25px;
   }
+  .modal{
+  width: 90%;
+}
+ 
 }
 @media only screen and (max-width: 400px) {
   .mobile{ display: inline !important; }
