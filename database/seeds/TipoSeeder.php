@@ -12,7 +12,7 @@ class TipoSeeder extends Seeder
      */
     public function run()
     {
-        $tipo = [
+        $tipos = [
           [
             'tipo' => 'Escritorio'
           ],
