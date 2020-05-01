@@ -204,6 +204,10 @@ class CadastroController extends Controller
 		Refeicao::create($req->all());
 		return redirect()->back();
 	}
+	public function cadastrarEstoque (Request $req){
+		Estoque::create($req->all());
+		return redirect()->back();
+	}
     public function Cadastros(){
         return view('admin/adminCadastros');
       }

@@ -106,6 +106,21 @@
                 </div>
             </a>
 </div>
+<div class="row white text ">
+<span class="col s4"></span>
+<a class="white-text modal-trigger" data-target="modal5">
+                <div class=" card-panel blue accent-2 col s5 l4 hoverable">
+                    <div class="row">
+                    <span class="row"></span>
+                        <div class="col">
+                            <i class="material-icons medium white-text ">view_compact</i>
+                            <h6 class="no-padding txt-md">Cadastros de Estoque</h6>
+                        </div>
+                        <span class="row"></span>
+                        </div>
+                </div>
+            </a>
+</div>
 <div id="modal1" class="modal">
     <div class="modal-content">
       <h4>Cadastro de Nova Marca</h4>
@@ -233,5 +248,27 @@
     </div>
   </div>
 </div>
+<div id="modal5" class="modal">
+<div class="modal-content">
+    <h4>Cadastro de Estoque</h4>
+    <form method="post" action="admin.estoque.cadastrar">
+        {{ csrf_field() }}
+        <br>
+        <div class="input-field">
+            <i class="material-icons prefix">view_compact</i>
+            <input required="required" id="estoque" name="estoque" type="text" placeholder="Almoxarifado">
+            <label for="estoque">Novo Estoque
+            <div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">O Estoque é o local onde será armazenado determinados produtos cadastrados </span>
+            </div>
+            </label>
+        </div>
+        <br>
+        <button class="btn waves-effect waves-light blue darken-2 ">Enviar</button>
+    </form>
+    <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
+    </div>
+  </div>
 </div>
 @endsection

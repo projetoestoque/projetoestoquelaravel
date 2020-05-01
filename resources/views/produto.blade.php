@@ -7,12 +7,12 @@
 @section('conteudo')
 <div class="butaoEspaco">
   @if(auth()->user()->is_admin)
-    <a href="{{ URL::route('admin.cadastros') }}" class="waves-effect waves-teal btn-flat cyan-text text-darken-4">
+    <a href="{{ URL::route('admin.cadastros') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
     <i class="large material-icons">arrow_back</i>
     <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
   @else
-    <a href="{{ URL::route('superv.cadastros') }}" class="waves-effect waves-teal btn-flat cyan-text text-darken-4">
+    <a href="{{ URL::route('superv.cadastros') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4 ">
     <i class="large material-icons">arrow_back</i>
     <span class="ButtaoEspacoTexto"><b>Voltar</span>
   </a>
@@ -175,6 +175,36 @@
             </div>
             </div>
         </div>
+        <div class="row">
+        <div class="col l1 "></div>
+        <div class="input-field col s12 l4">
+            <i class="material-icons prefix">view_compact</i>
+                <select required="required" id="selectEstoque" name="estoque">
+                    <option value="" disabled selected>Escolha o Estoque</option>
+                    @forelse($marcas as $marca)
+                    <option value="{{$marca->marca}}">{{$marca->marca}}</option>
+                    @empty
+                    <option value="sem estoque">Sem Estoque</option>
+                    @endforelse
+                </select>
+                <label>Estoque<span class="important">*</span></label>
+                @if(auth()->user()->is_admin)
+	                  <a data-target="modal4" class="modal-trigger radius white-text">
+                      <i class="tiny material-icons ">add_circle_outline</i>
+                      <span>Cadastrar Estoque</span> </a>
+                @endif
+                <div class="tooltip desktop-hide">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">O Estoque é o local onde será armazenado determinados produtos cadastrados</span>
+            </div>
+            </div>
+            <div class="mobile-hide">
+            <div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">O Estoque é o local onde será armazenado determinados produtos cadastrados</span>
+            </div>
+            </div>
+        </div>
         <br>
         <div class="row valign center">
             <button class="btn waves-effect waves-light blue darken-4"><b>Submit
@@ -201,6 +231,7 @@
             </div>
             <br>
             <button class="modal-close btn waves-effect waves-light blue darken-2 " id="marcaBtn">Enviar</button>
+            <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
     </div>
 </div>
 
@@ -215,6 +246,7 @@
             </div>
             <br>
             <button class="modal-close btn waves-effect waves-light blue darken-2 " id="medidaBtn">Enviar</button>
+            <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
     </div>
 </div>
 
@@ -229,6 +261,21 @@
             </div>
             <br>
             <button class="modal-close btn waves-effect waves-light blue darken-2 " id="tipoBtn">Enviar</button>
+            <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
+    </div>
+</div>
+<div id="modal4" class="modal">
+    <div class="modal-content">
+      <h4>Cadastro de Estoque</h4>
+            <br>
+            <div class="input-field">
+                <i class="material-icons prefix">view_compact</i>
+                <input required placeholder="tipo" id="modalEstoque" type="text">
+                <label for="modalEstoque">Nome do Estoque</label>
+            </div>
+            <br>
+            <button class="modal-close btn waves-effect waves-light blue darken-2 " id="estoqueBtn">Enviar</button>
+            <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
     </div>
 </div>
 
