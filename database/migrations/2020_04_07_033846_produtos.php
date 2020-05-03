@@ -23,6 +23,7 @@ class Produtos extends Migration
             $table->string('tipo');
             $table->string('marca');
             $table->string('doador');
+            $table->string('estoque');
             $table->timestamps();
         });
     }
