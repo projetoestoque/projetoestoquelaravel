@@ -34,11 +34,13 @@ Route::group(['middleware' => 'is_admin'], function () {
    Route::get('/admin/marca/atualizar', 'CadastroController@marcaAtualizar')->name('marca.atualizar');
    Route::get('/admin/medida/atualizar', 'CadastroController@medidaAtualizar')->name('medida.atualizar');
    Route::get('/admin/tipo/atualizar', 'CadastroController@tipoAtualizar')->name('tipo.atualizar');
+   Route::get('/admin/estoque/atualizar', 'CadastroController@estoqueAtualizar')->name('estoque.atualizar');
 
    Route::post('/admin/marca/cadastrar', ['as'=> 'admin.marca.cadastrar', 'uses'=>'CadastroController@cadastrarMarca']);
    Route::post('/admin/tipo/cadastrar', ['as'=> 'admin.tipo.cadastrar', 'uses'=>'CadastroController@cadastrarTipo']);
    Route::post('/admin/medida/cadastrar', ['as'=> 'admin.medida.cadastrar', 'uses'=>'CadastroController@cadastrarMedida']);
    Route::post('/admin/estoque/cadastrar', ['as'=> 'admin.estoque.cadastrar', 'uses'=>'CadastroController@cadastrarEstoque']);
+  
    Route::post('/admin/cadastros', ['as'=> 'admin.refeicao.cadastrar', 'uses'=>'CadastroController@cadastrarRefeicao']);
 });
 

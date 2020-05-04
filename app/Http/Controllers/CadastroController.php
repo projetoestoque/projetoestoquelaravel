@@ -10,6 +10,7 @@ use App\Marca;
 use App\Tipo;
 use App\Medida;
 use App\Refeicao;
+use App\Estoque_disponivel;
 use DB;
 
 class CadastroController extends Controller
@@ -22,7 +23,8 @@ class CadastroController extends Controller
         $marcas=DB::table('marcas')->get();
         $doadoresFisicos = DB::table('doador_fisicos')->get();
         $doadoresJuridicos = DB::table('doador_juridicos')->get();
-    	return view('produto',compact('medidas','tipos','marcas','doadoresFisicos','doadoresJuridicos'));
+        $estoques = DB::table('estoque_disponivels')->get();
+    	return view('produto',compact('medidas','tipos','marcas','doadoresFisicos','doadoresJuridicos','estoques'));
     }
 
     public function cadastrarProduto(Request $req)
@@ -174,6 +176,19 @@ class CadastroController extends Controller
 				return $medida;
      }
 
+     public function estoqueAtualizar() {
+	      $novoEstoque= $_GET['estoque'];
+          $estoque = new Estoque_disponivel();
+			$estoque->estoque = strtolower($novoEstoque);
+
+				if(DB::table('estoque_disponivels')->where('estoque', $estoque->estoque)->exists())
+				{
+					return false;
+				}
+				$estoque->save();
+				return $estoque;
+     }
+
      public function cadastrarTipo (Request $req) {
 			 $tipo = new Tipo();
 			 $tipo->tipo = strtolower($req->get('tipo'));
@@ -204,10 +219,19 @@ class CadastroController extends Controller
 		Refeicao::create($req->all());
 		return redirect()->back();
 	}
-	public function cadastrarEstoque (Request $req){
-		Estoque::create($req->all());
-		return redirect()->back();
-	}
+	public function cadastrarEstoque (Request $req) {
+				$estoque = new Estoque_disponivel();
+				$estoque->estoque = strtolower($req->get('estoque'));
+
+				if(DB::table('estoque_disponivels')->where('estoque', $estoque->estoque)->exists())
+				{
+					return redirect()->route('admin.cadastros')
+					->withErrors(["errors"=>["Estoque já cadastrado"]]);
+				}
+				$estoque->save();
+				return redirect()->back();
+    }
+
     public function Cadastros(){
         return view('admin/adminCadastros');
       }
@@ -215,3 +239,4 @@ class CadastroController extends Controller
     return view('cadastros');
     }
 }
+
