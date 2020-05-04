@@ -251,7 +251,7 @@
 <div id="modal5" class="modal">
 <div class="modal-content">
     <h4>Cadastro de Estoque</h4>
-    <form method="post" action="admin.estoque.cadastrar">
+    <form method="post" action="{{route('admin.estoque.cadastrar')}}">
         {{ csrf_field() }}
         <br>
         <div class="input-field">

@@ -181,8 +181,8 @@
             <i class="material-icons prefix">view_compact</i>
                 <select required="required" id="selectEstoque" name="estoque">
                     <option value="" disabled selected>Escolha o Estoque</option>
-                    @forelse($marcas as $marca)
-                    <option value="{{$marca->marca}}">{{$marca->marca}}</option>
+                    @forelse($estoques as $estoque)
+                    <option value="{{$estoque->estoque}}">{{$estoque->estoque}}</option>
                     @empty
                     <option value="sem estoque">Sem Estoque</option>
                     @endforelse
@@ -270,7 +270,7 @@
             <br>
             <div class="input-field">
                 <i class="material-icons prefix">view_compact</i>
-                <input required placeholder="tipo" id="modalEstoque" type="text">
+                <input required placeholder="almoxarifado" id="modalEstoque" type="text">
                 <label for="modalEstoque">Nome do Estoque</label>
             </div>
             <br>
@@ -333,6 +333,26 @@ $("#tipoBtn").click(function(){
 	    alert ("Tipo cadastrado com sucesso !");
 	} else {
 	    alert("Tipo já existe !");
+	}
+  });
+});
+
+
+$("#estoqueBtn").click(function(){
+	var estoque = $("#modalEstoque").val();
+	if (estoque == "") {
+		alert("Digite um Estoque!!!");
+		return false;
+	}
+
+  $.get("{{url('/admin/estoque/atualizar?estoque=')}}" + estoque, function(data, status){
+    if (data != false) {
+	    var newOption = new Option(data.estoque, data.estoque, false, false);
+       $('#selectEstoque').append(newOption).trigger('change');
+       $('#selectEstoque').formSelect();
+	    alert ("Estoque cadastrado com sucesso !");
+	} else {
+	    alert("Estoque já existe !");
 	}
   });
 });
