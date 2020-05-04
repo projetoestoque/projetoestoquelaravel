@@ -15,7 +15,6 @@ class Relatorios extends Migration
     {
         Schema::create('relatorios', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('Id_estoque');
             $table->unsignedBigInteger('Id_produto');
             $table->string('diaria');
             $table->string('semanal');
@@ -23,7 +22,6 @@ class Relatorios extends Migration
             $table->string('anual');
             $table->timestamps();
 
-            $table->foreign('Id_estoque')->references('id')->on('estoques');
             $table->foreign('Id_produto')->references('id')->on('produtos');
         });
     }
