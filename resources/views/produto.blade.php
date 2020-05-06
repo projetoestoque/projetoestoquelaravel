@@ -38,47 +38,9 @@
                 <input required type="text" placeholder="nome"  name="nome">
                 <label>Nome <span class="important">*</span></label>
             </div>
-            <div class="col l2"></div>
-            <div class="input-field col s12 l4">
-                <i class="material-icons prefix">access_time</i>
-                <input required type="text" name="vencimento" placeholder="00/00/0000" class="datepicker">
-                <label>Vencimento <span class="important">*</span></label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col l1"></div>
-            <div class="input-field col s12 l4">
-                <i class="material-icons prefix">plus_one</i>
-                <input required type="number" placeholder="5" name="quantidade">
-                <label>Quantidade <span class="important">*</span></label>
-            </div>
-            <div class="col l2"></div>
-            <div class="input-field col s12 l4">
-                <i class="material-icons prefix">fitness_center</i>
-                <select required="required" id="selectMedida" name="medida">
-                <option value="" disabled selected>Choose your option</option>
-                    @forelse($medidas as $medida)
-                    <option value="{{$medida->medida}}">{{$medida->medida}}</option>
-                    @empty
-                    <option value="sem medida">Sem Medidas</option>
-                    @endforelse
-                </select>
-                <label>Medida<span class="important">*</span></label>
-                @if(auth()->user()->is_admin)
-	                  <a data-target="modal2" class="modal-trigger radius white-text">
-                      <i class="tiny material-icons ">add_circle_outline</i>
-                          <span>Cadastrar Medida</span> </a>
-                @endif
-                <div class="tooltip desktop-hide">
-                <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">A medida é a unidade de determinado item(Quilo,pacotes,gramas) </span>
-            </div>
-            </div>
-        <div class="mobile-hide"><div class="tooltip">
-                <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">A medida é a unidade de determinado item(Quilo,pacotes,gramas)      </span>
-            </div></div>
-        </div>
+
+
+
 
         <div class="row">
             <div class="col l1"></div>
@@ -116,41 +78,7 @@
             </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col l1"></div>
-            <div class="input-field col s12 l4">
-            <i class="material-icons prefix"> account_box</i>
-                <select required="required" name="doador">
-                    <option value="" disabled selected>Escolha o doador</option>
-                    <option value="anonimo">Doador Anônimo</option>
-                    <option value="recursos proprios">Recursos Próprios</option>
-                    @forelse($doadoresFisicos as $doador)
-                    <option value="{{$doador->nome}}">{{$doador->id}} | {{$doador->nome}}</option>
-                    @empty
-                    <option value="sem doador">Sem doadores físicos</option>
-                    @endforelse
-                    @forelse($doadoresJuridicos as $doador)
-                    <option value="{{$doador->instituicao}}">{{$doador->id}} | {{$doador->instituicao}}</option>
-                    @empty
-                    <option value="sem doador">Sem doadores jurídicos</option>
-                    @endforelse
-                </select>
-                <label>Doador<span class="important">*</span></label>
-                <div class="tooltip desktop-hide">
-                <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">A medida é a quantidade de determinado item(Quilo,pacotes,gramas) </span>
-            </div>
-            </div>
-
-            <div class="mobile-hide">
-            <div class="col l2">
-            <div class="tooltip">
-                <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">O Doador é de quem recebeu o produto</span>
-            </div>
-            </div>
-
-            </div>
+        
 
             <div class="input-field col s12 l4">
             <i class="material-icons prefix"> copyright</i>
@@ -240,15 +168,7 @@
     </div>
 </div>
 
-<div id="modal2" class="modal">
-    <div class="modal-content">
-      <h4>Cadastro de Nova Medida</h4>
-            <br>
-            <div class="input-field col s12">
-                <i class="material-icons prefix">font_download</i>
-                <input required placeholder="medida" id="modalMedida" type="text">
-                <label>Nome da Medida</label>
-            </div>
+
             <br>
             <button class="modal-close btn waves-effect waves-light blue darken-2 " id="medidaBtn">Enviar</button>
             <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
