@@ -239,5 +239,17 @@ class CadastroController extends Controller
     return view('cadastros');
     }
 
+    public function salvarAlteracoes(Request $req)
+    {
+      $Produto = App\Produto::find(1);
+
+      foreach ($variable as $key => $value) {
+        if ($Produto->$key!=$req->$key) {
+          $Produto->$key = $req->$key;
+        }
+      }
+      Produto->save();
+    }
+
 
 }
