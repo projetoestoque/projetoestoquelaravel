@@ -241,14 +241,20 @@ class CadastroController extends Controller
 
     public function salvarAlteracoes(Request $req)
     {
-      $Produto = App\Produto::find(1);
+      $Produto = App\Produto::find($id);
 
       foreach ($variable as $key => $value) {
         if ($Produto->$key!=$req->$key) {
           $Produto->$key = $req->$key;
         }
       }
-      Produto->save();
+      $Produto->save();
+    }
+
+    public function deletarAlteracoes(Request $req)
+    {
+      $Produto = App\Produto::find($id);
+      $Produto->delete();
     }
 
 
