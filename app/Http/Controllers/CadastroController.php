@@ -31,7 +31,7 @@ class CadastroController extends Controller
     {
         $dados = $req->all();
             Produto::create($dados);
-    	     return redirect()->route('produto');
+    	     return redirect()->route('produto')->with('message', 'Produto cadastrado com sucesso! ;-)');
     }
 
     public function doador()
@@ -127,7 +127,7 @@ class CadastroController extends Controller
     public function cadastrarMarca (Request $req) {
         $marca = new Marca();
 				$marca->marca = strtolower($req->get('marca'));
-			
+
 				if(DB::table('marcas')->where('marca', $marca->marca)->exists())
 				{
 					return redirect()->route('admin.cadastros')
@@ -238,5 +238,6 @@ class CadastroController extends Controller
     public function CadastrosSupervisor(){
     return view('cadastros');
     }
-}
 
+
+}

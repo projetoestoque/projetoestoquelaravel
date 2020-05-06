@@ -17,6 +17,11 @@
     <span class="ButtaoEspacoTexto"><b>Voltar</span>
   </a>
   @endif
+  @if(session('mensagem'))
+    <div class="alert alert-success">
+        <p>{{session('mensagem')}}</p>
+    </div>
+  @endif
 </div>
 <br>
 <h3 class="center-align"><b>Cadastrar novo Produto</h3>
@@ -136,7 +141,7 @@
                 <span class="tooltiptext">A medida é a quantidade de determinado item(Quilo,pacotes,gramas) </span>
             </div>
             </div>
-            
+
             <div class="mobile-hide">
             <div class="col l2">
             <div class="tooltip">
@@ -144,7 +149,7 @@
                 <span class="tooltiptext">O Doador é de quem recebeu o produto</span>
             </div>
             </div>
-           
+
             </div>
 
             <div class="input-field col s12 l4">
