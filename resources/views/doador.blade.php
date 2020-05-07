@@ -3,7 +3,7 @@
 @section('titulo','Doador')
 
 <style>
-#formFisico, #nav, #formJuridico {
+#formJuridico {
     display: none;
 }
 </style>
@@ -28,14 +28,15 @@
   @endif
 </div>
 <br>
+<input type="checkbox">
 <h3 class="center-align"><b>Cadastrar novo Doador</h3>
 <br>
-<button onclick="showFisico()" id="btnFisico" class="butao">
-<i class="material-icons medium white-text pt-5">face</i>
+<button onclick="showFisico()" id="btnFisico" class="butaoAtivado">
+<i class="material-icons medium pt-5">face</i>
 <span class="butaoText"><b>Cadastrar Doador Físico</span>
 </button>
 <button onclick="showJuridico()" id="btnJuridico" class="butao">
-<i class="material-icons medium white-text pt-5">business_center</i>
+<i class="material-icons medium  pt-5">business_center</i>
 <span class="butaoText"><b>Cadastrar Doador Jurídico</span></button>
 <div class="container z-depth-2 valing-wrapper">
 <nav id="nav" class="nav-form blue darken-4" ></nav>
@@ -83,37 +84,37 @@
         <br>
       </div>
     </form>
-
     <form  method="post" action="{{route('doador.juridico')}}" id="formJuridico">
     <div class="container z-depth-2 valing-wrapper">
             {{csrf_field()}}
         <br>
+        
         <div class="row">
             <div class="col l1"></div>
+            <div class="input-field col s12 l4">
+                <i class="material-icons prefix">location_city</i>
+                <input required value="{{old('instituicao')}}" type="text" name="instituicao" placeholder="intituicao"  class="instituicao">
+                <label>Instituição<span class="important">*</span></label>
+            </div>
+            <div class="col l2"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">mail</i>
                 <input required type="email" name="e-mail" value="{{old('e-mail')}}" placeholder="exemplo@gmailm.com" class="E-mail">
                 <label>Email<span class="important">*</span></label>
             </div>
-            <div class="col l2"></div>
+        </div>
+        <div class="row">
+            <div class="col l1"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">gavel</i>
                 <input required value="{{old('cnpj')}}" type="text" name="cnpj" class="cnpj" pattern="/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$" placeholder="00000000000000"/>
                 <label>CNPJ<span class="important">*</span></label>
             </div>
-        </div>
-        <div class="row">
-            <div class="col l1"></div>
+            <div class="col l2"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">call</i>
                 <input required value="{{old('telefone')}}" type="tel" name="telefone" placeholder="87981167793">
                 <label>Telefone<span class="important">*</span></label>
-            </div>
-            <div class="col l2"></div>
-            <div class="input-field col s12 l4">
-                <i class="material-icons prefix">location_city</i>
-                <input required value="{{old('instituicao')}}" type="text" name="instituicao" placeholder="intituicao"  class="instituicao">
-                <label>Instituição<span class="important">*</span></label>
             </div>
         </div>
         <div class="row valign center">
@@ -133,17 +134,26 @@
     <br>
     <script>
           function showFisico() {
+            document.getElementById("formJuridico").style.display = "none";
 	         document.getElementById("formFisico").style.display = "block";
-	         document.getElementById("btnFisico").style.display = "none";
-	         document.getElementById("btnJuridico").style.display = "none";
 	         document.getElementById("nav").style.display = "block";
+             document.getElementById("btnJuridico").classList.remove('butaoAtivado');
+            document.getElementById("btnJuridico").classList.add('butao');
+             document.getElementById("btnFisico").classList.remove('butao');
+            document.getElementById("btnFisico").classList.add('butaoAtivado');
+            
 		}
 
 		function showJuridico() {
-		     document.getElementById("formJuridico").style.display = "block";
-	         document.getElementById("btnFisico").style.display = "none";
-	         document.getElementById("btnJuridico").style.display = "none";
+            document.getElementById("formFisico").style.display = "none";
+		    document.getElementById("formJuridico").style.display = "block";
 	        document.getElementById("nav").style.display = "block";
+            document.getElementById("btnFisico").classList.remove('butaoAtivado');
+            document.getElementById("btnFisico").classList.add('butao');
+            document.getElementById("btnJuridico").classList.remove('butao');
+            document.getElementById("btnJuridico").classList.add('butaoAtivado');
+            
+          
 		}
     </script>
 @endsection

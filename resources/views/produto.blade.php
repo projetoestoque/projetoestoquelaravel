@@ -38,18 +38,15 @@
                 <input required type="text" placeholder="nome"  name="nome">
                 <label>Nome <span class="important">*</span></label>
             </div>
-
-
-
-
-        <div class="row">
-            <div class="col l1"></div>
+            <div class="col l2"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">domain</i>
-                <input required type="number" placeholder="100000002" name="codigo_barra">
-                <label>Codigo de barra<span class="important">*</span></label>
+                <input type="number" placeholder="100000002" name="codigo_barra">
+                <label>Codigo de barra</label>
             </div>
-            <div class="col l2"></div>
+        </div>
+        <div class="row">
+            <div class="col l1"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">layers</i>
                 <select id="selectTipo" required="required" name="tipo">
@@ -69,17 +66,16 @@
                 <div class="tooltip desktop-hide">
                 <i class="material-icons">info_outline</i>
                 <span class="tooltiptext">Tipo é a categoria do produto(Alimento,higiene,escritório) </span>
-            </div>
-            </div>
+                </div>
+                </div>
+            <div class="col l2">
             <div class="mobile-hide">
-            <div class="tooltip ">
+            <div class="tooltip">
                 <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">Tipo é a categoria do produto(Alimento,higiene,escritório)</span>
+                <span class="tooltiptext">Tipo é a categoria do produto(Alimento,higiene,escritório) </span>
             </div>
             </div>
-        </div>
-        
-
+            </div>
             <div class="input-field col s12 l4">
             <i class="material-icons prefix"> copyright</i>
                 <select required="required" id="selectMarca" name="marca">
@@ -164,13 +160,6 @@
             </div>
             <br>
             <button class="modal-close btn waves-effect waves-light blue darken-2 " id="marcaBtn">Enviar</button>
-            <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
-    </div>
-</div>
-
-
-            <br>
-            <button class="modal-close btn waves-effect waves-light blue darken-2 " id="medidaBtn">Enviar</button>
             <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
     </div>
 </div>
