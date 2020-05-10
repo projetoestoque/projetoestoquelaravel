@@ -106,34 +106,7 @@
         </div>
         <div class="row">
         <div class="col l1 "></div>
-        <div class="input-field col s12 l4">
-            <i class="material-icons prefix">view_compact</i>
-                <select required="required" id="selectEstoque" name="estoque">
-                    <option value="" disabled selected>Escolha o Estoque</option>
-                    @forelse($estoques as $estoque)
-                    <option value="{{$estoque->estoque}}">{{$estoque->estoque}}</option>
-                    @empty
-                    <option value="sem estoque">Sem Estoque</option>
-                    @endforelse
-                </select>
-                <label>Estoque<span class="important">*</span></label>
-                @if(auth()->user()->is_admin)
-	                  <a data-target="modal4" class="modal-trigger radius white-text">
-                      <i class="tiny material-icons ">add_circle_outline</i>
-                      <span>Cadastrar Estoque</span> </a>
-                @endif
-                <div class="tooltip desktop-hide">
-                <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">O Estoque é o local onde será armazenado determinados produtos cadastrados</span>
-            </div>
-            </div>
-            <div class="mobile-hide">
-            <div class="tooltip">
-                <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">O Estoque é o local onde será armazenado determinados produtos cadastrados</span>
-            </div>
-            </div>
-        </div>
+        
         <br>
         <div class="row valign center">
             <button class="btn waves-effect waves-light blue darken-4"><b>Submit
