@@ -9,19 +9,18 @@
   </script>
 @endif
 <div class="butaoEspaco">
-    <a href="{{ URL::route('admin.home') }}" class="waves-effect waves-teal btn-flat cyan-text text-darken-4">
-    <i class="large material-icons">arrow_back</i>
+    <a href="{{ URL::route('admin.MenuCadastros') }}" class="waves-effect waves-teal btn-flat black-text">
+    <i class="large material-icons">reply</i>
     <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
 </div>
 <br>
 <br>
-
 <br>
 <div class="container ">
 <div class="row white-text ">
             <a href="{{route('produto')}}" class="white-text">
-                <div class=" card-panel blue accent-2 col s5 hoverable ">
+                <div class="card-panel blue darken-3 col s5 hoverable ">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col ">
@@ -35,7 +34,7 @@
             <div class="col s2">
             </div>
             <a href="{{route('doador')}}" class="white-text">
-                <div class=" card-panel blue accent-2 col s5 hoverable">
+                <div class=" card-panel blue darken-3 col s5 hoverable">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col ">
@@ -51,7 +50,7 @@
 </div>
 <div class="row white-text ">
             <a class="white-text modal-trigger" data-target="modal1">
-                <div class=" card-panel blue accent-2 col s5 hoverable ">
+                <div class=" card-panel blue darken-3 col s5 hoverable ">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col ">
@@ -65,7 +64,7 @@
             <div class="col s2">
             </div>
             <a class="white-text modal-trigger" data-target="modal2">
-                <div class=" card-panel blue accent-2 col s5 hoverable">
+                <div class=" card-panel blue darken-3 col s5 hoverable">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col ">
@@ -81,7 +80,7 @@
 </div>
 <div class="row white text ">
 <a class="white-text modal-trigger" data-target="modal3">
-                <div class=" card-panel blue accent-2 col s5 hoverable">
+                <div class=" card-panel blue darken-3 col s5 hoverable">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col">
@@ -93,23 +92,8 @@
                 </div>
             </a>
             <span class="col s2"></span>
-            <a class="white-text modal-trigger" data-target="modal4">
-                <div class=" card-panel blue accent-2 col s5 hoverable">
-                    <div class="row">
-                    <span class="row"></span>
-                        <div class="col">
-                            <i class="material-icons medium white-text ">restaurant</i>
-                            <h6 class="no-padding txt-md">Cadastros de Refeições</h6>
-                        </div>
-                        <span class="row"></span>
-                        </div>
-                </div>
-            </a>
-</div>
-<div class="row white text ">
-<span class="col s4"></span>
-<a class="white-text modal-trigger" data-target="modal5">
-                <div class=" card-panel blue accent-2 col s5 l4 hoverable">
+            <a class="white-text modal-trigger" data-target="modal5">
+                <div class=" card-panel blue darken-3 col s5 l5 hoverable">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col">

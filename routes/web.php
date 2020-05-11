@@ -26,6 +26,8 @@ Route::get('/', ['as' => 'main', 'uses' => function() {
 Route::group(['middleware' => 'is_admin'], function () {
     Route::get('/admin/home', 'HomeController@adminHome')->name('admin.home');
     Route::get('/admin/cadastros', 'CadastroController@Cadastros')->name('admin.cadastros');
+    Route::get('/admin/MenuCadastros', 'CadastroController@CadastrosInsercoes')->name('admin.MenuCadastros');
+    Route::get('/admin/MenuInsercoes', 'CadastroController@Insercoes')->name('admin.insercoes');
 
    Route::get('/admin/marca', ['as'=> 'admin.marca', 'uses'=>'CadastroController@marca']);
    Route::get('/admin/tipo', ['as'=> 'admin.tipo', 'uses'=>'CadastroController@tipo']);
@@ -47,6 +49,8 @@ Route::group(['middleware' => 'is_admin'], function () {
 
 Route::get('/produto', ['as'=> 'produto', 'uses'=>'CadastroController@produto']);
 Route::get('/doador', ['as'=> 'doador', 'uses'=>'CadastroController@doador']);
+Route::get('/refeicao', ['as'=> 'refeicao', 'uses'=>'CadastroController@refeicao']);
+Route::get('/entradaProduto', ['as'=> 'entradaProduto', 'uses'=>'CadastroController@entradaProduto']);
 
 Route::post('/doador/fisico', ['as'=> 'doador.fisico', 'uses'=>'CadastroController@doadorFisico']);
 Route::post('/doador/juridico', ['as'=> 'doador.juridico', 'uses'=>'CadastroController@doadorJuridico']);

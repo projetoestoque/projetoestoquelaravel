@@ -123,7 +123,15 @@ class CadastroController extends Controller
     public function medida () {
         return view('admin.medida');
     }
-
+	public function refeicao(){
+		return view('Refeicao');
+	}
+	public function entradaProduto(){
+		$medidas=DB::table('medidas')->get();
+        $doadoresFisicos = DB::table('doador_fisicos')->get();
+        $doadoresJuridicos = DB::table('doador_juridicos')->get();
+    	return view('entradaProduto',compact('medidas','doadoresFisicos','doadoresJuridicos'));
+	}
     public function cadastrarMarca (Request $req) {
         $marca = new Marca();
 				$marca->marca = strtolower($req->get('marca'));
@@ -238,7 +246,12 @@ class CadastroController extends Controller
     public function CadastrosSupervisor(){
     return view('cadastros');
     }
-
+	public function CadastrosInsercoes(){
+        return view('admin/adminMenuInserirCadastrar');
+	}
+	public function Insercoes(){
+		return view('admin/adminInsercoes');
+	}
     public function salvarAlteracoes(Request $req)
     {
       $Produto = App\Produto::find($id);

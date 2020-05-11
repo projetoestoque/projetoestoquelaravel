@@ -31,7 +31,7 @@
                     <span class="row"></span>
                         <div class="col ">
                             <i class="material-icons medium white-text pt-5">playlist_add</i>
-                            <h6>Cadastros</h6>
+                            <h6>Cadastros e Inserções</h6>
                         </div>
                         <span class="row"></span>
                     </div>
