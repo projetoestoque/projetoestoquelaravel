@@ -16,13 +16,9 @@ class Produtos extends Migration
         Schema::create('produtos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nome');
-            $table->string('vencimento');
-            $table->integer('quantidade');
-            $table->string('medida');
             $table->string('codigo_barra')->nullable();
             $table->string('tipo');
             $table->string('marca');
-            $table->string('doador');
             $table->string('estoque');
             $table->timestamps();
         });
