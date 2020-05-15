@@ -26,16 +26,20 @@
 <br>
 <div class="container z-depth-2 valing-wrapper">
     <nav class="nav-form blue darken-4"></nav>
-    <form method="post" action="#">
+    <form method="post" action="{{route('entradaProdutoPost')}}">
         {{ csrf_field() }}
         <br>
         <div class="row">
             <div class="col l1"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">style</i>
-                <select required="required" id="selectProduto" name="produto">
+                <select required="required" id="selectProduto" name="Id_produto">
                     <option value="" disabled selected>Escolha o Produto</option>
-                    <option value="Cafe">Feijão</option>
+                    @forelse($produtos as $produto)
+                    <option value="{{$produto->id}}">{{$produto->nome}}</option>
+                    @empty
+                    <option value="0">Sem produtos</option>
+                    @endforelse
                 </select>
                 <label>Produto<span class="important">*</span></label>
                 <div class="tooltip desktop-hide">
@@ -43,6 +47,26 @@
                 <span class="tooltiptext">O produto serve pra identificar qual produto será inserido </span>
                 </div>
             </div>
+
+            <!-- EXCLUIR ISSO -->
+            <div class="input-field col s12 l4">
+                <i class="material-icons prefix">style</i>
+                <select required="required" id="selectProduto" name="Id_estoque">
+                    <option value="" disabled selected>Escolha o Estoque</option>
+                    @forelse($estoques as $estoque)
+                    <option value="{{$estoque->id}}">{{$estoque->estoque}}</option>
+                    @empty
+                    <option value="0">Sem estoques</option>
+                    @endforelse
+                </select>
+                <label>Estoque<span class="important">*</span></label>
+                <div class="tooltip desktop-hide">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">O produto serve pra identificar qual produto será inserido </span>
+                </div>
+            </div>
+            <!-- EXCLUIR ISSO -->
+            
             <div class="col l2">
             <div class="mobile-hide"><div class="tooltip">
                 <i class="material-icons">info_outline</i>
@@ -82,12 +106,12 @@
             </div>
                 <div class="input-field col s12 l4">
                 <i class="material-icons prefix">fitness_center</i>
-                <select required="required" id="selectMedida" name="medida">
+                <select required="required" id="selectMedida" name="Id_medida">
                 <option value="" disabled selected>Escolha a medida</option>
                     @forelse($medidas as $medida)
-                    <option value="{{$medida->medida}}">{{$medida->medida}}</option>
+                    <option value="{{$medida->id}}">{{$medida->medida}}</option>
                     @empty
-                    <option value="sem medida">Sem Medidas</option>
+                    <option value="0">Sem Medidas</option>
                     @endforelse
                 </select>
                 <label for="quantidade">Medida<span class="important">*</span></label>
@@ -105,19 +129,18 @@
         <div class="col l1"></div>
         <div class="input-field col s12 l4">
         <i class="material-icons prefix"> account_box</i>
-                <select required="required" name="doador">
+                <select required="required" name="Id_doador">
                     <option value="" disabled selected>Escolha o doador</option>
-                    <option value="anonimo">Doador Anônimo</option>
-                    <option value="recursos proprios">Recursos Próprios</option>
-                    @forelse($doadoresFisicos as $doador)
-                    <option value="{{$doador->nome}}">{{$doador->id}} | {{$doador->nome}}</option>
+                    <option value="0">Doador Anônimo</option>
+                    <option value="1">Recursos Próprios</option>
+                    @forelse($doadores as $doador)
+                    @if($doador->tipo == "fisico")
+                    <option value="{{$doador->id}}">{{$doador->id}} | {{$doador->nome}}</option>
+                    @else
+                    <option value="{{$doador->id}}">{{$doador->id}} | {{$doador->instituicao}}</option>
+                    @endif
                     @empty
-                    <option value="sem doador">Sem doadores físicos</option>
-                    @endforelse
-                    @forelse($doadoresJuridicos as $doador)
-                    <option value="{{$doador->instituicao}}">{{$doador->id}} | {{$doador->instituicao}}</option>
-                    @empty
-                    <option value="sem doador">Sem doadores jurídicos</option>
+                    <option value="0">Sem doadores</option>
                     @endforelse
                 </select>
                 <label>Doador<span class="important">*</span></label>
