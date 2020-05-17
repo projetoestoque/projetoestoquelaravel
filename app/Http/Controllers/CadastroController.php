@@ -281,9 +281,18 @@ class CadastroController extends Controller
 	{
 		return view('admin/adminInsercoes');
 	}
-	public function salvarAlteracoes(Request $req)
+	public function editarProduto($id){
+		$produtos = DB::table('produtos')->get();
+		$estoques = DB::table('estoque_disponivels')->get();
+		$medidas = DB::table('medidas')->get();
+		$doadores = DB::table('doadors')->get();
+		$registro= produto_em_estoque::find($id);
+		return view('admin.editarProduto',compact('registro','produtos','estoques','medidas','doadores','registro'));
+		
+	}
+	public function salvarAlteracoes(Request $req,$id)
 	{
-		$Produto = App\Produto::find($id);
+		$Produto = produto_em_estoque::find($id);
 
 		foreach ($variable as $key => $value) {
 			if ($Produto->$key != $req->$key) {

@@ -1,33 +1,27 @@
 @extends('template.site')
 
-@section('titulo','Novo Produto')
-@section('classBody','Background')
+@section('titulo','Editar Produtos')
+
 @section('conteudo')
-@if($errors->any())
-  <script>
-    alert("{{$errors->first()}}");
-  </script>
-@endif
 <div class="butaoEspaco">
-@if(auth()->user()->is_admin)
-    <a href="{{ URL::route('admin.insercoes') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
-    <i class="large material-icons">reply</i>
+    <a href="{{ URL::route('produtos.listar') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
+    <i class="large material-icons">arrow_back</i>
     <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
-  @else
-    <a href="{{ URL::route('superv.cadastros') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4 ">
-    <i class="large material-icons">reply</i>
-    <span class="ButtaoEspacoTexto"><b>Voltar</span>
-  </a>
+  @if(session('mensagem'))
+    <div class="alert alert-success">
+        <p>{{session('mensagem')}}</p>
+    </div>
   @endif
 </div>
 <br>
-<h3 class="center-align"><b>Inserir Produto</h3>
+<h3 class="center-align"><b>Editar Produto</h3>
 <br>
 <div class="container z-depth-2 valing-wrapper">
     <nav class="nav-form blue darken-4"></nav>
-    <form method="post" action="{{route('entradaProdutoPost')}}">
-        {{ csrf_field() }}
+    <form action="{{route('admin.produto.atualizar',$registro->id)}}" method="post">
+        {{csrf_field()}}
+        <input type="hidden" name="_method" value="put">
         <br>
         <div class="row">
             <div class="col l1"></div>

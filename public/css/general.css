@@ -1,8 +1,16 @@
 .nav-form{
-    height: 15px; line-height: 15px;
-    
+  height: 15px; 
+  line-height: 15px;
 }
-
+.nav-form.blue.lighten-1{
+  height: 7px; 
+  line-height: 7px;
+  background: linear-gradient(to right, #56ccf2, #2f80ed);
+  
+}
+body{
+  font-family: 'Noto Sans JP', sans-serif;
+}
 hr{
   border-color: #64b5f6 ;
   display: inline-block; 
@@ -11,8 +19,11 @@ hr{
   margin-left: 7px;
 }
 fieldset { 
-border:1px solid; 
-border-color:#64b5f6;
+border-left:transparent;
+border-right:transparent;
+border-bottom:transparent;
+border-top:2px solid #9e9e9e ;
+ 
 }
 legend{
   position: relative;
@@ -149,11 +160,14 @@ a.modal-trigger.radius{
   color:#FFFFFF;
   
 }
+
+.nome-produto{
+  font-weight: bolder;
+}
 .butao:active{
   top:0.5em;
 }
-
-.modal-close{
+.modal-close.waves-effect.waves-teal.btn-flat{
   position: relative;
   float: right;
   top:-35px;
@@ -192,9 +206,6 @@ a.modal-trigger.radius{
   border-style: solid;
   border-color: #555 transparent transparent transparent;
 }
-.modal{
-  width: 70%;
-}
 .modal-overlay{
   bottom:25%;
   top:-5%;
@@ -225,6 +236,12 @@ a.modal-trigger.radius{
 }
 .card.horizontal:hover{
   box-shadow: 0px 8px #008f947e;
+}
+h5.header{
+  margin-left: 15px;
+}
+.tiny.material-icons.red-text{
+  top: -10px;
 }
 @media only screen and (max-width: 400px) {
   .mobile-hide{ display: none !important; }
@@ -259,11 +276,14 @@ a.modal-trigger.radius{
   .modal{
   width: 90%;
 }
- 
+
 }
 @media only screen and (max-width: 400px) {
   .mobile{ display: inline !important; }
   }
   @media only screen and (min-width: 500px) {
   .desktop-hide{ display: none !important; }
+  .modal.confirm{
+    width: 40%;
+  }
   }
