@@ -12,6 +12,7 @@
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&display=swap" rel="stylesheet">
 </head>
 <body class="@yield('classBody')">
 <header>
@@ -79,8 +80,9 @@
   @elseif(Auth::user()->is_admin==true)
   <ul class="sidenav" id="mobile-demo">
   <li><a href="{{route ('admin.home') }}">Menu</a></li>
-  <li ><a href="#">Listagem</a></li>
+  <li ><a href="{{route('produtos.listar')}}">Listagem</a></li>
   <li><a href="{{ route('admin.cadastros')}}">Cadastros</a></li>
+  <li><a href="{{ route('admin.insercoes')}}">Inserções</a></li>
   <li><a href="#">Produtos Faltando</a></li>
   <li><a href="#">Relatório</a></li>
        <li>
@@ -95,8 +97,8 @@
   @else
   <ul class="sidenav" id="mobile-demo">
   <li><a href="{{ route('home') }}">Menu</a></li>
-  <li ><a href="#">Listagem</a></li>
-  <li><a href="{{route('superv.cadastros')}}">Cadastros</a></li>
+  <li ><a href="{{route('produtos.listar')}}">Listagem</a></li>
+  <li><a href="{{route('superv.cadastros')}}">Cadastros/Inserções</a></li>
   <li><a href="#">Produtos Faltando</a></li>
   <li><a href="#">Relatório</a></li>
   <li>
@@ -110,14 +112,16 @@
   </ul> 
  @endguest
  <ul id="dropdown1" class="dropdown-content"  >
-    <li ><a href="#">Listagem</a></li>
+    <li ><a href="{{route('produtos.listar')}}">Listagem</a></li>
     <li><a href="{{ route('admin.cadastros')}}">Cadastros</a></li>
+    <li><a href="{{ route('admin.insercoes')}}">Inserções</a></li>
     <li><a href="#">Produtos Faltando</a></li>
     <li><a href="#">Relatório</a></li>
   </ul> 
   <ul id="dropdown2" class="dropdown-content"  >
-    <li ><a href="#">Listagem</a></li>
+    <li ><a href="{{route('produtos.listar')}}">Listagem</a></li>
     <li><a href="{{ route('superv.cadastros')}}">Cadastros</a></li>
+    <li><a href="{{ route('superv.cadastros')}}">Inserções</a></li>
     <li><a href="#">Produtos Faltando</a></li>
     <li><a href="#">Relatório</a></li>
   </ul> 

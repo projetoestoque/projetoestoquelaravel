@@ -28,6 +28,10 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::get('/admin/cadastros', 'CadastroController@Cadastros')->name('admin.cadastros');
     Route::get('/admin/MenuCadastros', 'CadastroController@CadastrosInsercoes')->name('admin.MenuCadastros');
     Route::get('/admin/MenuInsercoes', 'CadastroController@Insercoes')->name('admin.insercoes');
+    Route::get('/admin/produto/editar/{id}', 'CadastroController@editarProduto')->name('admin.produto.editar');
+    Route::put('/admin/produto/atualizar/{id}', 'CadastroController@salvarAlteracoes')->name('admin.produto.atualizar');
+    Route::delete('/admin/produto/remover/{id}', 'CadastroController@deletarAlteracoes')->name('admin.produto.deletar');
+    
 
    Route::get('/admin/marca', ['as'=> 'admin.marca', 'uses'=>'CadastroController@marca']);
    Route::get('/admin/tipo', ['as'=> 'admin.tipo', 'uses'=>'CadastroController@tipo']);
@@ -57,6 +61,7 @@ Route::post('/doador/fisico', ['as'=> 'doador.fisico', 'uses'=>'CadastroControll
 Route::post('/doador/juridico', ['as'=> 'doador.juridico', 'uses'=>'CadastroController@doadorJuridico']);
 Route::post('/produto/cadastrar', ['as'=> 'produto.cadastrar', 'uses'=>'CadastroController@cadastrarProduto']);
 Route::post('/refeicao/cadastros', ['as'=> 'refeicao.cadastrar', 'uses'=>'CadastroController@cadastrarRefeicao']);
+Route::get('/produto/listar', ['as'=> 'produtos.listar', 'uses'=>'ProdutoController@listar_produtos']);
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

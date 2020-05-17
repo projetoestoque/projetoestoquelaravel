@@ -59,7 +59,7 @@
                 </select>
                 <label>Tipo<span class="important">*</span></label>
                 @if(auth()->user()->is_admin)
-                 <a data-target="modal3" class="modal-trigger radius white-text">
+                 <a data-target="modal2" class="modal-trigger radius white-text">
                       <i class="tiny material-icons ">add_circle_outline</i>
                       <span>Cadastrar Tipo</span></a>
                 @endif
@@ -119,9 +119,7 @@
         <br>
     </form>
 </div>
-<br>
-<br>
-<br>
+
 <div id="modal1" class="modal">
     <div class="modal-content">
       <h4>Cadastro de Nova Marca</h4>
@@ -133,11 +131,11 @@
             </div>
             <br>
             <button class="modal-close btn waves-effect waves-light blue darken-2 " id="marcaBtn">Enviar</button>
-            <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
+            <button class="modal-close waves-effect waves-black btn-flat right">Fechar</button>
     </div>
 </div>
 
-<div id="modal3" class="modal">
+<div id="modal2" class="modal">
     <div class="modal-content">
       <h4>Cadastro de Novo Tipo</h4>
             <br>
@@ -148,21 +146,7 @@
             </div>
             <br>
             <button class="modal-close btn waves-effect waves-light blue darken-2 " id="tipoBtn">Enviar</button>
-            <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
-    </div>
-</div>
-<div id="modal4" class="modal">
-    <div class="modal-content">
-      <h4>Cadastro de Estoque</h4>
-            <br>
-            <div class="input-field">
-                <i class="material-icons prefix">view_compact</i>
-                <input required placeholder="almoxarifado" id="modalEstoque" type="text">
-                <label for="modalEstoque">Nome do Estoque</label>
-            </div>
-            <br>
-            <button class="modal-close btn waves-effect waves-light blue darken-2 " id="estoqueBtn">Enviar</button>
-            <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
+            <button class="modal-close waves-effect waves-black btn-flat right">Fechar</button>
     </div>
 </div>
 
