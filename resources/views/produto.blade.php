@@ -6,42 +6,61 @@
 
 @section('conteudo')
 <div class="butaoEspaco">
-  @if(auth()->user()->is_admin)
-    <a href="{{ URL::route('admin.cadastros') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
-    <i class="large material-icons">arrow_back</i>
-    <span class="ButtaoEspacoTexto"><b>Voltar</span>
+
+@if(isset($produto))
+    <a href="{{ URL::route('produtos.listar') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
+        <i class="large material-icons">arrow_back</i>
+        <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
-  @else
-    <a href="{{ URL::route('superv.cadastros') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4 ">
-    <i class="large material-icons">arrow_back</i>
-    <span class="ButtaoEspacoTexto"><b>Voltar</span>
-  </a>
-  @endif
-  @if(session('mensagem'))
-    <div class="alert alert-success">
-        <p>{{session('mensagem')}}</p>
-    </div>
-  @endif
+@else
+    @if(auth()->user()->is_admin)
+        <a href="{{ URL::route('admin.cadastros') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
+        <i class="large material-icons">arrow_back</i>
+        <span class="ButtaoEspacoTexto"><b>Voltar</span>
+        </a>
+    @else
+        <a href="{{ URL::route('superv.cadastros') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4 ">
+        <i class="large material-icons">arrow_back</i>
+        <span class="ButtaoEspacoTexto"><b>Voltar</span>
+    </a>
+    @endif
+@endif
 </div>
 <br>
+@if(isset($produto))
+<h3 class="center-align"><b>Atualizar Produto</h3>
+@else
 <h3 class="center-align"><b>Cadastrar novo Produto</h3>
+@endif
 <br>
 <div class="container z-depth-2 valing-wrapper">
     <nav class="nav-form blue darken-4"></nav>
-    <form action="{{route('produto.cadastrar')}}" method="post">
+    @if(isset($produto))
+        <form action="{{route('admin.produto.atualizar')}}" method="post">
+    @else
+        <form action="{{route('produto.cadastrar')}}" method="post">
+    @endif
         {{csrf_field()}}
         <br>
         <div class="row">
             <div class="col l1"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">mode_edit</i>
-                <input required type="text" placeholder="nome"  name="nome">
+                @if(isset($produto))
+                    <input required type="text" value="{{$produto->nome}}" placeholder="nome"  name="nome">
+                @else
+                    <input required type="text" placeholder="nome"  name="nome">
+                @endif
                 <label>Nome <span class="important">*</span></label>
             </div>
             <div class="col l2"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">domain</i>
-                <input type="number" placeholder="100000002" name="codigo_barra">
+                @if(isset($produto))
+                    <input type="number" value="{{$produto->codigo_barra}}" placeholder="100000002" name="codigo_barra">
+                @else
+                    <input type="number" placeholder="100000002" name="codigo_barra">
+                @endif
                 <label>Codigo de barra</label>
             </div>
         </div>
@@ -50,12 +69,21 @@
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">layers</i>
                 <select id="selectTipo" required="required" name="tipo">
-                    <option value="" disabled selected>Escolha o tipo do Produto</option>
-                    @forelse($tipos as $tipo)
-                    <option value="{{$tipo->tipo}}">{{$tipo->tipo}}</option>
-                    @empty
-                    <option value="sem tipo">Sem Tipos</option>
-                    @endforelse
+                    @if(isset($produto))
+                        <option value="{{$produto->tipo}}"  selected>{{$produto->tipo}}</option>
+                        @forelse($tipos as $tipo)
+                        <option value="{{$tipo->tipo}}">{{$tipo->tipo}}</option>
+                        @empty
+                        <option value="sem tipo">Sem Tipos</option>
+                        @endforelse
+                    @else
+                        <option value="" disabled selected>Escolha o tipo do Produto</option>
+                        @forelse($tipos as $tipo)
+                        <option value="{{$tipo->tipo}}">{{$tipo->tipo}}</option>
+                        @empty
+                        <option value="sem tipo">Sem Tipos</option>
+                        @endforelse
+                    @endif
                 </select>
                 <label>Tipo<span class="important">*</span></label>
                 @if(auth()->user()->is_admin)
@@ -79,12 +107,21 @@
             <div class="input-field col s12 l4">
             <i class="material-icons prefix"> copyright</i>
                 <select required="required" id="selectMarca" name="marca">
-                    <option value="" disabled selected>Escolha a marca</option>
-                    @forelse($marcas as $marca)
-                    <option value="{{$marca->marca}}">{{$marca->marca}}</option>
-                    @empty
-                    <option value="sem marca">Sem Marcas</option>
-                    @endforelse
+                    @if(isset($produto))
+                        <option value="{{$produto->marca}}" selected>{{$produto->marca}}</option>
+                        @forelse($marcas as $marca)
+                        <option value="{{$marca->marca}}">{{$marca->marca}}</option>
+                        @empty
+                        <option value="sem marca">Sem Marcas</option>
+                        @endforelse
+                    @else
+                        <option value="" disabled selected>Escolha a marca</option>
+                        @forelse($marcas as $marca)
+                        <option value="{{$marca->marca}}">{{$marca->marca}}</option>
+                        @empty
+                        <option value="sem marca">Sem Marcas</option>
+                        @endforelse
+                    @endif
                 </select>
                 <label>Marca<span class="important">*</span></label>
                 @if(auth()->user()->is_admin)
@@ -117,8 +154,13 @@
             <label ><span class="important">*</span> Campos Obrigatórios</label>
         </div>
         <br>
+        @if(isset($produto))
+            <input type="hidden" name="id" value="{{$produto->id}}"/>
+        @endif
     </form>
 </div>
+
+
 
 <div id="modal1" class="modal">
     <div class="modal-content">

@@ -9,11 +9,6 @@
 </style>
 
 @section('conteudo')
-@if($errors->any())
-<script>
-    alert("{{$errors->first()}}");
-</script>
-@endif
 <div class="butaoEspaco">
     @if(auth()->user()->is_admin)
     <a href="{{ URL::route('admin.cadastros') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">

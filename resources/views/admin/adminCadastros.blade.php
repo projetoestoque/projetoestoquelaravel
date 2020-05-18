@@ -3,11 +3,6 @@
 @section('titulo','Menu de Cadastros')
 @section('classBody','Background')
 @section('conteudo')
-@if($errors->any())
-  <script>
-    alert("{{$errors->first()}}");
-  </script>
-@endif
 <div class="butaoEspaco">
     <a href="{{ URL::route('admin.MenuCadastros') }}" class="waves-effect waves-teal btn-flat black-text">
     <i class="large material-icons">reply</i>
