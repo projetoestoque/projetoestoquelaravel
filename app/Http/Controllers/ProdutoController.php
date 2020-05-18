@@ -38,15 +38,15 @@ class ProdutoController extends Controller
             $produto_cadastrado->vencimento=$produto_em_estoque->vencimento;
             array_push($produtos_estoque,$produto_cadastrado);
         };
-        $produtos_estoque=$this->paginate($produtos_estoque);
+        //$produtos_estoque=$this->paginate($produtos_estoque);
         return view('listagem', compact('produtos_estoque', 'produtos_cadastrados'));
     }
-    public function paginate($items, $perPage = 5, $page = null, $options = [])
-    {
-        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-        $items = $items instanceof Collection ? $items : Collection::make($items);
-        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
-    }
+   // public function paginate($items, $perPage = 5, $page = null, $options = [])
+   // {
+   //     $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+   //     $items = $items instanceof Collection ? $items : Collection::make($items);
+   //     return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+   // }
 
     public function deletarProduto()
 	{   

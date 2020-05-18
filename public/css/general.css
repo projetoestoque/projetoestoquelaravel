@@ -8,6 +8,10 @@
   background: linear-gradient(to right, #56ccf2, #2f80ed);
   
 }
+.alinhado-a-direita{
+  float:right;
+  margin-right: 50px;
+}
 body{
   font-family: 'Noto Sans JP', sans-serif;
 }

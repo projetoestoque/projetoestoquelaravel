@@ -66,9 +66,12 @@
     $('.modal').modal();
     $(".dropdown-trigger").dropdown({ 
       hover: true,
-      alignment:'up',
-      coverTrigger:false
+      alignment:'right',
+      coverTrigger:false,
+      constrain_width: true,
+      focusedIndex:2
       });
+    $('#dropdowner').dropdown();
   });
 </script>
 </body>
