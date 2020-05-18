@@ -2,6 +2,11 @@
 
 @section('titulo','Listagem')
 
+<style>
+    #listCadastro {
+        display: none;
+    }
+</style>
 @section('conteudo')
 <div class="butaoEspaco">
 @if(auth()->user()->is_admin)
@@ -19,21 +24,23 @@
 <br>
 <br>
 <br>
-<div class="container z-depth-2 valing-wrapper">
+<div class="container z-depth-2 valing-wrapper" id="listEstoque">
 <table class="highlight centered responsive-table">
         <thead>
         <nav class="nav-form blue lighten-1"></nav>
         </thead>
-        <h5 class="header"><b>Listagem de Produtos em estoque<b></h5>
+        <h5 class="header"><b>Listagem de Produtos</b>
+        <div class="alinhado-a-direita"> 
+        <button class="waves-effect waves-light btn blue"><i class="material-icons left">inbox</i><b>Em estoque</b></button>
+        <button class="waves-effect waves-light btn-flat" onclick="showCadastrados()"><i class="material-icons left">apps</i><b>Cadastrados</b></button>
+        </div>
+        </h5>
         <thead class="grey-text ">
           <tr>
               <th>Nome</th>
               <th>Quantidade</th>
-              <th>Medida</th>
               <th>Estoque</th>
               <th>Vencimento</th>
-              <th>Codigo de barras</th>
-              <th>Tipo</th>
               <th>Marca</th>
               @if(auth()->user()->is_admin)
               <th>Ações</th>
@@ -46,16 +53,13 @@
                 <td>{{$produto->nome}}</td>
                 <td class="grey-text text-darken-3">
                  @if($produto->quantidade<=4)
-                 <div>{{$produto->quantidade}}<i class="tiny material-icons red-text">brightness_1</i></div>
+                 <div>{{$produto->quantidade}} {{$produto->medida}}<i class="tiny material-icons red-text">brightness_1</i></div>
                  @else
-                 {{$produto->quantidade}}
+                 {{$produto->quantidade}} {{$produto->medida}}
                  @endif
                  </td>
-                 <td class="grey-text text-darken-3">{{$produto->medida}}</td>
                 <td class="grey-text text-darken-3">{{$produto->estoque->estoque}}</td>
                 <td class="grey-text text-darken-3">{{$produto->vencimento}}</td>
-                <td>{{$produto->codigo_barra}}</td>
-                <td>{{$produto->tipo}}</td>
                 <td>{{$produto->marca}}</td>
                 @if(auth()->user()->is_admin)
                 <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarEntrada({{$produto->id}})"><i class="material-icons">edit</i></a>
@@ -67,18 +71,20 @@
         @endforeach
         </tbody>
       </table>
-      <div class="container">
-<div class="row right">
-{{$produtos_estoque->links('pagination::default')}}
+
 </div>
-</div>
-      <br/><br/><br/><br/><br/>
-      
-      <table class="highlight centered responsive-table">
+
+<div class="container z-depth-2 valing-wrapper" id="listCadastro" >
+      <table class="highlight centered responsive-table" >
         <thead>
         <nav class="nav-form blue lighten-1"></nav>
         </thead>
-        <h5 class="header"><b>Listagem de Produtos cadastrados<b></h5>
+        <h5 class="header"><b>Listagem de Produtos<b>
+        <div class="alinhado-a-direita"> 
+        <button class="waves-effect waves-light btn-flat" onclick="showEstoque()"><i class="material-icons left">inbox</i><b>Em estoque</b></button>
+        <button class="waves-effect waves-light btn blue"><i class="material-icons left">apps</i><b>Cadastrados</b></button>
+        </div>
+        </h5>
         <thead class="grey-text ">
           <tr>
               <th>Nome</th>
@@ -109,15 +115,8 @@
         </tbody>
         <input type="hidden" id="produto_id"/>
       </table>
-      
 </div>
 <br>
-<div class="container">
-<div class="row right">
-{{$produtos_estoque->links('pagination::default')}}
-</div>
-</div>
-
 <br>
 <br>
 
@@ -148,6 +147,15 @@
 </div>
 
 <script>
+  function showCadastrados(){
+    document.getElementById("listEstoque").style.display = "none";
+    document.getElementById("listCadastro").style.display = "block";
+  }
+  function showEstoque(){
+    document.getElementById("listCadastro").style.display = "none";
+    document.getElementById("listEstoque").style.display = "block";
+    
+  }
   function confirmarProduto(id) {
     document.getElementById('produto_id').value = id;
     const elem = document.getElementById('modal1');
