@@ -22,6 +22,12 @@ class CadastroController extends Controller
 		$tipos = DB::table('tipos')->get();
 		$marcas = DB::table('marcas')->get();
 		$estoques = DB::table('estoque_disponivels')->get();
+
+		if(isset($_GET['id'])) {
+			$produto = Produto::findOrFail($_GET['id']);
+			return view('produto', compact('produto','medidas', 'tipos', 'marcas', 'estoques'));
+		}
+
 		return view('produto', compact('medidas', 'tipos', 'marcas', 'estoques'));
 	}
 
@@ -29,7 +35,7 @@ class CadastroController extends Controller
 	{
 		$dados = $req->all();
 		Produto::create($dados);
-		return redirect()->route('produto')->with('message', 'Produto cadastrado com sucesso! ;-)');
+		return redirect()->route('produto')->with('status', 'Produto cadastrado com sucesso!');
 	}
 
 	public function doador()
@@ -79,7 +85,7 @@ class CadastroController extends Controller
 				->withErrors(['errors' => ['CPF INFORMADO NÃO EXISTE']])
 				->withInput($req->input());
 		}
-		return redirect()->route('doador');
+		return redirect()->route('doador')->with('status', 'Doador cadastrado com sucesso!');;
 	}
 
 	public function doadorJuridico(Request $req)
@@ -121,7 +127,7 @@ class CadastroController extends Controller
 				->withErrors(['errors' => ['CNPJ INFORMADO NÃO EXISTE']])
 				->withInput($req->input());
 		}
-		return redirect()->route('doador');
+		return redirect()->route('doador')->with('status', 'Doador cadastrado com sucesso!');;
 	}
 
 	public function marca()
@@ -142,18 +148,29 @@ class CadastroController extends Controller
 	{
 		return view('Refeicao');
 	}
-	public function entradaProduto()
+	public function entradaProduto(Request $request)
 	{
 		$produtos = DB::table('produtos')->get();
 		$estoques = DB::table('estoque_disponivels')->get();
 		$medidas = DB::table('medidas')->get();
 		$doadores = DB::table('doadors')->get();
+
+		if(isset($_GET['id'])) {
+			$produto_em_estoque = Produto_em_estoque::find($_GET['id']);
+			$produto_em_estoque->marca = Marca::find($produto_em_estoque->Id_produto)->marca;
+			$produto_em_estoque->nome = Produto::find($produto_em_estoque->Id_produto)->nome;
+			$produto_em_estoque->estoque = Estoque_disponivel::find($produto_em_estoque->Id_estoque);
+			$produto_em_estoque->medida = Medida::find($produto_em_estoque->Id_medida);
+			$produto_em_estoque->doador = Doador::find($produto_em_estoque->Id_doador);
+			return view('entradaProduto', compact('produto_em_estoque','estoques', 'medidas', 'doadores', 'produtos'));
+		}
 		return view('entradaProduto', compact('estoques', 'medidas', 'doadores', 'produtos'));
 	}
 
 	public function entradaProdutoPost(Request $req)
 	{
 		Produto_em_estoque::create($req->all());
+		return redirect()->back()->with('status', 'Entrada realizada com sucesso!');
 	}
 
 	public function cadastrarMarca(Request $req)
@@ -166,7 +183,7 @@ class CadastroController extends Controller
 				->withErrors(["errors" => ["Marca já cadastrada"]]);
 		}
 		$marca->save();
-		return redirect()->back();
+		return redirect()->back()->with('status', 'Marca cadastrada com sucesso!');
 	}
 
 	public function marcaAtualizar()
@@ -231,7 +248,7 @@ class CadastroController extends Controller
 				->withErrors(["errors" => ["Tipo já cadastrado"]]);
 		}
 		$tipo->save();
-		return redirect()->back();
+		return redirect()->back()->with('status', 'Tipo cadastrado com sucesso!');
 	}
 
 	public function cadastrarMedida(Request $req)
@@ -244,13 +261,13 @@ class CadastroController extends Controller
 				->withErrors(["errors" => ["Medida já cadastrada"]]);
 		}
 		$medida->save();
-		return redirect()->back();
+		return redirect()->back()->with('status', 'Medida cadastrada com sucesso!');
 	}
 
 	public function cadastrarRefeicao(Request $req)
 	{
 		Refeicao::create($req->all());
-		return redirect()->back();
+		return redirect()->back()->with('status', 'Refeião registrada com sucesso!');
 	}
 	public function cadastrarEstoque(Request $req)
 	{
@@ -262,7 +279,7 @@ class CadastroController extends Controller
 				->withErrors(["errors" => ["Estoque já cadastrado"]]);
 		}
 		$estoque->save();
-		return redirect()->back();
+		return redirect()->back()->with('status', 'Estoque cadastrado com sucesso!');
 	}
 
 	public function Cadastros()
@@ -280,31 +297,5 @@ class CadastroController extends Controller
 	public function Insercoes()
 	{
 		return view('admin/adminInsercoes');
-	}
-	public function editarProduto($id){
-		$produtos = DB::table('produtos')->get();
-		$estoques = DB::table('estoque_disponivels')->get();
-		$medidas = DB::table('medidas')->get();
-		$doadores = DB::table('doadors')->get();
-		$registro= produto_em_estoque::find($id);
-		return view('admin.editarProduto',compact('registro','produtos','estoques','medidas','doadores','registro'));
-		
-	}
-	public function salvarAlteracoes(Request $req,$id)
-	{
-		$Produto = produto_em_estoque::find($id);
-
-		foreach ($variable as $key => $value) {
-			if ($Produto->$key != $req->$key) {
-				$Produto->$key = $req->$key;
-			}
-		}
-		$Produto->save();
-	}
-
-	public function deletarAlteracoes(Request $req)
-	{
-		$Produto = App\Produto::find($id);
-		$Produto->delete();
 	}
 }

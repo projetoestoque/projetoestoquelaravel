@@ -47,6 +47,10 @@ Route::group(['middleware' => 'is_admin'], function () {
    Route::post('/admin/medida/cadastrar', ['as'=> 'admin.medida.cadastrar', 'uses'=>'CadastroController@cadastrarMedida']);
    Route::post('/admin/estoque/cadastrar', ['as'=> 'admin.estoque.cadastrar', 'uses'=>'CadastroController@cadastrarEstoque']);
   
+   Route::post('/admin/entrada/produto/atualizar', ['as'=> 'admin.entrada.produto.atualizar', 'uses'=>'ProdutoController@entradaAtualizar']);
+   Route::post('/admin/produto/atualizar', ['as'=> 'admin.produto.atualizar', 'uses'=>'ProdutoController@produtoAtualizar']);
+
+  
    Route::post('/admin/cadastros', ['as'=> 'admin.refeicao.cadastrar', 'uses'=>'CadastroController@cadastrarRefeicao']);
 });
 
@@ -62,6 +66,9 @@ Route::post('/doador/juridico', ['as'=> 'doador.juridico', 'uses'=>'CadastroCont
 Route::post('/produto/cadastrar', ['as'=> 'produto.cadastrar', 'uses'=>'CadastroController@cadastrarProduto']);
 Route::post('/refeicao/cadastros', ['as'=> 'refeicao.cadastrar', 'uses'=>'CadastroController@cadastrarRefeicao']);
 Route::get('/produto/listar', ['as'=> 'produtos.listar', 'uses'=>'ProdutoController@listar_produtos']);
+
+Route::get('/produto/deletar', 'ProdutoController@deletarProduto')->name('produto.deletar');
+Route::get('/produto/entrada/deletar', 'ProdutoController@deletarEntrada')->name('entrada.deletar');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

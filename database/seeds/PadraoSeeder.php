@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use App\Marca;
 use App\Estoque_disponivel;
 use App\Medida;
+use App\Doador;
 
 class PadraoSeeder extends Seeder
 {
@@ -16,17 +17,36 @@ class PadraoSeeder extends Seeder
     {
         //default marca
         $marca = new Marca();
-        $marca->marca = "sem marca";
+        $marca->marca = "Sem marca";
         $marca->save();
 
         //default estoque
         $estoque = new Estoque_disponivel();
-        $estoque->estoque = "sem estoque";
+        $estoque->estoque = "Sem estoque";
         $estoque->save();
 
         //default medida
         $medida = new Medida();
-        $medida->medida = "sem medida";
+        $medida->medida = "Sem medida";
         $medida->save();
+
+        //default doador
+        $doador = new Doador();
+        $doador->nome = "Sem doador";
+        $doador->email = "Sem doador";
+        $doador->tipo = "Sem doador";
+        $doador->save();
+
+        $doador1 = new Doador();
+        $doador1->nome = "Doador anônimo";
+        $doador1->email = "Doador anônimo";
+        $doador1->tipo = "Doador anônimo";
+        $doador1->save();
+
+        $doador2 = new Doador();
+        $doador2->nome = "Recursos própios";
+        $doador2->email = "Recursos própios";
+        $doador2->tipo = "Recursos própios";
+        $doador2->save();
     }
 }

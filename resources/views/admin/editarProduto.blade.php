@@ -8,11 +8,6 @@
     <i class="large material-icons">arrow_back</i>
     <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
-  @if(session('mensagem'))
-    <div class="alert alert-success">
-        <p>{{session('mensagem')}}</p>
-    </div>
-  @endif
 </div>
 <br>
 <h3 class="center-align"><b>Editar Produto</h3>
