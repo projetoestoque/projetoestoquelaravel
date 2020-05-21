@@ -49,7 +49,7 @@
             <div class="col l2"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">mail</i>
-                <input required type="email" name="e-mail" value="{{old('e-mail')}}" placeholder="exemplo@gmailm.com" class="E-mail">
+                <input required type="email" name="email_fisico" value="{{old('email_fisico')}}" placeholder="exemplo@gmailm.com" class="E-mail">
                 <label>Email<span class="important">*</span></label>
             </div>
         </div>
@@ -63,7 +63,7 @@
             <div class="col l2"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">call</i>
-                <input required value="{{old('telefone')}}" type="tel" name="telefone" placeholder="87981167793">
+                <input required value="{{old('telefone_fisico')}}" type="tel" name="telefone_fisico" maxlength="15" onkeypress='return SomenteNumero(event)' placeholder="87981167793">
                 <label>Telefone<span class="important">*</span></label>
             </div>
         </div>
@@ -95,7 +95,7 @@
             <div class="col l2"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">mail</i>
-                <input required type="email" name="e-mail" value="{{old('e-mail')}}" placeholder="exemplo@gmailm.com" class="E-mail">
+                <input required type="email" name="email_juridico" value="{{old('email_juridico')}}" placeholder="exemplo@gmailm.com" class="E-mail">
                 <label>Email<span class="important">*</span></label>
             </div>
         </div>
@@ -109,7 +109,7 @@
             <div class="col l2"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">call</i>
-                <input required value="{{old('telefone')}}" type="tel" name="telefone" placeholder="87981167793">
+                <input required value="{{old('telefone_juridico')}}" type="tel" name="telefone_juridico" maxlength="15" onkeypress='return SomenteNumero(event)' placeholder="87981283493">
                 <label>Telefone<span class="important">*</span></label>
             </div>
         </div>
@@ -130,6 +130,15 @@
 <br>
 <br>
 <script>
+    function SomenteNumero(e){
+        var tecla=(window.event)?event.keyCode:e.which;   
+        if((tecla>47 && tecla<58)) return true;
+        else{
+            if (tecla==8 || tecla==0) return true;
+        else  return false;
+        }
+    }
+
     function showFisico() {
         document.getElementById("formJuridico").style.display = "none";
         document.getElementById("formFisico").style.display = "block";

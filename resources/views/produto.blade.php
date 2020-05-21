@@ -57,9 +57,9 @@
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">domain</i>
                 @if(isset($produto))
-                    <input type="number" value="{{$produto->codigo_barra}}" placeholder="100000002" name="codigo_barra">
+                    <input type="text" value="{{$produto->codigo_barra}}" maxlength="12" minlength="12" onkeypress='return SomenteNumero(event)' placeholder="999999999999" name="codigo_barra">
                 @else
-                    <input type="number" placeholder="100000002" name="codigo_barra">
+                    <input type="text" placeholder="999999999999" maxlength="12" minlength="12" onkeypress='return SomenteNumero(event)' name="codigo_barra">
                 @endif
                 <label>Codigo de barra</label>
             </div>
@@ -193,6 +193,15 @@
 </div>
 
 <script>
+     function SomenteNumero(e){
+        var tecla=(window.event)?event.keyCode:e.which;   
+        if((tecla>47 && tecla<58)) return true;
+        else{
+            if (tecla==8 || tecla==0) return true;
+        else  return false;
+        }
+    }
+
     $("#marcaBtn").click(function(){
 	var marca = $("#modalMarca").val();
 	if (marca == "") {

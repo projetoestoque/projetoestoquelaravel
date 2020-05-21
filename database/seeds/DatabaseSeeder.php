@@ -15,7 +15,11 @@ class DatabaseSeeder extends Seeder
          $this->call([
              UsuarioSeeder::class,
              TipoSeeder::class,
-             PadraoSeeder::class
+             DoadorSeeder::class,
+             EstoqueSeeder::class,
+             MarcaSeeder::class,
+             MedidaSeeder::class,
+             ProdutoSeeder::class
          ]);
     }
 }
