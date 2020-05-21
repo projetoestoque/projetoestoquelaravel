@@ -146,7 +146,7 @@ class CadastroController extends Controller
 	}
 	public function refeicao()
 	{
-		return view('Refeicao');
+		return view('refeicao');
 	}
 	public function entradaProduto(Request $request)
 	{
@@ -169,7 +169,15 @@ class CadastroController extends Controller
 
 	public function entradaProdutoPost(Request $req)
 	{
-		Produto_em_estoque::create($req->all());
+		$produto = new Produto_em_estoque();
+		$produto->Id_produto = $req->get('Id_produto');
+		$produto->Id_estoque = $req->get('Id_estoque');
+		$produto->Id_medida = $req->get('Id_medida');
+		$produto->Id_doador = $req->get('Id_doador');
+		$produto->quantidade = $req->get('quantidade');
+		$produto->vencimento = $req->get('vencimento');
+		$produto->save();
+		
 		return redirect()->back()->with('status', 'Entrada realizada com sucesso!');
 	}
 
