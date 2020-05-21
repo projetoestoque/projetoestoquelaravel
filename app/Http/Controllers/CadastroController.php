@@ -46,6 +46,7 @@ class CadastroController extends Controller
 	public function doadorFisico(Request $req)
 	{
 		$cpf = $req->get("cpf");
+		$cpf = preg_replace('/[^0-9]/is', '', $cpf);
 
 		function validar_cpf($cpf)
 		{
@@ -72,25 +73,34 @@ class CadastroController extends Controller
 			return true;
 		}
 
+		if(DB::table('doadors')->where('cpf', $cpf)->value('cpf') == $cpf) {
+			return redirect()->route("doador")
+				->withErrors(['errors' => ['CPF INFORMADO JÁ CADASTRADO!']])
+				->withInput($req->input());
+		}
+
 		if (validar_cpf($cpf)) {
 			$doador = new Doador();
 			$doador->nome = $req->get('nome');
-			$doador->cpf = $req->get('cpf');
-			$doador->telefone = $req->get('telefone');
-			$doador->email = $req->get('e-mail');
+			$doador->cpf = $cpf;
+			$doador->telefone = $req->get('telefone_fisico');
+			$doador->email = $req->get('email_fisico');
 			$doador->tipo = $req->get('tipo');
 			$doador->save();
 		} else {
 			return redirect()->route("doador")
-				->withErrors(['errors' => ['CPF INFORMADO NÃO EXISTE']])
+				->withErrors(['errors' => ['CPF INFORMADO NÃO EXISTE!']])
 				->withInput($req->input());
 		}
+
 		return redirect()->route('doador')->with('status', 'Doador cadastrado com sucesso!');;
 	}
 
 	public function doadorJuridico(Request $req)
 	{
 		$cnpj = $req->get("cnpj");
+		$cnpj = preg_replace('/[^0-9]/', '', (string) $cnpj);
+
 		function validar_cnpj($cnpj)
 		{
 			$cnpj = preg_replace('/[^0-9]/', '', (string) $cnpj);
@@ -114,12 +124,18 @@ class CadastroController extends Controller
 			return $cnpj[13] == ($resto < 2 ? 0 : 11 - $resto);
 		}
 
+		if(DB::table('doadors')->where('cnpj', $cnpj)->value('cnpj') == $cnpj){
+			return redirect()->route('doador')
+				->withErrors(['errors' => ['CNPJ INFORMADO JÁ CADASTRADO!']])
+				->withInput($req->input());
+		}
+
 		if (validar_cnpj($cnpj)) {
 			$doador = new Doador();
 			$doador->instituicao = $req->get('instituicao');
-			$doador->cnpj = $req->get('cnpj');
-			$doador->telefone = $req->get('telefone');
-			$doador->email = $req->get('e-mail');
+			$doador->cnpj = $cnpj;
+			$doador->telefone = $req->get('telefone_juridico');
+			$doador->email = $req->get('email_juridico');
 			$doador->tipo = $req->get('tipo');
 			$doador->save();
 		} else {
@@ -127,6 +143,7 @@ class CadastroController extends Controller
 				->withErrors(['errors' => ['CNPJ INFORMADO NÃO EXISTE']])
 				->withInput($req->input());
 		}
+
 		return redirect()->route('doador')->with('status', 'Doador cadastrado com sucesso!');;
 	}
 
