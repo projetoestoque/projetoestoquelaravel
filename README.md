@@ -1,79 +1,70 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
-
+# SysOng
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
+<img src="public/telas-read.png">
 </p>
 
-## About Laravel
+## Do que se trata?
+SYSONG é um sistema de gerenciamento e gestão de estoque para a ONG [Projeto Gamaliel](https://www.facebook.com/ProjetoGamaliel/) com o objetivo de melhorar o controle das doações recebidas e por consequência, a ONG prestará um serviço ainda mais impactante e eficiente para a sociedade.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tecnologias
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+* Materialize
+* Html/Css/JavaScript
+* PostgreSQL
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Inicializando o projeto
 
-## Learning Laravel
+Para que o sistema rode na sua máquina é necessário uma série de etapas listadas a baixo:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Pré-Requisitos
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+* Sistema de Gerenciamento de Banco de dados(Mysql ou Pgsql de preferência)
+* Php
+* Git
+* Composer
+* Navegador Web(Chrome,firefox,etc)
+* IDE ou Editor de Código(Opcional)
 
-## Laravel Sponsors
+### Instalação
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Tendo os pré-requisitos já configurados,vamos começar clonando o repositório na nosssa máquina. Para isso escolha uma pasta onde será clonado o repositório,abra o terminal/cmd e use o comando do *git* abaixo:
+```
+git clone https://github.com/projetoestoque/projetoestoquelaravel.git
+```
+Após isso,use ``cd projetoestoquelaravel`` para acessar o projeto clonado.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
-- [云软科技](http://www.yunruan.ltd/)
+A segunda etapa será rodar instalar as bibliotecas do composer no projeto para garantir que todas elas estarão no projeto e assim não nos dar nenhum erro de falta de dependência.Estando na pasta do projeto via terminal/cmd use:
 
-## Contributing
+```
+composer install
+```
+Após baixado,abra o arquivo **.env** dentro do projeto via Editor de código(caso não possua,utilize o bloco de notas.Dentro do arquivo mude as linhas abaixo:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+DB_CONNECTION=pgsql ou mysql
+DB_HOST=127.0.0.1   //ponha como localhost
+DB_PORT=           //porta que o seu sgbd está funcionando
+DB_DATABASE=      //nome do bd que você criou para o projeto
+DB_USERNAME=     //nome do usuário admin do sgbd
+DB_PASSWORD=    //senha do sgbd
+```
+Após isso,novamente no terminal/cmd utilize o comando ``php artisan migrate``, isso criará todas as tabelas necessárias no BD configurado.
+Após o comando ter feito todas as migrations,use o comando ``php artisan db:seed``, para que todas as opções pré-definidas sejam configuradas nas tabelas do BD.
+Por fim utilize o comando para rodar a aplicação em localhost:
 
-## Code of Conduct
+```
+php artisan serve
+```
+No navegador,cole o link: **localhost:8000** e você verá a aplicação funcionando.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Contribuidores
 
-## Security Vulnerabilities
+- [@JuanGustah](https://github.com/JuanGustah) Design e UX
+- [@AlephyV](https://github.com/AlephyV)  Php
+- [@Nidhoggui](https://github.com/Nidhoggui) Php
+- [@874715maria](https://github.com/874715maria) DB
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Do nosso time para todos:
+>Obrigado por visualizar nosso projeto,sinta-se livre para melhorá-lo.
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
