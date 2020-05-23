@@ -73,7 +73,7 @@ class CadastroController extends Controller
 			return true;
 		}
 
-		if(DB::table('doadors')->where('cpf', $cpf)->value('cpf') == $cpf) {
+		if(DB::table('doadors')->where('cpf', $cpf)->exists()) {
 			return redirect()->route("doador")
 				->withErrors(['errors' => ['CPF INFORMADO JÁ CADASTRADO!']])
 				->withInput($req->input());
@@ -82,7 +82,7 @@ class CadastroController extends Controller
 		if (validar_cpf($cpf)) {
 			$doador = new Doador();
 			$doador->nome = $req->get('nome');
-			$doador->cpf = $cpf;
+			$doador->cpf = $req->get('cpf');
 			$doador->telefone = $req->get('telefone_fisico');
 			$doador->email = $req->get('email_fisico');
 			$doador->tipo = $req->get('tipo');
@@ -124,7 +124,7 @@ class CadastroController extends Controller
 			return $cnpj[13] == ($resto < 2 ? 0 : 11 - $resto);
 		}
 
-		if(DB::table('doadors')->where('cnpj', $cnpj)->value('cnpj') == $cnpj){
+		if(DB::table('doadors')->where('cnpj', $cnpj)->exists()){
 			return redirect()->route('doador')
 				->withErrors(['errors' => ['CNPJ INFORMADO JÁ CADASTRADO!']])
 				->withInput($req->input());
@@ -201,7 +201,7 @@ class CadastroController extends Controller
 	public function cadastrarMarca(Request $req)
 	{
 		$marca = new Marca();
-		$marca->marca = strtolower($req->get('marca'));
+		$marca->marca = $req->get('marca');
 
 		if (DB::table('marcas')->where('marca', $marca->marca)->exists()) {
 			return redirect()->route('admin.cadastros')
@@ -215,11 +215,12 @@ class CadastroController extends Controller
 	{
 		$novaMarca = $_GET['marca'];
 		$marca = new Marca();
-		$marca->marca = strtolower($novaMarca);
+		$marca->marca = $novaMarca;
 
 		if (DB::table('marcas')->where('marca', $marca->marca)->exists()) {
 			return false;
 		}
+
 		$marca->save();
 		return $marca;
 	}
@@ -228,11 +229,12 @@ class CadastroController extends Controller
 	{
 		$novoTipo = $_GET['tipo'];
 		$tipo = new Tipo();
-		$tipo->tipo = strtolower($novoTipo);
+		$tipo->tipo = $novoTipo;
 
 		if (DB::table('tipos')->where('tipo', $tipo->tipo)->exists()) {
 			return false;
 		}
+
 		$tipo->save();
 		return $tipo;
 	}
@@ -241,11 +243,12 @@ class CadastroController extends Controller
 	{
 		$novaMedida = $_GET['medida'];
 		$medida = new Medida();
-		$medida->medida = strtolower($novaMedida);
+		$medida->medida = $novaMedida;
 
 		if (DB::table('medidas')->where('medida', $medida->medida)->exists()) {
 			return false;
 		}
+
 		$medida->save();
 		return $medida;
 	}
@@ -254,11 +257,12 @@ class CadastroController extends Controller
 	{
 		$novoEstoque = $_GET['estoque'];
 		$estoque = new Estoque_disponivel();
-		$estoque->estoque = strtolower($novoEstoque);
+		$estoque->estoque = $novoEstoque;
 
 		if (DB::table('estoque_disponivels')->where('estoque', $estoque->estoque)->exists()) {
 			return false;
 		}
+
 		$estoque->save();
 		return $estoque;
 	}
@@ -266,7 +270,7 @@ class CadastroController extends Controller
 	public function cadastrarTipo(Request $req)
 	{
 		$tipo = new Tipo();
-		$tipo->tipo = strtolower($req->get('tipo'));
+		$tipo->tipo = $req->get('tipo');
 
 		if (DB::table('tipos')->where('tipo', $tipo->tipo)->exists()) {
 			return redirect()->route('admin.cadastros')
@@ -279,12 +283,13 @@ class CadastroController extends Controller
 	public function cadastrarMedida(Request $req)
 	{
 		$medida = new Medida();
-		$medida->medida = strtolower($req->get('medida'));
+		$medida->medida = $req->get('medida');
 
 		if (DB::table('medidas')->where('medida', $medida->medida)->exists()) {
 			return redirect()->route('admin.cadastros')
 				->withErrors(["errors" => ["Medida já cadastrada"]]);
 		}
+
 		$medida->save();
 		return redirect()->back()->with('status', 'Medida cadastrada com sucesso!');
 	}
@@ -297,12 +302,13 @@ class CadastroController extends Controller
 	public function cadastrarEstoque(Request $req)
 	{
 		$estoque = new Estoque_disponivel();
-		$estoque->estoque = strtolower($req->get('estoque'));
+		$estoque->estoque = $req->get('estoque');
 
 		if (DB::table('estoque_disponivels')->where('estoque', $estoque->estoque)->exists()) {
 			return redirect()->route('admin.cadastros')
 				->withErrors(["errors" => ["Estoque já cadastrado"]]);
 		}
+
 		$estoque->save();
 		return redirect()->back()->with('status', 'Estoque cadastrado com sucesso!');
 	}
