@@ -7,6 +7,13 @@ use App\Tipo;
 
 class TipoController extends Controller
 {
+  public function listar_tipos() 
+    {
+        $tipos_cadastrados=DB::table('tipos')->get();
+
+        return view('listagem', compact('tipos_cadastrados'));
+    }
+
   public function atualizarTipo(Request $req)
   {
     $tipo_id = $req->get('id');

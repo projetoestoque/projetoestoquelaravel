@@ -10,6 +10,13 @@ class MarcaController extends Controller
 
 {
 
+public function listar_marcas() 
+    {
+        $marcas_cadastradas=DB::table('marcas')->get();
+
+        return view('listagem', compact('marcas_cadastradas'));
+    }
+
   public function atualizarMarca(Request $req)
   {
     $marca_id = $req->get('id');

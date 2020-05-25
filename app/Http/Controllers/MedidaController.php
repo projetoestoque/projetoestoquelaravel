@@ -7,6 +7,13 @@ use App\Medida;
 
 class MedidaController extends Controller
 {
+  public function listar_medidas() 
+    {
+        $medidas_cadastradas=DB::table('medidas')->get();
+
+        return view('listagem', compact('medidas_cadastradas'));
+    }
+
   public function atualizarMedida(Request $req)
   {
     $medida_id = $req->get('id');

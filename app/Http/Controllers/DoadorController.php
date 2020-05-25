@@ -9,6 +9,12 @@ use DB;
 
 class DoadorController extends Controller
 {
+  public function listar_doadores() 
+    {
+        $doadores_cadastrados=DB::table('doadors')->get();
+
+        return view('listagem', compact('doadores_cadastrados'));
+    }
 
   public function atualizarDoador(Request $req)
   {

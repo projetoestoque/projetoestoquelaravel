@@ -8,6 +8,13 @@ use DB;
 
 class EstoqueController extends Controller
 {
+  public function listar_estoques() 
+    {
+        $estoques_cadastrados=DB::table('estoques')->get();
+
+        return view('listagem', compact('estoques_cadastrados'));
+    }
+
   public function atualizarEstoque(Request $req)
   {
     $estoque_id = $req->get('id');

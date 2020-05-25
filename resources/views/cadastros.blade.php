@@ -22,7 +22,7 @@
                     <span class="row"></span>
                         <div class="col ">
                             <i class="material-icons medium white-text pt-5">free_breakfast</i>
-                            <h6 class="no-padding txt-md">Cadastros de Produtos</h6>
+                            <h6 class="no-padding txt-md">Produtos</h6>
                         </div>
                         <span class="row"></span>
                     </div>
@@ -36,7 +36,7 @@
                     <span class="row"></span>
                         <div class="col ">
                             <i class="material-icons medium white-text pt-5">face</i>
-                            <h6>Cadastros de Doadores</h6>
+                            <h6>Doadores</h6>
                         </div>
                         <span class="row"></span>
                     </div>
@@ -55,7 +55,7 @@
                     <span class="row"></span>
                         <div class="col">
                             <i class="material-icons medium white-text ">restaurant</i>
-                            <h6 class="no-padding txt-md">Inserir Refeição</h6>
+                            <h6 class="no-padding txt-md">Refeição</h6>
                         </div>
                         <span class="row"></span>
                         </div>
@@ -68,7 +68,7 @@
                     <span class="row"></span>
                         <div class="col">
                             <i class="material-icons medium white-text ">kitchen</i>
-                            <h6 class="no-padding txt-md">Inserir Produto</h6>
+                            <h6 class="no-padding txt-md">Produto</h6>
                         </div>
                         <span class="row"></span>
                         </div>
