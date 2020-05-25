@@ -24,7 +24,13 @@
 </div>
 <br>
 <input type="checkbox">
-<h3 class="center-align"><b>Cadastrar novo Doador</h3>
+
+@if(isset($doador))
+    <h3 class="center-align"><b>Atualizar Doador</h3>
+@else
+    <h3 class="center-align"><b>Cadastrar novo Doador</h3>
+@endif
+
 <br>
 <button onclick="showFisico()" id="btnFisico" class="butaoAtivado">
     <i class="material-icons medium pt-5">face</i>
@@ -36,20 +42,33 @@
 <div class="container z-depth-2 valing-wrapper">
     <nav id="nav" class="nav-form blue darken-4"></nav>
 
-    <form action="{{route('doador.fisico')}}" method="post" id="formFisico">
+    @if(isset($doador))
+        <form action="{{route('admin.doador.atualizar')}}" method="post" id="formFisico">
+        <input type="hidden" name="id" value="{{$doador->id}}">
+    @else
+        <form action="{{route('doador.fisico')}}" method="post" id="formFisico">
+    @endif
         {{csrf_field()}}
         <br>
         <div class="row">
             <div class="col l1"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">mode_edit</i>
-                <input required type="text" value="{{old('nome')}}" placeholder="nome" name="nome">
+                @if(isset($doador))
+                    <input required type="text" value="{{$doador->nome}}" placeholder="nome" name="nome">
+                @else
+                    <input required type="text" value="{{old('nome')}}" placeholder="nome" name="nome">
+                @endif
                 <label>Nome<span class="important">*</span></label>
             </div>
             <div class="col l2"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">mail</i>
-                <input required type="email" name="email_fisico" value="{{old('email_fisico')}}" placeholder="exemplo@gmailm.com" class="E-mail">
+                @if(isset($doador) && $doador->tipo == "fisico")
+                    <input required type="email" name="email_fisico" value="{{$doador->email}}" placeholder="exemplo@gmailm.com" class="E-mail">
+                @else
+                    <input required type="email" name="email_fisico" value="{{old('email_fisico')}}" placeholder="exemplo@gmailm.com" class="E-mail">
+                @endif
                 <label>Email<span class="important">*</span></label>
             </div>
         </div>
@@ -57,13 +76,21 @@
             <div class="col l1"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">assignment_ind</i>
-                <input required value="{{old('cpf')}}" type="text" name="cpf" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" placeholder="000.000.000-00" title="Digite um cpf válido formatado ou não"></input>
+                @if(isset($doador))
+                    <input required value="{{$doador->cpf}}" type="text" name="cpf" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" placeholder="000.000.000-00" title="Digite um cpf válido formatado ou não"></input>
+                @else
+                    <input required value="{{old('cpf')}}" type="text" name="cpf" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" placeholder="000.000.000-00" title="Digite um cpf válido formatado ou não"></input>
+                @endif
                 <label>CPF<span class="important">*</span></label>
             </div>
             <div class="col l2"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">call</i>
-                <input required value="{{old('telefone_fisico')}}" type="tel" name="telefone_fisico" maxlength="15" onkeypress='return SomenteNumero(event)' placeholder="87981167793">
+                @if(isset($doador) && $doador->tipo == "fisico")
+                    <input required value="{{$doador->telefone}}" type="tel" name="telefone_fisico" maxlength="15" onkeypress='return SomenteNumero(event)' placeholder="87981167793">
+                @else
+                    <input required value="{{old('telefone_fisico')}}" type="tel" name="telefone_fisico" maxlength="15" onkeypress='return SomenteNumero(event)' placeholder="87981167793">
+                @endif
                 <label>Telefone<span class="important">*</span></label>
             </div>
         </div>
@@ -80,7 +107,12 @@
         <input type="hidden" name="tipo" value="fisico"/>
 </div>
 </form>
-<form method="post" action="{{route('doador.juridico')}}" id="formJuridico">
+@if(isset($doador))
+    <form method="post" action="{{route('admin.doador.atualizar')}}" id="formJuridico">
+    <input type="hidden" name="id" value="{{$doador->id}}">
+@else
+    <form method="post" action="{{route('doador.juridico')}}" id="formJuridico">
+@endif
     <div class="container z-depth-2 valing-wrapper">
         {{csrf_field()}}
         <br>
@@ -89,13 +121,21 @@
             <div class="col l1"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">location_city</i>
-                <input required value="{{old('instituicao')}}" type="text" name="instituicao" placeholder="intituicao" class="instituicao">
+                @if(isset($doador))
+                    <input required value="{{$doador->instituicao}}" type="text" name="instituicao" placeholder="intituicao" class="instituicao">
+                @else
+                    <input required value="{{old('instituicao')}}" type="text" name="instituicao" placeholder="intituicao" class="instituicao">
+                @endif
                 <label>Instituição<span class="important">*</span></label>
             </div>
             <div class="col l2"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">mail</i>
-                <input required type="email" name="email_juridico" value="{{old('email_juridico')}}" placeholder="exemplo@gmailm.com" class="E-mail">
+                @if(isset($doador) && $doador->tipo == "juridico")
+                    <input required type="email" name="email_juridico" value="{{$doador->email}}" placeholder="exemplo@gmailm.com" class="E-mail">
+                @else
+                    <input required type="email" name="email_juridico" value="{{old('email_juridico')}}" placeholder="exemplo@gmailm.com" class="E-mail">
+                @endif
                 <label>Email<span class="important">*</span></label>
             </div>
         </div>
@@ -103,13 +143,21 @@
             <div class="col l1"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">gavel</i>
-                <input required value="{{old('cnpj')}}" type="text" name="cnpj" class="cnpj" pattern="/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$" placeholder="00000000000000" />
+                @if(isset($doador))
+                    <input required value="{{$doador->cpnj}}" type="text" name="cnpj" class="cnpj" pattern="/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$" placeholder="00000000000000" />
+                @else
+                    <input required value="{{old('cnpj')}}" type="text" name="cnpj" class="cnpj" pattern="/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$" placeholder="00000000000000" />
+                @endif
                 <label>CNPJ<span class="important">*</span></label>
             </div>
             <div class="col l2"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">call</i>
-                <input required value="{{old('telefone_juridico')}}" type="tel" name="telefone_juridico" maxlength="15" onkeypress='return SomenteNumero(event)' placeholder="87981283493">
+                @if(isset($doador) && $doador->tipo == "juridico")
+                    <input required value="{{$doador->telefone}}" type="tel" name="telefone_juridico" maxlength="15" onkeypress='return SomenteNumero(event)' placeholder="87981283493">
+                @else
+                    <input required value="{{old('telefone_juridico')}}" type="tel" name="telefone_juridico" maxlength="15" onkeypress='return SomenteNumero(event)' placeholder="87981283493">
+                @endif
                 <label>Telefone<span class="important">*</span></label>
             </div>
         </div>

@@ -40,6 +40,11 @@ class CadastroController extends Controller
 
 	public function doador()
 	{
+		if(isset($_GET['id'])) {
+			$doador_id = $_GET['id'];
+			$doador = Doador::find($doador_id);
+			return view('doador', compact('doador'));
+		}
 		return view('doador');
 	}
 
@@ -148,7 +153,7 @@ class CadastroController extends Controller
 	}
 
 	public function marca()
-	{
+	{	
 		return view('admin.marca');
 	}
 
@@ -315,6 +320,30 @@ class CadastroController extends Controller
 
 	public function Cadastros()
 	{
+		if(isset($_GET['marca_id'])) {
+			$marca_id = $_GET['marca_id'];
+			$marca = Marca::findOrFail($marca_id);
+			return view('admin/adminCadastros', compact('marca'));
+		}
+
+		if(isset($_GET['medida_id'])) {
+			$medida_id = $_GET['medida_id'];
+			$medida = Medida::findOrFail($medida_id);
+			return view('admin/adminCadastros', compact('medida'));
+		}
+
+		if(isset($_GET['tipo_id'])) {
+			$tipo_id = $_GET['tipo_id'];
+			$tipo = Tipo::findOrFail($tipo_id);
+			return view('admin/adminCadastros', compact('tipo'));
+		}
+
+		if(isset($_GET['estoque_id'])) {
+			$estoque_id = $_GET['estoque_id'];
+			$estoque = Estoque_disponivel::findOrFail($estoque_id);
+			return view('admin/adminCadastros', compact('estoque'));
+		}
+
 		return view('admin/adminCadastros');
 	}
 	public function CadastrosSupervisor()
@@ -328,5 +357,6 @@ class CadastroController extends Controller
 	public function Insercoes()
 	{
 		return view('admin/adminInsercoes');
+		
 	}
 }

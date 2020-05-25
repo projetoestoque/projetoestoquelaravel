@@ -3,6 +3,7 @@
 @section('titulo','Menu de Cadastros')
 @section('classBody','Background')
 @section('conteudo')
+
 <div class="butaoEspaco">
     <a href="{{ URL::route('admin.MenuCadastros') }}" class="waves-effect waves-teal btn-flat black-text">
     <i class="large material-icons">reply</i>
@@ -102,13 +103,23 @@
 </div>
 <div id="modal1" class="modal">
     <div class="modal-content">
+    @if(isset($marca))
+      <h4>Atualizar Marca</h4>
+      <form method="post" action="{{route('admin.marca.atualizar')}}">
+    @else
       <h4>Cadastro de Nova Marca</h4>
       <form method="post" action="{{route('admin.marca.cadastrar')}}">
+    @endif
             {{ csrf_field() }}
             <br>
             <div class="input-field" >
                 <i class="material-icons prefix">font_download</i>
-                <input required="required" placeholder="marca" name="marca" id="marcaInput" type="text">
+                @if(isset($marca))
+                    <input value="{{$marca->marca}}" required="required" placeholder="marca" name="marca" id="marcaInput" type="text">
+                    <input value="{{$marca->id}}" type="hidden" name="id">
+                @else
+                    <input required="required" placeholder="marca" name="marca" id="marcaInput" type="text">
+                @endif
                 <label for="marcaInput">Nova marca
                 <div class="tooltip">
                 <i class="material-icons">info_outline</i>
@@ -126,13 +137,23 @@
 </div>
 <div id="modal2" class="modal">
 <div class="modal-content">
+@if(isset($tipo))
+    <h4>Atualizar Tipo</h4>
+    <form method="post" action="{{route('admin.tipo.atualizar')}}">
+@else
     <h4>Cadastro de Novo Tipo</h4>
     <form method="post" action="{{route('admin.tipo.cadastrar')}}">
+@endif
         {{ csrf_field() }}
         <br>
         <div class="input-field">
             <i class="material-icons prefix">label</i>
-            <input required="required" placeholder="tipo" id="tipo" name="tipo" type="text">
+            @if(isset($tipo))
+                <input type="hidden" name="id" value="{{$tipo->id}}">
+                <input value="{{$tipo->tipo}}" required="required" placeholder="tipo" id="tipo" name="tipo" type="text">
+            @else
+                <input required="required" placeholder="tipo" id="tipo" name="tipo" type="text">
+            @endif
             <label for="tipo">Novo tipo de Produto
             <div class="tooltip">
                 <i class="material-icons">info_outline</i>
@@ -146,15 +167,26 @@
     <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
     </div>
   </div>
+
 <div id="modal3" class="modal">
 <div class="modal-content">
+@if(isset($medida))
+    <h4>Atualizar Medida</h4>
+    <form method="post" action="{{route('admin.medida.atualizar')}}">
+@else
     <h4>Cadastro de Medida</h4>
     <form method="post" action="{{route('admin.medida.cadastrar')}}">
+@endif
         {{ csrf_field() }}
         <br>
         <div class="input-field">
             <i class="material-icons prefix">linear_scale</i>
-            <input required="required" id="medida" name="medida" type="text" placeholder="Quilo(kg)">
+            @if(isset($medida))
+                <input type="hidden" name="id" value="{{$medida->id}}">
+                <input value="{{$medida->medida}}" required="required" id="medida" name="medida" type="text" placeholder="Quilo(kg)">
+            @else
+                <input required="required" id="medida" name="medida" type="text" placeholder="Quilo(kg)">
+            @endif
             <label for="medida">Nova Medida
             <div class="tooltip">
                 <i class="material-icons">info_outline</i>
@@ -168,6 +200,7 @@
     <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
     </div>
   </div>
+  
 <div id="modal4" class="modal">
 <div class="modal-content">
     <h4>Cadastro de Refeições</h4>
@@ -229,13 +262,23 @@
 </div>
 <div id="modal5" class="modal">
 <div class="modal-content">
+@if(isset($estoque))
+    <h4>Atualizar Estoque</h4>
+    <form method="post" action="{{route('admin.estoque.atualizar')}}">
+@else
     <h4>Cadastro de Estoque</h4>
     <form method="post" action="{{route('admin.estoque.cadastrar')}}">
+@endif
         {{ csrf_field() }}
         <br>
         <div class="input-field">
             <i class="material-icons prefix">view_compact</i>
-            <input required="required" id="estoque" name="estoque" type="text" placeholder="Almoxarifado">
+            @if(isset($estoque))
+                <input type="hidden" name="id" value="{{$estoque->id}}">
+                <input value="{{$estoque->estoque}}" required="required" id="estoque" name="estoque" type="text" placeholder="Almoxarifado">
+            @else
+                <input required="required" id="estoque" name="estoque" type="text" placeholder="Almoxarifado">
+            @endif
             <label for="estoque">Novo Estoque
             <div class="tooltip">
                 <i class="material-icons">info_outline</i>
@@ -250,4 +293,43 @@
     </div>
   </div>
 </div>
+
+<script>
+    function sleep (time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
+
+    function exibirModal(modal) {
+        sleep(500, 1).then(() => {
+            const elem = document.getElementById(modal);
+            const instance = M.Modal.init(elem, {dismissible: false});
+            instance.open();
+        });
+    }
+</script>
+
+@if(isset($marca))
+<script>
+    exibirModal('modal1')
+</script>
+@endif
+
+@if(isset($tipo))
+<script>
+    exibirModal('modal2')
+</script>
+@endif
+
+@if(isset($medida))
+<script>
+    exibirModal('modal3')
+</script>
+@endif
+
+@if(isset($estoque))
+<script>
+    exibirModal('modal5')   
+</script>
+@endif
+
 @endsection
