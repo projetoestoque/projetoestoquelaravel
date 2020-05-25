@@ -3,13 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Doador;
+use App\Estoque_disponivel;
 use DB;
 
 class EstoqueController extends Controller
 {
+  public function atualizarEstoque(Request $req)
+  {
+    $estoque_id = $req->get('id');
+    $estoque = Estoque_disponivel::findOrFail($estoque_id);
+    $estoque->estoque = $req->get('estoque');
+    $estoque->save();
+    return redirect()->route('admin.cadastros')->with('status', 'Estoque atualizado com sucesso!');
+  }
+
   public function deletarEstoque()
-{
+  {
       $estoque_id = $_GET['id'];
       $estoque = Estoque::find($estoque_id);
       $estoque->delete();
