@@ -15,7 +15,7 @@
     <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
   @else
-    <a href="{{ URL::route('home') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4 ">
+    <a href="{{ URL::route('estoqueMenu') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4 ">
     <i class="large material-icons">reply</i>
     <span class="ButtaoEspacoTexto"><b>Voltar</span>
   </a>
@@ -35,7 +35,18 @@
         <button class="waves-effect waves-light btn-flat" onclick="showCadastrados()"><i class="material-icons left">apps</i><b>Faltando</b></button>
         </div>
         </h5>
-        <thead class="grey-text ">
+        @if( empty($produtos_estoque))
+        <br>
+        <br>
+          <img src="{{asset('paper.png')}}" class="list-image" >
+          <p class="center-align">Ops! Você ainda não deu entrada de nenhum produto.</p>
+          <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui: 
+          <a class="btn-floating btn-medium waves-effect waves-light blue"><i class="material-icons">add</i></a>
+          </p>
+          <br>
+          <br>
+         @else
+         <thead class="grey-text ">
           <tr>
               <th>Nome</th>
               <th>Quantidade</th>
@@ -53,9 +64,9 @@
                 <td>{{$produto->nome}}</td>
                 <td class="grey-text text-darken-3">
                  @if($produto->quantidade<=4)
-                 <div>{{$produto->quantidade}} {{$produto->medida}}<i class="tiny material-icons red-text">brightness_1</i></div>
+                 <div>{{$produto->quantidade}} {{$produto->abreviacao}}<i class="tiny material-icons red-text">brightness_1</i></div>
                  @else
-                 {{$produto->quantidade}} {{$produto->medida}}
+                 {{$produto->quantidade}} {{$produto->abreviacao}}
                  @endif
                  </td>
                 <td class="grey-text text-darken-3">{{$produto->estoque->estoque}}</td>
@@ -70,6 +81,8 @@
             </tr>
         @endforeach
         </tbody>
+        @endif 
+       
       </table>
 
 </div>

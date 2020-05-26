@@ -28,5 +28,11 @@ class HomeController extends Controller
 
    public function adminHome() {
        return view('admin.adminHome');
-	}
+    }
+    public function estoqueMenu(){
+        return view('estoqueMenu');
+    }
+    public function estoqueEntradas(){
+        return view('entrada');
+    }
 }

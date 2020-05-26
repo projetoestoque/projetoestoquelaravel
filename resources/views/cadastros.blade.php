@@ -12,70 +12,37 @@
 <br>
 <br>
 <br>
+<div class="mobile-hide"><h4 class="cadastros-align"><b>Cadastros<b></h5></div>
+<div class="mobile"><div class="desktop-hide"><h4 class="center-align"><b>Cadastros<b></h5></div>
+<div class="mobile-hide">
+<br>
 <div class="container ">
-<div class="row ">
-<fieldset>
-<legend><h4>Cadastros</h4></legend>
-            <a href="{{route('produto')}}" class="white-text ">
-                <div class=" card-panel blue accent-2 col s5 hoverablewhite-text ">
+<div class="row white-text ">
+            <a href="{{route('produto')}}" class="white-text">
+                <div class="card-panel blue darken-3 col s5 mobile hoverable ">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col ">
-                            <i class="material-icons medium white-text pt-5">free_breakfast</i>
-                            <h6 class="no-padding txt-md">Produtos</h6>
+                            <i class="material-icons large white-text">free_breakfast</i>
+                            <h6 >Produtos</h6>
                         </div>
-                        <span class="row"></span>
                     </div>
                 </div>
             </a>
             <div class="col s2">
             </div>
-            <a href="{{route('doador')}}" class="white-text">
-                <div class=" card-panel blue accent-2 col s5 hoverable">
+            <a href="{{route('doador')}}" href="" class="white-text">
+                <div class=" card-panel blue darken-3 col s5 hoverable mobile">
                     <div class="row">
                     <span class="row"></span>
-                        <div class="col ">
-                            <i class="material-icons medium white-text pt-5">face</i>
-                            <h6>Doadores</h6>
+                        <div class="col">
+                            <i class="material-icons large white-text pt-5">face</i>
+                            <h6> Doadores</h6>
                         </div>
-                        <span class="row"></span>
                     </div>
                 </div>
             </a>
-            <div class="col s1">
-            </div>
 </div>
-</fieldset>
-<fieldset>
-  <legend><h4> Inserções</h4></legend>
-  <div class="row white text ">
-    <a class="white-text" href="{{route('refeicao')}}">
-                <div class=" card-panel blue accent-2 col s5 hoverable">
-                    <div class="row">
-                    <span class="row"></span>
-                        <div class="col">
-                            <i class="material-icons medium white-text ">restaurant</i>
-                            <h6 class="no-padding txt-md">Refeição</h6>
-                        </div>
-                        <span class="row"></span>
-                        </div>
-                </div>
-            </a>
-            <div class="col s2"></div>
-            <a class="white-text" href="{{route('entradaProduto')}}">
-                <div class=" card-panel blue accent-2 col s5 hoverable">
-                    <div class="row">
-                    <span class="row"></span>
-                        <div class="col">
-                            <i class="material-icons medium white-text ">kitchen</i>
-                            <h6 class="no-padding txt-md">Produto</h6>
-                        </div>
-                        <span class="row"></span>
-                        </div>
-                </div>
-            </a>
-</div>
-</fieldset>
 <br>
 <br>
 

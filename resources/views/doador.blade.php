@@ -12,12 +12,12 @@
 <div class="butaoEspaco">
     @if(auth()->user()->is_admin)
     <a href="{{ URL::route('admin.cadastros') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
-        <i class="large material-icons">arrow_back</i>
+    <i class="large material-icons">reply</i>
         <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
     @else
     <a href="{{ URL::route('superv.cadastros')}}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
-        <i class="large material-icons">arrow_back</i>
+    <i class="large material-icons">reply</i>
         <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
     @endif

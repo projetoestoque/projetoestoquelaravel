@@ -254,7 +254,12 @@ h5.header{
 .card-panel.col.s5.hoverable.mobile{
   border:3px solid #1976d2;
 }
-
+.list-image{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+}
 .cadastros-align{
   margin-left:200px;
 }
