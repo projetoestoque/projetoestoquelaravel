@@ -5,102 +5,175 @@
 @section('conteudo')
 
 <div class="butaoEspaco">
-    <a href="{{ URL::route('admin.MenuCadastros') }}" class="waves-effect waves-teal btn-flat black-text">
+    <a href="{{ URL::route('admin.home') }}" class="waves-effect waves-teal btn-flat black-text">
     <i class="large material-icons">reply</i>
     <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
 </div>
 <br>
 <br>
-<br>
-<div class="container ">
+<div class="mobile-hide"><h4 class="cadastros-align"><b>Cadastros<b></h5></div>
+<div class="mobile"><div class="desktop-hide"><h4 class="center-align"><b>Cadastros<b></h5></div>
+<div class="mobile-hide">
+<div class="container">
 <div class="row white-text ">
             <a href="{{route('produto')}}" class="white-text">
-                <div class="card-panel blue darken-3 col s5 hoverable ">
+                <div class="card-panel blue darken-3 col s3 hoverable ">
                     <div class="row">
                     <span class="row"></span>
-                        <div class="col ">
-                            <i class="material-icons medium white-text pt-5">free_breakfast</i>
-                            <h6 class="no-padding txt-md">Produtos</h6>
+                        <div class="col cadastro">
+                            <i class="material-icons large white-text">free_breakfast</i>
+                            <h6 class="back">Produtos</h6>
                         </div>
-                        <span class="row"></span>
-                    </div>
-                </div>
-            </a>
-            <div class="col s2">
-            </div>
-            <a href="{{route('doador')}}" class="white-text">
-                <div class=" card-panel blue darken-3 col s5 hoverable">
-                    <div class="row">
-                    <span class="row"></span>
-                        <div class="col ">
-                            <i class="material-icons medium white-text pt-5">face</i>
-                            <h6>Doadores</h6>
-                        </div>
-                        <span class="row"></span>
                     </div>
                 </div>
             </a>
             <div class="col s1">
             </div>
+            <a class="white-text modal-trigger" href="" data-target="modal2">
+                <div class=" card-panel col s3 hoverable">
+                    <div class="row">
+                    <span class="row"></span>
+                    <div class="col cadastro">
+                            <i class="material-icons large blue-text text-darken-3 pt-5">layers</i>
+                            <h6 class="back blue-text text-darken-3"> Tipos</h6>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <div class="col s1">
+            </div>
+            <a class="white-text modal-trigger" href="" data-target="modal1">
+                <div class=" card-panel col s3 hoverable ">
+                    <div class="row">
+                    <span class="row"></span>
+                    <div class="col cadastro">
+                            <i class="material-icons large blue-text text-darken-3 pt-5">copyright</i>
+                            <h6 class="back blue-text text-darken-3"> Marcas</h6>
+                        </div>
+                    </div>
+                </div>
+            </a>
 </div>
 <div class="row white-text ">
-            <a class="white-text modal-trigger" data-target="modal1">
-                <div class=" card-panel blue darken-3 col s5 hoverable ">
+            <a href="{{route('doador')}}" href="" class="white-text">
+                <div class=" card-panel blue darken-3 col s3 hoverable">
                     <div class="row">
                     <span class="row"></span>
-                        <div class="col ">
-                            <i class="material-icons medium white-text pt-5">copyright</i>
-                            <h6 class="no-padding txt-md">Marcas</h6>
+                        <div class="col cadastro">
+                            <i class="material-icons large white-text pt-5">face</i>
+                            <h6 class="back"> Doadores</h6>
                         </div>
-                        <span class="row"></span>
-                    </div>
-                </div>
-            </a>
-            <div class="col s2">
-            </div>
-            <a class="white-text modal-trigger" data-target="modal2">
-                <div class=" card-panel blue darken-3 col s5 hoverable">
-                    <div class="row">
-                    <span class="row"></span>
-                        <div class="col ">
-                            <i class="material-icons medium white-text pt-5">layers</i>
-                            <h6>Tipos</h6>
-                        </div>
-                        <span class="row"></span>
                     </div>
                 </div>
             </a>
             <div class="col s1">
             </div>
-</div>
-<div class="row white text ">
-<a class="white-text modal-trigger" data-target="modal3">
-                <div class=" card-panel blue darken-3 col s5 hoverable">
+            <a class="white-text modal-trigger" href="" data-target="modal3">
+                <div class=" card-panel col s3 hoverable">
                     <div class="row">
                     <span class="row"></span>
-                        <div class="col">
-                            <i class="material-icons medium white-text ">fitness_center</i>
-                            <h6 class="no-padding txt-md">Medidas</h6>
+                    <div class="col cadastro">
+                            <i class="material-icons large blue-text text-darken-3 ">fitness_center</i>
+                            <h6 class="back blue-text text-darken-3"> Medidas</h6>
                         </div>
-                        <span class="row"></span>
                         </div>
                 </div>
             </a>
-            <span class="col s2"></span>
-            <a class="white-text modal-trigger" data-target="modal5">
-                <div class=" card-panel blue darken-3 col s5 l5 hoverable">
+            <span class="col s1"></span>
+            <a class="white-text modal-trigger" href="" data-target="modal5">
+                <div class=" card-panel col s3 l3 hoverable">
                     <div class="row">
                     <span class="row"></span>
-                        <div class="col">
-                            <i class="material-icons medium white-text ">view_compact</i>
-                            <h6 class="no-padding txt-md">Estoque</h6>
+                    <div class="col cadastro">
+                            <i class="material-icons large blue-text text-darken-3 ">view_compact</i>
+                            <h6 class="back blue-text text-darken-3"> Estoque</h6>
                         </div>
-                        <span class="row"></span>
                         </div>
                 </div>
             </a>
 </div>
+</div>
+</div>
+<div class="mobile"><div class="desktop-hide">
+<div class="container">
+<div class="row white-text ">
+            <a href="{{route('produto')}}" class="white-text">
+                <div class="card-panel blue darken-3 col s5 hoverable mobile ">
+                    <div class="row">
+                    <span class="row"></span>
+                        <div class="col">
+                            <i class="material-icons medium white-text">free_breakfast</i>
+                            <h6>Produtos</h6>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <div class="col s1">
+            </div>
+            <a href="{{route('doador')}}" href="" class="white-text">
+                <div class="card-panel blue darken-3 col s5 hoverable mobile">
+                    <div class="row">
+                    <span class="row"></span>
+                        <div class="col">
+                            <i class="material-icons medium white-text pt-5">face</i>
+                            <h6> Doadores</h6>
+                        </div>
+                    </div>
+                </div>
+            </a>
+</div>
+<div class="row white-text ">
+<a class="white-text modal-trigger" href="" data-target="modal1">
+                <div class=" card-panel col s5 hoverable mobile">
+                    <div class="row">
+                    <span class="row"></span>
+                    <div class="col">
+                            <i class="material-icons medium blue-text text-darken-3 pt-5">copyright</i>
+                            <h6 class="blue-text text-darken-3"> Marcas</h6>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <div class="col s1">
+            </div>
+            <a class="white-text modal-trigger" href="" data-target="modal2">
+            <div class=" card-panel col s5 hoverable mobile">
+                    <div class="row">
+                    <span class="row"></span>
+                    <div class="col">
+                            <i class="material-icons medium blue-text text-darken-3 pt-5">layers</i>
+                            <h6 class="blue-text text-darken-3"> Tipos</h6>
+                        </div>
+                    </div>
+                </div>
+            </a>
+</div>
+<div class="row white-text ">
+            <a class="white-text modal-trigger" href="" data-target="modal3">
+                <div class=" card-panel col s5 hoverable mobile">
+                    <div class="row">
+                    <span class="row"></span>
+                    <div class="col">
+                            <i class="material-icons medium blue-text text-darken-3 ">fitness_center</i>
+                            <h6 class="blue-text text-darken-3"> Medidas</h6>
+                        </div>
+                        </div>
+                </div>
+            </a>
+            <span class="col s1"></span>
+            <a class="white-text modal-trigger" href="" data-target="modal5">
+                <div class=" card-panel col s5 hoverable mobile">
+                    <div class="row">
+                    <span class="row"></span>
+                    <div class="col">
+                            <i class="material-icons medium blue-text text-darken-3 ">view_compact</i>
+                            <h6 class="blue-text text-darken-3"> Estoque</h6>
+                        </div>
+                        </div>
+                </div>
+            </a>
+</div></div></div>
 <div id="modal1" class="modal">
     <div class="modal-content">
     @if(isset($marca))
@@ -179,21 +252,56 @@
 @endif
         {{ csrf_field() }}
         <br>
-        <div class="input-field">
+        <div class="row">
+        <div class="input-field col s11">
             <i class="material-icons prefix">linear_scale</i>
             @if(isset($medida))
                 <input type="hidden" name="id" value="{{$medida->id}}">
-                <input value="{{$medida->medida}}" required="required" id="medida" name="medida" type="text" placeholder="Quilo(kg)">
-            @else
-                <input required="required" id="medida" name="medida" type="text" placeholder="Quilo(kg)">
-            @endif
-            <label for="medida">Nova Medida
-            <div class="tooltip">
+                <input value="{{$medida->medida}}" required="required" id="medida" name="medida" type="text" placeholder="Quilo">
+                <label for="medida">Nova Medida
+                <div class="tooltip">
                 <i class="material-icons">info_outline</i>
                 <span class="tooltiptext">A medida é a unidade de determinado item(Quilo,pacotes,gramas) </span>
-            </div>
-            </label>
-        </div>
+                </div>
+                </label>
+                </div>
+                </div>
+                <div class="row">
+                <div class="input-field col s4">
+                <i class="material-icons prefix">font_download</i>
+                <input required="required" id="unidade" name="unidade" type="text" placeholder="kg">
+                <label for="unidade">Abreviação
+                <div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">A abreviação de determinada unidade(kg,cx,pct) </span>
+                </div>
+                </label>
+                </div>
+                </div>
+            @else
+                <input required="required" id="medida" name="medida" type="text" placeholder="Quilo(kg)">
+                <label for="medida">Nova Medida
+                <div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">A medida é a unidade de determinado item(Quilo,pacotes,gramas) </span>
+                </div>
+                </label>
+                </div>
+                </div>
+                <div class="row">
+                <div class="input-field col s4">
+                <i class="material-icons prefix">font_download</i>
+                <input required="required" id="unidade" name="unidade" type="text" placeholder="kg">
+                <label for="unidade">Abreviação
+                <div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">A abreviação de determinada unidade(kg,cx,pct) </span>
+                </div>
+                </label>
+                </div>
+                </div>
+            @endif
+           
         <br>
         <button class="btn waves-effect waves-light blue darken-2 ">Enviar</button>
     </form>

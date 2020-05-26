@@ -76,6 +76,7 @@ text-align: center;
 .ipanema{
   width:380px;
   float:right;
+  margin-top:-120px;
 }
 nav{
   background-color: rgba(0, 0, 0, 0%);
@@ -246,6 +247,22 @@ h5.header{
 }
 .tiny.material-icons.red-text{
   top: -10px;
+}
+.card-panel.col.s3.hoverable{
+  border:3px solid #1976d2;
+}
+.card-panel.col.s5.hoverable.mobile{
+  border:3px solid #1976d2;
+}
+
+.cadastros-align{
+  margin-left:200px;
+}
+.col.cadastro{
+  margin-left: calc(100% - 75%);
+}
+.back{
+  text-align: center;
 }
 @media only screen and (max-width: 400px) {
   .mobile-hide{ display: none !important; }
