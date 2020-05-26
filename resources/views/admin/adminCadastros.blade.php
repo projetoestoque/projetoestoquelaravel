@@ -21,7 +21,7 @@
                     <span class="row"></span>
                         <div class="col ">
                             <i class="material-icons medium white-text pt-5">free_breakfast</i>
-                            <h6 class="no-padding txt-md">Cadastros de Produtos</h6>
+                            <h6 class="no-padding txt-md">Produtos</h6>
                         </div>
                         <span class="row"></span>
                     </div>
@@ -35,7 +35,7 @@
                     <span class="row"></span>
                         <div class="col ">
                             <i class="material-icons medium white-text pt-5">face</i>
-                            <h6>Cadastros de Doadores</h6>
+                            <h6>Doadores</h6>
                         </div>
                         <span class="row"></span>
                     </div>
@@ -51,7 +51,7 @@
                     <span class="row"></span>
                         <div class="col ">
                             <i class="material-icons medium white-text pt-5">copyright</i>
-                            <h6 class="no-padding txt-md">Cadastros de Marcas</h6>
+                            <h6 class="no-padding txt-md">Marcas</h6>
                         </div>
                         <span class="row"></span>
                     </div>
@@ -65,7 +65,7 @@
                     <span class="row"></span>
                         <div class="col ">
                             <i class="material-icons medium white-text pt-5">layers</i>
-                            <h6>Cadastros de Tipos</h6>
+                            <h6>Tipos</h6>
                         </div>
                         <span class="row"></span>
                     </div>
@@ -81,7 +81,7 @@
                     <span class="row"></span>
                         <div class="col">
                             <i class="material-icons medium white-text ">fitness_center</i>
-                            <h6 class="no-padding txt-md">Cadastros de Medidas</h6>
+                            <h6 class="no-padding txt-md">Medidas</h6>
                         </div>
                         <span class="row"></span>
                         </div>
@@ -94,7 +94,7 @@
                     <span class="row"></span>
                         <div class="col">
                             <i class="material-icons medium white-text ">view_compact</i>
-                            <h6 class="no-padding txt-md">Cadastros de Estoque</h6>
+                            <h6 class="no-padding txt-md">Estoque</h6>
                         </div>
                         <span class="row"></span>
                         </div>
