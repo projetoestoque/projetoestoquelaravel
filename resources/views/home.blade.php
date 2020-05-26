@@ -11,13 +11,13 @@
 <br>
 <div class="container ">
 <div class="row white-text ">
-            <a href="{{route('produtos.listar')}}" class="white-text">
+            <a href="{{route('estoqueMenu')}}" class="white-text">
                 <div class=" card-panel blue accent-1 col s5 hoverable  ">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col ">
-                            <i class="material-icons medium white-text pt-5">format_list_bulleted</i>
-                            <h6 class="no-padding txt-md">Listagem</h6>
+                            <i class="material-icons medium white-text pt-5">view_compact</i>
+                            <h6 class="no-padding txt-md">Estoque</h6>
                         </div>
                         <span class="row"></span>
                     </div>
@@ -31,7 +31,7 @@
                     <span class="row"></span>
                         <div class="col ">
                             <i class="material-icons medium white-text pt-5">playlist_add</i>
-                            <h6>Cadastros e Inserções</h6>
+                            <h6>Cadastros</h6>
                         </div>
                         <span class="row"></span>
                     </div>

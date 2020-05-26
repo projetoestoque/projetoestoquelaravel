@@ -269,7 +269,7 @@
                 <div class="row">
                 <div class="input-field col s4">
                 <i class="material-icons prefix">font_download</i>
-                <input required="required" id="unidade" name="unidade" type="text" placeholder="kg">
+                <input required="required" id="abreviacao" name="abreviacao" type="text" placeholder="kg">
                 <label for="unidade">Abreviação
                 <div class="tooltip">
                 <i class="material-icons">info_outline</i>
@@ -291,7 +291,7 @@
                 <div class="row">
                 <div class="input-field col s4">
                 <i class="material-icons prefix">font_download</i>
-                <input required="required" id="unidade" name="unidade" type="text" placeholder="kg">
+                <input required="required" id="abreviacao" name="abreviacao" type="text" placeholder="kg">
                 <label for="unidade">Abreviação
                 <div class="tooltip">
                 <i class="material-icons">info_outline</i>

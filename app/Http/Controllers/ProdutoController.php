@@ -27,7 +27,7 @@ class ProdutoController extends Controller
             $produto_cadastrado=Produto::find($produto_em_estoque->Id_produto);
             $produto_cadastrado->id = $produto_em_estoque->id;
             $produto_cadastrado->estoque=Estoque_disponivel::find($produto_em_estoque->Id_estoque);
-            $produto_cadastrado->medida=Medida::find($produto_em_estoque->Id_medida)->medida;
+            $produto_cadastrado->abreviacao=Medida::find($produto_em_estoque->Id_medida)->abreviacao;
             if(Doador::find($produto_em_estoque->Id_doador)->tipo=="fisico"){
                 $produto_cadastrado->doador=Doador::find($produto_em_estoque->Id_doador)->nome;
             }

@@ -289,6 +289,7 @@ class CadastroController extends Controller
 	{
 		$medida = new Medida();
 		$medida->medida = $req->get('medida');
+		$medida->abreviacao = $req->get('abreviacao');
 
 		if (DB::table('medidas')->where('medida', $medida->medida)->exists()) {
 			return redirect()->route('admin.cadastros')

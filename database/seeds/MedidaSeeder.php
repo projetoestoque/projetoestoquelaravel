@@ -14,13 +14,16 @@ class MedidaSeeder extends Seeder
     {
         $medidas = [
             [
-              'medida' => 'sem medida'
+              'medida' => 'sem medida',
+              'abreviacao'=>''
             ],
             [
-              'medida' => 'quilo (kg)'
+              'medida' => 'quilo',
+              'abreviacao'=>'kg'
             ],
             [
-              'medida' => 'unidade (un)'
+              'medida' => 'unidade',
+              'abreviacao'=>'un'
             ]
           ];
 

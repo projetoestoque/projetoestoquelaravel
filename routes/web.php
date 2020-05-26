@@ -83,5 +83,7 @@ Route::get('/produto/entrada/deletar', 'ProdutoController@deletarEntrada')->name
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/estoque', 'HomeController@estoqueMenu')->name('estoqueMenu');
+Route::get('/estoque/entrada', 'HomeController@estoqueEntradas')->name('estoqueEntradas');
 Route::get('/home/cadastros', 'CadastroController@CadastrosSupervisor')->name('superv.cadastros');
 
