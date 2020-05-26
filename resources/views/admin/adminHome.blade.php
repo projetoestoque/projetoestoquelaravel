@@ -9,13 +9,13 @@
 <br>
 <div class="container ">
 <div class="row white-text ">
-            <a href="{{route('produtos.listar')}}" class="white-text ">
+            <a href="{{ route('admin.MenuCadastros')}}" class="white-text ">
                 <div class=" card-panel blue accent-1 col s5 hoverable ">
                     <div class="row ">
                     <span class="row"></span>
                         <div class="col">
-                            <i class="material-icons medium white-text ">format_list_bulleted</i>
-                            <h6 class="no-padding txt-md">Listagem</h6>
+                            <i class="material-icons medium white-text ">view_compact</i>
+                            <h6 class="no-padding txt-md">Estoque</h6>
                         </div>
                         <span class="row"></span>
                     </div>
@@ -23,13 +23,13 @@
             </a>
             <div class="col s2">
             </div>
-            <a href="{{ route('admin.MenuCadastros')}}" class="white-text">
+            <a href="{{route('admin.cadastros')}}" class="white-text">
                 <div class=" card-panel blue accent-2 col s5 hoverable">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col ">
                             <i class="material-icons medium white-text pt-5">playlist_add</i>
-                            <h6>Cadastros e Inserções</h6>
+                            <h6>Cadastros </h6>
                         </div>
                         <span class="row"></span>
                     </div>
@@ -70,7 +70,4 @@
 </div>
 </div>
 <div class="mobile-hide" ><img class="ipanema" src="{{asset('fluid2.png')}}"></div>
-<br>
-<br>
-<br>
 @endsection

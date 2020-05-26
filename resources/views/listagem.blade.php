@@ -10,7 +10,7 @@
 @section('conteudo')
 <div class="butaoEspaco">
 @if(auth()->user()->is_admin)
-    <a href="{{ URL::route('admin.home') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
+    <a href="{{ URL::route('admin.MenuCadastros') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
     <i class="large material-icons">reply</i>
     <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
@@ -29,10 +29,10 @@
         <thead>
         <nav class="nav-form blue lighten-1"></nav>
         </thead>
-        <h5 class="header"><b>Listagem de Produtos</b>
+        <h5 class="header"><b>Visualizar Estoque</b>
         <div class="alinhado-a-direita"> 
         <button class="waves-effect waves-light btn blue"><i class="material-icons left">inbox</i><b>Em estoque</b></button>
-        <button class="waves-effect waves-light btn-flat" onclick="showCadastrados()"><i class="material-icons left">apps</i><b>Cadastrados</b></button>
+        <button class="waves-effect waves-light btn-flat" onclick="showCadastrados()"><i class="material-icons left">apps</i><b>Faltando</b></button>
         </div>
         </h5>
         <thead class="grey-text ">
@@ -82,7 +82,7 @@
         <h5 class="header"><b>Listagem de Produtos<b>
         <div class="alinhado-a-direita"> 
         <button class="waves-effect waves-light btn-flat" onclick="showEstoque()"><i class="material-icons left">inbox</i><b>Em estoque</b></button>
-        <button class="waves-effect waves-light btn blue"><i class="material-icons left">apps</i><b>Cadastrados</b></button>
+        <button class="waves-effect waves-light btn blue"><i class="material-icons left">apps</i><b>Faltando</b></button>
         </div>
         </h5>
         <thead class="grey-text ">

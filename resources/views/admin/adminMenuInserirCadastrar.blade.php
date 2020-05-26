@@ -16,13 +16,13 @@
 <br>
 <div class="row">
 <div class="col l12">
-    <a href="{{route('admin.cadastros')}}" class="black-text">
+    <a href="{{route('produtos.listar')}}" class="black-text">
         <div class="card horizontal">
             <div class="card-image-fade">
                 <div class="row"></div>
                 <div class="row"></div>
                 <div class="col l1"></div>
-                <div class="col l4"><i class="material-icons medium white-text pt-5">playlist_add</i></div>
+                <div class="col l4"><i class="material-icons medium white-text pt-5">format_list_bulleted</i></div>
                 <div class="col l2"></div>
                 <div class="row"></div>
                 <div class="row"></div>
@@ -30,7 +30,7 @@
         <div class="card-stacked white">
         <div class="mobile-hide"><div class="row"></div></div>
             <div class="card-content white">
-            <h5><b>Cadastros no Sistema</b><div class="mobile-hide"> <i class="material-icons small right">send</i></div></h5>          
+            <h5><b>Visualisar Estoque</b><div class="mobile-hide"> <i class="material-icons small right">send</i></div></h5>          
             </div>
         </div>
         </div>
@@ -55,7 +55,7 @@
       <div class="card-stacked white">
       <div class="mobile-hide"><div class="row"></div></div>
         <div class="card-content white">
-          <h5><b>Inserções no Sistema</b> <div class="mobile-hide"><i class="material-icons small right">send</i></div></h5>
+          <h5><b>Entrada no Estoque</b> <div class="mobile-hide"><i class="material-icons small right">send</i></div></h5>
         </div>
       </div>
     </div>
