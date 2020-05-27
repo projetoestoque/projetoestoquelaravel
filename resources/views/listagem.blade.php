@@ -32,7 +32,7 @@
         <h5 class="header"><b>Visualizar Estoque</b>
         <div class="alinhado-a-direita"> 
         <button class="waves-effect waves-light btn blue"><i class="material-icons left">inbox</i><b>Em estoque</b></button>
-        <button class="waves-effect waves-light btn-flat" onclick="showCadastrados()"><i class="material-icons left">apps</i><b>Faltando</b></button>
+        <button class="waves-effect waves-light btn-flat" onclick="showCadastrados()"><i class="material-icons left">apps</i><b>Crítico</b></button>
         </div>
         </h5>
         @if( empty($produtos_estoque))
@@ -95,14 +95,15 @@
         <h5 class="header"><b>Listagem de Produtos<b>
         <div class="alinhado-a-direita"> 
         <button class="waves-effect waves-light btn-flat" onclick="showEstoque()"><i class="material-icons left">inbox</i><b>Em estoque</b></button>
-        <button class="waves-effect waves-light btn blue"><i class="material-icons left">apps</i><b>Faltando</b></button>
+        <button class="waves-effect waves-light btn blue"><i class="material-icons left">apps</i><b>Crítico</b></button>
         </div>
         </h5>
         <thead class="grey-text ">
           <tr>
               <th>Nome</th>
-              <th>Codigo de barras</th>
-              <th>Tipo</th>
+              <th>Quantidade</th>
+              <th>Estoque</th>
+              <th>Vencimento</th>
               <th>Marca</th>
               @if(auth()->user()->is_admin)
               <th>Ações</th>
@@ -110,14 +111,19 @@
           </tr>
         </thead>
         <tbody>
-        @foreach($produtos_cadastrados as $produto)
+        @foreach($produtos_abaixo as $produto)
             <tr>
                 <td>{{$produto->nome}}</td>
                 <td class="grey-text text-darken-3">
-                 {{$produto->codigo_barra}}
+                 @if($produto->quantidade<=4)
+                 <div>{{$produto->quantidade}} {{$produto->abreviacao}}<i class="tiny material-icons red-text">brightness_1</i></div>
+                 @else
+                 {{$produto->quantidade}} {{$produto->abreviacao}}
+                 @endif
                  </td>
-                <td class="grey-text text-darken-3">{{$produto->tipo}}</td>
-                <td class="grey-text text-darken-3">{{$produto->marca}}</td>
+                <td class="grey-text text-darken-3">{{$produto->estoque->estoque}}</td>
+                <td class="grey-text text-darken-3">{{$produto->vencimento}}</td>
+                <td>{{$produto->marca}}</td>
                 @if(auth()->user()->is_admin)
                 <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarProduto({{$produto->id}})"><i class="material-icons">edit</i></a>
                 <button onclick="confirmarProduto({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" data-target="modal1"><i class="material-icons">delete</i></button>

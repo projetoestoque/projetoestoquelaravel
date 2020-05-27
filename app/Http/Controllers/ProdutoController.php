@@ -11,35 +11,60 @@ use App\produto_em_estoque;
 use App\Estoque_disponivel;
 use App\Medida;
 use App\Doador;
+use App\Marca;
 use DB;
 
 class ProdutoController extends Controller
 {
+
     public function listar_produtos() 
     {
-        $produtos_estoque=[];
-        $produtos_cadastrados=DB::table('produtos')->get();
+        $produtos_cadastrados = DB::table('produtos')->get();
+        $produtos_em_estoque = DB::table('produto_em_estoques')->get();
 
-        $produtos_em_estoque=DB::table('produto_em_estoques')->get();
-        $estoques_disponiveis=DB::table('estoque_disponivels')->get();
+        $produtos_estoque = [];
+        $produtos_acima = [];
+        $produtos_abaixo = [];
+        $produtos_sem = [];
 
-        foreach($produtos_em_estoque as $produto_em_estoque){
-            $produto_cadastrado=Produto::find($produto_em_estoque->Id_produto);
-            $produto_cadastrado->id = $produto_em_estoque->id;
-            $produto_cadastrado->estoque=Estoque_disponivel::find($produto_em_estoque->Id_estoque);
-            $produto_cadastrado->abreviacao=Medida::find($produto_em_estoque->Id_medida)->abreviacao;
-            if(Doador::find($produto_em_estoque->Id_doador)->tipo=="fisico"){
-                $produto_cadastrado->doador=Doador::find($produto_em_estoque->Id_doador)->nome;
+        foreach($produtos_em_estoque as $produto) {
+            //listando todo os produtos em estoque
+            $produto_estoque = $produto;
+            $produto_estoque->nome = Produto::findOrFail($produto->Id_produto)->nome;
+            $produto_estoque->estoque = Estoque_disponivel::findOrFail($produto->Id_estoque);
+            $produto_estoque->marca = Produto::findOrFail($produto->Id_produto)->marca;
+            $produto_estoque->abreviacao = Medida::findOrFail($produto->Id_medida)->abreviacao;
+            array_push($produtos_estoque, $produto_estoque);
+
+            //listando produtos acima do nivel critico
+            if($produto->quantidade >= 5) {
+                $produto_acima = $produto;
+                $produto_acima->nome = Produto::findOrFail($produto->Id_produto)->nome;
+                $produto_acima->estoque = Estoque_disponivel::findOrFail($produto->Id_estoque);
+                $produto_acima->marca = Produto::findOrFail($produto->Id_produto)->marca;
+                $produto_acima->abreviacao = Medida::findOrFail($produto->Id_medida)->abreviacao;
+                array_push($produtos_acima, $produto_acima);
             }
-            else{
-                $produto_cadastrado->doador=Doador::find($produto_em_estoque->Id_doador)->instituicao;
+
+            //listando produtos abaixo do nivel critico
+            if($produto->quantidade < 5) {
+                $produto_abaixo = $produto;
+                $produto_abaixo->nome = Produto::findOrFail($produto->Id_produto)->nome;
+                $produto_abaixo->estoque = Estoque_disponivel::findOrFail($produto->Id_estoque);
+                $produto_abaixo->marca = Produto::findOrFail($produto->Id_produto)->marca;
+                $produto_abaixo->abreviacao = Medida::findOrFail($produto->Id_medida)->abreviacao;
+                array_push($produtos_abaixo, $produto_abaixo);
             }
-            $produto_cadastrado->quantidade=$produto_em_estoque->quantidade;
-            $produto_cadastrado->vencimento=$produto_em_estoque->vencimento;
-            array_push($produtos_estoque,$produto_cadastrado);
-        };
+        }
+
+        foreach($produtos_cadastrados as $produto) {
+            if((DB::table('produto_em_estoques')->where('id', $produto->id)->exists()) == false){
+                array_push($produtos_sem, $produto);
+            }
+        }
+        
+        return view('listagem', compact('produtos_estoque','produtos_acima', 'produtos_abaixo', 'produtos_sem'));
         //$produtos_estoque=$this->paginate($produtos_estoque);
-        return view('listagem', compact('produtos_estoque', 'produtos_cadastrados'));
     }
    // public function paginate($items, $perPage = 5, $page = null, $options = [])
    // {
