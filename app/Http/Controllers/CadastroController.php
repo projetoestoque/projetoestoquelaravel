@@ -362,7 +362,14 @@ class CadastroController extends Controller
 	public function menuCadastros(){
 		return view('admin/adminMenuCadastros');
 	}
-	public function listarCadastros(){
-		return view('admin/visualizarCadastros');
-	}
+	public function listarCadastros()
+    {
+        $produtos_cadastrados = DB::table('produtos')->get();
+        $doadores = DB::table('doadors')->get();
+        $tipos = DB::table('tipos')->get();
+        $medidas = DB::table('medidas')->get();
+        $marcas = DB::table('marcas')->get();
+        $estoques_disponiveis = DB::table('estoque_disponivels')->get();
+        return view('admin/visualizarCadastros', compact('produtos_cadastrados','tipos','medidas','marcas','estoques_disponiveis'));
+    }
 }
