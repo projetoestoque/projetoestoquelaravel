@@ -179,7 +179,7 @@ class CadastroController extends Controller
 
 		if(isset($_GET['id'])) {
 			$produto_em_estoque = Produto_em_estoque::find($_GET['id']);
-			$produto_em_estoque->marca = Marca::find($produto_em_estoque->Id_produto)->marca;
+			$produto_em_estoque->marca = Produto::find($produto_em_estoque->Id_produto)->marca;
 			$produto_em_estoque->nome = Produto::find($produto_em_estoque->Id_produto)->nome;
 			$produto_em_estoque->estoque = Estoque_disponivel::find($produto_em_estoque->Id_estoque);
 			$produto_em_estoque->medida = Medida::find($produto_em_estoque->Id_medida);

@@ -41,6 +41,9 @@
     }
 </style>
 @section('conteudo')
+<!-- nao me apagar vlw -->
+<input type="hidden" id="produto_id">
+
 <div class="butaoEspaco">
 @if(auth()->user()->is_admin)
     <a href="{{ URL::route('admin.MenuEstoque') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
@@ -261,8 +264,8 @@
                   <td class="grey-text text-darken-3">{{$produto->codigo_barra}}</td>
                   <td class="grey-text text-darken-3">{{$produto->tipo}}</td>
                   @if(auth()->user()->is_admin)
-                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarEntrada({{$produto->id}})"><i class="material-icons">edit</i></a>
-                  <button onclick="confirmarEntrada({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" data-target="modal2"><i class="material-icons">delete</i></button>
+                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarProduto({{$produto->id}})"><i class="material-icons">edit</i></a>
+                  <button onclick="confirmarProduto({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger"><i class="material-icons">delete</i></button>
                   </td>
                   @endif
               </tr>
@@ -274,6 +277,7 @@
 <br>
 <br>
 <br>
+
 <div id="modal1" class="modal confirm">
     <div class="modal-content">
       <h4>Tem certeza que deseja deletar o Produto?</h4>
@@ -286,9 +290,10 @@
     </div>
     </div>
 </div>
+
 <div id="modal2" class="modal confirm">
     <div class="modal-content">
-      <h4>Tem certeza que deseja deletar o Produto?</h4>
+      <h4>Tem certeza que deseja deletar a Entrada?</h4>
         <br>
         <div class="row right">
             <input type="hidden" id="modalid"/>
@@ -373,6 +378,7 @@
     
   }
   function confirmarProduto(id) {
+    alert('chegueeeeeeeeei')
     document.getElementById('produto_id').value = id;
     const elem = document.getElementById('modal1');
     const instance = M.Modal.init(elem, {dismissible: false});
