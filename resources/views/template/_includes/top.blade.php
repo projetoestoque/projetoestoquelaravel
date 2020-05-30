@@ -81,10 +81,10 @@
   @elseif(Auth::user()->is_admin==true)
   <ul class="sidenav" id="mobile-demo">
   <li><a href="{{route ('admin.home') }}">Menu</a></li>
-  <li ><a href="{{route('produtos.listar')}}">Listagem</a></li>
-  <li><a href="{{ route('admin.cadastros')}}">Cadastros</a></li>
-  <li><a href="{{ route('admin.insercoes')}}">Inserções</a></li>
-  <li><a href="#">Produtos Faltando</a></li>
+  <li ><a href="{{route('produtos.listar')}}">Visualizar Estoque</a></li>
+  <li ><a href="{{route('admin.listarCadastros')}}">Visualizar Cadastros</a></li>
+  <li><a href="{{ route('admin.cadastros')}}">Cadastrar</a></li>
+  <li><a href="{{ route('admin.insercoes')}}">Entradas</a></li>
   <li><a href="#">Relatório</a></li>
        <li>
        <a class="dropdown-trigger"href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
@@ -98,9 +98,9 @@
   @else
   <ul class="sidenav" id="mobile-demo">
   <li><a href="{{ route('home') }}">Menu</a></li>
-  <li ><a href="{{route('produtos.listar')}}">Listagem</a></li>
-  <li><a href="{{route('superv.cadastros')}}">Cadastros/Inserções</a></li>
-  <li><a href="#">Produtos Faltando</a></li>
+  <li ><a href="{{route('produtos.listar')}}">Visualizar Estoque</a></li>
+  <li><a href="{{ route('superv.cadastros')}}">Cadastrar</a></li>
+  <li><a href="{{ route('superv.cadastros')}}">Entradas</a></li>
   <li><a href="#">Relatório</a></li>
   <li>
   <a class="dropdown-trigger"href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
@@ -113,17 +113,16 @@
   </ul> 
  @endguest
  <ul id="dropdown1" class="dropdown-content"  >
-    <li ><a href="{{route('produtos.listar')}}">Listagem</a></li>
-    <li><a href="{{ route('admin.cadastros')}}">Cadastros</a></li>
-    <li><a href="{{ route('admin.insercoes')}}">Inserções</a></li>
-    <li><a href="#">Produtos Faltando</a></li>
+    <li ><a href="{{route('produtos.listar')}}">Visualizar Estoque</a></li>
+    <li ><a href="{{route('admin.listarCadastros')}}">Visualizar Cadastros</a></li>
+    <li><a href="{{ route('admin.cadastros')}}">Cadastrar</a></li>
+    <li><a href="{{ route('admin.insercoes')}}">Entradas</a></li>
     <li><a href="#">Relatório</a></li>
   </ul> 
   <ul id="dropdown2" class="dropdown-content"  >
-    <li ><a href="{{route('produtos.listar')}}">Listagem</a></li>
-    <li><a href="{{ route('superv.cadastros')}}">Cadastros</a></li>
-    <li><a href="{{ route('superv.cadastros')}}">Inserções</a></li>
-    <li><a href="#">Produtos Faltando</a></li>
+    <li ><a href="{{route('produtos.listar')}}">Visualizar Estoque</a></li>
+    <li><a href="{{ route('superv.cadastros')}}">Cadastrar</a></li>
+    <li><a href="{{ route('superv.cadastros')}}">Entradas</a></li>
     <li><a href="#">Relatório</a></li>
   </ul> 
 </header>
