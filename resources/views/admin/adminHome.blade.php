@@ -9,7 +9,7 @@
 <br>
 <div class="container ">
 <div class="row white-text ">
-            <a href="{{ route('admin.MenuCadastros')}}" class="white-text ">
+            <a href="{{ route('admin.MenuEstoque')}}" class="white-text ">
                 <div class=" card-panel blue accent-1 col s5 hoverable ">
                     <div class="row ">
                     <span class="row"></span>
@@ -23,7 +23,7 @@
             </a>
             <div class="col s2">
             </div>
-            <a href="{{route('admin.cadastros')}}" class="white-text">
+            <a href="{{route('admin.MenuCadastros')}}" class="white-text">
                 <div class=" card-panel blue accent-2 col s5 hoverable">
                     <div class="row">
                     <span class="row"></span>
@@ -39,20 +39,6 @@
             </div>
 </div>
 <div class="row white-text ">
-            <a href="#" class="white-text ">
-                <div class=" card-panel light-blue darken-3 col s5 hoverable ">
-                    <div class="row ">
-                    <span class="row"></span>
-                        <div class="col">
-                            <i class="material-icons medium white-text ">report_problem</i>
-                            <h6 class="no-padding txt-md">Produtos faltando</h6>
-                        </div>
-                        <span class="row"></span>
-                    </div>
-                </div>
-            </a>
-            <div class="col s2">
-            </div>
             <a href="#" class="white-text">
                 <div class=" card-panel blue darken-4 col s5 hoverable">
                     <div class="row">

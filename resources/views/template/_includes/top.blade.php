@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
   <title>@yield('titulo')</title>
   <!--Import Google Icon Font-->
@@ -13,6 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
 </head>
 <body class="@yield('classBody')">
 <header>
@@ -38,7 +39,7 @@
        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
        <ul class="right hide-on-med-and-down">  
        <li><a href="{{route ('admin.home') }}">Início</a></li>
-       <li><a class="dropdown-trigger" href="#" data-target="dropdown1">Menu<i class="material-icons right">arrow_drop_down</i></a></li>
+       <li><a class="dropdown-trigger" href="#" data-target="dropdown1" >Menu<i class="material-icons right">arrow_drop_down</i></a></li>
        <li>
        <a class="dropdown-trigger"href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
        Logout<i class="material-icons right">power_settings_new</i>

@@ -29,12 +29,12 @@
                             <label for="password">Password</label>
                           </div>
                         </div>
-                        <br>
                         <div class="row valign center">
                         <button class="btn waves-effect waves-light blue darken-2 "><b>Entrar
                             <i class="material-icons right">send</i>
                         </button>
                         </div>
+                        <br>
                     </form>
                 </div>
             </div>

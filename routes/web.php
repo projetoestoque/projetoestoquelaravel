@@ -26,8 +26,10 @@ Route::get('/', ['as' => 'main', 'uses' => function() {
 Route::group(['middleware' => 'is_admin'], function () {
     Route::get('/admin/home', 'HomeController@adminHome')->name('admin.home');
     Route::get('/admin/cadastros', 'CadastroController@Cadastros')->name('admin.cadastros');
-    Route::get('/admin/MenuCadastros', 'CadastroController@CadastrosInsercoes')->name('admin.MenuCadastros');
+    Route::get('/admin/MenuEstoque', 'CadastroController@CadastrosInsercoes')->name('admin.MenuEstoque');
+    Route::get('/admin/MenuCadastros', 'CadastroController@menuCadastros')->name('admin.MenuCadastros');
     Route::get('/admin/MenuInsercoes', 'CadastroController@Insercoes')->name('admin.insercoes');
+    Route::get('/admin/listarCadastros', 'CadastroController@listarCadastros')->name('admin.listarCadastros');
     Route::get('/admin/produto/editar/{id}', 'CadastroController@editarProduto')->name('admin.produto.editar');
     Route::put('/admin/produto/atualizar/{id}', 'CadastroController@salvarAlteracoes')->name('admin.produto.atualizar');
     Route::delete('/admin/produto/remover/{id}', 'CadastroController@deletarAlteracoes')->name('admin.produto.deletar');

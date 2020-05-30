@@ -10,7 +10,8 @@
 }
 .alinhado-a-direita{
   float:right;
-  margin-right: 50px;
+  margin-right:10px;
+  margin-top:-50px;
 }
 body{
   font-family: 'Noto Sans JP', sans-serif;
@@ -242,8 +243,9 @@ a.modal-trigger.radius{
 .card.horizontal:hover{
   box-shadow: 0px 8px #008f947e;
 }
-h5.header{
-  margin-left: 15px;
+.header{
+  margin-left:15px;
+  
 }
 .tiny.material-icons.red-text{
   top: -10px;
@@ -260,6 +262,12 @@ h5.header{
   margin-right: auto;
   width: 20%;
 }
+.empty-image{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+}
 .cadastros-align{
   margin-left:200px;
 }
@@ -268,6 +276,10 @@ h5.header{
 }
 .back{
   text-align: center;
+}
+.gradient{
+  background-image:linear-gradient(to right, #00b4db, #0083b0);
+  color:white;
 }
 @media only screen and (max-width: 400px) {
   .mobile-hide{ display: none !important; }
