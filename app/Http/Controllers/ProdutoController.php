@@ -58,7 +58,7 @@ class ProdutoController extends Controller
         }
 
         foreach($produtos_cadastrados as $produto) {
-            if((DB::table('produto_em_estoques')->where('id', $produto->id)->exists()) == false){
+            if((DB::table('produto_em_estoques')->where('Id_produto', $produto->id)->exists()) == false){
                 array_push($produtos_sem, $produto);
             }
         }
@@ -96,6 +96,10 @@ class ProdutoController extends Controller
         
         $produto_id = $_GET['id'];
         $produto = Produto_em_estoque::find($produto_id);
+
+        if($produto->quantidade > 0) {
+            return redirect()->back()->with('status', 'Entrada em estoque, impossivel deletar!');
+        }
 
         $produto->delete();
         return redirect()->back()->with('status', 'Entrada deletada com sucesso!');

@@ -179,7 +179,7 @@ class CadastroController extends Controller
 
 		if(isset($_GET['id'])) {
 			$produto_em_estoque = Produto_em_estoque::find($_GET['id']);
-			$produto_em_estoque->marca = Marca::find($produto_em_estoque->Id_produto)->marca;
+			$produto_em_estoque->marca = Produto::find($produto_em_estoque->Id_produto)->marca;
 			$produto_em_estoque->nome = Produto::find($produto_em_estoque->Id_produto)->nome;
 			$produto_em_estoque->estoque = Estoque_disponivel::find($produto_em_estoque->Id_estoque);
 			$produto_em_estoque->medida = Medida::find($produto_em_estoque->Id_medida);
@@ -362,7 +362,14 @@ class CadastroController extends Controller
 	public function menuCadastros(){
 		return view('admin/adminMenuCadastros');
 	}
-	public function listarCadastros(){
-		return view('admin/visualizarCadastros');
-	}
+	public function listarCadastros()
+    {
+        $produtos_cadastrados = DB::table('produtos')->get();
+        $doadores = DB::table('doadors')->get();
+        $tipos = DB::table('tipos')->get();
+        $medidas = DB::table('medidas')->get();
+        $marcas = DB::table('marcas')->get();
+        $estoques_disponiveis = DB::table('estoque_disponivels')->get();
+        return view('admin/visualizarCadastros', compact('produtos_cadastrados','tipos','medidas','marcas','estoques_disponiveis'));
+    }
 }
