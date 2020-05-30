@@ -206,8 +206,6 @@
         document.getElementById("btnFisico").classList.add('butao');
         document.getElementById("btnJuridico").classList.remove('butao');
         document.getElementById("btnJuridico").classList.add('butaoAtivado');
-
-
     }
 </script>
 @endsection

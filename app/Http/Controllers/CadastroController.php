@@ -358,6 +358,11 @@ class CadastroController extends Controller
 	public function Insercoes()
 	{
 		return view('admin/adminInsercoes');
-		
+	}
+	public function menuCadastros(){
+		return view('admin/adminMenuCadastros');
+	}
+	public function listarCadastros(){
+		return view('admin/visualizarCadastros');
 	}
 }

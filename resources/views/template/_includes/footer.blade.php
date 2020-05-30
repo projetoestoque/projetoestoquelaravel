@@ -68,10 +68,10 @@
       hover: true,
       alignment:'right',
       coverTrigger:false,
-      constrain_width: true,
+      constrain_width: true, 
       focusedIndex:2
       });
-    $('#dropdowner').dropdown();
+    $('.chips').chips();
   });
 </script>
 </body>
