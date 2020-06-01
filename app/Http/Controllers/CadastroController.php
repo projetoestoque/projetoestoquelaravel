@@ -364,13 +364,64 @@ class CadastroController extends Controller
 	}
 	public function listarCadastros()
     {
-		$all=array();
+		$all = [];
         $produtos_cadastrados = DB::table('produtos')->get();
         $doadores = DB::table('doadors')->get();
         $tipos = DB::table('tipos')->get();
         $medidas = DB::table('medidas')->get();
         $marcas = DB::table('marcas')->get();
-        $estoques_disponiveis = DB::table('estoque_disponivels')->get();
+		$estoques_disponiveis = DB::table('estoque_disponivels')->get();
+
+		//listar todos
+		foreach($produtos_cadastrados as $produto) {
+			array_push($all, [
+				'nome' => $produto->nome,
+				'tipo' => "produto/$produto->tipo"
+			]);
+		}
+
+		foreach($doadores as $doador) {
+			if($doador->tipo == 'fisico') {
+				array_push($all, [
+					'nome' => $doador->nome,
+					'tipo' => "doador $doador->tipo"
+				]);
+			} else if($doador->tipo == 'juridico'){
+				array_push($all, [
+					'nome' => $doador->instituicao,
+					'tipo' => "doador $doador->tipo"
+				]);
+			}
+		}
+
+		foreach($tipos as $tipo) {
+			array_push($all, [
+				'nome' => $tipo->tipo,
+				'tipo' => 'tipo'
+			]);
+		}
+
+		foreach($medidas as $medida) {
+			array_push($all, [
+				'nome' => $medida->medida,
+				'tipo' => 'medida'
+			]);
+		}
+
+		foreach($marcas as $marca) {
+			array_push($all, [
+				'nome' => $marca->marca,
+				'tipo' => 'marca'
+			]);
+		}
+
+		foreach($estoques_disponiveis as $estoque_disponivel) {
+			array_push($all, [
+				'nome' => $estoque_disponivel->estoque,
+				'tipo' => 'estoque'
+			]);
+		}
+		
         return view('admin/visualizarCadastros', compact('all','produtos_cadastrados','tipos','medidas','marcas','estoques_disponiveis','doadores'));
     }
 }
