@@ -49,7 +49,7 @@
 </div>
 <div class="container z-depth-2 ">
 <nav class="nav-form blue lighten-1"></nav>
-<table class="All">
+<table class="All highlight centered responsive-table">
 @if(empty($all))
 <div class="All">
           <br>
@@ -63,11 +63,37 @@
             <br>
 </div>
 @else
-<tr>
-       <td>
-       All table
-       </td>
-       </tr>
+<thead class="grey-text text-darken-4">
+            <tr>
+                <th>Nome</th>
+                <th>Tipo</th>
+                @if(auth()->user()->is_admin)   
+                @endif
+            </tr>
+          </thead>
+          <tbody>
+          @foreach($all as $allItem)
+              <tr>
+                  <td class="grey-text text-darken-3">{{$allItem['nome']}}</td>
+                  @if($allItem['tipo']=="produto/Alimento")
+                  <td><span class="new badge red" data-badge-caption="">{{$allItem['tipo']}}</span></td>
+                  @elseif($allItem['tipo']=="produto/Escritorio")
+                  <td><span class="new badge blue" data-badge-caption="">{{$allItem['tipo']}}</span></td>
+                  @elseif($allItem['tipo']=="tipo")
+                  <td><span class="new badge green" data-badge-caption="">{{$allItem['tipo']}}</span></td>
+                  @elseif($allItem['tipo']=="medida")
+                  <td><span class="new badge orange" data-badge-caption="">{{$allItem['tipo']}}</span></td>
+                  @elseif($allItem['tipo']=="marca")
+                  <td><span class="new badge teal" data-badge-caption="">{{$allItem['tipo']}}</span></td>
+                  @elseif($allItem['tipo']=="estoque")
+                  <td><span class="new badge pink darken-3" data-badge-caption="">{{$allItem['tipo']}}</span></td>
+                  
+                  @else
+                  <td class="grey-text text-darken-2">{{$allItem['tipo']}}</td>
+                  @endif
+              </tr>
+          @endforeach
+          </tbody>
 @endif
 </table>
 <table class="Produto highlight centered responsive-table">
@@ -103,7 +129,7 @@
                   <td class="grey-text text-darken-2">{{$produto->tipo}}</td>
                   <td class="grey-text text-darken-2">{{$produto->codigo_barra}}</td>
                   @if(auth()->user()->is_admin)
-                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarEntrada({{$produto->id}})"><i class="material-icons">edit</i></a>
+                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarCadastro({{$produto->id}})"><i class="material-icons">edit</i></a>
                   <button onclick="confirmarEntrada({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" data-target="modal2"><i class="material-icons">delete</i></button>
                   </td>
                   @endif
@@ -398,6 +424,7 @@
                     }
                 }
     }
+    
 </script>
 @endsection
 
