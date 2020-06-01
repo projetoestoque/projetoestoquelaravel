@@ -97,7 +97,7 @@
             <img src="{{asset('caixa.png')}}" class="list-image" >
             <p class="center-align">Ops! Você ainda não deu entrada de nenhum produto.</p>
             <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui: 
-            <a class="btn-floating btn-medium waves-effect waves-light blue"><i class="material-icons">add</i></a>
+            <a href="{{route('admin.insercoes')}}"class="btn-floating btn-medium waves-effect waves-light blue"><i class="material-icons">add</i></a>
             </p>
             <br>
             <br>
