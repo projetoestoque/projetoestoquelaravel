@@ -6,8 +6,25 @@
  .chips-chips{
      margin-bottom:10px;
  }
+ .Produto{
+     display:none;
+ }
+ .Doador{
+    display:none;
+ }
+ .Tipo{
+    display:none;
+ }
+ .Medida{
+    display:none;
+ }
+ .Marca{
+    display:none;
+ }
+ .Estoque{
+    display:none;
+ }
 </style>
-
 @section('conteudo')
 <div class="butaoEspaco">
     <a href="{{ URL::route('admin.MenuCadastros') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
@@ -20,7 +37,7 @@
 <div class="container">
 <h4><b>Visualizar Cadastros</b></h4>
 <br>
-<div class="chips-chips">
+<div class="chips-chips" id="chips">
 <a id="All" class="waves-effect waves-light btn-flat gradient" onclick="changeFilter(id)">Todos</a>
 <a id="Produto" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">free_breakfast</i>Produto</a>
 <a id="Doador" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">face</i>Doador</a>
@@ -31,7 +48,10 @@
 </div>
 </div>
 <div class="container z-depth-2 ">
-<table  id="listEstoque">
+<nav class="nav-form blue lighten-1"></nav>
+<table class="All">
+@if(empty($all))
+<div class="All">
           <br>
           <br>
             <img src="{{asset('empty.png')}}" class="empty-image" >
@@ -41,7 +61,266 @@
             </p>
             <br>
             <br>
-      </table>
+</div>
+@else
+<tr>
+       <td>
+       All table
+       </td>
+       </tr>
+@endif
+</table>
+<table class="Produto highlight centered responsive-table">
+@if(empty($produtos_cadastrados))
+<div class="Produto">
+          <br>
+          <br>
+            <img src="{{asset('empty.png')}}" class="empty-image" >
+            <p class="center-align">Ops! Você ainda não fez cadastro de produto.</p>
+            <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui: 
+            <a href="{{route('admin.cadastros')}} "class="btn-floating btn-medium waves-effect waves-light blue"><i class="material-icons">add</i></a>
+            </p>
+            <br>
+            <br>
+</div>
+@else
+<thead class="grey-text text-darken-4">
+            <tr>
+                <th>Nome</th>
+                <th>Marca</th>
+                <th>Tipo</th>
+                <th>Código de barra</th>
+                @if(auth()->user()->is_admin)
+                <th>Ações</th>
+                @endif
+            </tr>
+          </thead>
+          <tbody>
+          @foreach($produtos_cadastrados as $produto)
+              <tr>
+                  <td class="grey-text text-darken-3">{{$produto->nome}}</td>
+                  <td class="grey-text text-darken-2">{{$produto->marca}}</td>
+                  <td class="grey-text text-darken-2">{{$produto->tipo}}</td>
+                  <td class="grey-text text-darken-2">{{$produto->codigo_barra}}</td>
+                  @if(auth()->user()->is_admin)
+                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarEntrada({{$produto->id}})"><i class="material-icons">edit</i></a>
+                  <button onclick="confirmarEntrada({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" data-target="modal2"><i class="material-icons">delete</i></button>
+                  </td>
+                  @endif
+              </tr>
+          @endforeach
+          </tbody>
+@endif
+</table>
+<table class="Doador highlight centered responsive-table">
+@if(empty($doadores))
+<div class="Doador">
+          <br>
+          <br>
+            <img src="{{asset('empty.png')}}" class="empty-image" >
+            <p class="center-align">Ops! Você ainda não fez cadastro de Doador.</p>
+            <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui: 
+            <a href="{{route('admin.cadastros')}} "class="btn-floating btn-medium waves-effect waves-light blue"><i class="material-icons">add</i></a>
+            </p>
+            <br>
+            <br>
+</div>
+@else
+<thead class="grey-text text-darken-4">
+            <tr>
+                <th>Nome/Instituição</th>
+                <th>CPF/CNPJ</th>
+                <th>Telefone</th>
+                <th>email</th>
+                @if(auth()->user()->is_admin)
+                <th>Ações</th>
+                @endif
+            </tr>
+          </thead>
+          <tbody>
+          @foreach($doadores as $doador)
+              <tr>
+              @if($doador->tipo=="fisico")
+                <td class="grey-text text-darken-3">{{$doador->nome}}</td>
+                <td class="grey-text text-darken-3">{{$doador->cpf}}</td>
+                <td class="grey-text text-darken-2">{{$doador->telefone}}</td>
+                <td class="grey-text text-darken-2">{{$doador->email}}</td>
+              @elseif($doador->tipo=="juridico")
+                <td class="grey-text text-darken-3">{{$doador->instituicao}}</td>
+                <td class="grey-text text-darken-3">{{$doador->cnpj}}</td>
+                <td class="grey-text text-darken-2">{{$doador->telefone}}</td>
+                <td class="grey-text text-darken-2">{{$doador->email}}</td>
+              @else
+              <td class="grey-text text-darken-3">{{$doador->nome}}</td>
+              <td class="grey-text text-darken-3">N/A</td>
+              <td class="grey-text text-darken-3">N/A</td>
+              <td class="grey-text text-darken-3">N/A</td>
+              @endif
+                  
+                  @if(auth()->user()->is_admin)
+                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarEntrada({{$produto->id}})"><i class="material-icons">edit</i></a>
+                  <button onclick="confirmarEntrada({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" data-target="modal2"><i class="material-icons">delete</i></button>
+                  </td>
+                  @endif
+              </tr>
+          @endforeach
+          </tbody>
+@endif
+</table>
+<table class="Tipo highlight centered responsive-table">
+@if(empty($tipos))
+<div class="Tipo">
+          <br>
+          <br>
+            <img src="{{asset('empty.png')}}" class="empty-image" >
+            <p class="center-align">Ops! Você ainda não fez cadastro de Tipo.</p>
+            <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui: 
+            <a href="{{route('admin.cadastros')}} "class="btn-floating btn-medium waves-effect waves-light blue"><i class="material-icons">add</i></a>
+            </p>
+            <br>
+            <br>
+</div>
+@else
+<thead class="grey-text text-darken-4">
+            <tr>
+                <th>Tipo</th>
+                @if(auth()->user()->is_admin)
+                <th>Ações</th>
+                @endif
+            </tr>
+          </thead>
+          <tbody>
+          @foreach($tipos as $tipo)
+              <tr>
+                <td class="grey-text text-darken-3">{{$tipo->tipo}}</td>
+                  @if(auth()->user()->is_admin)
+                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarEntrada({{$produto->id}})"><i class="material-icons">edit</i></a>
+                  <button onclick="confirmarEntrada({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" data-target="modal2"><i class="material-icons">delete</i></button>
+                  </td>
+                  @endif
+              </tr>
+          @endforeach
+          </tbody>
+@endif
+</table>
+<table class="Medida highlight centered responsive-table">
+@if(empty($medidas))
+<div class="Medida">
+          <br>
+          <br>
+            <img src="{{asset('empty.png')}}" class="empty-image" >
+            <p class="center-align">Ops! Você ainda não fez cadastro de Medida.</p>
+            <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui: 
+            <a href="{{route('admin.cadastros')}} "class="btn-floating btn-medium waves-effect waves-light blue"><i class="material-icons">add</i></a>
+            </p>
+            <br>
+            <br>
+</div>
+@else
+<thead class="grey-text text-darken-4">
+            <tr>
+                <th>Medida</th>
+                <th>Abreviação</th>
+                @if(auth()->user()->is_admin)
+                <th>Ações</th>
+                @endif
+            </tr>
+          </thead>
+          <tbody>
+          @foreach($medidas as $medida)
+              <tr>
+                <td class="grey-text text-darken-3">{{$medida->medida}}</td>
+                @if(empty($medida->abreviacao))
+                <td class="grey-text text-darken-3">N/A</td>
+                @else
+                <td class="grey-text text-darken-3">{{$medida->abreviacao}}</td>
+                @endif
+                  @if(auth()->user()->is_admin)
+                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarEntrada({{$produto->id}})"><i class="material-icons">edit</i></a>
+                  <button onclick="confirmarEntrada({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" data-target="modal2"><i class="material-icons">delete</i></button>
+                  </td>
+                  @endif
+              </tr>
+          @endforeach
+          </tbody>
+@endif
+</table>
+<table class="Marca highlight centered responsive-table">
+@if(empty($marcas))
+<div class="Marca">
+          <br>
+          <br>
+            <img src="{{asset('empty.png')}}" class="empty-image" >
+            <p class="center-align">Ops! Você ainda não fez cadastro de Marca.</p>
+            <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui: 
+            <a href="{{route('admin.cadastros')}} "class="btn-floating btn-medium waves-effect waves-light blue"><i class="material-icons">add</i></a>
+            </p>
+            <br>
+            <br>
+</div>
+@else
+<thead class="grey-text text-darken-4">
+            <tr>
+                <th>Marca</th>
+                @if(auth()->user()->is_admin)
+                <th>Ações</th>
+                @endif
+            </tr>
+          </thead>
+          <tbody>
+          @foreach($marcas as $marca)
+              <tr>
+                <td class="grey-text text-darken-3">{{$marca->marca}}</td>
+                  @if(auth()->user()->is_admin)
+                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarEntrada({{$produto->id}})"><i class="material-icons">edit</i></a>
+                  <button onclick="confirmarEntrada({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" data-target="modal2"><i class="material-icons">delete</i></button>
+                  </td>
+                  @endif
+              </tr>
+          @endforeach
+          </tbody>
+@endif
+</table>
+<table class="Estoque highlight centered responsive-table">
+@if(empty($estoques_disponiveis))
+<div class="Estoque">
+          <br>
+          <br>
+            <img src="{{asset('empty.png')}}" class="empty-image" >
+            <p class="center-align">Ops! Você ainda não fez cadastro de Estoque.</p>
+            <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui: 
+            <a href="{{route('admin.cadastros')}} "class="btn-floating btn-medium waves-effect waves-light blue"><i class="material-icons">add</i></a>
+            </p>
+            <br>
+            <br>
+</div>
+@else
+<thead class="grey-text text-darken-4">
+            <tr>
+                <th>Estoque</th>
+                @if(auth()->user()->is_admin)
+                <th>Ações</th>
+                @endif
+            </tr>
+          </thead>
+          <tbody>
+          @foreach($estoques_disponiveis as $estoque)
+              <tr>
+              @if($estoque->estoque=="sem estoque")
+                @continue
+              @else
+                <td class="grey-text text-darken-3">{{$estoque->estoque}}</td>
+              @endif
+                  @if(auth()->user()->is_admin)
+                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarEntrada({{$produto->id}})"><i class="material-icons">edit</i></a>
+                  <button onclick="confirmarEntrada({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" data-target="modal2"><i class="material-icons">delete</i></button>
+                  </td>
+                  @endif
+              </tr>
+          @endforeach
+          </tbody>
+@endif
+</table>
 </div>
 <br>
 <br>
@@ -77,83 +356,47 @@
     function changeFilter(id){
         switch(id){
             case "All":
-                if(!document.getElementById(id).classList.contains("gradient")){
-                  document.getElementById("Produto").classList.remove("gradient");
-                  document.getElementById("Doador").classList.remove("gradient");
-                  document.getElementById("Tipo").classList.remove("gradient");
-                  document.getElementById("Medida").classList.remove("gradient");
-                  document.getElementById("Marca").classList.remove("gradient");
-                  document.getElementById("Estoque").classList.remove("gradient");
-                   document.getElementById(id).classList.add("gradient");
-                }
+                changeStateElements(id);
             break;
             case "Produto":
-                if(!document.getElementById(id).classList.contains("gradient")){
-                  document.getElementById("All").classList.remove("gradient");
-                  document.getElementById("Doador").classList.remove("gradient");
-                  document.getElementById("Tipo").classList.remove("gradient");
-                  document.getElementById("Medida").classList.remove("gradient");
-                  document.getElementById("Marca").classList.remove("gradient");
-                  document.getElementById("Estoque").classList.remove("gradient");
-                   document.getElementById(id).classList.add("gradient");
-                }
+                changeStateElements(id);
             break;
             case "Doador":
-                if(!document.getElementById(id).classList.contains("gradient")){
-                  document.getElementById("All").classList.remove("gradient");
-                  document.getElementById("Produto").classList.remove("gradient");
-                  document.getElementById("Tipo").classList.remove("gradient");
-                  document.getElementById("Medida").classList.remove("gradient");
-                  document.getElementById("Marca").classList.remove("gradient");
-                  document.getElementById("Estoque").classList.remove("gradient");
-                   document.getElementById(id).classList.add("gradient");
-                }
+                changeStateElements(id);
             break;
             case "Tipo":
-                if(!document.getElementById(id).classList.contains("gradient")){
-                  document.getElementById("All").classList.remove("gradient");
-                  document.getElementById("Produto").classList.remove("gradient");
-                  document.getElementById("Doador").classList.remove("gradient");
-                  document.getElementById("Medida").classList.remove("gradient");
-                  document.getElementById("Marca").classList.remove("gradient");
-                  document.getElementById("Estoque").classList.remove("gradient");
-                   document.getElementById(id).classList.add("gradient");
-                }
+                changeStateElements(id);
             break;
             case "Medida":
-                if(!document.getElementById(id).classList.contains("gradient")){
-                  document.getElementById("All").classList.remove("gradient");
-                  document.getElementById("Produto").classList.remove("gradient");
-                  document.getElementById("Doador").classList.remove("gradient");
-                  document.getElementById("Tipo").classList.remove("gradient");
-                  document.getElementById("Marca").classList.remove("gradient");
-                  document.getElementById("Estoque").classList.remove("gradient");
-                   document.getElementById(id).classList.add("gradient");
-                }
+                changeStateElements(id);
             break;
             case "Marca":
-                if(!document.getElementById(id).classList.contains("gradient")){
-                  document.getElementById("All").classList.remove("gradient");
-                  document.getElementById("Produto").classList.remove("gradient");
-                  document.getElementById("Doador").classList.remove("gradient");
-                  document.getElementById("Tipo").classList.remove("gradient");
-                  document.getElementById("Medida").classList.remove("gradient");
-                  document.getElementById("Estoque").classList.remove("gradient");
-                   document.getElementById(id).classList.add("gradient");
-                }
+                changeStateElements(id);
             break;
             case "Estoque":
-                if(!document.getElementById(id).classList.contains("gradient")){
-                  document.getElementById("All").classList.remove("gradient");
-                  document.getElementById("Produto").classList.remove("gradient");
-                  document.getElementById("Doador").classList.remove("gradient");
-                  document.getElementById("Tipo").classList.remove("gradient");
-                  document.getElementById("Medida").classList.remove("gradient");
-                  document.getElementById("Marca").classList.remove("gradient");
-                   document.getElementById(id).classList.add("gradient");
-                }
+                changeStateElements(id);
             break;
         }
+    }
+    function changeStateElements(id){
+        if(!document.getElementById(id).classList.contains("gradient")){
+                let list=document.getElementById("chips").getElementsByTagName("A");
+                for(item of list){
+                    if(item.className.includes("gradient")){
+                        item.classList.remove("gradient");
+                        document.getElementsByClassName(item.id)[0].style="display:none;";
+                        if(document.getElementsByClassName(item.id)[1]!=null){
+                            document.getElementsByClassName(item.id)[1].style.display="none";
+                        }
+                        break;
+                    }
+                }   
+                document.getElementById(id).classList.add("gradient");
+                document.getElementsByClassName(document.getElementById(id).id)[0].style="display:table;";
+                    if(document.getElementsByClassName(document.getElementById(id).id).lenght>1){
+                        document.getElementsByClassName(item.id)[1].style.display="block";
+                    }
+                }
     }
 </script>
 @endsection
