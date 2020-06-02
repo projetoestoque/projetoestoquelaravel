@@ -49,7 +49,7 @@
 </div>
 <div class="container z-depth-2 ">
 <nav class="nav-form blue lighten-1"></nav>
-<table class="All highlight centered responsive-table">
+<table class="All highlight centered ">
 @if(empty($all))
 <div class="All">
           <br>
@@ -96,7 +96,7 @@
           </tbody>
 @endif
 </table>
-<table class="Produto highlight centered responsive-table">
+<table class="Produto highlight centered ">
 @if(empty($produtos_cadastrados))
 <div class="Produto">
           <br>
@@ -138,7 +138,7 @@
           </tbody>
 @endif
 </table>
-<table class="Doador highlight centered responsive-table">
+<table class="Doador highlight centered ">
 @if(empty($doadores))
 <div class="Doador">
           <br>
@@ -193,7 +193,7 @@
           </tbody>
 @endif
 </table>
-<table class="Tipo highlight centered responsive-table">
+<table class="Tipo highlight centered ">
 @if(empty($tipos))
 <div class="Tipo">
           <br>
@@ -229,7 +229,7 @@
           </tbody>
 @endif
 </table>
-<table class="Medida highlight centered responsive-table">
+<table class="Medida highlight centered ">
 @if(empty($medidas))
 <div class="Medida">
           <br>
@@ -271,7 +271,7 @@
           </tbody>
 @endif
 </table>
-<table class="Marca highlight centered responsive-table">
+<table class="Marca highlight centered ">
 @if(empty($marcas))
 <div class="Marca">
           <br>
@@ -307,7 +307,7 @@
           </tbody>
 @endif
 </table>
-<table class="Estoque highlight centered responsive-table">
+<table class="Estoque highlight centered ">
 @if(empty($estoques_disponiveis))
 <div class="Estoque">
           <br>
