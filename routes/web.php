@@ -51,9 +51,12 @@ Route::group(['middleware' => 'is_admin'], function () {
    Route::post('/estoque/atualizar', 'EstoqueController@atualizarEstoque')->name('admin.estoque.atualizar');
    Route::post('/doador/atualizar', 'DoadorController@atualizarDoador')->name('admin.doador.atualizar');
 
-   //Route::get('/admin/medida/atualizar', 'CadastroController@medidaAtualizar')->name('medida.atualizar');
-   //Route::get('/admin/tipo/atualizar', 'CadastroController@tipoAtualizar')->name('tipo.atualizar');
-   //Route::get('/admin/estoque/atualizar', 'CadastroController@estoqueAtualizar')->name('estoque.atualizar');
+   Route::get('admin/marca/deletar', 'MarcaController@deletarMarca')->name('admin.marca.deletar');
+   Route::get('admin/medida/deletar', 'MedidaController@deletarMedida')->name('admin.medida.deletar');
+   Route::get('admin/tipo/deletar', 'TipoController@deletarTipo')->name('admin.tipo.deletar');
+   Route::get('admin/estoque/deletar', 'EstoqueController@deletarEstoque')->name('admin.estoque.deletar');
+   Route::get('admin/doador/deletar', 'DoadorController@deletarDoador')->name('admin.doador.deletar');
+
 
    Route::post('/admin/marca/cadastrar', ['as'=> 'admin.marca.cadastrar', 'uses'=>'CadastroController@cadastrarMarca']);
    Route::post('/admin/tipo/cadastrar', ['as'=> 'admin.tipo.cadastrar', 'uses'=>'CadastroController@cadastrarTipo']);

@@ -10,6 +10,7 @@
 
 @section('conteudo')
 <div class="butaoEspaco">
+@if(empty($doador))
     @if(auth()->user()->is_admin)
     <a href="{{ URL::route('admin.cadastros') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
     <i class="large material-icons">reply</i>
@@ -21,6 +22,12 @@
         <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
     @endif
+@else
+    <a href="{{ URL::previous() }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
+        <i class="large material-icons">reply</i>
+        <span class="ButtaoEspacoTexto"><b>Voltar</span>
+    </a>
+@endif
 </div>
 <br>
 <input type="checkbox">

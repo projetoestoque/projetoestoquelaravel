@@ -27,6 +27,9 @@
 
 </style>
 @section('conteudo')
+
+<input type="hidden" id="produto_id" name="id"/>
+
 <div class="butaoEspaco">
     <a href="{{ URL::route('admin.MenuCadastros') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
     <i class="large material-icons">reply</i>
@@ -130,8 +133,8 @@
                   <td class="grey-text text-darken-2">{{$produto->tipo}}</td>
                   <td class="grey-text text-darken-2">{{$produto->codigo_barra}}</td>
                   @if(auth()->user()->is_admin)
-                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarCadastro({{$produto->id}})"><i class="material-icons">edit</i></a>
-                  <button onclick="confirmarEntrada({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" data-target="modal2"><i class="material-icons">delete</i></button>
+                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarProduto({{$produto->id}})"><i class="material-icons">edit</i></a>
+                  <button onclick="confirmarProduto({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" data-target="modal2"><i class="material-icons">delete</i></button>
                   </td>
                   @endif
               </tr>
@@ -185,8 +188,8 @@
               @endif
                   
                   @if(auth()->user()->is_admin)
-                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarEntrada({{$produto->id}})"><i class="material-icons">edit</i></a>
-                  <button onclick="confirmarEntrada({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" data-target="modal2"><i class="material-icons">delete</i></button>
+                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarDoador({{$doador->id}})"><i class="material-icons">edit</i></a>
+                  <button onclick="confirmarDoador({{$doador->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" data-target="modal2"><i class="material-icons">delete</i></button>
                   </td>
                   @endif
               </tr>
@@ -368,12 +371,12 @@
 
 <div id="modal2" class="modal confirm">
     <div class="modal-content">
-      <h4>Tem certeza que deseja deletar o Produto?</h4>
+      <h4>Tem certeza que deseja deletar o Doador?</h4>
         <br>
         <div class="row right">
             <input type="hidden" id="modalid"/>
             <button class="btn-flat waves-effect waves-light modal-close" ><b>Cancelar</button>
-            <a class="btn waves-effect waves-light red darken-2 modal-close" onclick="deletarEntrada()"><b>Deletar</a>
+            <a class="btn waves-effect waves-light red darken-2 modal-close" onclick="deletarDoador()"><b>Deletar</a>
             <br>
     </div>
     </div>
@@ -434,7 +437,43 @@
                 }
                 
     }
-    
+
+    //produto
+    function atualizarProduto(id) {
+        document.getElementById('produto_id').value = id;
+        window.location.href = "{{route('produto')}}?id=" + id;
+    }
+
+    function confirmarProduto(id) {
+        document.getElementById('produto_id').value = id;
+        const elem = document.getElementById('modal1');
+        const instance = M.Modal.init(elem, {dismissible: false});
+        instance.open();
+    }
+
+    function deletarProduto() {
+        var id = document.getElementById('produto_id').value;
+        window.location.href = "{{route('produto.deletar')}}?id=" + id;
+    }
+
+    //doador
+    function atualizarDoador(id) {
+        document.getElementById('produto_id').value = id;
+        window.location.href = "{{route('doador')}}?id=" + id;
+    }
+
+    function confirmarDoador(id) {
+        document.getElementById('produto_id').value = id;
+        const elem = document.getElementById('modal2');
+        const instance = M.Modal.init(elem, {dismissible: false});
+        instance.open();
+    }
+
+    function deletarDoador() {
+        var id = document.getElementById('produto_id').value;
+        window.location.href = "{{route('admin.doador.deletar')}}?id=" + id;
+    }
+
 </script>
 @endsection
 
