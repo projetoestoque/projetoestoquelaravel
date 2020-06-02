@@ -21,6 +21,7 @@ class NotaFiscals extends Migration
             $table->timestamps();
 
             $table->foreign('Id_produto')->references('id')->on('produtos');
+            $table->softDeletes();
         });
     }
 

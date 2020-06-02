@@ -21,6 +21,7 @@ class CreateEstoquesTable extends Migration
 
             $table->foreign('Id_produto')->references('id')->on('produtos');
             $table->foreign('Id_estoque')->references('id')->on('estoque_disponivels');
+            $table->softDeletes();
         });
     }
 

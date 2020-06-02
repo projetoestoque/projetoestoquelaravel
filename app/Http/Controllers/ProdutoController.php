@@ -134,7 +134,7 @@ class ProdutoController extends Controller
         $produto->marca = $data['marca'];
         $produto->save();
 
-        return redirect()->route('produtos.listar')->with('status', 'Produto atualizado com sucesso!');
+        return redirect()->back()->with('update', 'Produto atualizado com sucesso!');
 
     }
 }

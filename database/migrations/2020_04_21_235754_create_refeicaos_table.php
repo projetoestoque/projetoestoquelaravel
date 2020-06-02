@@ -20,6 +20,7 @@ class CreateRefeicaosTable extends Migration
             $table->integer('quantidade');
             $table->string('data');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

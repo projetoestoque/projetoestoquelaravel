@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
              EstoqueSeeder::class,
              MarcaSeeder::class,
              MedidaSeeder::class,
-             ProdutoSeeder::class
+             ProdutoSeeder::class,
+             EntradaSeeder::class
          ]);
     }
 }

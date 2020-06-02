@@ -18,6 +18,7 @@ class CreateMedidasTable extends Migration
             $table->string('medida');
             $table->string('abreviacao');
             $table->timestamps();
+            $table->softDeletes();
             
         });
     }

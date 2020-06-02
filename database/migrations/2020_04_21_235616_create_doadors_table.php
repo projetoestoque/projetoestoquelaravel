@@ -23,6 +23,7 @@ class CreateDoadorsTable extends Migration
             $table->string('email');
             $table->string('tipo');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -21,6 +21,7 @@ class Relatorios extends Migration
             $table->string('mensal');
             $table->string('anual');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('Id_produto')->references('id')->on('produtos');
         });

@@ -27,6 +27,7 @@ class CreateProdutoEmEstoquesTable extends Migration
              $table->foreign('Id_produto')->references('id')->on('produtos');
              $table->foreign('Id_medida')->references('id')->on('medidas');
              $table->foreign('Id_doador')->references('id')->on('doadors');
+             $table->softDeletes();
         });
     }
 

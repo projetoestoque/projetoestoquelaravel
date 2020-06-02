@@ -5,10 +5,18 @@
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 
 @section('conteudo')
+
+@if(session('update'))
+    <script>
+        alert("{{session('update')}}");
+        window.location.href = "{{route('admin.listarCadastros')}}"
+    </script>
+@endif
+
 <div class="butaoEspaco">
 
 @if(isset($produto))
-    <a href="{{ URL::route('produtos.listar') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
+    <a href="{{ URL::previous()}}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
     <i class="large material-icons">reply</i>
         <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>

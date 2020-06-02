@@ -23,7 +23,7 @@ public function listar_marcas()
     $marca = Marca::findOrFail($marca_id);
     $marca->marca = $req->get('marca');
     $marca->save();
-    return redirect()->route('admin.cadastros')->with('status', 'Marca atualizada com sucesso!');
+    return redirect()->route('admin.cadastros')->with('update', 'Marca atualizada com sucesso!');
   }
 
   public function deletarMarca()
