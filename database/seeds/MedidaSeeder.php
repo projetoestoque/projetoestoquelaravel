@@ -24,6 +24,10 @@ class MedidaSeeder extends Seeder
             [
               'medida' => 'unidade',
               'abreviacao'=>'un'
+            ],
+            [
+              'medida' => 'caixa',
+              'abreviacao'=>'cx'
             ]
           ];
 
