@@ -7,7 +7,7 @@
      margin-bottom:10px;
  }
  .Produto{
-     display:none;
+     display:none !important;
  }
  .Doador{
     display:none;
@@ -24,6 +24,7 @@
  .Estoque{
     display:none;
  }
+
 </style>
 @section('conteudo')
 <div class="butaoEspaco">
@@ -49,9 +50,9 @@
 </div>
 <div class="container z-depth-2 ">
 <nav class="nav-form blue lighten-1"></nav>
-<table class="All highlight centered responsive-table">
+<table class="All highlight centered ">
 @if(empty($all))
-<div class="All">
+<div class="All ">
           <br>
           <br>
             <img src="{{asset('empty.png')}}" class="empty-image" >
@@ -193,7 +194,7 @@
           </tbody>
 @endif
 </table>
-<table class="Tipo highlight centered responsive-table">
+<table class="Tipo highlight centered ">
 @if(empty($tipos))
 <div class="Tipo">
           <br>
@@ -229,7 +230,7 @@
           </tbody>
 @endif
 </table>
-<table class="Medida highlight centered responsive-table">
+<table class="Medida highlight centered ">
 @if(empty($medidas))
 <div class="Medida">
           <br>
@@ -271,7 +272,7 @@
           </tbody>
 @endif
 </table>
-<table class="Marca highlight centered responsive-table">
+<table class="Marca highlight centered ">
 @if(empty($marcas))
 <div class="Marca">
           <br>
@@ -307,7 +308,7 @@
           </tbody>
 @endif
 </table>
-<table class="Estoque highlight centered responsive-table">
+<table class="Estoque highlight centered ">
 @if(empty($estoques_disponiveis))
 <div class="Estoque">
           <br>
@@ -410,7 +411,7 @@
                 for(item of list){
                     if(item.className.includes("gradient")){
                         item.classList.remove("gradient");
-                        document.getElementsByClassName(item.id)[0].style="display:none;";
+                        document.getElementsByClassName(item.id)[0].style="display:none !important;";
                         if(document.getElementsByClassName(item.id)[1]!=null){
                             document.getElementsByClassName(item.id)[1].style.display="none";
                         }
@@ -418,11 +419,20 @@
                     }
                 }   
                 document.getElementById(id).classList.add("gradient");
-                document.getElementsByClassName(document.getElementById(id).id)[0].style="display:table;";
+                if(document.getElementsByClassName(id)[0].classList.contains("responsive-table") && window.innerWidth<=400){
+                    document.getElementsByClassName(document.getElementById(id).id)[0].style="display:block!important;";
                     if(document.getElementsByClassName(document.getElementById(id).id).lenght>1){
                         document.getElementsByClassName(item.id)[1].style.display="block";
                     }
                 }
+                else{
+                    document.getElementsByClassName(document.getElementById(id).id)[0].style="display:table!important;";
+                    if(document.getElementsByClassName(document.getElementById(id).id).lenght>1){
+                        document.getElementsByClassName(item.id)[1].style.display="block";
+                    }
+                }
+                }
+                
     }
     
 </script>

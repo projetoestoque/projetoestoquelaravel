@@ -21,6 +21,9 @@
     #emptySem{
       display:none; 
     }
+    #listEstoque {
+      display:table;
+      }
     .select-wrapper input.select-dropdown{
       border-bottom:none !important;
       font-family:'Noto Sans JP' !important;
@@ -33,10 +36,13 @@
       .select-wrapper input.select-dropdown{
       border-bottom:none !important;
       font-family:'Noto Sans JP' !important;
-      text-align:left;
+      text-align:right;
+      top:10px;
+      left:-10px;
     }
     .select-wrapper .caret{
-      right:100px !important;
+      top:20px !important;
+      right:-10px !important;
     }
     }
 </style>
@@ -66,7 +72,6 @@
         <nav class="nav-form blue lighten-1"></nav>
         </thead>
         <h5 class="header"><b>Visualizar Estoque</b>
-        <div class="mobile-hide">
         <div class="alinhado-a-direita"> 
         <div class="input-field">
           <select id="filter" onchange="show()">
@@ -75,18 +80,6 @@
             <option value="2">Produtos em baixa</option>
             <option value="3">Produtos sem estoque</option>
           </select>
-        </div>
-        </div>
-        </div>
-        <div class="mobile"><div class="desktop-hide">
-        <div class="input-field">
-          <select id="filter" onchange="show()">
-            <option value="0" selected>Produtos em Estoque</option>
-            <option value="1" >Produtos em ordem</option>
-            <option value="2">Produtos em baixa</option>
-            <option value="3">Produtos sem estoque</option>
-          </select>
-        </div>
         </div>
         </div>
         </h5>
@@ -375,7 +368,6 @@
         document.getElementById("emptySem").style.display="block";
       }
     }
-    
   }
   function confirmarProduto(id) {
     alert('chegueeeeeeeeei')

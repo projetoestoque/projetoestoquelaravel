@@ -13,7 +13,6 @@
 <br>
 <div class="mobile-hide"><h4 class="cadastros-align"><b>Entradas<b></h5></div>
 <div class="mobile"><div class="desktop-hide"><h4 class="center-align"><b>Entradas<b></h5></div>
-<div class="mobile-hide">
 <br>
 <div class="container">
 <div class="row white text ">

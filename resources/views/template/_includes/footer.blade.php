@@ -3,6 +3,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
+    M.updateTextFields();
     $('.datepicker').datepicker({
       format: 'dd/mm/yyyy',
       i18n: {
@@ -59,8 +60,6 @@
         }
     });
     $('select').formSelect();
-    $("select[required]").css({display: "inline", height: 0, padding: 0, width: 0});
-    M.updateTextFields();
     $('.sidenav').sidenav();
     $('.parallax').parallax();
     $('.modal').modal();
