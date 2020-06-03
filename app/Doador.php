@@ -1,10 +1,10 @@
 <?php
 
 namespace App;
-namespace Illuminate\Database\Eloquent\SoftDeletes;
+//namespace Illuminate\Database\Eloquent\SoftDeletes;
 
 use Illuminate\Database\Eloquent\Model;
-use SoftDeletes;
+//use SoftDeletes;
 
 
 class Doador extends Model

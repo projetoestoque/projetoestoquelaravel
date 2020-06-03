@@ -10,7 +10,7 @@
      display:none !important;
  }
  .Doador{
-    display:none;
+    display:none !important;
  }
  .Tipo{
     display:none;
@@ -134,7 +134,7 @@
                   <td class="grey-text text-darken-2">{{$produto->codigo_barra}}</td>
                   @if(auth()->user()->is_admin)
                   <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarProduto({{$produto->id}})"><i class="material-icons">edit</i></a>
-                  <button onclick="confirmarProduto({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" data-target="modal2"><i class="material-icons">delete</i></button>
+                  <button onclick="confirmarProduto({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger"><i class="material-icons">delete</i></button>
                   </td>
                   @endif
               </tr>
@@ -189,7 +189,7 @@
                   
                   @if(auth()->user()->is_admin)
                   <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarDoador({{$doador->id}})"><i class="material-icons">edit</i></a>
-                  <button onclick="confirmarDoador({{$doador->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" data-target="modal2"><i class="material-icons">delete</i></button>
+                  <button onclick="confirmarDoador({{$doador->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" ><i class="material-icons">delete</i></button>
                   </td>
                   @endif
               </tr>
@@ -224,8 +224,8 @@
               <tr>
                 <td class="grey-text text-darken-3">{{$tipo->tipo}}</td>
                   @if(auth()->user()->is_admin)
-                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarEntrada({{$produto->id}})"><i class="material-icons">edit</i></a>
-                  <button onclick="confirmarEntrada({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" data-target="modal2"><i class="material-icons">delete</i></button>
+                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarTipo({{$tipo->id}})"><i class="material-icons">edit</i></a>
+                  <button onclick="confirmarTipo({{$tipo->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger"><i class="material-icons">delete</i></button>
                   </td>
                   @endif
               </tr>
@@ -266,8 +266,8 @@
                 <td class="grey-text text-darken-3">{{$medida->abreviacao}}</td>
                 @endif
                   @if(auth()->user()->is_admin)
-                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarEntrada({{$produto->id}})"><i class="material-icons">edit</i></a>
-                  <button onclick="confirmarEntrada({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" data-target="modal2"><i class="material-icons">delete</i></button>
+                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarMedida({{$medida->id}})"><i class="material-icons">edit</i></a>
+                  <button onclick="confirmarMedida({{$medida->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" ><i class="material-icons">delete</i></button>
                   </td>
                   @endif
               </tr>
@@ -302,8 +302,8 @@
               <tr>
                 <td class="grey-text text-darken-3">{{$marca->marca}}</td>
                   @if(auth()->user()->is_admin)
-                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarEntrada({{$produto->id}})"><i class="material-icons">edit</i></a>
-                  <button onclick="confirmarEntrada({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" data-target="modal2"><i class="material-icons">delete</i></button>
+                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarMarca({{$marca->id}})"><i class="material-icons">edit</i></a>
+                  <button onclick="confirmarMarca({{$marca->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" ><i class="material-icons">delete</i></button>
                   </td>
                   @endif
               </tr>
@@ -342,8 +342,8 @@
                 <td class="grey-text text-darken-3">{{$estoque->estoque}}</td>
               @endif
                   @if(auth()->user()->is_admin)
-                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarEntrada({{$produto->id}})"><i class="material-icons">edit</i></a>
-                  <button onclick="confirmarEntrada({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" data-target="modal2"><i class="material-icons">delete</i></button>
+                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarEstoque({{$estoque->id}})"><i class="material-icons">edit</i></a>
+                  <button onclick="confirmarEstoque({{$estoque->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" ><i class="material-icons">delete</i></button>
                   </td>
                   @endif
               </tr>
@@ -377,6 +377,58 @@
             <input type="hidden" id="modalid"/>
             <button class="btn-flat waves-effect waves-light modal-close" ><b>Cancelar</button>
             <a class="btn waves-effect waves-light red darken-2 modal-close" onclick="deletarDoador()"><b>Deletar</a>
+            <br>
+    </div>
+    </div>
+</div>
+
+<div id="modal3" class="modal confirm">
+    <div class="modal-content">
+      <h4>Tem certeza que deseja deletar o Tipo?</h4>
+        <br>
+        <div class="row right">
+            <input type="hidden" id="modalid"/>
+            <button class="btn-flat waves-effect waves-light modal-close" ><b>Cancelar</button>
+            <a class="btn waves-effect waves-light red darken-2 modal-close" onclick="deletarTipo()"><b>Deletar</a>
+            <br>
+    </div>
+    </div>
+</div>
+
+<div id="modal4" class="modal confirm">
+    <div class="modal-content">
+      <h4>Tem certeza que deseja deletar a Medida?</h4>
+        <br>
+        <div class="row right">
+            <input type="hidden" id="modalid"/>
+            <button class="btn-flat waves-effect waves-light modal-close" ><b>Cancelar</button>
+            <a class="btn waves-effect waves-light red darken-2 modal-close" onclick="deletarMedida()"><b>Deletar</a>
+            <br>
+    </div>
+    </div>
+</div>
+
+<div id="modal5" class="modal confirm">
+    <div class="modal-content">
+      <h4>Tem certeza que deseja deletar a Marca?</h4>
+        <br>
+        <div class="row right">
+            <input type="hidden" id="modalid"/>
+            <button class="btn-flat waves-effect waves-light modal-close" ><b>Cancelar</button>
+            <a class="btn waves-effect waves-light red darken-2 modal-close" onclick="deletarMarca()"><b>Deletar</a>
+            <br>
+    </div>
+    </div>
+</div>
+
+<div id="modal6" class="modal confirm">
+    <div class="modal-content">
+      <h4>Tem certeza que deseja deletar o Estoque?</h4>
+        <br>
+        <div class="row right">
+            <input type="hidden" id="modalid"/>
+            <button class="btn-flat waves-effect waves-light modal-close" ><b>Cancelar</button>
+            <a class="btn waves-effect waves-light red darken-2 modal-close" onclick="deletarEstoque()"><b>Deletar</a>
             <br>
     </div>
     </div>
@@ -474,6 +526,77 @@
         window.location.href = "{{route('admin.doador.deletar')}}?id=" + id;
     }
 
+    //tipo
+    function atualizarTipo(id) {
+        document.getElementById('produto_id').value = id;
+        window.location.href = "{{route('admin.cadastros')}}?tipo_id=" + id;
+    }
+
+    function confirmarTipo(id) {
+        document.getElementById('produto_id').value = id;
+        const elem = document.getElementById('modal3');
+        const instance = M.Modal.init(elem, {dismissible: false});
+        instance.open();
+    }
+
+    function deletarTipo() {
+        var id = document.getElementById('produto_id').value;
+        window.location.href = "{{route('admin.tipo.deletar')}}?id=" + id;
+    }
+
+    //medida
+    function atualizarMedida(id) {
+        document.getElementById('produto_id').value = id;
+        window.location.href = "{{route('admin.cadastros')}}?medida_id=" + id;
+    }
+
+    function confirmarMedida(id) {
+        document.getElementById('produto_id').value = id;
+        const elem = document.getElementById('modal4');
+        const instance = M.Modal.init(elem, {dismissible: false});
+        instance.open();
+    }
+
+    function deletarMedida() {
+        var id = document.getElementById('produto_id').value;
+        window.location.href = "{{route('admin.medida.deletar')}}?id=" + id;
+    }
+
+    //marca
+    function atualizarMarca(id) {
+        document.getElementById('produto_id').value = id;
+        window.location.href = "{{route('admin.cadastros')}}?marca_id=" + id;
+    }
+
+    function confirmarMarca(id) {
+        document.getElementById('produto_id').value = id;
+        const elem = document.getElementById('modal5');
+        const instance = M.Modal.init(elem, {dismissible: false});
+        instance.open();
+    }
+
+    function deletarMarca() {
+        var id = document.getElementById('produto_id').value;
+        window.location.href = "{{route('admin.marca.deletar')}}?id=" + id;
+    }
+
+    //estoque
+    function atualizarEstoque(id) {
+        document.getElementById('produto_id').value = id;
+        window.location.href = "{{route('admin.cadastros')}}?estoque_id=" + id;
+    }
+
+    function confirmarEstoque(id) {
+        document.getElementById('produto_id').value = id;
+        const elem = document.getElementById('modal6');
+        const instance = M.Modal.init(elem, {dismissible: false});
+        instance.open();
+    }
+
+    function deletarEstoque() {
+        var id = document.getElementById('produto_id').value;
+        window.location.href = "{{route('admin.estoque.deletar')}}?id=" + id;
+    }
 </script>
 @endsection
 

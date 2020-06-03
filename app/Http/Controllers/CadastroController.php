@@ -282,7 +282,7 @@ class CadastroController extends Controller
 				->withErrors(["errors" => ["Tipo já cadastrado"]]);
 		}
 		$tipo->save();
-		return redirect()->back()->with('status', 'Tipo cadastrado com sucesso!');
+		return redirect()->back()->with('tipo', 'Tipo cadastrado com sucesso!');
 	}
 
 	public function cadastrarMedida(Request $req)
@@ -297,7 +297,7 @@ class CadastroController extends Controller
 		}
 
 		$medida->save();
-		return redirect()->back()->with('status', 'Medida cadastrada com sucesso!');
+		return redirect()->back()->with('medida', 'Medida cadastrada com sucesso!');
 	}
 
 	public function cadastrarRefeicao(Request $req)

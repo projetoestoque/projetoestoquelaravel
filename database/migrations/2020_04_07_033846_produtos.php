@@ -20,6 +20,7 @@ class Produtos extends Migration
             $table->string('tipo');
             $table->string('marca');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

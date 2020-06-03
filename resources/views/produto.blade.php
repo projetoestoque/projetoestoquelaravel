@@ -5,6 +5,14 @@
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 
 @section('conteudo')
+
+@if(session('update'))
+    <script>
+        alert("{{session('update')}}");
+        window.location.href = "{{route('admin.listarCadastros')}}"
+    </script>
+@endif
+
 <div class="butaoEspaco">
 
 @if(isset($produto))

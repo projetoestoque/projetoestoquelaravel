@@ -21,13 +21,13 @@ class EstoqueController extends Controller
     $estoque = Estoque_disponivel::findOrFail($estoque_id);
     $estoque->estoque = $req->get('estoque');
     $estoque->save();
-    return redirect()->route('admin.cadastros')->with('status', 'Estoque atualizado com sucesso!');
+    return redirect()->route('admin.cadastros')->with('update', 'Estoque atualizado com sucesso!');
   }
 
   public function deletarEstoque()
   {
       $estoque_id = $_GET['id'];
-      $estoque = Estoque::find($estoque_id);
+      $estoque = Estoque_disponivel::find($estoque_id);
       $estoque->delete();
       return redirect()->back()->with('status', 'Estoque deletado com sucesso!');
   }

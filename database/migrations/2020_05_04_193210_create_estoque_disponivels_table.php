@@ -17,6 +17,7 @@ class CreateEstoqueDisponivelsTable extends Migration
             $table->bigIncrements('id');
             $table->string('estoque');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
