@@ -269,7 +269,7 @@
                 <div class="row">
                 <div class="input-field col s4">
                 <i class="material-icons prefix">font_download</i>
-                <input value="{{$medida->abreviacao}}" required="required" id="abreviacao" name="abreviacao" type="text" placeholder="kg">
+                <input value="{{$medida->abreviacao}}" minlength="2" maxlength="2" required="required" id="abreviacao" name="abreviacao" type="text" placeholder="kg">
                 <label for="unidade">Abreviação
                 <div class="tooltip">
                 <i class="material-icons">info_outline</i>
@@ -291,8 +291,7 @@
                 <div class="row">
                 <div class="input-field col s4">
                 <i class="material-icons prefix">font_download</i>
-                <input required="required" id="abreviacao" name="abreviacao" type="text" placeholder="kg">
-                <input required="required" id="unidade" name="unidade" type="text" placeholder="kg">
+                <input minlength="2" maxlength="2" required="required" id="abreviacao" name="abreviacao" type="text" placeholder="kg">
                 <label for="unidade">Abreviação
                 <div class="tooltip">
                 <i class="material-icons">info_outline</i>
