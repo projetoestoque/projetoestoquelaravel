@@ -31,4 +31,24 @@ class EstoqueController extends Controller
       $estoque->delete();
       return redirect()->back()->with('status', 'Estoque deletado com sucesso!');
   }
+
+  public function pesquisarEntrada() 
+  {
+    $produtos_em_estoque = DB::table('produtos')->get();
+    $produtos = [];
+    $query = "F";
+    $contador = 0;
+
+    //varre todos os produtos em estoque e verificada cada letra
+    //se for igual a da $query ele salva no array produtos xD
+    foreach($produtos_em_estoque as $produto) {
+        for($i = 0; $i < strlen($query); $i++) {
+            if($produto->nome[$i] === $query[$i]) $contador++;
+            if($contador == strlen($query)) array_push($produtos, $produto);
+        }
+        $contador = 0;
+    }
+
+    return $produtos;
+  }
 }

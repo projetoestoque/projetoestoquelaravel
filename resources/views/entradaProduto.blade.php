@@ -12,7 +12,7 @@
         <i class="large material-icons">reply</i>
         <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
-@else   
+@else
     @if(auth()->user()->is_admin)
         <a href="{{ URL::route('admin.insercoes') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
         <i class="large material-icons">reply</i>
@@ -30,7 +30,7 @@
 @if(isset($produto_em_estoque))
 <h3 class="center-align"><b>Atualizar Produto</h3>
 @else
-<h3 class="center-align"><b>Inserir Produto</h3>
+<h3 class="center-align"><b>Entrada de Produtos</h3>
 @endif
 <br>
 <div class="container z-depth-2 valing-wrapper">
@@ -77,7 +77,7 @@
                 @else
                     <input required type="number"  placeholder="5" name="quantidade">
                 @endif
-                
+
                 <label>Quantidade <span class="important">*</span></label>
                 <div class="tooltip desktop-hide">
                 <i class="material-icons">info_outline</i>
