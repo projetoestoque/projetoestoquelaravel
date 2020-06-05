@@ -13,13 +13,13 @@
       display: none;
     }
     #emptyAcima{
-      display:none; 
+      display:none;
     }
     #emptyAbaixo{
-      display:none; 
+      display:none;
     }
     #emptySem{
-      display:none; 
+      display:none;
     }
     #listEstoque {
       display:table;
@@ -72,7 +72,7 @@
         <nav class="nav-form blue lighten-1"></nav>
         </thead>
         <h5 class="header"><b>Visualizar Estoque</b>
-        <div class="alinhado-a-direita"> 
+        <div class="alinhado-a-direita">
         <div class="input-field">
           <select id="filter" onchange="show()">
             <option value="0" selected>Produtos em Estoque</option>
@@ -89,7 +89,7 @@
           <br>
             <img src="{{asset('caixa.png')}}" class="list-image" >
             <p class="center-align">Ops! Você ainda não deu entrada de nenhum produto.</p>
-            <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui: 
+            <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui:
             <a href="{{route('admin.insercoes')}}"class="btn-floating btn-medium waves-effect waves-light blue"><i class="material-icons">add</i></a>
             </p>
             <br>
@@ -103,9 +103,6 @@
                 <th>Quantidade</th>
                 <th>Estoque</th>
                 <th>Vencimento</th>
-                @if(auth()->user()->is_admin)
-                <th>Ações</th>
-                @endif
             </tr>
           </thead>
           <tbody>
@@ -130,7 +127,7 @@
               </tr>
           @endforeach
           </tbody>
-          @endif 
+          @endif
       </table>
       <table class="highlight centered responsive-table" id="listAcima">
       @if(empty($produtos_acima))
@@ -142,7 +139,7 @@
       <br>
       <br>
       </div>
-     
+
           @else
           <thead class="grey-text ">
             <tr>
@@ -151,9 +148,6 @@
                 <th>Quantidade</th>
                 <th>Estoque</th>
                 <th>Vencimento</th>
-                @if(auth()->user()->is_admin)
-                <th>Ações</th>
-                @endif
             </tr>
           </thead>
           <tbody>
@@ -178,7 +172,7 @@
               </tr>
           @endforeach
           </tbody>
-          @endif 
+          @endif
       </table>
       <table class="highlight centered responsive-table" id="listAbaixo">
       @if( empty($produtos_abaixo))
@@ -198,9 +192,6 @@
                 <th>Quantidade</th>
                 <th>Estoque</th>
                 <th>Vencimento</th>
-                @if(auth()->user()->is_admin)
-                <th>Ações</th>
-                @endif
             </tr>
           </thead>
           <tbody>
@@ -225,7 +216,7 @@
               </tr>
           @endforeach
           </tbody>
-          @endif 
+          @endif
       </table>
       <table class="highlight centered responsive-table" id="listSem">
       @if(empty($produtos_sem))
@@ -244,9 +235,6 @@
                 <th>Marca</th>
                 <th>Código de Barra</th>
                 <th>tipo</th>
-                @if(auth()->user()->is_admin)
-                <th>Ações</th>
-                @endif
             </tr>
           </thead>
           <tbody>
@@ -264,7 +252,7 @@
               </tr>
           @endforeach
           </tbody>
-          @endif 
+          @endif
       </table>
 </div>
 <br>
@@ -393,7 +381,7 @@
     var id = document.getElementById('produto_id').value;
     window.location.href = "{{route('entrada.deletar')}}?id=" + id;
   }
-  
+
   function atualizarEntrada(id) {
     document.getElementById('produto_id').value = id;
     window.location.href = "{{route('entradaProduto')}}?id=" + id;
@@ -405,4 +393,3 @@
   }
 </script>
 @endsection
-
