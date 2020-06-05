@@ -626,4 +626,32 @@
         </div>
     </div>
 </a>
+
+<div class="row white-text ">
+            <a class="white-text modal-trigger" href="" data-target="modal3">
+                <div class=" card-panel col s5 hoverable mobile">
+                    <div class="row">
+                    <span class="row"></span>
+                    <div class="col">
+                            <i class="material-icons medium blue-text text-darken-3 ">fitness_center</i>
+                            <h6 class="blue-text text-darken-3"> Medidas</h6>
+                        </div>
+                        </div>
+          </div>
+</a>
+<div class="col s1">
+</div>
+<a class="white-text modal-trigger" href="" data-target="modal3">
+    <div class=" card-panel col s3 hoverable">
+        <div class="row">
+        <span class="row"></span>
+        <div class="col cadastro">
+                <i class="material-icons large blue-text text-darken-3 ">fitness_center</i>
+                <h6 class="back blue-text text-darken-3"> Medidas</h6>
+            </div>
+            </div>
+    </div>
+</a>
+
+
 @endsection
