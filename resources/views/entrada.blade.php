@@ -23,7 +23,7 @@
                     <span class="row"></span>
                         <div class="col ">
                             <i class="material-icons large white-text pt-5">kitchen</i>
-                            <h6>Inserir Produtos</h6>
+                            <h6>Entrada de Produtos</h6>
                         </div>
                     </div>
                 </div>
@@ -40,6 +40,6 @@
                 </div>
             </div>
         </a>
-          
+
 </div>
 @endsection

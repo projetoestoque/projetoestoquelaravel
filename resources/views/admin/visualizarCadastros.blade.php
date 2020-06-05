@@ -60,7 +60,7 @@
           <br>
             <img src="{{asset('empty.png')}}" class="empty-image" >
             <p class="center-align">Ops! Você ainda não fez nenhum cadastro.</p>
-            <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui: 
+            <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui:
             <a href="{{route('admin.cadastros')}} "class="btn-floating btn-medium waves-effect waves-light blue"><i class="material-icons">add</i></a>
             </p>
             <br>
@@ -71,7 +71,7 @@
             <tr>
                 <th>Nome</th>
                 <th>Tipo</th>
-                @if(auth()->user()->is_admin)   
+                @if(auth()->user()->is_admin)
                 @endif
             </tr>
           </thead>
@@ -91,7 +91,7 @@
                   <td><span class="new badge teal" data-badge-caption="">{{$allItem['tipo']}}</span></td>
                   @elseif($allItem['tipo']=="estoque")
                   <td><span class="new badge pink darken-3" data-badge-caption="">{{$allItem['tipo']}}</span></td>
-                  
+
                   @else
                   <td class="grey-text text-darken-2">{{$allItem['tipo']}}</td>
                   @endif
@@ -107,7 +107,7 @@
           <br>
             <img src="{{asset('empty.png')}}" class="empty-image" >
             <p class="center-align">Ops! Você ainda não fez cadastro de produto.</p>
-            <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui: 
+            <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui:
             <a href="{{route('admin.cadastros')}} "class="btn-floating btn-medium waves-effect waves-light blue"><i class="material-icons">add</i></a>
             </p>
             <br>
@@ -149,7 +149,7 @@
           <br>
             <img src="{{asset('empty.png')}}" class="empty-image" >
             <p class="center-align">Ops! Você ainda não fez cadastro de Doador.</p>
-            <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui: 
+            <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui:
             <a href="{{route('admin.cadastros')}} "class="btn-floating btn-medium waves-effect waves-light blue"><i class="material-icons">add</i></a>
             </p>
             <br>
@@ -186,7 +186,7 @@
               <td class="grey-text text-darken-3">N/A</td>
               <td class="grey-text text-darken-3">N/A</td>
               @endif
-                  
+
                   @if(auth()->user()->is_admin)
                   <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarDoador({{$doador->id}})"><i class="material-icons">edit</i></a>
                   <button onclick="confirmarDoador({{$doador->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" ><i class="material-icons">delete</i></button>
@@ -204,7 +204,7 @@
           <br>
             <img src="{{asset('empty.png')}}" class="empty-image" >
             <p class="center-align">Ops! Você ainda não fez cadastro de Tipo.</p>
-            <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui: 
+            <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui:
             <a href="{{route('admin.cadastros')}} "class="btn-floating btn-medium waves-effect waves-light blue"><i class="material-icons">add</i></a>
             </p>
             <br>
@@ -232,6 +232,7 @@
           @endforeach
           </tbody>
 @endif
+
 </table>
 <table class="Medida highlight centered ">
 @if(empty($medidas))
@@ -240,7 +241,7 @@
           <br>
             <img src="{{asset('empty.png')}}" class="empty-image" >
             <p class="center-align">Ops! Você ainda não fez cadastro de Medida.</p>
-            <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui: 
+            <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui:
             <a href="{{route('admin.cadastros')}} "class="btn-floating btn-medium waves-effect waves-light blue"><i class="material-icons">add</i></a>
             </p>
             <br>
@@ -282,7 +283,7 @@
           <br>
             <img src="{{asset('empty.png')}}" class="empty-image" >
             <p class="center-align">Ops! Você ainda não fez cadastro de Marca.</p>
-            <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui: 
+            <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui:
             <a href="{{route('admin.cadastros')}} "class="btn-floating btn-medium waves-effect waves-light blue"><i class="material-icons">add</i></a>
             </p>
             <br>
@@ -318,7 +319,7 @@
           <br>
             <img src="{{asset('empty.png')}}" class="empty-image" >
             <p class="center-align">Ops! Você ainda não fez cadastro de Estoque.</p>
-            <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui: 
+            <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui:
             <a href="{{route('admin.cadastros')}} "class="btn-floating btn-medium waves-effect waves-light blue"><i class="material-icons">add</i></a>
             </p>
             <br>
@@ -472,7 +473,7 @@
                         }
                         break;
                     }
-                }   
+                }
                 document.getElementById(id).classList.add("gradient");
                 if(document.getElementsByClassName(id)[0].classList.contains("responsive-table") && window.innerWidth<=400){
                     document.getElementsByClassName(document.getElementById(id).id)[0].style="display:block!important;";
@@ -487,7 +488,7 @@
                     }
                 }
                 }
-                
+
     }
 
     //produto
@@ -598,5 +599,110 @@
         window.location.href = "{{route('admin.estoque.deletar')}}?id=" + id;
     }
 </script>
-@endsection
+<div class="col s1">
+</div>
+<a class="white-text modal-trigger" href="" data-target="modal2">
+    <div class=" card-panel col s3 hoverable">
+        <div class="row">
+        <span class="row"></span>
+        <div class="col cadastro">
+                <i class="material-icons large blue-text text-darken-3 pt-5">layers</i>
+                <h6 class="back blue-text text-darken-3"> Tipos</h6>
+            </div>
+        </div>
+    </div>
+</a>
 
+<div class="col s1">
+</div>
+<a class="white-text modal-trigger" href="" data-target="modal2">
+<div class=" card-panel col s5 hoverable mobile">
+        <div class="row">
+        <span class="row"></span>
+        <div class="col">
+                <i class="material-icons medium blue-text text-darken-3 pt-5">layers</i>
+                <h6 class="blue-text text-darken-3"> Tipos</h6>
+            </div>
+        </div>
+    </div>
+</a>
+
+<div class="row white-text ">
+            <a class="white-text modal-trigger" href="" data-target="modal3">
+                <div class=" card-panel col s5 hoverable mobile">
+                    <div class="row">
+                    <span class="row"></span>
+                    <div class="col">
+                            <i class="material-icons medium blue-text text-darken-3 ">fitness_center</i>
+                            <h6 class="blue-text text-darken-3"> Medidas</h6>
+                        </div>
+                        </div>
+          </div>
+</a>
+</div>
+<div class="col s1">
+</div>
+<a class="white-text modal-trigger" href="" data-target="modal3">
+    <div class=" card-panel col s3 hoverable">
+        <div class="row">
+        <span class="row"></span>
+        <div class="col cadastro">
+                <i class="material-icons large blue-text text-darken-3 ">fitness_center</i>
+                <h6 class="back blue-text text-darken-3"> Medidas</h6>
+            </div>
+            </div>
+    </div>
+</a>
+
+<div class="row white-text ">
+<a class="white-text modal-trigger" href="" data-target="modal1">
+                <div class=" card-panel col s5 hoverable mobile">
+                    <div class="row">
+                    <span class="row"></span>
+                    <div class="col">
+                            <i class="material-icons medium blue-text text-darken-3 pt-5">copyright</i>
+                            <h6 class="blue-text text-darken-3"> Marcas</h6>
+                        </div>
+                    </div>
+                </div>
+            </a>
+</div>
+<div class="col s1">
+</div>
+<a class="white-text modal-trigger" href="" data-target="modal1">
+    <div class=" card-panel col s3 hoverable ">
+        <div class="row">
+        <span class="row"></span>
+        <div class="col cadastro">
+                <i class="material-icons large blue-text text-darken-3 pt-5">copyright</i>
+                <h6 class="back blue-text text-darken-3"> Marcas</h6>
+            </div>
+        </div>
+    </div>
+</a>
+
+<span class="col s1"></span>
+<a class="white-text modal-trigger" href="" data-target="modal5">
+    <div class=" card-panel col s3 l3 hoverable">
+        <div class="row">
+        <span class="row"></span>
+        <div class="col cadastro">
+                <i class="material-icons large blue-text text-darken-3 ">view_compact</i>
+                <h6 class="back blue-text text-darken-3"> Estoque</h6>
+            </div>
+            </div>
+    </div>
+</a>
+<span class="col s1"></span>
+<a class="white-text modal-trigger" href="" data-target="modal5">
+    <div class=" card-panel col s5 hoverable mobile">
+        <div class="row">
+        <span class="row"></span>
+        <div class="col">
+                <i class="material-icons medium blue-text text-darken-3 ">view_compact</i>
+                <h6 class="blue-text text-darken-3"> Estoque</h6>
+            </div>
+            </div>
+    </div>
+</a>
+@endsection

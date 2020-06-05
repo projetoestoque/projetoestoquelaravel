@@ -301,14 +301,14 @@
                 </div>
                 </div>
             @endif
-           
+
         <br>
         <button class="btn waves-effect waves-light blue darken-2 ">Enviar</button>
     </form>
     <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
     </div>
   </div>
-  
+
 <div id="modal4" class="modal">
 <div class="modal-content">
     <h4>Cadastro de Refeições</h4>
@@ -413,7 +413,6 @@
     function sleep (time) {
         return new Promise((resolve) => setTimeout(resolve, time));
     }
-
     function exibirModal(modal) {
         sleep(500, 1).then(() => {
             const elem = document.getElementById(modal);
@@ -443,7 +442,7 @@
 
 @if(isset($estoque))
 <script>
-    exibirModal('modal5')   
+    exibirModal('modal5')
 </script>
 @endif
 
