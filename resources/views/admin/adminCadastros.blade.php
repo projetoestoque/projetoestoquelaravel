@@ -123,19 +123,6 @@
                     </div>
                 </div>
             </a>
-            <div class="col s1">
-            </div>
-            <a class="white-text modal-trigger" href="" data-target="modal2">
-            <div class=" card-panel col s5 hoverable mobile">
-                    <div class="row">
-                    <span class="row"></span>
-                    <div class="col">
-                            <i class="material-icons medium blue-text text-darken-3 pt-5">layers</i>
-                            <h6 class="blue-text text-darken-3"> Tipos</h6>
-                        </div>
-                    </div>
-                </div>
-            </a>
 </div>
 <div class="row white-text ">
             <a class="white-text modal-trigger" href="" data-target="modal3">
