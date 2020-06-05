@@ -28,19 +28,7 @@
                     </div>
                 </div>
             </a>
-            <div class="col s1">
-            </div>
-            <a class="white-text modal-trigger" href="" data-target="modal2">
-                <div class=" card-panel col s3 hoverable">
-                    <div class="row">
-                    <span class="row"></span>
-                    <div class="col cadastro">
-                            <i class="material-icons large blue-text text-darken-3 pt-5">layers</i>
-                            <h6 class="back blue-text text-darken-3"> Tipos</h6>
-                        </div>
-                    </div>
-                </div>
-            </a>
+
             <div class="col s1">
             </div>
             <a class="white-text modal-trigger" href="" data-target="modal1">
@@ -301,14 +289,14 @@
                 </div>
                 </div>
             @endif
-           
+
         <br>
         <button class="btn waves-effect waves-light blue darken-2 ">Enviar</button>
     </form>
     <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
     </div>
   </div>
-  
+
 <div id="modal4" class="modal">
 <div class="modal-content">
     <h4>Cadastro de Refeições</h4>
@@ -443,7 +431,7 @@
 
 @if(isset($estoque))
 <script>
-    exibirModal('modal5')   
+    exibirModal('modal5')
 </script>
 @endif
 
