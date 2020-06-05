@@ -27,6 +27,12 @@ class ProdutoController extends Controller
         $produtos_abaixo = [];
         $produtos_sem = [];
 
+            $intens_vencido = DB::table('produto_em_estoque')
+           ->where(function ($query) {
+               $query->where('quantidade', '<', 'quantidade_minima');
+           })
+           ->get();
+
         foreach($produtos_em_estoque as $produto) {
             //listando todo os produtos em estoque
             $produto_estoque = $produto;
@@ -63,7 +69,9 @@ class ProdutoController extends Controller
             }
         }
         
-        return view('listagem', compact('produtos_estoque','produtos_acima', 'produtos_abaixo', 'produtos_sem'));
+        
+
+        return view('listagem', compact('produtos_estoque','produtos_acima', 'produtos_abaixo', 'produtos_sem', 'intens_vencido'));
         //$produtos_estoque=$this->paginate($produtos_estoque);
     }
    // public function paginate($items, $perPage = 5, $page = null, $options = [])

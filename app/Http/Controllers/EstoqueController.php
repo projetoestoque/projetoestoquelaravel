@@ -12,7 +12,7 @@ class EstoqueController extends Controller
     {
         $estoques_cadastrados=DB::table('estoques')->get();
 
-        return view('listagem', compact('estoques_cadastrados'));
+      return view('listagem', compact('estoques_cadastrados'));
     }
 
   public function atualizarEstoque(Request $req)

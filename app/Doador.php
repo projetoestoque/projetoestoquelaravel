@@ -10,6 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 class Doador extends Model
 {
     // protected $fillable = [
-    // 	'nome', 'cpf', 'instituicao',  'cnpj', 'telefone', 'e-mail'
+    // 	'nome', 'cpf', 'instituicao',  'cnpj', 'telefone', 'e-mail', 'endereco'
     // ];
 }

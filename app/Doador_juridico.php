@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Doador_juridico extends Model
 {
    protected $fillable = [
-    	'instituicao',  'cnpj', 'telefone', 'e-mail'
+    	'instituicao',  'cnpj', 'telefone', 'e-mail', 'endereco'
     ];
 }
