@@ -358,7 +358,6 @@
     }
   }
   function confirmarProduto(id) {
-    alert('chegueeeeeeeeei')
     document.getElementById('produto_id').value = id;
     const elem = document.getElementById('modal1');
     const instance = M.Modal.init(elem, {dismissible: false});

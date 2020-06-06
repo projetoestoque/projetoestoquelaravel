@@ -435,6 +435,127 @@
     </div>
 </div>
 
+<div id="modal7" class="modal">
+    <div class="modal-content">
+      <h4>Atualizar Marca</h4>
+      <form method="POST" action="{{route('admin.marca.atualizar')}}">
+            {{ csrf_field() }}
+            <br>
+            <div class="input-field" >
+                <i class="material-icons prefix">font_download</i>
+                @if($marca_antiga != null)
+                    <input value="{{$marca_antiga->marca}}" required="required" placeholder="marca" name="marca" id="marcaInput" type="text">
+                    <input value="{{$marca_antiga->id}}" type="hidden" name="id">
+                @endif
+                <label for="marcaInput">Nova marca
+                <div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">Marca é a marca específica do produto </span>
+            </div>
+                </label>
+            </div>
+            <br>
+            <button class="btn waves-effect waves-light blue darken-2 ">Enviar</button>
+        </form>
+        <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
+    </div>
+</div>
+
+<div id="modal8" class="modal">
+ <div class="modal-content">
+    <h4>Atualizar Tipo</h4>
+    <form method="get" action="{{route('admin.tipo.atualizar')}}">
+        {{ csrf_field() }}
+        <br>
+        <div class="input-field">
+            <i class="material-icons prefix">label</i>
+            @if($tipo_antigo != null)
+                <input type="hidden" name="id" value="{{$tipo_antigo->id}}">
+                <input value="{{$tipo_antigo->tipo}}" required="required" placeholder="tipo" id="tipo" name="tipo" type="text">
+            @endif
+            <label for="tipo">Novo tipo de Produto
+            <div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">Tipo é a categoria do produto(Alimento,higiene,escritório) </span>
+            </div>
+            </label>
+        </div>
+        <br>
+        <button class="btn waves-effect waves-light blue darken-2 ">Enviar</button>
+    </form>
+    <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
+    </div>
+  </div>
+
+<div id="modal9" class="modal">
+<div class="modal-content">
+    <h4>Atualizar Medida</h4>
+    <form method="post" action="{{route('admin.medida.atualizar')}}">
+        {{ csrf_field() }}
+        <br>
+        <div class="row">
+        <div class="input-field col s11">
+            <i class="material-icons prefix">linear_scale</i>
+            @if($medida_antiga != null)
+                <input type="hidden" name="id" value="{{$medida_antiga->id}}">
+                <input value="{{$medida_antiga->medida}}" required="required" id="medida" name="medida" type="text" placeholder="Quilo">
+            @endif
+                <label for="medida">Nova Medida
+                <div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">A medida é a unidade de determinado item(Quilo,pacotes,gramas) </span>
+                </div>
+                </label>
+                </div>
+                </div>
+                <div class="row">
+                <div class="input-field col s4">
+                <i class="material-icons prefix">font_download</i>
+                @if($medida_antiga != null)
+                <input value="{{$medida_antiga->abreviacao}}" minlength="2" maxlength="2" required="required" id="abreviacao" name="abreviacao" type="text" placeholder="kg">
+                <label for="unidade">Abreviação
+                @endif
+                <div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">A abreviação de determinada unidade(kg,cx,pct) </span>
+                </div>
+                </label>
+                </div>
+                </div>
+        <br>
+        <button class="btn waves-effect waves-light blue darken-2 ">Enviar</button>
+    </form>
+    <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
+    </div>
+  </div>
+
+<div id="modal10" class="modal">
+<div class="modal-content">
+    <h4>Atualizar Estoque</h4>
+    <form method="post" action="{{route('admin.estoque.atualizar')}}">
+        {{ csrf_field() }}
+        <br>
+        <div class="input-field">
+            <i class="material-icons prefix">view_compact</i>
+            @if($estoque_antigo)
+                <input type="hidden" name="id" value="{{$estoque_antigo->id}}">
+                <input value="{{$estoque_antigo->estoque}}" required="required" id="estoque" name="estoque" type="text" placeholder="Almoxarifado">
+            @endif    
+            <label for="estoque">Novo Estoque
+            <div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">O Estoque é o local onde será armazenado determinados produtos cadastrados </span>
+            </div>
+            </label>
+        </div>
+        <br>
+        <button class="btn waves-effect waves-light blue darken-2 ">Enviar</button>
+    </form>
+    <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
+    </div>
+  </div>
+</div>
+
 <script>
     function changeFilter(id){
         switch(id){
@@ -491,6 +612,17 @@
 
     }
 
+    function sleep (time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
+    function exibirModal(modal) {
+        sleep(500, 1).then(() => {
+            const elem = document.getElementById(modal);
+            const instance = M.Modal.init(elem, {dismissible: false});
+            instance.open();
+        });
+    }
+
     //produto
     function atualizarProduto(id) {
         document.getElementById('produto_id').value = id;
@@ -530,7 +662,7 @@
     //tipo
     function atualizarTipo(id) {
         document.getElementById('produto_id').value = id;
-        window.location.href = "{{route('admin.cadastros')}}?tipo_id=" + id;
+        window.location.href = "{{route('admin.listarCadastros')}}?tipo_id=" + id;
     }
 
     function confirmarTipo(id) {
@@ -548,7 +680,7 @@
     //medida
     function atualizarMedida(id) {
         document.getElementById('produto_id').value = id;
-        window.location.href = "{{route('admin.cadastros')}}?medida_id=" + id;
+        window.location.href = "{{route('admin.listarCadastros')}}?medida_id=" + id;
     }
 
     function confirmarMedida(id) {
@@ -566,7 +698,7 @@
     //marca
     function atualizarMarca(id) {
         document.getElementById('produto_id').value = id;
-        window.location.href = "{{route('admin.cadastros')}}?marca_id=" + id;
+        window.location.href = "{{route('admin.listarCadastros')}}?marca_id=" + id;
     }
 
     function confirmarMarca(id) {
@@ -584,7 +716,7 @@
     //estoque
     function atualizarEstoque(id) {
         document.getElementById('produto_id').value = id;
-        window.location.href = "{{route('admin.cadastros')}}?estoque_id=" + id;
+        window.location.href = "{{route('admin.listarCadastros')}}?estoque_id=" + id;
     }
 
     function confirmarEstoque(id) {
@@ -599,4 +731,29 @@
         window.location.href = "{{route('admin.estoque.deletar')}}?id=" + id;
     }
 </script>
+
+@if($marca_antiga != null)
+ <script>
+    exibirModal('modal7')
+ </script>
+@endif
+
+@if($tipo_antigo != null)
+ <script>
+    exibirModal('modal8')
+ </script>
+@endif
+
+@if($medida_antiga != null)
+ <script>
+    exibirModal('modal9')
+ </script>
+@endif
+
+@if($estoque_antigo != null)
+ <script>
+    exibirModal('modal10')
+ </script>
+@endif
+
 @endsection

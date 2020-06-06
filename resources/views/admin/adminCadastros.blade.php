@@ -176,13 +176,8 @@
 </div></div></div>
 <div id="modal1" class="modal">
     <div class="modal-content">
-    @if(isset($marca))
-      <h4>Atualizar Marca</h4>
-      <form method="post" action="{{route('admin.marca.atualizar')}}">
-    @else
       <h4>Cadastro de Nova Marca</h4>
       <form method="post" action="{{route('admin.marca.cadastrar')}}">
-    @endif
             {{ csrf_field() }}
             <br>
             <div class="input-field" >
@@ -210,23 +205,13 @@
 </div>
 <div id="modal2" class="modal">
 <div class="modal-content">
-@if(isset($tipo))
-    <h4>Atualizar Tipo</h4>
-    <form method="post" action="{{route('admin.tipo.atualizar')}}">
-@else
     <h4>Cadastro de Novo Tipo</h4>
     <form method="post" action="{{route('admin.tipo.cadastrar')}}">
-@endif
         {{ csrf_field() }}
         <br>
         <div class="input-field">
             <i class="material-icons prefix">label</i>
-            @if(isset($tipo))
-                <input type="hidden" name="id" value="{{$tipo->id}}">
-                <input value="{{$tipo->tipo}}" required="required" placeholder="tipo" id="tipo" name="tipo" type="text">
-            @else
                 <input required="required" placeholder="tipo" id="tipo" name="tipo" type="text">
-            @endif
             <label for="tipo">Novo tipo de Produto
             <div class="tooltip">
                 <i class="material-icons">info_outline</i>
@@ -243,42 +228,13 @@
 
 <div id="modal3" class="modal">
 <div class="modal-content">
-@if(isset($medida))
-    <h4>Atualizar Medida</h4>
-    <form method="post" action="{{route('admin.medida.atualizar')}}">
-@else
     <h4>Cadastro de Medida</h4>
     <form method="post" action="{{route('admin.medida.cadastrar')}}">
-@endif
         {{ csrf_field() }}
         <br>
         <div class="row">
         <div class="input-field col s11">
             <i class="material-icons prefix">linear_scale</i>
-            @if(isset($medida))
-                <input type="hidden" name="id" value="{{$medida->id}}">
-                <input value="{{$medida->medida}}" required="required" id="medida" name="medida" type="text" placeholder="Quilo">
-                <label for="medida">Nova Medida
-                <div class="tooltip">
-                <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">A medida é a unidade de determinado item(Quilo,pacotes,gramas) </span>
-                </div>
-                </label>
-                </div>
-                </div>
-                <div class="row">
-                <div class="input-field col s4">
-                <i class="material-icons prefix">font_download</i>
-                <input value="{{$medida->abreviacao}}" minlength="2" maxlength="2" required="required" id="abreviacao" name="abreviacao" type="text" placeholder="kg">
-                <label for="unidade">Abreviação
-                <div class="tooltip">
-                <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">A abreviação de determinada unidade(kg,cx,pct) </span>
-                </div>
-                </label>
-                </div>
-                </div>
-            @else
                 <input required="required" id="medida" name="medida" type="text" placeholder="Quilo(kg)">
                 <label for="medida">Nova Medida
                 <div class="tooltip">
@@ -300,8 +256,6 @@
                 </label>
                 </div>
                 </div>
-            @endif
-
         <br>
         <button class="btn waves-effect waves-light blue darken-2 ">Enviar</button>
     </form>
@@ -369,37 +323,27 @@
   </div>
 </div>
 <div id="modal5" class="modal">
-<div class="modal-content">
-@if(isset($estoque))
-    <h4>Atualizar Estoque</h4>
-    <form method="post" action="{{route('admin.estoque.atualizar')}}">
-@else
-    <h4>Cadastro de Estoque</h4>
-    <form method="post" action="{{route('admin.estoque.cadastrar')}}">
-@endif
-        {{ csrf_field() }}
-        <br>
-        <div class="input-field">
-            <i class="material-icons prefix">view_compact</i>
-            @if(isset($estoque))
-                <input type="hidden" name="id" value="{{$estoque->id}}">
-                <input value="{{$estoque->estoque}}" required="required" id="estoque" name="estoque" type="text" placeholder="Almoxarifado">
-            @else
-                <input required="required" id="estoque" name="estoque" type="text" placeholder="Almoxarifado">
-            @endif
-            <label for="estoque">Novo Estoque
-            <div class="tooltip">
-                <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">O Estoque é o local onde será armazenado determinados produtos cadastrados </span>
+    <div class="modal-content">
+        <h4>Cadastro de Estoque</h4>
+        <form method="post" action="{{route('admin.estoque.cadastrar')}}">
+            {{ csrf_field() }}
+            <br>
+            <div class="input-field">
+                <i class="material-icons prefix">view_compact</i>
+                    <input required="required" id="estoque" name="estoque" type="text" placeholder="Almoxarifado">
+                <label for="estoque">Novo Estoque
+                <div class="tooltip">
+                    <i class="material-icons">info_outline</i>
+                    <span class="tooltiptext">O Estoque é o local onde será armazenado determinados produtos cadastrados </span>
+                </div>
+                </label>
             </div>
-            </label>
+            <br>
+            <button class="btn waves-effect waves-light blue darken-2 ">Enviar</button>
+        </form>
+        <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
         </div>
-        <br>
-        <button class="btn waves-effect waves-light blue darken-2 ">Enviar</button>
-    </form>
-    <button class="modal-close waves-effect waves-teal btn-flat">Fechar</button>
     </div>
-  </div>
 </div>
 
 @if(session('update'))
@@ -408,42 +352,4 @@
         window.location.href = "{{route('admin.listarCadastros')}}"
     </script>
 @endif
-
-<script>
-    function sleep (time) {
-        return new Promise((resolve) => setTimeout(resolve, time));
-    }
-    function exibirModal(modal) {
-        sleep(500, 1).then(() => {
-            const elem = document.getElementById(modal);
-            const instance = M.Modal.init(elem, {dismissible: false});
-            instance.open();
-        });
-    }
-</script>
-
-@if(isset($marca))
-<script>
-    exibirModal('modal1')
-</script>
-@endif
-
-@if(isset($tipo))
-<script>
-    exibirModal('modal2')
-</script>
-@endif
-
-@if(isset($medida))
-<script>
-    exibirModal('modal3')
-</script>
-@endif
-
-@if(isset($estoque))
-<script>
-    exibirModal('modal5')
-</script>
-@endif
-
 @endsection

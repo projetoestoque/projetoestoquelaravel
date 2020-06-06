@@ -47,7 +47,7 @@ Route::group(['middleware' => 'is_admin'], function () {
    
    Route::post('/marca/atualizar', 'MarcaController@atualizarMarca')->name('admin.marca.atualizar');
    Route::post('/medida/atualizar', 'MedidaController@atualizarMedida')->name('admin.medida.atualizar');
-   Route::post('/tipo/atualizar', 'TipoController@atualizarTipo')->name('admin.tipo.atualizar');
+   Route::get('/tipo/atualizar', 'TipoController@atualizarTipo')->name('admin.tipo.atualizar');
    Route::post('/estoque/atualizar', 'EstoqueController@atualizarEstoque')->name('admin.estoque.atualizar');
    Route::post('/doador/atualizar', 'DoadorController@atualizarDoador')->name('admin.doador.atualizar');
 

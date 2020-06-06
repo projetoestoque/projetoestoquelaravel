@@ -321,30 +321,6 @@ class CadastroController extends Controller
 
 	public function Cadastros()
 	{
-		if(isset($_GET['marca_id'])) {
-			$marca_id = $_GET['marca_id'];
-			$marca = Marca::findOrFail($marca_id);
-			return view('admin/adminCadastros', compact('marca'));
-		}
-
-		if(isset($_GET['medida_id'])) {
-			$medida_id = $_GET['medida_id'];
-			$medida = Medida::findOrFail($medida_id);
-			return view('admin/adminCadastros', compact('medida'));
-		}
-
-		if(isset($_GET['tipo_id'])) {
-			$tipo_id = $_GET['tipo_id'];
-			$tipo = Tipo::findOrFail($tipo_id);
-			return view('admin/adminCadastros', compact('tipo'));
-		}
-
-		if(isset($_GET['estoque_id'])) {
-			$estoque_id = $_GET['estoque_id'];
-			$estoque = Estoque_disponivel::findOrFail($estoque_id);
-			return view('admin/adminCadastros', compact('estoque'));
-		}
-
 		return view('admin/adminCadastros');
 	}
 	public function CadastrosSupervisor()
@@ -364,6 +340,31 @@ class CadastroController extends Controller
 	}
 	public function listarCadastros()
     {
+		$marca_antiga = null;
+		$medida_antiga = null;
+		$tipo_antigo = null;
+		$estoque_antigo = null;
+
+		if(isset($_GET['marca_id'])) {
+			$marca_id = $_GET['marca_id'];
+			$marca_antiga = Marca::findOrFail($marca_id);
+		}
+
+		if(isset($_GET['medida_id'])) {
+			$medida_id = $_GET['medida_id'];
+			$medida_antiga = Medida::findOrFail($medida_id);
+		}
+
+		if(isset($_GET['tipo_id'])) {
+			$tipo_id = $_GET['tipo_id'];
+			$tipo_antigo = Tipo::findOrFail($tipo_id);
+		}
+
+		if(isset($_GET['estoque_id'])) {
+			$estoque_id = $_GET['estoque_id'];
+			$estoque_antigo = Estoque_disponivel::findOrFail($estoque_id);
+		}
+
 		$all = [];
         $produtos_cadastrados = DB::table('produtos')->get();
         $doadores = DB::table('doadors')->get();
@@ -421,7 +422,6 @@ class CadastroController extends Controller
 				'tipo' => 'estoque'
 			]);
 		}
-		
-        return view('admin/visualizarCadastros', compact('all','produtos_cadastrados','tipos','medidas','marcas','estoques_disponiveis','doadores'));
+        return view('admin/visualizarCadastros', compact('all','produtos_cadastrados','tipos','medidas','marcas','estoques_disponiveis','doadores','marca_antiga','medida_antiga','tipo_antigo','estoque_antigo'));
     }
 }
