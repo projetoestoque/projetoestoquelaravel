@@ -20,7 +20,7 @@ class TipoController extends Controller
     $tipo = Tipo::findOrFail($tipo_id);
     $tipo->tipo = $req->get('tipo');
     $tipo->save();
-    return redirect()->back()->with('update', 'Tipo atualizado com sucesso!');
+    return redirect()->route('admin.cadastros')->with('update', 'Tipo atualizado com sucesso!');
   }
 
   public function deletarTipo()
