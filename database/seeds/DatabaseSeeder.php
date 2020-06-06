@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
              MarcaSeeder::class,
              MedidaSeeder::class,
              ProdutoSeeder::class,
-             EntradaSeeder::class
+             EntradaSeeder::class,
          ]);
     }
 }

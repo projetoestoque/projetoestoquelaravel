@@ -22,7 +22,7 @@ class CreateDoadorsTable extends Migration
             $table->string('telefone')->nullable();
             $table->string('email');
             $table->string('tipo');
-            $table->string('endereco');
+            $table->string('endereco')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

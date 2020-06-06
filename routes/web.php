@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('ajaxRequest', 'CadastroController@ajax')->name('teste');
+Route::get('/teste', 'ProdutoController@pesquisarEntrada')->name('teste');
 
 Route::get('/', ['as' => 'main', 'uses' => function() {
 	return view('welcome');
