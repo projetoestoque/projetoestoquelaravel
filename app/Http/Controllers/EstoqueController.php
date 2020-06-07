@@ -8,9 +8,9 @@ use DB;
 
 class EstoqueController extends Controller
 {
-  public function listar_estoques() 
+  public function listar_estoques()
     {
-        $estoques_cadastrados=DB::table('estoques')->get();
+        $estoques_cadastrados=DB::table('estoques')->orderBy('estoque')->get();
 
       return view('listagem', compact('estoques_cadastrados'));
     }
@@ -32,7 +32,7 @@ class EstoqueController extends Controller
       return redirect()->back()->with('status', 'Estoque deletado com sucesso!');
   }
 
-  public function pesquisarEntrada() 
+  public function pesquisarEntrada()
   {
     $produtos_em_estoque = DB::table('produtos')->get();
     $produtos = [];
