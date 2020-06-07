@@ -17,9 +17,9 @@ use DB;
 class ProdutoController extends Controller
 {
 
-    public function listar_produtos() 
+    public function listar_produtos()
     {
-        $produtos_cadastrados = DB::table('produtos')->get();
+        $produtos_cadastrados = DB::table('produtos')->orderBy('nome')->get();
         $produtos_em_estoque = DB::table('produto_em_estoques')->get();
 
         $produtos_estoque = [];
@@ -62,8 +62,8 @@ class ProdutoController extends Controller
                 array_push($produtos_sem, $produto);
             }
         }
-        
-        
+
+
 
         return view('listagem', compact('produtos_estoque','produtos_acima', 'produtos_abaixo', 'produtos_sem'));
         //$produtos_estoque=$this->paginate($produtos_estoque);
@@ -76,10 +76,10 @@ class ProdutoController extends Controller
    // }
 
     public function deletarProduto()
-	{   
+	{
         $produto_id = $_GET['id'];
         $produto = Produto::find($produto_id);
-        
+
         $produtos_em_estoque = DB::table('produto_em_estoques')->get();
 
         foreach($produtos_em_estoque as $produtos) {
@@ -94,8 +94,8 @@ class ProdutoController extends Controller
     }
 
     public function deletarEntrada()
-	{   
-        
+	{
+
         $produto_id = $_GET['id'];
         $produto = Produto_em_estoque::find($produto_id);
 
@@ -106,8 +106,8 @@ class ProdutoController extends Controller
         $produto->delete();
         return redirect()->back()->with('status', 'Entrada deletada com sucesso!');
     }
-    
-    public function entradaAtualizar(Request $req) 
+
+    public function entradaAtualizar(Request $req)
     {
         $data = $req->all();
         if (strpos($req->get('vencimento'), ',') !== false) {

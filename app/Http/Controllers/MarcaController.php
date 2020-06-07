@@ -10,9 +10,9 @@ class MarcaController extends Controller
 
 {
 
-public function listar_marcas() 
+public function listar_marcas()
     {
-        $marcas_cadastradas=DB::table('marcas')->get();
+        $marcas_cadastradas=DB::table('marcas')->orderBy('nome')->get();
 
         return view('listagem', compact('marcas_cadastradas'));
     }

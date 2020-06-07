@@ -153,7 +153,7 @@ class CadastroController extends Controller
 	}
 
 	public function marca()
-	{	
+	{
 		return view('admin.marca');
 	}
 
@@ -199,7 +199,7 @@ class CadastroController extends Controller
 		$produto->quantidade = $req->get('quantidade');
 		$produto->vencimento = $req->get('vencimento');
 		$produto->save();
-		
+
 		return redirect()->back()->with('status', 'Entrada realizada com sucesso!');
 	}
 
@@ -366,12 +366,12 @@ class CadastroController extends Controller
 		}
 
 		$all = [];
-        $produtos_cadastrados = DB::table('produtos')->get();
-        $doadores = DB::table('doadors')->get();
-        $tipos = DB::table('tipos')->get();
-        $medidas = DB::table('medidas')->get();
-        $marcas = DB::table('marcas')->get();
-		$estoques_disponiveis = DB::table('estoque_disponivels')->get();
+        $produtos_cadastrados = DB::table('produtos')->orderBy('nome')->get();
+        $doadores = DB::table('doadors')->orderBy('nome')->get();
+        $tipos = DB::table('tipos')->orderBy('tipo')->get();
+        $medidas = DB::table('medidas')->orderBy('medida')->get();
+        $marcas = DB::table('marcas')->orderBy('nome')->get();
+		$estoques_disponiveis = DB::table('estoque_disponivels')->orderBy('estoque')->get();
 
 		//listar todos
 		foreach($produtos_cadastrados as $produto) {

@@ -7,9 +7,9 @@ use App\Tipo;
 
 class TipoController extends Controller
 {
-  public function listar_tipos() 
+  public function listar_tipos()
     {
-        $tipos_cadastrados=DB::table('tipos')->get();
+        $tipos_cadastrados=DB::table('tipos')->orderBy('tipo')->get();
 
         return view('listagem', compact('tipos_cadastrados'));
     }

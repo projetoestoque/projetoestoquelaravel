@@ -9,9 +9,9 @@ use DB;
 
 class DoadorController extends Controller
 {
-  public function listar_doadores() 
+  public function listar_doadores()
     {
-        $doadores_cadastrados=DB::table('doadors')->get();
+        $doadores_cadastrados=DB::table('doadors')->orderBy('nome')->get();
 
         return view('listagem', compact('doadores_cadastrados'));
     }
@@ -20,7 +20,7 @@ class DoadorController extends Controller
   {
     $doador_id = $req->get('id');
     $doador = Doador::find($doador_id);
-    
+
     if($doador->tipo == "fisico") {
       $doador->nome = $req->get('nome');
       $doador->cpf = $req->get('cpf');

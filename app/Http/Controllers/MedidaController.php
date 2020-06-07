@@ -7,9 +7,9 @@ use App\Medida;
 
 class MedidaController extends Controller
 {
-  public function listar_medidas() 
+  public function listar_medidas()
     {
-        $medidas_cadastradas=DB::table('medidas')->get();
+        $medidas_cadastradas=DB::table('medidas')->orderBy('medida')->get();
 
         return view('listagem', compact('medidas_cadastradas'));
     }
