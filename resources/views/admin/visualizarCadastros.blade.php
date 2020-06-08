@@ -6,8 +6,8 @@
  .chips-chips{
      margin-bottom:10px;
  }
- .Produto{
-     display:none !important;
+ .All{
+     display:none;
  }
  .Doador{
     display:none !important;
@@ -24,14 +24,20 @@
  .Estoque{
     display:none;
  }
-
+ .sem-fundo{
+    margin-bottom:0 !important;
+ }
+ .btn.waves-effect.waves-light.gradient.right{
+    margin-top:8px !important;
+    border-radius:30px !important;
+ }
 </style>
 @section('conteudo')
 
 <input type="hidden" id="produto_id" name="id"/>
 
 <div class="butaoEspaco">
-    <a href="{{ URL::route('admin.MenuCadastros') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
+    <a href="{{ URL::route('admin.home') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
     <i class="large material-icons">reply</i>
     <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
@@ -39,11 +45,20 @@
 <br>
 <br>
 <div class="container">
-<h4><b>Visualizar Cadastros</b></h4>
-<br>
+<h4><b>Visualizar Cadastros</b>
+<a class="btn waves-effect waves-light gradient right" href="{{route('admin.cadastros')}}">Cadastrar Produto
+<i class="material-icons right">add_circle_outline</i>
+</a>
+</h4>
+<div class="row sem-fundo">
+<div class="input-field col s12 input-outlined">
+        <i class="material-icons prefix right">search</i>
+        <input id="icon_prefix" type="text" placeholder="Pesquisar Produto Cadastrado">
+    </div>
+</div>
 <div class="chips-chips" id="chips">
-<a id="All" class="waves-effect waves-light btn-flat gradient" onclick="changeFilter(id)">Todos</a>
-<a id="Produto" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">free_breakfast</i>Produto</a>
+<a id="All" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)">Todos</a>
+<a id="Produto" class="waves-effect waves-light btn-flat gradient" onclick="changeFilter(id)"><i class="material-icons left">free_breakfast</i>Produto</a>
 <a id="Doador" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">face</i>Doador</a>
 <a id="Tipo" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">layers</i>Tipo</a>
 <a id="Medida" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">fitness_center</i>Medida</a>

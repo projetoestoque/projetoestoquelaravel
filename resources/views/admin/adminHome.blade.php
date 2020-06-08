@@ -23,7 +23,7 @@
             </a>
             <div class="col s2">
             </div>
-            <a href="{{route('admin.MenuCadastros')}}" class="white-text">
+            <a href="{{route('admin.listarCadastros')}}" class="white-text">
                 <div class=" card-panel blue accent-2 col s5 hoverable">
                     <div class="row">
                     <span class="row"></span>

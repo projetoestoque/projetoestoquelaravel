@@ -6,7 +6,33 @@
   height: 7px; 
   line-height: 7px;
   background: linear-gradient(to right, #56ccf2, #2f80ed);
-  
+}
+.input-field .prefix.right{
+  margin-top:10px;
+  right: 30;
+}
+.input-field.input-outlined > input {
+  margin-left: 20px;
+  padding-left: 10px;
+  margin-right:margin-left;
+  margin-top:10px;
+  border: 2px solid #eee;
+  width: calc(100% - 3.5rem);
+  float: none;
+  display: block;
+  border-radius: 4px;
+  transition: box-shadow, border-color 0.15s;
+}
+.input-field.input-outlined > input:focus:not([readonly]){
+  border-color: #56a7f2;
+  box-shadow: 0 1px 0 0px #56a7f2;
+}
+.input-field .prefix.active{
+  color:#56a7f2;
+}
+::placeholder {
+  color: rgba(172, 172, 172, 0.842);
+  font-family:'Noto Sans JP', sans-serif;
 }
 .alinhado-a-direita{
   float:right;
