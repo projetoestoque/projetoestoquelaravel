@@ -78,16 +78,16 @@ class CadastroController extends Controller
 			return true;
 		}
 
-		if(DB::table('doadors')->where('cpf', $cpf)->exists()) {
-			return redirect()->route("doador")
-				->withErrors(['errors' => ['CPF INFORMADO JÁ CADASTRADO!']])
-				->withInput($req->input());
-		}
-
 		if (validar_cpf($cpf)) {
+			if(DB::table('doadors')->where('cpf', $cpf)->exists()) {
+				return redirect()->route("doador")
+					->withErrors(['errors' => ['CPF INFORMADO JÁ CADASTRADO!']])
+					->withInput($req->input());
+			}
+
 			$doador = new Doador();
 			$doador->nome = $req->get('nome');
-			$doador->cpf = $req->get('cpf');
+			$doador->cpf = $cpf;
 			$doador->telefone = $req->get('telefone_fisico');
 			$doador->email = $req->get('email_fisico');
 			$doador->tipo = $req->get('tipo');
@@ -366,11 +366,19 @@ class CadastroController extends Controller
 		}
 
 		$all = [];
+		$doadores = [];
         $produtos_cadastrados = DB::table('produtos')->orderBy('nome')->get();
-        $doadores = DB::table('doadors')->orderBy('nome')->get();
+        $doadores_fisicos = DB::table('doadors')->where('nome', '!=', '')->orderBy('nome')->get();
+		$doadores_juridicos = DB::table('doadors')->where('instituicao', '!=', '')->orderBy('nome')->get();
+		foreach($doadores_fisicos as $doador) {
+			array_push($doadores, $doador);
+		}
+		foreach($doadores_juridicos as $doador) {
+			array_push($doadores, $doador);
+		}
         $tipos = DB::table('tipos')->orderBy('tipo')->get();
         $medidas = DB::table('medidas')->orderBy('medida')->get();
-        $marcas = DB::table('marcas')->orderBy('nome')->get();
+        $marcas = DB::table('marcas')->orderBy('marca')->get();
 		$estoques_disponiveis = DB::table('estoque_disponivels')->orderBy('estoque')->get();
 
 		//listar todos
