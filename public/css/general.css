@@ -10,6 +10,7 @@
 .input-field .prefix.right{
   margin-top:10px;
   right: 30;
+  color:rgb(71, 71, 71);
 }
 .input-field.input-outlined > input {
   margin-left: 20px;
@@ -27,7 +28,7 @@
   border-color: #56a7f2;
   box-shadow: 0 1px 0 0px #56a7f2;
 }
-.input-field .prefix.active{
+.input-field .prefix.right.active{
   color:#56a7f2;
 }
 ::placeholder {

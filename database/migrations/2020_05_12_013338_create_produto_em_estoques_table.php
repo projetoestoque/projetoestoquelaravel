@@ -20,8 +20,8 @@ class CreateProdutoEmEstoquesTable extends Migration
             $table->unsignedBigInteger('Id_medida');
             $table->unsignedBigInteger('Id_doador');
             $table->Integer('quantidade');
-            $table->Integer('quantidade_minima');
             $table->string('vencimento');
+            $table->Integer('quantidade_minima');
             $table->timestamps();
 
              $table->foreign('Id_estoque')->references('id')->on('estoque_disponivels');

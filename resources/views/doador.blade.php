@@ -109,6 +109,18 @@
                 <label>Telefone<span class="important">*</span></label>
             </div>
         </div>
+        <div class="row">
+        <div class="col l1"></div>
+            <div class="input-field col s12 l4">
+                <i class="material-icons prefix">home</i>
+                @if(isset($doador))
+                    <input value="{{$doador->endereco}}" type="text" name="endereco" placeholder="Rua Exemplo  nºxx,Exemplo"></input>
+                @else
+                    <input value="{{old('endereco')}}" type="text" name="endereco" placeholder="Rua Exemplo  nºxx,Exemplo"></input>
+                @endif
+                <label>Endereço</label>
+            </div>
+        </div>
 
         <div class="row valign center">
             <button class="btn waves-effect waves-light blue darken-4"><b>Submit

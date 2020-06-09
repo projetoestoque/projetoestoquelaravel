@@ -149,9 +149,7 @@
             </div>
             </div>
         </div>
-        <div class="row">
-        <div class="col l1 "></div>
-        
+    
         <br>
         <div class="row valign center">
             <button class="btn waves-effect waves-light blue darken-4"><b>Submit
