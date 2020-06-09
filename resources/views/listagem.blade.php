@@ -44,8 +44,13 @@
 <br>
 <div class="container">
 <h4><b>Visualizar Estoque</b>
-<a class="btn waves-effect waves-light gradient right" href="{{route('admin.cadastros')}}">Dar Entrada No Estoque
+@if(auth()->user()->is_admin)
+<a class="btn waves-effect waves-light gradient right" href="{{route('admin.insercoes')}}">Dar Entrada No Estoque
 <i class="material-icons right">add_circle_outline</i>
+@else
+<a class="btn waves-effect waves-light gradient right" href="{{route('estoqueMenu')}}">Dar Entrada No Estoque
+<i class="material-icons right">add_circle_outline</i>
+@endif
 </a>
 </h4>
 <div class="row sem-fundo">
