@@ -3,48 +3,25 @@
 @section('titulo','Listagem')
 
 <style>
-    #listAcima {
-      display: none;
-    }
-    #listAbaixo {
-      display: none;
-    }
-    #listSem {
-      display: none;
-    }
-    #emptyAcima{
-      display:none;
-    }
-    #emptyAbaixo{
-      display:none;
-    }
-    #emptySem{
-      display:none;
-    }
-    #listEstoque {
-      display:table;
-      }
-    .select-wrapper input.select-dropdown{
-      border-bottom:none !important;
-      font-family:'Noto Sans JP' !important;
-      text-align:center;
-    }
-    .select-wrapper .caret{
-      right:10px !important;
-    }
-    @media only screen and (max-width: 450px) {
-      .select-wrapper input.select-dropdown{
-      border-bottom:none !important;
-      font-family:'Noto Sans JP' !important;
-      text-align:right;
-      top:10px;
-      left:-10px;
-    }
-    .select-wrapper .caret{
-      top:20px !important;
-      right:-10px !important;
-    }
-    }
+    .chips-chips{
+     margin-bottom:10px;
+ }
+ .listAcima{
+    display:none;
+ }
+ .listAbaixo{
+    display:none;
+ }
+ .listSem{
+    display:none;
+ }
+ .sem-fundo{
+    margin-bottom:0 ;
+ }
+ .btn.waves-effect.waves-light.gradient.right{
+    margin-top:8px !important;
+    border-radius:30px !important;
+ }
 </style>
 @section('conteudo')
 <!-- nao me apagar vlw -->
@@ -65,26 +42,38 @@
 </div>
 <br>
 <br>
-<br>
+<div class="container">
+<h4><b>Visualizar Estoque</b>
+@if(auth()->user()->is_admin)
+<a class="btn waves-effect waves-light gradient right" href="{{route('admin.insercoes')}}">Dar Entrada No Estoque
+<i class="material-icons right">add_circle_outline</i>
+@else
+<a class="btn waves-effect waves-light gradient right" href="{{route('estoqueMenu')}}">Dar Entrada No Estoque
+<i class="material-icons right">add_circle_outline</i>
+@endif
+</a>
+</h4>
+<div class="row sem-fundo">
+<div class="input-field col s12 input-outlined">
+        <i class="material-icons prefix right">search</i>
+        <input id="icon_prefix" type="text" placeholder="Pesquisar Produto Cadastrado">
+    </div>
+</div>
+<div class="chips-chips" id="chips">
+<a id="listEstoque" class="waves-effect waves-light btn-flat gradient" onclick="changeFilter(id)">Em Estoque</a>
+<a id="listAcima" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">add_circle</i>Em grande quantidade</a>
+<a id="listAbaixo" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">remove_circle</i>Em baixa Quantidade</a>
+<a id="listSem" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">cancel</i>Sem Estoque</a>
+</div>
+</div>
+</div>
 <div class="container z-depth-2 ">
-<table class="highlight centered responsive-table" id="listEstoque">
+<table class="listEstoque highlight centered responsive-table">
         <thead>
         <nav class="nav-form blue lighten-1"></nav>
         </thead>
-        <h5 class="header"><b>Visualizar Estoque</b>
-        <div class="alinhado-a-direita">
-        <div class="input-field">
-          <select id="filter" onchange="show()">
-            <option value="0" selected>Produtos em Estoque</option>
-            <option value="1" >Produtos em ordem</option>
-            <option value="2">Produtos em baixa</option>
-            <option value="3">Produtos sem estoque</option>
-          </select>
-        </div>
-        </div>
-        </h5>
           @if( empty($produtos_estoque))
-          <div id="emptyEstoque">
+          <div class="listEstoque">
           <br>
           <br>
             <img src="{{asset('caixa.png')}}" class="list-image" >
@@ -129,9 +118,9 @@
           </tbody>
           @endif
       </table>
-      <table class="highlight centered responsive-table" id="listAcima">
+      <table class="listAcima highlight centered responsive-table">
       @if(empty($produtos_acima))
-      <div id="emptyAcima">
+      <div class="listAcima">
       <br>
       <br>
       <img src="{{asset('caixa.png')}}" class="list-image" >
@@ -139,7 +128,6 @@
       <br>
       <br>
       </div>
-
           @else
           <thead class="grey-text ">
             <tr>
@@ -174,9 +162,9 @@
           </tbody>
           @endif
       </table>
-      <table class="highlight centered responsive-table" id="listAbaixo">
+      <table class="listAbaixo highlight centered responsive-table">
       @if( empty($produtos_abaixo))
-      <div id="emptyAbaixo">
+      <div class="listAbaixo">
       <br>
       <br>
       <img src="{{asset('paper.png')}}" class="list-image" >
@@ -218,9 +206,9 @@
           </tbody>
           @endif
       </table>
-      <table class="highlight centered responsive-table" id="listSem">
+      <table class="listSem highlight centered responsive-table">
       @if(empty($produtos_sem))
-      <div id="emptySem">
+      <div class="listSem">
       <br>
       <br>
       <img src="{{asset('paper.png')}}" class="list-image" >
@@ -286,77 +274,50 @@
 </div>
 
 <script>
-  function show(){
-    if( document.getElementById("filter").value==0){
-      document.getElementById("listAcima").style.display = "none";
-      document.getElementById("listAbaixo").style.display = "none";
-      document.getElementById("listSem").style.display = "none";
-      document.getElementById("listEstoque").style.display = "table";
-      if(document.getElementById("emptyAcima")!=null){
-        document.getElementById("emptyAcima").style.display="none";
-      }
-      if(document.getElementById("emptyAbaixo")!=null){
-        document.getElementById("emptyAbaixo").style.display="none";
-      }
-      if(document.getElementById("emptySem")!=null){
-        document.getElementById("emptySem").style.display="none";
-      }
-      if(document.getElementById("emptyEstoque")!=null){
-        document.getElementById("emptyEstoque").style.display="block";
-      }
-    }else if( document.getElementById("filter").value==1){
-      document.getElementById("listEstoque").style.display = "none";
-      document.getElementById("listAbaixo").style.display = "none";
-      document.getElementById("listSem").style.display = "none";
-      document.getElementById("listAcima").style.display = "table";
-      if(document.getElementById("emptyEstoque")!=null){
-        document.getElementById("emptyEstoque").style.display="none";
-      }
-      if(document.getElementById("emptyAbaixo")!=null){
-        document.getElementById("emptyAbaixo").style.display="none";
-      }
-      if(document.getElementById("emptySem")!=null){
-        document.getElementById("emptySem").style.display="none";
-      }
-      if(document.getElementById("emptyAcima")!=null){
-        document.getElementById("emptyAcima").style.display="block";
-      }
-    }else if( document.getElementById("filter").value==2){
-      document.getElementById("listEstoque").style.display = "none";
-      document.getElementById("listAcima").style.display = "none";
-      document.getElementById("listSem").style.display = "none";
-      document.getElementById("listAbaixo").style.display = "table";
-      if(document.getElementById("emptyEstoque")!=null){
-        document.getElementById("emptyEstoque").style.display="none";
-      }
-      if(document.getElementById("emptyAcima")!=null){
-        document.getElementById("emptyAcima").style.display="none";
-      }
-      if(document.getElementById("emptySem")!=null){
-        document.getElementById("emptySem").style.display="none";
-      }
-      if(document.getElementById("emptyAbaixo")!=null){
-        document.getElementById("emptyAbaixo").style.display="block";
-      }
-    }else if( document.getElementById("filter").value==3){
-      document.getElementById("listEstoque").style.display = "none";
-      document.getElementById("listAcima").style.display = "none";
-      document.getElementById("listAbaixo").style.display = "none";
-      document.getElementById("listSem").style.display = "table";
-      if(document.getElementById("emptyEstoque")!=null){
-        document.getElementById("emptyEstoque").style.display="none";
-      }
-      if(document.getElementById("emptyAcima")!=null){
-        document.getElementById("emptyAcima").style.display="none";
-      }
-      if(document.getElementById("emptyAbaixo")!=null){
-        document.getElementById("emptyAbaixo").style.display="none";
-      }
-      if(document.getElementById("emptySem")!=null){
-        document.getElementById("emptySem").style.display="block";
-      }
+  function changeFilter(id){
+        switch(id){
+            case "listEstoque":
+                changeStateElements(id);
+            break;
+            case "listAcima":
+                changeStateElements(id);
+            break;
+            case "listAbaixo":
+                changeStateElements(id);
+            break;
+            case "listSem":
+                changeStateElements(id);
+            break;
+        }
     }
-  }
+    function changeStateElements(id){
+        if(!document.getElementById(id).classList.contains("gradient")){
+                let list=document.getElementById("chips").getElementsByTagName("A");
+                for(item of list){
+                    if(item.className.includes("gradient")){
+                        item.classList.remove("gradient");
+                        document.getElementsByClassName(item.id)[0].style="display:none !important;";
+                        if(document.getElementsByClassName(item.id)[1]!=null){
+                            document.getElementsByClassName(item.id)[1].style.display="none";
+                        }
+                        break;
+                    }
+                }
+                document.getElementById(id).classList.add("gradient");
+                if(document.getElementsByClassName(id)[0].classList.contains("responsive-table") && window.innerWidth<=400){
+                    document.getElementsByClassName(document.getElementById(id).id)[0].style="display:block!important;";
+                    if(document.getElementsByClassName(document.getElementById(id).id).lenght>1){
+                        document.getElementsByClassName(item.id)[1].style.display="block";
+                    }
+                }
+                else{
+                    document.getElementsByClassName(document.getElementById(id).id)[0].style="display:table!important;";
+                    if(document.getElementsByClassName(document.getElementById(id).id).lenght>1){
+                        document.getElementsByClassName(item.id)[1].style.display="block";
+                    }
+                }
+          }
+    }
   function confirmarProduto(id) {
     document.getElementById('produto_id').value = id;
     const elem = document.getElementById('modal1');
