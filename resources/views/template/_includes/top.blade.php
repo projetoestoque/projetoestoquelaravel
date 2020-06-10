@@ -20,7 +20,7 @@
 <header>
   @guest
   <nav>
-   <div class="nav-wrapper" >
+   <div class="nav-wrapper z-depth-1" >
      <div class="container">
      <a href="/" class="brand-logo">
        SysONG<i class="material-icons ">filter_drama</i>
@@ -32,7 +32,7 @@
        </ul>
        @elseif(Auth::user()->is_admin==true)
         <nav>
-        <div class="nav-wrapper" style="background:linear-gradient(to right, #30cfd0 0%, #330867 100%);"  >
+        <div class="nav-wrapper z-depth-1" style="background:linear-gradient(to right, #30cfd0 0%, #330867 100%);"  >
      <div class="container">
      <a href="/" class="brand-logo">
        SysONG<i class="material-icons ">filter_drama</i>
@@ -52,7 +52,7 @@
        </ul>                           
        @else
        <nav>
-        <div class="nav-wrapper" style="background:linear-gradient(to right, #30cfd0 0%, #330867 100%);"  >
+        <div class="nav-wrapper z-depth-1" style="background:linear-gradient(to right, #30cfd0 0%, #330867 100%);"  >
      <div class="container">
      <a href="/" class="brand-logo">
        SysONG<i class="material-icons ">filter_drama</i>
