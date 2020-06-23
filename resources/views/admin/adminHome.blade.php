@@ -9,7 +9,7 @@
 <br>
 <div class="container ">
 <div class="row white-text ">
-            <a href="{{ route('admin.MenuEstoque')}}" class="white-text ">
+            <a href="{{route('produtos.listar')}}" class="white-text ">
                 <div class=" card-panel blue accent-1 col s5 hoverable ">
                     <div class="row ">
                     <span class="row"></span>

@@ -156,14 +156,13 @@
                 @else
                     <input required type="number"  placeholder="5" name="quantidade">
                 @endif
-
                 <label>Quantidade<span class="important">*</span></label>
                 <div class="tooltip desktop-hide">
                 <i class="material-icons">info_outline</i>
                 <span class="tooltiptext">Quantidade de produtos que será inserida</span>
                 </div>
             </div>
-            <div class="mobile-hide"><div class="tooltip">
+            <div class="mobile-hide"><div class="tooltip back">
                 <i class="material-icons">info_outline</i>
                 <span class="tooltiptext">Quantidade de produtos que será inserida</span>
             </div></div>
@@ -247,7 +246,7 @@
                 <span class="tooltiptext">Quantidade Mínima é o valor que junto com a unidade representa quanto o estoque tem que ter no mínimo.Csaso esteja abaixo desse valor será notificado</span>
                 </div>
             </div>
-            <div class="mobile-hide"><div class="tooltip">
+            <div class="mobile-hide"><div class="tooltip back">
                 <i class="material-icons">info_outline</i>
                 <span class="tooltiptext">Quantidade Mínima é o valor que junto com a unidade representa quanto o estoque tem que ter no mínimo.Caso esteja abaixo desse valor será notificado</span>
             </div></div>

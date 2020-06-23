@@ -69,6 +69,21 @@
         <div class="row">
             <div class="col l1"></div>
             <div class="input-field col s12 l4">
+            <i class="material-icons prefix">plus_one</i>
+                <input required="required" id="quantidade" name="quantidade" type="number" placeholder="10">
+                <label for="quantidade">Porções servidas (em unidade)<span class="important">*</span></label>
+                <div class="tooltip desktop-hide">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">Quantas refeições foram postas Ex:5 porções</span>
+                </div>
+            </div>
+            <div class="col l2">
+            <div class="mobile-hide"><div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">Quantas refeições foram postas Ex:5 porções</span>
+            </div></div>
+            </div>
+                <div class="input-field col s12 l4">
                 <i class="material-icons prefix">archive</i>
                 <input required step="0.1" placeholder="2.5" type="number"  name="desperdicio">
                 <label> Desperdício em Kg<span class="important">*</span></label>
@@ -77,24 +92,9 @@
                 <span class="tooltiptext">Em quilos,quanto da refeição posta foi desperdiçada </span>
                 </div>
             </div>
-            <div class="col l2">
             <div class="mobile-hide"><div class="tooltip">
                 <i class="material-icons">info_outline</i>
                 <span class="tooltiptext">Em quilos,quanto da refeição posta foi desperdiçada</span>
-            </div></div>
-            </div>
-                <div class="input-field col s12 l4">
-                <i class="material-icons prefix">plus_one</i>
-                <input required="required" id="quantidade" name="quantidade" type="number" placeholder="10">
-                <label for="quantidade">Quantidade servida<span class="important">*</span></label>
-                <div class="tooltip desktop-hide">
-                <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">Quantas refeições foram postas</span>
-                </div>
-            </div>
-            <div class="mobile-hide"><div class="tooltip">
-                <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">Quantas refeições foram postas</span>
             </div></div>
         </div>
         <div class="row valign center">

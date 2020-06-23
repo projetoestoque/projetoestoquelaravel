@@ -4,12 +4,21 @@
 @section('classBody','Background')
 @section('conteudo')
 
+@if($_SERVER['HTTP_REFERER']==URL::route('admin.listarCadastros'))
 <div class="butaoEspaco">
     <a href="{{ URL::route('admin.listarCadastros') }}" class="waves-effect waves-teal btn-flat black-text">
     <i class="large material-icons">reply</i>
     <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
 </div>
+@else
+<div class="butaoEspaco">
+    <a href="{{ URL::route('admin.home') }}" class="waves-effect waves-teal btn-flat black-text">
+    <i class="large material-icons">reply</i>
+    <span class="ButtaoEspacoTexto"><b>Voltar</span>
+    </a>
+</div>
+@endif
 <br>
 <br>
 <div class="mobile-hide"><h4 class="cadastros-align"><b>Cadastros<b></h5></div>
