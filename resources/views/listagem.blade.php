@@ -29,7 +29,7 @@
 
 <div class="butaoEspaco">
 @if(auth()->user()->is_admin)
-    <a href="{{ URL::route('admin.MenuEstoque') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
+    <a href="{{ URL::route('admin.home') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
     <i class="large material-icons">reply</i>
     <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
@@ -100,7 +100,7 @@
                   <td>{{$produto->nome}}</td>
                   <td>{{$produto->marca}}</td>
                   <td class="grey-text text-darken-3">
-                  @if($produto->quantidade<=4)
+                  @if($produto->quantidade<=$produto->quantidade_minima)
                   <div>{{$produto->quantidade}} {{$produto->abreviacao}}<i class="tiny material-icons red-text">brightness_1</i></div>
                   @else
                   {{$produto->quantidade}} {{$produto->abreviacao}}
@@ -108,11 +108,6 @@
                   </td>
                   <td class="grey-text text-darken-3">{{$produto->estoque->estoque}}</td>
                   <td class="grey-text text-darken-3">{{$produto->vencimento}}</td>
-                  @if(auth()->user()->is_admin)
-                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarEntrada({{$produto->id}})"><i class="material-icons">edit</i></a>
-                  <button onclick="confirmarEntrada({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" data-target="modal2"><i class="material-icons">delete</i></button>
-                  </td>
-                  @endif
               </tr>
           @endforeach
           </tbody>
@@ -144,7 +139,7 @@
                   <td>{{$produto->nome}}</td>
                   <td>{{$produto->marca}}</td>
                   <td class="grey-text text-darken-3">
-                  @if($produto->quantidade<=4)
+                  @if($produto->quantidade<=$produto->quantidade_minima)
                   <div>{{$produto->quantidade}} {{$produto->abreviacao}}<i class="tiny material-icons red-text">brightness_1</i></div>
                   @else
                   {{$produto->quantidade}} {{$produto->abreviacao}}
@@ -152,11 +147,6 @@
                   </td>
                   <td class="grey-text text-darken-3">{{$produto->estoque->estoque}}</td>
                   <td class="grey-text text-darken-3">{{$produto->vencimento}}</td>
-                  @if(auth()->user()->is_admin)
-                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarEntrada({{$produto->id}})"><i class="material-icons">edit</i></a>
-                  <button onclick="confirmarEntrada({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" data-target="modal2"><i class="material-icons">delete</i></button>
-                  </td>
-                  @endif
               </tr>
           @endforeach
           </tbody>
@@ -188,7 +178,7 @@
                   <td>{{$produto->nome}}</td>
                   <td>{{$produto->marca}}</td>
                   <td class="grey-text text-darken-3">
-                  @if($produto->quantidade<=4)
+                  @if($produto->quantidade<=$produto->quantidade_minima)
                   <div>{{$produto->quantidade}} {{$produto->abreviacao}}<i class="tiny material-icons red-text">brightness_1</i></div>
                   @else
                   {{$produto->quantidade}} {{$produto->abreviacao}}
@@ -196,11 +186,6 @@
                   </td>
                   <td class="grey-text text-darken-3">{{$produto->estoque->estoque}}</td>
                   <td class="grey-text text-darken-3">{{$produto->vencimento}}</td>
-                  @if(auth()->user()->is_admin)
-                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarEntrada({{$produto->id}})"><i class="material-icons">edit</i></a>
-                  <button onclick="confirmarEntrada({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" data-target="modal2"><i class="material-icons">delete</i></button>
-                  </td>
-                  @endif
               </tr>
           @endforeach
           </tbody>
@@ -232,16 +217,14 @@
                   <td>{{$produto->marca}}</td>
                   <td class="grey-text text-darken-3">{{$produto->codigo_barra}}</td>
                   <td class="grey-text text-darken-3">{{$produto->tipo}}</td>
-                  @if(auth()->user()->is_admin)
-                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarProduto({{$produto->id}})"><i class="material-icons">edit</i></a>
-                  <button onclick="confirmarProduto({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger"><i class="material-icons">delete</i></button>
-                  </td>
-                  @endif
               </tr>
           @endforeach
           </tbody>
           @endif
       </table>
+</div>
+<div class="container">
+<p class="red-text"><i class="tiny material-icons">brightness_1</i> Indica que o produto está abaixo do esperado</p>
 </div>
 <br>
 <br>

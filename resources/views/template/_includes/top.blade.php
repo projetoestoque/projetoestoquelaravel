@@ -20,7 +20,7 @@
 <header>
   @guest
   <nav>
-   <div class="nav-wrapper z-depth-1" >
+   <div class="nav-wrapper" >
      <div class="container">
      <a href="/" class="brand-logo">
        SysONG<i class="material-icons ">filter_drama</i>
@@ -34,7 +34,7 @@
         <nav>
         <div class="nav-wrapper z-depth-1" style="background:linear-gradient(to right, #30cfd0 0%, #330867 100%);"  >
      <div class="container">
-     <a href="/" class="brand-logo">
+     <a class="brand-logo">
        SysONG<i class="material-icons ">filter_drama</i>
        </a>
        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
@@ -54,7 +54,7 @@
        <nav>
         <div class="nav-wrapper z-depth-1" style="background:linear-gradient(to right, #30cfd0 0%, #330867 100%);"  >
      <div class="container">
-     <a href="/" class="brand-logo">
+     <a class="brand-logo">
        SysONG<i class="material-icons ">filter_drama</i>
        </a>
        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>

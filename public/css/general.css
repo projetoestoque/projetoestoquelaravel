@@ -343,6 +343,10 @@ a.modal-trigger.radius{
   .modal{
   width: 90%;
 }
+.back{
+  margin-left:0px !important;
+}
+
 
 }
 @media only screen and (max-width: 400px) {
