@@ -60,10 +60,10 @@
     </div>
 </div>
 <div class="chips-chips" id="chips">
-<a id="listEstoque" class="waves-effect waves-light btn-flat gradient" onclick="changeFilter(id)">Em Estoque</a>
-<a id="listAcima" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">add_circle</i>Em grande quantidade</a>
+<a id="listEstoque" class="waves-effect waves-light btn-flat gradient" onclick="changeFilter(id)" >Em Estoque</a>
+<a id="listAcima" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)" ><i class="material-icons left">add_circle</i>Em grande quantidade</a>
 <a id="listAbaixo" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">remove_circle</i>Em baixa Quantidade</a>
-<a id="listSem" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">cancel</i>Sem Estoque</a>
+<a id="listSem" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)" "><i class="material-icons left">cancel</i>Sem Estoque</a>
 </div>
 </div>
 </div>
@@ -223,9 +223,11 @@
           @endif
       </table>
 </div>
+@if(!empty($produtos_abaixo))
 <div class="container">
-<p class="red-text"><i class="tiny material-icons">brightness_1</i> Indica que o produto está abaixo do esperado</p>
+<p class="red-text" id="description"><i class="tiny material-icons">brightness_1</i> Indica que o produto está abaixo do esperado</p>
 </div>
+@endif
 <br>
 <br>
 <br>
@@ -261,15 +263,19 @@
         switch(id){
             case "listEstoque":
                 changeStateElements(id);
+                showMessage(true);
             break;
             case "listAcima":
                 changeStateElements(id);
+                showMessage(false);
             break;
             case "listAbaixo":
                 changeStateElements(id);
+                showMessage(true);
             break;
             case "listSem":
                 changeStateElements(id);
+                showMessage(false);
             break;
         }
     }
@@ -300,6 +306,16 @@
                     }
                 }
           }
+    }
+    function showMessage(state){
+      if(document.getElementById("description")!=null){
+        if(state){
+          document.getElementById("description").style.display="block";
+        }
+        else{
+          document.getElementById("description").style.display="none";
+        }
+      }
     }
   function confirmarProduto(id) {
     document.getElementById('produto_id').value = id;

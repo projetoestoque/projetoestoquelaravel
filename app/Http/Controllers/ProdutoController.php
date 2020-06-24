@@ -27,6 +27,7 @@ class ProdutoController extends Controller
         $produtos_abaixo = [];
         $produtos_sem = [];
 
+
         foreach($produtos_em_estoque as $produto) {
             //listando todo os produtos em estoque
             $produto_estoque = $produto;
