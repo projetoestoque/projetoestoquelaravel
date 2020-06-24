@@ -7,16 +7,11 @@
 @section('classBody','Background')
 <style>
     .acima{
-        margin-top:-20px;
-    }
-    label{
-        display:flex;
+        margin-top:-10px;
+        margin-left:20px;
     }
     .back{
         margin-left:-20px !important;
-    }
-    .row{
-        margin-bottom:0px !important;
     }
 </style>
 @section('conteudo')
@@ -56,82 +51,29 @@
     @endif
         {{ csrf_field() }}
         <br>
+         <h5 class="acima"><b>Dados Principais</b></h5>
         <div class="row">
-            <div class="col s4">
-            <h5><b>Dados Principais</b></h5>
-            </div>
-            <div class="col s1"></div>
-            <div class="input-field col s12 l6">
-                <i class="material-icons prefix">style</i>
-                <select required="required" id="selectProduto" name="Id_produto">
-                    @if(isset($produto_em_estoque))
-                        <option value="{{$produto_em_estoque->Id_produto}}">{{$produto_em_estoque->nome}} | {{$produto_em_estoque>marca}}</option>
-                    @else
-                    <option value="" disabled selected>Escolha o Produto</option>
-                        @forelse($produtos as $produto)
-                        <option value="{{$produto->id}}">{{$produto->nome}} | {{$produto->marca}}</option>
-                        @empty
-                        <option value="0">Sem produtos</option>
-                        @endforelse
-                    @endif
-                </select>
-                <label>Produto<span class="important">*</span></label>
-                <div class="tooltip desktop-hide">
+            <div class="col l1"></div>
+            <div class="input-field col s12 l4">
+                <div class="desktop-hide">
+                <a href="{{route('admin.listarCadastros')}}" class="waves-effect waves-light btn-flat gradient left"><i class="material-icons left">style</i>Escolher o Produto</a>
+                <div class="tooltip">
                 <i class="material-icons">info_outline</i>
                 <span class="tooltiptext">O produto serve pra identificar qual produto será inserido </span>
                 </div>
+                </div>
+                <div class="mobile-hide">
+                <a href="{{route('admin.listarCadastros')}}" class="waves-effect waves-light btn-large gradient"><i class="material-icons left">style</i>Escolher o Produto</a>
+                </div>
             </div>
+            <div class="col l2">
             <div class="mobile-hide"><div class="tooltip">
                 <i class="material-icons">info_outline</i>
                 <span class="tooltiptext">O produto serve pra identificar qual produto será inserido</span>
             </div></div>
-        </div>
-        <div class="row">
-            <div class="col s5"></div>
-        <div class="input-field col s12 l6">
-        <i class="material-icons prefix"> account_box</i>
-                <select required="required" name="Id_doador">
-                @if(isset($produto_em_estoque))
-                    @if($produto_em_estoque->doador->tipo != "juridico")
-                        <option value="{{$produto_em_estoque->doador->id}}" >{{$produto_em_estoque->doador->nome}}</option>
-                    @else
-                        <option value="{{$produto_em_estoque->doador->id}}" >{{$produto_em_estoque->doador->instituicao}}</option>
-                    @endif
-                        @forelse($doadores as $doador)
-                            @if($doador->tipo != "juridico")
-                                <option value="{{$doador->id}}" >{{$doador->nome}}</option>
-                            @else
-                                <option value="{{$doador->id}}" >{{$doador->instituicao}}</option>
-                            @endif
-                        @empty
-                        @endforelse
-                @else
-                    <option selected disabled >Escolha o doador</option>
-                    @forelse($doadores as $doador)
-                            @if($doador->tipo != "juridico")
-                                <option value="{{$doador->id}}" >{{$doador->nome}}</option>
-                            @else
-                                <option value="{{$doador->id}}" >{{$doador->instituicao}}</option>
-                            @endif
-                        @empty
-                    @endforelse
-                @endif
-                </select>
-                <label>Doador<span class="important">*</span></label>
-                <div class="tooltip desktop-hide">
-                <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">O Doador é de quem recebeu o produto que será inserido</span>
-                </div>
-        </div>
-        <div class="mobile-hide"><div class="tooltip">
-                <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">O Doador é de quem recebeu o produto que será inserido</span>
-            </div></div>
-        </div>
-        <div class="row">
-        <div class="col s5"></div>
-        <div class="input-field col s12 l3">
-                <i class="material-icons prefix">access_time</i>
+            </div>
+            <div class="input-field col s12 l4">
+            <i class="material-icons prefix">access_time</i>
                 @if(isset($produto_em_estoque))
                     <input required type="text" value="{{$produto_em_estoque->vencimento}}" name="vencimento" placeholder="00/00/0000" class="datepicker">
                 @else
@@ -140,36 +82,35 @@
                 <label>Vencimento <span class="important">*</span></label>
                 <div class="tooltip desktop-hide">
                 <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">Data que os produtos serão inseridos </span>
+                <span class="tooltiptext">Data que os produtos vencerá </span>
                 </div>
             </div>
-            <div class="col back">
-            <div class="mobile-hide linha"><div class="tooltip">
+            <div class="mobile-hide"><div class="tooltip">
                 <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">Data que os produtos serão inseridos</span>
-            </div></div>
-            </div>
-            <div class="input-field col s12 l3 back">
-                <i class="material-icons prefix">plus_one</i>
-                @if(isset($produto_em_estoque))
-                    <input required type="number" value="{{$produto_em_estoque->quantidade}}" placeholder="5" name="quantidade">
-                @else
-                    <input required type="number"  placeholder="5" name="quantidade">
-                @endif
-                <label>Quantidade<span class="important">*</span></label>
-                <div class="tooltip desktop-hide">
-                <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">Quantidade de produtos que será inserida</span>
-                </div>
-            </div>
-            <div class="mobile-hide"><div class="tooltip back">
-                <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">Quantidade de produtos que será inserida</span>
+                <span class="tooltiptext">Data que os produtos vencerá</span>
             </div></div>
         </div>
         <div class="row">
-        <div class="col s5"></div>
-        <div class="input-field col s12 l6">
+            <div class="col l1"></div>
+            <div class="input-field col s12 l4">
+            <div class="desktop-hide">
+                <a href="{{route('admin.listarCadastros','Doador')}}" class="waves-effect waves-light btn-flat gradient"><i class="material-icons left">account_box</i>Escolher o Doador</a>
+                <div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">O Doador é de quem recebeu o produto que será inserido</span>
+                </div>
+                </div>
+                <div class="mobile-hide">
+                <a href="{{route('admin.listarCadastros','Doador')}}" class="waves-effect waves-light btn-large gradient"><i class="material-icons left">account_box</i>Escolher o Doador</a>
+                </div>
+            </div>
+            <div class="col l2">
+            <div class="mobile-hide"><div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">O Doador é de quem recebeu o produto que será inserido</span>
+            </div></div>
+            </div>
+            <div class="input-field col s12 l4">
                 <i class="material-icons prefix">view_compact</i>
                 <select required="required" id="selectProduto" name="Id_estoque">
                     @if(isset($produto_em_estoque))
@@ -194,15 +135,17 @@
                 <span class="tooltiptext">O Estoque é o local onde será armazenado determinados produtos cadastrados</span>
                 </div>
             </div>
+            <div class="mobile-hide"><div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">O Estoque é o local onde será armazenado determinados produtos cadastrados</span>
+            </div></div>
         </div>
-        <br>
+        <h5 style="margin-left:20px;"><b>Dados para Filtragem</b></h5>
         <br>
         <div class="row">
-            <div class="col s4">
-                <h5><b>Dados para filtragem</b></h5>
-            </div>
-            <div class="col s1"></div>
-            <div class="input-field col s12 l3">
+        <div class="col l1 "></div>
+        <div class="row">
+        <div class="input-field col s12 l4">
                 <i class="material-icons prefix">fitness_center</i>
                 <select required="required" id="selectMedida" name="Id_medida">
                 @if(isset($produto_em_estoque))
@@ -227,13 +170,13 @@
                 <span class="tooltiptext">A medida é a unidade de determinado item(Quilo,pacotes,gramas)/span>
                 </div>
             </div>
-            <div class="col back">
+            <div class="col l2">
             <div class="mobile-hide"><div class="tooltip">
                 <i class="material-icons">info_outline</i>
                 <span class="tooltiptext">A medida é a unidade de determinado item(Quilo,pacotes,gramas)</span>
             </div></div>
             </div>
-        <div class="input-field col s12 l3 back">
+            <div class="input-field col s12 l4">
                 <i class="material-icons prefix">remove_circle</i>
                 @if(isset($produto_em_estoque))
                     <input required type="number" value="{{$produto_em_estoque->quantidade_minima}}" placeholder="5" name="quantidade_minima">
@@ -246,14 +189,24 @@
                 <span class="tooltiptext">Quantidade Mínima é o valor que junto com a unidade representa quanto o estoque tem que ter no mínimo.Csaso esteja abaixo desse valor será notificado</span>
                 </div>
             </div>
-            <div class="mobile-hide"><div class="tooltip back">
+            <div class="mobile-hide"><div class="tooltip">
                 <i class="material-icons">info_outline</i>
                 <span class="tooltiptext">Quantidade Mínima é o valor que junto com a unidade representa quanto o estoque tem que ter no mínimo.Caso esteja abaixo desse valor será notificado</span>
             </div></div>
         </div>
         </div>
-        @if(isset($produto_em_estoque))
-        <input type="hidden" name="id" value="{{$produto_em_estoque->id}}"/>
+        <br>
+        <div class="row valign center">
+            <button class="btn waves-effect waves-light blue darken-4"><b>Submit
+                    <i class="material-icons right">send</i>
+            </button>
+            <br>
+            <br>
+            <label ><span class="important">*</span> Campos Obrigatórios</label>
+        </div>
+        <br>
+        @if(isset($produto))
+            <input type="hidden" name="id" value="{{$produto->id}}"/>
         @endif
     </form>
 </div>

@@ -338,7 +338,7 @@ class CadastroController extends Controller
 	public function menuCadastros(){
 		return view('admin/adminMenuCadastros');
 	}
-	public function listarCadastros()
+	public function listarCadastros($reference="Produto")
     {
 		$marca_antiga = null;
 		$medida_antiga = null;
@@ -430,6 +430,7 @@ class CadastroController extends Controller
 				'tipo' => 'estoque'
 			]);
 		}
+	
         return view('admin/visualizarCadastros', compact('all','produtos_cadastrados','tipos','medidas','marcas','estoques_disponiveis','doadores','marca_antiga','medida_antiga','tipo_antigo','estoque_antigo'));
     }
 }
