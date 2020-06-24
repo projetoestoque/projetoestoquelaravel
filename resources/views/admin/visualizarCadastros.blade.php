@@ -147,7 +147,9 @@
                   <td class="grey-text text-darken-2">{{$produto->marca}}</td>
                   <td class="grey-text text-darken-2">{{$produto->tipo}}</td>
                   <td class="grey-text text-darken-2">{{$produto->codigo_barra}}</td>
-                  @if(auth()->user()->is_admin)
+                  @if(auth()->user()->is_admin && $_SERVER['HTTP_REFERER']==URL::route('entradaProduto'))
+                  <td><a class="btn-floating waves-effect waves-light gradient"><i class="material-icons">add</i></a></td>
+                  @elseif(auth()->user()->is_admin )
                   <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarProduto({{$produto->id}})"><i class="material-icons">edit</i></a>
                   <button onclick="confirmarProduto({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger"><i class="material-icons">delete</i></button>
                   </td>
@@ -202,7 +204,9 @@
               <td class="grey-text text-darken-3">N/A</td>
               @endif
 
-                  @if(auth()->user()->is_admin)
+                  @if(auth()->user()->is_admin && $_SERVER['HTTP_REFERER']==URL::route('entradaProduto'))
+                  <td><a class="btn-floating waves-effect waves-light gradient"><i class="material-icons">add</i></a></td>
+                  @elseif(auth()->user()->is_admin )
                   <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarDoador({{$doador->id}})"><i class="material-icons">edit</i></a>
                   <button onclick="confirmarDoador({{$doador->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" ><i class="material-icons">delete</i></button>
                   </td>
