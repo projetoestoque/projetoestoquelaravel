@@ -22,6 +22,10 @@
     margin-top:8px !important;
     border-radius:30px !important;
  }
+
+ #resultados {
+   border: 1px solid green;
+ }
 </style>
 @section('conteudo')
 <!-- nao me apagar vlw -->
@@ -56,7 +60,13 @@
 <div class="row sem-fundo">
 <div class="input-field col s12 input-outlined">
         <i class="material-icons prefix right">search</i>
-        <input id="icon_prefix" type="text" placeholder="Pesquisar Produto Cadastrado">
+        <input onkeydown="buscarEntrada(event)" id="icon_prefix" type="text" placeholder="Pesquisar...">
+        <div id="resultados">
+          <ul id="lista_resultados">
+            <li>Nome    |    Vencimento</li>
+            <br/>
+          </ul>
+        </div>
     </div>
 </div>
 <div class="chips-chips" id="chips">
@@ -349,6 +359,61 @@
   function atualizarProduto(id) {
     document.getElementById('produto_id').value = id;
     window.location.href = "{{route('produto')}}?id=" + id;
+  }
+
+  let query
+
+  function buscarEntrada(event) {
+    input = document.getElementById('icon_prefix')
+    query = input.value
+    let keyCode = event.keyCode
+
+    let lista = document.getElementById("lista_resultados");
+    let produtos = []
+    
+    if((keyCode >= 65 && keyCode <= 90) && (keyCode != 20) || keyCode == 186) {
+      lista.innerHTML = ""
+      let letra = event.key
+      query += letra
+
+      let li = document.createElement('li')
+      li.innerHTML = "Nome | Vencimento"
+      lista.appendChild(li)
+
+      $.get("{{url('/admin/buscar/entrada?query=')}}" + query, (data, status) => {
+        
+        for(let i = 0; i < data.length; i++) {
+          
+          if(document.getElementById(data[i]['id']) == null) {
+            let li = document.createElement('li')
+            li.innerHTML = data[i]['nome'] + " | " + data[i]['vencimento']
+            li.setAttribute('id', data[i]['id']);
+            lista.appendChild(li);
+          }
+          
+        }
+       });
+    } else if(keyCode == 8) {
+      newQuery = ""
+      for(let i = 0; i < query.length-1; i++) {
+        newQuery += query[i]
+      }
+
+      $.get("{{url('/admin/buscar/entrada?query=')}}" + newQuery, (data, status) => {
+        
+        for(let i = 0; i < data.length; i++) {
+          
+          if(document.getElementById(data[i]['id']) == null) {
+            let li = document.createElement('li')
+            li.innerHTML = data[i]['nome'] + " | " + data[i]['vencimento']
+            li.setAttribute('id', data[i]['id']);
+            lista.appendChild(li);
+          }
+          
+        }
+       });
+    }
+
   }
 </script>
 @endsection
