@@ -46,7 +46,7 @@ class EstoqueController extends Controller
       return false;
     }
 
-    //pesquisa entradas de acordo com a query
+    //pesquisa entradas de acordo com a query teste
     $produtos_id = Produto::where('nome', 'LIKE', "%"."$query"."%")->get();
     foreach($produtos_id as $produto) {
       $produtos_filtrados = Produto_em_estoque::where('Id_produto', 'LIKE', '%'.$produto->id.'%')->get();
