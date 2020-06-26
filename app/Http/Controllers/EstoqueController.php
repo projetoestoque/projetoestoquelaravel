@@ -37,6 +37,7 @@ class EstoqueController extends Controller
 
   public function pesquisarEntrada()
   {
+    sleep(0.5);
     $produtos_em_estoque = DB::table('produto_em_estoques')->get();
     $produtos = [];
     $query = "";
@@ -51,10 +52,12 @@ class EstoqueController extends Controller
     foreach($produtos_id as $produto) {
       $produtos_filtrados = Produto_em_estoque::where('Id_produto', 'LIKE', '%'.$produto->id.'%')->get();
       foreach($produtos_filtrados as $produto) {
-        $produto->nome = Produto::findOrFail($produto->Id_produto)->nome;
-        $produto->marca = Produto::findOrFail($produto->Id_produto)->marca;
-        $produto->estoque = Estoque_disponivel::findOrFail($produto->Id_estoque)->estoque;
-        array_push($produtos, $produto);
+          $produto->nome = Produto::findOrFail($produto->Id_produto)->nome;
+          if($query[0] == $produto->nome[0]) {
+            $produto->marca = Produto::findOrFail($produto->Id_produto)->marca;
+            $produto->estoque = Estoque_disponivel::findOrFail($produto->Id_estoque)->estoque;
+            array_push($produtos, $produto);
+          }
       }
     }
     
@@ -69,13 +72,4 @@ class EstoqueController extends Controller
     
     return $produtos;
   }
-
-  // function pesquisarEntrada()
-  // {
-  //   $produtos_cadastrados = DB::table('produtos')->get();
-  //   $query = "feijã";
-  //   if((DB::table('produto_em_estoques')->where('Id_produto', $produto->id)->exists()) == false)
-  //   $data = Produto::where('nome', 'LIKE', '%'.$query.'%')->get();
-  //   return $data;
-  // }
 }
