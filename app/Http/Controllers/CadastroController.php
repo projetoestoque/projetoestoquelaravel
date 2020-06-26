@@ -432,5 +432,81 @@ class CadastroController extends Controller
 		}
 	
         return view('admin/visualizarCadastros', compact('all','produtos_cadastrados','tipos','medidas','marcas','estoques_disponiveis','doadores','marca_antiga','medida_antiga','tipo_antigo','estoque_antigo'));
-    }
+	}
+	
+	public function pesquisarCadastros()
+  	{
+		sleep(0.5);
+		$produtos_em_estoque = DB::table('produto_em_estoques')->get();
+		$items = [];
+		$query = "";
+		if(isset($_GET['query'])) $query = $_GET['query'];
+		if(!$query) return false;
+
+		//filtrar produtos cadastrados
+		$produtos_cadastrados_filtrados = Produto::where('nome', 'LIKE', '%'.$query.'%')->get();
+		foreach($produtos_cadastrados_filtrados as $produto) {
+			if($produto->nome[0] == $query[0]) {
+				$produto->tipo = "Produto";
+				array_push($items, $produto);
+			}
+		}
+		
+		//filtrar doadores
+		$doadores_fisicos_filtrados = Doador::where('nome', 'LIKE', '%'.$query.'%')->get();
+		$doadores_juridicos_filtrados = Doador::where('instituicao', 'LIKE', '%'.$query.'%')->get();
+		foreach($doadores_fisicos_filtrados as $doador) {
+			if($query[0] == $doador->nome[0]) {
+				array_push($items, $doador);
+			}
+		}
+		foreach($doadores_juridicos_filtrados as $doador) {
+			if($query[0] == $doador->instituicao[0]) {
+				array_push($items, $doador);
+			}
+		}
+
+		//filtrar tipos
+		$tipos_filtrados = Tipo::where('tipo', 'LIKE', '%'.$query.'%')->get();
+		foreach($tipos_filtrados as $tipo) {
+			if($query[0] == $tipo->tipo[0]) {
+				$tipo->nome = $tipo->tipo;
+				$tipo->tipo = "Tipo";
+				array_push($items, $tipo);
+			}
+		}
+
+		//filtrar medidas
+		$medidas_filtradas = Medida::where('medida', 'LIKE', '%'.$query.'%')->get();
+		foreach($medidas_filtradas as $medida) {
+			if($query[0] == $medida->medida[0]) {
+				$medida->nome = $medida->medida;
+				$medida->tipo = "Medida";
+				array_push($items, $medida);
+			}
+		}
+
+		//filtrar marcas
+		$marcas_filtradas = Marca::where('marca', 'LIKE', '%'.$query.'%')->get();
+		foreach($marcas_filtradas as $marca) {
+			if($query[0] == $marca->marca[0]) {
+				$marca->nome = $marca->marca;
+				$marca->tipo = "Marca";
+				array_push($items, $marca);
+			}
+		}
+
+		//filtrar estoques
+		$estoques_filtrados = Estoque_disponivel::where('estoque', 'LIKE', '%'.$query.'%')->get();
+		foreach($estoques_filtrados as $estoque) {
+			if($query[0] == $estoque->estoque[0]) {
+				$estoque->nome = $estoque->estoque;
+				$estoque->tipo = "Estoque";
+				array_push($items, $estoque);
+			}
+		}
+		
+		
+		return $items;
+  }
 }

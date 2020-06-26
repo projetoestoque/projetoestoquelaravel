@@ -70,6 +70,7 @@ Route::group(['middleware' => 'is_admin'], function () {
    Route::post('/admin/cadastros', ['as'=> 'admin.refeicao.cadastrar', 'uses'=>'CadastroController@cadastrarRefeicao']);
 
    Route::get('/admin/buscar/entrada/', 'EstoqueController@pesquisarEntrada')->name('admin.buscar.entrada');
+   Route::get('/admin/buscar/cadastros/', 'CadastroController@pesquisarCadastros')->name('admin.buscar.cadastros');
 });
 
 

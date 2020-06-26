@@ -31,7 +31,12 @@
     margin-top:8px !important;
     border-radius:30px !important;
  }
+
+ #resultados {
+     border: 1px solid green;
+ }
 </style>
+
 @section('conteudo')
 
 <input type="hidden" id="produto_id" name="id"/>
@@ -53,7 +58,15 @@
 <div class="row sem-fundo">
 <div class="input-field col s12 input-outlined">
         <i class="material-icons prefix right">search</i>
-        <input id="icon_prefix" type="text" placeholder="Pesquisar Produto Cadastrado">
+        <input onkeydown="buscarCadastros(event)" id="icon_prefix" type="text" placeholder="Pesquisar...">
+
+        <div id="resultados">
+          <ul id="lista_resultados">
+            <li>Nome    |    Tipo</li>
+            <br/>
+          </ul>
+        </div>
+
     </div>
 </div>
 <div class="chips-chips" id="chips">
@@ -576,6 +589,60 @@
 </div>
 
 <script>
+
+    function buscarCadastros(event) {
+        
+        input = document.getElementById('icon_prefix')
+        query = input.value
+        let keyCode = event.keyCode
+
+        da = ""
+
+        let lista = document.getElementById("lista_resultados");
+        let produtos = []
+        
+        if((keyCode >= 65 && keyCode <= 90) && (keyCode != 20) || keyCode == 186) {
+            lista.innerHTML = ""
+            let letra = event.key
+            query += letra
+
+            let li = document.createElement('li')
+            li.innerHTML = "Nome | Tipo"
+            lista.appendChild(li)
+
+            $.get("{{url('/admin/buscar/cadastros?query=')}}" + query, (data, status) => {  
+                for(let i = 0; i < data.length; i++) {
+                    if(document.getElementById(data[i]['nome']) == null) {
+                        let li = document.createElement('li')
+                        li.innerHTML = `${data[i]['nome']} | ${data[i]['tipo']}`
+                        li.setAttribute('id', data[i]['nome'])
+                        lista.appendChild(li)
+                    }
+                }
+            });
+        } else if(keyCode == 8) {
+            newQuery = ""
+            for(let i = 0; i < query.length-1; i++) {
+                newQuery += query[i]
+            }
+
+            $.get("{{url('/admin/buscar/cadastros?query=')}}" + newQuery, (data, status) => {
+                for(let i = 0; i < data.length; i++) {
+          
+                    if(document.getElementById(data[i]['nome']) == null) {
+                        let li = document.createElement('li')
+                        li.innerHTML = data[i]['nome'] + " | " + data[i]['tipo']
+                        li.setAttribute('id', data[i]['nome']);
+                        lista.appendChild(li);
+                    }
+    
+                }
+            });
+
+            
+        }
+    }
+
     function changeFilter(id){
         switch(id){
             case "All":
