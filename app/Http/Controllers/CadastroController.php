@@ -186,6 +186,23 @@ class CadastroController extends Controller
 			$produto_em_estoque->doador = Doador::find($produto_em_estoque->Id_doador);
 			return view('entradaProduto', compact('produto_em_estoque','estoques', 'medidas', 'doadores', 'produtos'));
 		}
+		
+		if(isset($_GET['produto']) && isset($_GET['doador'])) {
+			$get_id = $_GET['produto'];
+			$produto = Produto::findOrFail($get_id);
+			$get_id = $_GET['doador'];
+			$doador = Doador::findOrFail($get_id);
+			return view('entradaProduto', compact('estoques', 'medidas', 'doadores', 'produtos', 'produto', 'doador'));
+		} else if(isset($_GET['doador'])) {
+			$get_id = $_GET['doador'];
+			$doador = Doador::findOrFail($get_id);
+			return view('entradaProduto', compact('estoques', 'medidas', 'doadores', 'produtos', 'doador'));
+		} else if(isset($_GET['produto'])) {
+			$get_id = $_GET['produto'];
+			$produto = Produto::findOrFail($get_id);
+			return view('entradaProduto', compact('estoques', 'medidas', 'doadores', 'produtos', 'produto'));
+		}
+
 		return view('entradaProduto', compact('estoques', 'medidas', 'doadores', 'produtos'));
 	}
 

@@ -3,6 +3,7 @@
 @section('titulo','Menu de Inserções')
 @section('classBody','Background')
 @section('conteudo')
+
 <div class="butaoEspaco">
     <a href="{{ URL::route('produtos.listar') }}" class="waves-effect waves-teal btn-flat black-text">
     <i class="large material-icons">reply</i>

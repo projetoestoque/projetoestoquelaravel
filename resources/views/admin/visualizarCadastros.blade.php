@@ -71,8 +71,19 @@
 </div>
 <div class="chips-chips" id="chips">
 <a id="All" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)">Todos</a>
+
+@if($_GET['tipo'] == "produto")
 <a id="Produto" class="waves-effect waves-light btn-flat gradient" onclick="changeFilter(id)"><i class="material-icons left">free_breakfast</i>Produto</a>
+@else
+<a id="Produto" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">free_breakfast</i>Produto</a>
+@endif
+
+@if($_GET['tipo'] == "doador")
+<a id="Doador" class="waves-effect waves-light btn-flat gradient" onclick="changeFilter(id)"><i class="material-icons left">face</i>Doador</a>
+@else
 <a id="Doador" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">face</i>Doador</a>
+@endif
+
 <a id="Tipo" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">layers</i>Tipo</a>
 <a id="Medida" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">fitness_center</i>Medida</a>
 <a id="Marca" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">copyright</i>Marca</a>
@@ -160,8 +171,8 @@
                   <td class="grey-text text-darken-2">{{$produto->marca}}</td>
                   <td class="grey-text text-darken-2">{{$produto->tipo}}</td>
                   <td class="grey-text text-darken-2">{{$produto->codigo_barra}}</td>
-                  @if(auth()->user()->is_admin && $_SERVER['HTTP_REFERER']==URL::route('entradaProduto'))
-                  <td><a class="btn-floating waves-effect waves-light gradient"><i class="material-icons">add</i></a></td>
+                  @if(auth()->user()->is_admin && $_GET['tipo'] == "produto")
+                  <td><a onclick="adicionarProduto({{$produto->id}})" class="btn-floating waves-effect waves-light gradient"><i class="material-icons">add</i></a></td>
                   @elseif(auth()->user()->is_admin )
                   <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarProduto({{$produto->id}})"><i class="material-icons">edit</i></a>
                   <button onclick="confirmarProduto({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger"><i class="material-icons">delete</i></button>
@@ -217,8 +228,8 @@
               <td class="grey-text text-darken-3">N/A</td>
               @endif
 
-                  @if(auth()->user()->is_admin && $_SERVER['HTTP_REFERER']==URL::route('entradaProduto'))
-                  <td><a class="btn-floating waves-effect waves-light gradient"><i class="material-icons">add</i></a></td>
+                  @if(auth()->user()->is_admin && $_GET['tipo'] == "doador")
+                  <td><a onclick="adicionarDoador({{$doador->id}})" class="btn-floating waves-effect waves-light gradient"><i class="material-icons">add</i></a></td>
                   @elseif(auth()->user()->is_admin )
                   <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarDoador({{$doador->id}})"><i class="material-icons">edit</i></a>
                   <button onclick="confirmarDoador({{$doador->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" ><i class="material-icons">delete</i></button>
@@ -815,6 +826,26 @@
     function deletarEstoque() {
         var id = document.getElementById('produto_id').value;
         window.location.href = "{{route('admin.estoque.deletar')}}?id=" + id;
+    }
+
+    function adicionarProduto(id) {
+        url_anterior = "{{$_SERVER['HTTP_REFERER']}}"
+        if(url_anterior.indexOf('?') != -1) {
+            window.location.href = url_anterior + "&produto=" + id;
+        } else {
+            window.location.href = "{{route('entradaProduto')}}?produto=" + id;
+        }
+        
+    }
+
+    function adicionarDoador(id) {
+        url_anterior = "{{$_SERVER['HTTP_REFERER']}}"
+        if(url_anterior.indexOf('?') != -1) {
+            window.location.href = url_anterior + "&doador=" + id;
+        } else {
+            window.location.href = "{{route('entradaProduto')}}?doador=" + id;
+        }
+        
     }
 </script>
 
