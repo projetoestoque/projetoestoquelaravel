@@ -14,6 +14,7 @@
         margin-left:-20px !important;
     }
 </style>
+
 @section('conteudo')
 <div class="butaoEspaco">
 @if(isset($produto_em_estoque))
@@ -56,14 +57,26 @@
             <div class="col l1"></div>
             <div class="input-field col s12 l4">
                 <div class="desktop-hide">
-                <a href="{{route('admin.listarCadastros')}}" class="waves-effect waves-light btn-flat gradient left"><i class="material-icons left">style</i>Escolher o Produto</a>
+                @if(isset($produto))
+                    <select name="produto">
+                        <option value="{{$produto->id}}">{{$produto->nome}}</option>
+                    </select>
+                @else
+                <a onclick="listarCadastrosProduto()" class="waves-effect waves-light btn-flat gradient left"><i class="material-icons left">style</i>Escolher o Produto</a>
+                @endif
                 <div class="tooltip">
                 <i class="material-icons">info_outline</i>
                 <span class="tooltiptext">O produto serve pra identificar qual produto será inserido </span>
                 </div>
                 </div>
                 <div class="mobile-hide">
-                <a href="{{route('admin.listarCadastros')}}" class="waves-effect waves-light btn-large gradient"><i class="material-icons left">style</i>Escolher o Produto</a>
+                @if(isset($produto))
+                    <select name="Id_produto">
+                        <option value="{{$produto->id}}">{{$produto->nome}} | {{$produto->marca}}</option>
+                    </select>
+                @else
+                <a onclick="listarCadastrosProduto()" class="waves-effect waves-light btn-flat gradient left"><i class="material-icons left">style</i>Escolher o Produto</a>
+                @endif
                 </div>
             </div>
             <div class="col l2">
@@ -94,14 +107,34 @@
             <div class="col l1"></div>
             <div class="input-field col s12 l4">
             <div class="desktop-hide">
-                <a href="{{route('admin.listarCadastros','Doador')}}" class="waves-effect waves-light btn-flat gradient"><i class="material-icons left">account_box</i>Escolher o Doador</a>
+                @if(isset($doador))
+                <select name="Id_doador">
+                    @if($doador->tipo == "fisico")
+                    <option value="{{$doador->id}}">{{$doador->nome}}</option>
+                    @else
+                    <option value="{{$doador->id}}">{{$doador->instituicao}}</option>
+                    @endif
+                </select>
+                @else
+                <a onclick="listarCadastrosDoador()" class="waves-effect waves-light btn-flat gradient"><i class="material-icons left">account_box</i>Escolher o Doador</a>
+                @endif
                 <div class="tooltip">
                 <i class="material-icons">info_outline</i>
                 <span class="tooltiptext">O Doador é de quem recebeu o produto que será inserido</span>
                 </div>
                 </div>
                 <div class="mobile-hide">
-                <a href="{{route('admin.listarCadastros','Doador')}}" class="waves-effect waves-light btn-large gradient"><i class="material-icons left">account_box</i>Escolher o Doador</a>
+                @if(isset($doador))
+                <select name="Id_doador">
+                    @if($doador->tipo == "fisico" || $doador->tipo != "juridico")
+                    <option value="{{$doador->id}}">{{$doador->nome}}</option>
+                    @else
+                    <option value="{{$doador->id}}">{{$doador->instituicao}}</option>
+                    @endif
+                </select>
+                @else
+                <a onclick="listarCadastrosDoador()" class="waves-effect waves-light btn-flat gradient"><i class="material-icons left">account_box</i>Escolher o Doador</a>
+                @endif
                 </div>
             </div>
             <div class="col l2">
@@ -212,4 +245,15 @@
 </div>
 <br>
 <br>
+
+<script>
+    function listarCadastrosProduto() {
+        window.location.href = "{{route('admin.listarCadastros')}}?tipo=produto"
+    }
+
+    function listarCadastrosDoador() {
+        window.location.href = "{{route('admin.listarCadastros')}}?tipo=doador"
+    }
+</script>
+
 @endsection
