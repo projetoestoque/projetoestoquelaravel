@@ -13,6 +13,9 @@
     .back{
         margin-left:-20px !important;
     }
+    .selected-from-lists{
+        margin-right:10px !important;
+    }
 </style>
 
 @section('conteudo')
@@ -53,29 +56,42 @@
         {{ csrf_field() }}
         <br>
          <h5 class="acima"><b>Dados Principais</b></h5>
+         <div class="row"></div>
         <div class="row">
-            <div class="col l1"></div>
-            <div class="input-field col s12 l4">
-                <div class="desktop-hide">
+            <div class="col l1"></div> 
+            <div class="desktop-hide">
+                <div class="input-field col s12 l4">
                 @if(isset($produto))
-                    <select name="produto">
-                        <option value="{{$produto->id}}">{{$produto->nome}}</option>
-                    </select>
+                <i class="material-icons prefix blue-text">style</i>
+                <input id="icon_prefix" type="text" value="{{$produto->nome}}">
+                <label for="icon_prefix">
+                    Produto Selecionado
+                </label>
+                <a onclick="listarCadastrosProduto()" class="modal-trigger radius white-text">
+                <i class="tiny material-icons ">add_circle_outline</i>
+                <span>Corrigir Produto</span> </a>
                 @else
-                <a onclick="listarCadastrosProduto()" class="waves-effect waves-light btn-flat gradient left"><i class="material-icons left">style</i>Escolher o Produto</a>
+                <a onclick="listarCadastrosProduto()" class="waves-effect waves-light btn-large gradient left"><i class="material-icons left">style</i>Escolher o Produto</a>
                 @endif
                 <div class="tooltip">
                 <i class="material-icons">info_outline</i>
                 <span class="tooltiptext">O produto serve pra identificar qual produto será inserido </span>
                 </div>
                 </div>
+                </div>
                 <div class="mobile-hide">
+                <div class="input-field col s12 l4">
                 @if(isset($produto))
-                    <select name="Id_produto">
-                        <option value="{{$produto->id}}">{{$produto->nome}} | {{$produto->marca}}</option>
-                    </select>
+                <i class="material-icons prefix blue-text">style</i>
+                <input id="icon_prefix" type="text" value="{{$produto->nome}}">
+                <label for="icon_prefix">
+                    Produto Selecionado
+                </label>
+                <a onclick="listarCadastrosProduto()" class="modal-trigger radius white-text">
+                <i class="tiny material-icons ">add_circle_outline</i>
+                <span class="selected-from-lists">Corrigir Produto</span> </a>
                 @else
-                <a onclick="listarCadastrosProduto()" class="waves-effect waves-light btn-flat gradient left"><i class="material-icons left">style</i>Escolher o Produto</a>
+                <a onclick="listarCadastrosProduto()" class="waves-effect waves-light btn-large gradient left"><i class="material-icons left">style</i>Escolher o Produto</a>
                 @endif
                 </div>
             </div>
@@ -86,54 +102,66 @@
             </div></div>
             </div>
             <div class="input-field col s12 l4">
-            <i class="material-icons prefix">access_time</i>
+            <i class="material-icons prefix">plus_one</i>
                 @if(isset($produto_em_estoque))
-                    <input required type="text" value="{{$produto_em_estoque->vencimento}}" name="vencimento" placeholder="00/00/0000" class="datepicker">
+                    <input required type="number" value="{{$produto_em_estoque->quantidade}}" placeholder="5" name="quantidade">
                 @else
-                    <input required type="text" name="vencimento" placeholder="00/00/0000" class="datepicker">
+                    <input required type="number"  placeholder="5" name="quantidade">
                 @endif
-                <label>Vencimento <span class="important">*</span></label>
+                <label>Quantidade <span class="important">*</span></label>
                 <div class="tooltip desktop-hide">
                 <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">Data que os produtos vencerá </span>
+                <span class="tooltiptext">Quantidade de produtos que será inserida</span>
                 </div>
             </div>
             <div class="mobile-hide"><div class="tooltip">
                 <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">Data que os produtos vencerá</span>
+                <span class="tooltiptext">Quantidade de produtos que será inserida</span>
             </div></div>
         </div>
         <div class="row">
             <div class="col l1"></div>
-            <div class="input-field col s12 l4">
             <div class="desktop-hide">
+             <div class="input-field col s12 l4">
                 @if(isset($doador))
-                <select name="Id_doador">
-                    @if($doador->tipo == "fisico")
-                    <option value="{{$doador->id}}">{{$doador->nome}}</option>
+                    <i class="material-icons prefix blue-text">style</i>
+                    @if($doador->tipo == "fisico" || $doador->tipo != "fisico" )
+                    <input id="icon_prefix" id="id_doador" type="text" value="{{$doador->nome}}">
                     @else
-                    <option value="{{$doador->id}}">{{$doador->instituicao}}</option>
+                    <input id="icon_prefix" id="id_doador" type="text" value="{{$doador->instituicao}}">
                     @endif
-                </select>
+                    <label for="icon_prefix">
+                        Doador Selecionado
+                    </label>
+                    <a onclick="listarCadastrosDoador()" class="modal-trigger radius white-text">
+                    <i class="tiny material-icons ">add_circle_outline</i>
+                    <span>Corrigir Doador</span> </a>
                 @else
-                <a onclick="listarCadastrosDoador()" class="waves-effect waves-light btn-flat gradient"><i class="material-icons left">account_box</i>Escolher o Doador</a>
+                <a onclick="listarCadastrosDoador()" class="waves-effect waves-light btn-large gradient"><i class="material-icons left">account_box</i>Escolher o Doador</a>
                 @endif
                 <div class="tooltip">
                 <i class="material-icons">info_outline</i>
                 <span class="tooltiptext">O Doador é de quem recebeu o produto que será inserido</span>
                 </div>
                 </div>
+                </div>
                 <div class="mobile-hide">
+                <div class="input-field col s12 l4">
                 @if(isset($doador))
-                <select name="Id_doador">
-                    @if($doador->tipo == "fisico" || $doador->tipo != "juridico")
-                    <option value="{{$doador->id}}">{{$doador->nome}}</option>
+                    <i class="material-icons prefix blue-text">style</i>
+                    @if($doador->tipo == "fisico" || $doador->tipo != "fisico" )
+                    <input id="icon_prefix" id="id_doador" type="text" value="{{$doador->nome}}">
                     @else
-                    <option value="{{$doador->id}}">{{$doador->instituicao}}</option>
+                    <input id="icon_prefix" id="id_doador" type="text" value="{{$doador->instituicao}}">
                     @endif
-                </select>
+                    <label for="icon_prefix">
+                        Doador Selecionado
+                    </label>
+                    <a onclick="listarCadastrosDoador()" class="modal-trigger radius white-text">
+                    <i class="tiny material-icons ">add_circle_outline</i>
+                    <span>Corrigir Doador</span> </a>
                 @else
-                <a onclick="listarCadastrosDoador()" class="waves-effect waves-light btn-flat gradient"><i class="material-icons left">account_box</i>Escolher o Doador</a>
+                <a onclick="listarCadastrosDoador()" class="waves-effect waves-light btn-large gradient"><i class="material-icons left">account_box</i>Escolher o Doador</a>
                 @endif
                 </div>
             </div>
@@ -173,6 +201,29 @@
                 <span class="tooltiptext">O Estoque é o local onde será armazenado determinados produtos cadastrados</span>
             </div></div>
         </div>
+        <div class="row">
+        <div class="col l1"></div>
+        <div class="input-field col s12 l4">
+        <i class="material-icons prefix">access_time</i>
+                @if(isset($produto_em_estoque))
+                    <input required type="text" value="{{$produto_em_estoque->vencimento}}" name="vencimento" placeholder="00/00/0000" class="datepicker">
+                @else
+                    <input required type="text" name="vencimento" placeholder="00/00/0000" class="datepicker">
+                @endif
+                <label>Vencimento <span class="important">*</span></label>
+                <div class="tooltip desktop-hide">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">Data que os produtos vencerá </span>
+                </div>
+            </div>
+            <div class="col l2">
+            <div class="mobile-hide"><div class="tooltip">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">Data que os produtos vencerá</span>
+            </div>
+            </div>
+            </div>
+        </div>
         <h5 style="margin-left:20px;"><b>Dados para Filtragem</b></h5>
         <br>
         <div class="row">
@@ -197,7 +248,7 @@
                         @endforelse
                 @endif
                 </select>
-                <label for="quantidade">Medida<span class="important">*</span></label>
+                <label for="Id_medida">Medida<span class="important">*</span></label>
                 <div class="tooltip desktop-hide">
                 <i class="material-icons">info_outline</i>
                 <span class="tooltiptext">A medida é a unidade de determinado item(Quilo,pacotes,gramas)/span>

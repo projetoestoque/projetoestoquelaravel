@@ -22,7 +22,6 @@ Route::get('/teste', 'ProdutoController@pesquisarEntrada')->name('teste');
 Route::get('/', ['as' => 'main', 'uses' => function() {
 	return view('welcome');
 }]);
-
 Route::group(['middleware' => 'is_admin'], function () {
     Route::get('/admin/home', 'HomeController@adminHome')->name('admin.home');
     Route::get('/admin/cadastros', 'CadastroController@Cadastros')->name('admin.cadastros');
