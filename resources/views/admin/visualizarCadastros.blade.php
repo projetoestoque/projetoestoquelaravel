@@ -32,9 +32,6 @@
     border-radius:30px !important;
  }
 
- #resultados {
-     border: 1px solid green;
- }
 </style>
 
 @section('conteudo')
@@ -59,11 +56,8 @@
 <div class="input-field col s12 input-outlined">
         <i class="material-icons prefix right">search</i>
         <input onkeydown="buscarCadastros(event)" id="icon_prefix" type="text" placeholder="Pesquisar...">
-
-        <div id="resultados">
+        <div id="resultados" class="z-depth-2">
           <ul id="lista_resultados">
-            <li>Nome    |    Tipo</li>
-            <br/>
           </ul>
         </div>
 
@@ -71,19 +65,8 @@
 </div>
 <div class="chips-chips" id="chips">
 <a id="All" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)">Todos</a>
-
-@if($_GET['tipo'] == "produto")
 <a id="Produto" class="waves-effect waves-light btn-flat gradient" onclick="changeFilter(id)"><i class="material-icons left">free_breakfast</i>Produto</a>
-@else
-<a id="Produto" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">free_breakfast</i>Produto</a>
-@endif
-
-@if($_GET['tipo'] == "doador")
-<a id="Doador" class="waves-effect waves-light btn-flat gradient" onclick="changeFilter(id)"><i class="material-icons left">face</i>Doador</a>
-@else
 <a id="Doador" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">face</i>Doador</a>
-@endif
-
 <a id="Tipo" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">layers</i>Tipo</a>
 <a id="Medida" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">fitness_center</i>Medida</a>
 <a id="Marca" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">copyright</i>Marca</a>
@@ -167,11 +150,11 @@
           <tbody>
           @foreach($produtos_cadastrados as $produto)
               <tr>
-                  <td class="grey-text text-darken-3">{{$produto->nome}}</td>
+                  <td class="grey-text text-darken-3" name="{{$produto->nome}}">{{$produto->nome}}</td>
                   <td class="grey-text text-darken-2">{{$produto->marca}}</td>
                   <td class="grey-text text-darken-2">{{$produto->tipo}}</td>
                   <td class="grey-text text-darken-2">{{$produto->codigo_barra}}</td>
-                  @if(auth()->user()->is_admin && $_GET['tipo'] == "produto")
+                  @if(auth()->user()->is_admin && isset($_GET['tipo']) && $_GET['tipo'] == "produto")
                   <td><a onclick="adicionarProduto({{$produto->id}})" class="btn-floating waves-effect waves-light gradient"><i class="material-icons">add</i></a></td>
                   @elseif(auth()->user()->is_admin )
                   <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarProduto({{$produto->id}})"><i class="material-icons">edit</i></a>
@@ -212,23 +195,22 @@
           @foreach($doadores as $doador)
               <tr>
               @if($doador->tipo=="fisico")
-                <td class="grey-text text-darken-3">{{$doador->nome}}</td>
+                <td class="grey-text text-darken-3" name="{{$doador->nome}}">{{$doador->nome}}</td>
                 <td class="grey-text text-darken-3">{{$doador->cpf}}</td>
                 <td class="grey-text text-darken-2">{{$doador->telefone}}</td>
                 <td class="grey-text text-darken-2">{{$doador->email}}</td>
               @elseif($doador->tipo=="juridico")
-                <td class="grey-text text-darken-3">{{$doador->instituicao}}</td>
+                <td class="grey-text text-darken-3" name="{{$doador->instituicao}}">{{$doador->instituicao}}</td>
                 <td class="grey-text text-darken-3">{{$doador->cnpj}}</td>
                 <td class="grey-text text-darken-2">{{$doador->telefone}}</td>
                 <td class="grey-text text-darken-2">{{$doador->email}}</td>
               @else
-              <td class="grey-text text-darken-3">{{$doador->nome}}</td>
+              <td class="grey-text text-darken-3" name="{{$doador->nome}}">{{$doador->nome}}</td>
               <td class="grey-text text-darken-3">N/A</td>
               <td class="grey-text text-darken-3">N/A</td>
               <td class="grey-text text-darken-3">N/A</td>
               @endif
-
-                  @if(auth()->user()->is_admin && $_GET['tipo'] == "doador")
+                  @if(auth()->user()->is_admin && isset($_GET['tipo']) && $_GET['tipo'] == "doador")
                   <td><a onclick="adicionarDoador({{$doador->id}})" class="btn-floating waves-effect waves-light gradient"><i class="material-icons">add</i></a></td>
                   @elseif(auth()->user()->is_admin )
                   <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarDoador({{$doador->id}})"><i class="material-icons">edit</i></a>
@@ -598,7 +580,6 @@
     </div>
   </div>
 </div>
-
 <script>
 
     function buscarCadastros(event) {
@@ -618,16 +599,19 @@
             query += letra
 
             let li = document.createElement('li')
-            li.innerHTML = "Nome | Tipo"
-            lista.appendChild(li)
+            let a = document.createElement('a')
+
 
             $.get("{{url('/admin/buscar/cadastros?query=')}}" + query, (data, status) => {  
                 for(let i = 0; i < data.length; i++) {
                     if(document.getElementById(data[i]['nome']) == null) {
                         let li = document.createElement('li')
-                        li.innerHTML = `${data[i]['nome']} | ${data[i]['tipo']}`
-                        li.setAttribute('id', data[i]['nome'])
+                        let a = document.createElement('a')
+                        a.innerHTML = `${data[i]['nome']} | ${data[i]['tipo']}`
+                        a.setAttribute('id', data[i]['nome'])
+                        a.setAttribute('href', `#${data[i]['nome']}`)
                         lista.appendChild(li)
+                        li.appendChild(a)
                     }
                 }
             });
@@ -642,9 +626,11 @@
           
                     if(document.getElementById(data[i]['nome']) == null) {
                         let li = document.createElement('li')
-                        li.innerHTML = data[i]['nome'] + " | " + data[i]['tipo']
-                        li.setAttribute('id', data[i]['nome']);
+                        let a = document.createElement('a')
+                        a.innerHTML = data[i]['nome'] + " | " + data[i]['tipo']
+                        a.setAttribute('id', data[i]['nome']);
                         lista.appendChild(li);
+                        li.appendChild(a);
                     }
     
                 }
@@ -653,7 +639,6 @@
             
         }
     }
-
     function changeFilter(id){
         switch(id){
             case "All":
@@ -848,6 +833,11 @@
         
     }
 </script>
+@if(isset($_GET['tipo']) && $_GET['tipo'] == "doador")
+<script>
+    changeFilter("Doador");
+</script>
+@endif
 
 @if($marca_antiga != null)
  <script>

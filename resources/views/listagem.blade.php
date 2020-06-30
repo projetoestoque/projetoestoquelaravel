@@ -22,9 +22,11 @@
     margin-top:8px !important;
     border-radius:30px !important;
  }
-
- #resultados {
-   border: 1px solid green;
+ div #resultados{
+   display:none;
+ }
+ .row:after{
+   clear:none !important;
  }
 </style>
 @section('conteudo')
@@ -61,10 +63,8 @@
 <div class="input-field col s12 input-outlined">
         <i class="material-icons prefix right">search</i>
         <input onkeydown="buscarEntrada(event)" id="icon_prefix" type="text" placeholder="Pesquisar...">
-        <div id="resultados">
+        <div id="resultados" class="z-depth-2">
           <ul id="lista_resultados">
-            <li>Nome    |    Vencimento</li>
-            <br/>
           </ul>
         </div>
     </div>
@@ -107,7 +107,7 @@
           <tbody>
           @foreach($produtos_estoque as $produto)
               <tr>
-                  <td>{{$produto->nome}}</td>
+                  <td name="{{$produto->nome}}">{{$produto->nome}}</td>
                   <td>{{$produto->marca}}</td>
                   <td class="grey-text text-darken-3">
                   @if($produto->quantidade<=$produto->quantidade_minima)
@@ -163,7 +163,7 @@
           @endif
       </table>
       <table class="listAbaixo highlight centered responsive-table">
-      @if( empty($produtos_abaixo))
+      @if(empty($produtos_abaixo))
       <div class="listAbaixo">
       <br>
       <br>
@@ -364,7 +364,7 @@
   let query
 
   function buscarEntrada(event) {
-    
+    document.getElementById("resultados").style.display="block"
     input = document.getElementById('icon_prefix')
         query = input.value
         let keyCode = event.keyCode
@@ -376,22 +376,27 @@
             lista.innerHTML = ""
             let letra = event.key
             query += letra
-
             let li = document.createElement('li')
-            li.innerHTML = "Nome | Tipo"
-            lista.appendChild(li)
+            let a = document.createElement('a')
 
             $.get("{{url('/admin/buscar/cadastros?query=')}}" + query, (data, status) => {  
                 for(let i = 0; i < data.length; i++) {
                     if(document.getElementById(data[i]['nome']) == null) {
                         let li = document.createElement('li')
-                        li.innerHTML = `${data[i]['nome']} | ${data[i]['tipo']}`
-                        li.setAttribute('id', data[i]['nome'])
+                        let a = document.createElement('a')
+                        a.innerHTML = `${data[i]['nome']} | ${data[i]['tipo']}`
+                        a.setAttribute('id', data[i]['nome'])
+                        a.setAttribute('href', `#${data[i]['nome']}`)
                         lista.appendChild(li)
+                        li.appendChild(a)
+                        
                     }
                 }
-            });
-        } else if(keyCode == 8) {
+            
+        });
+        }
+        else if(keyCode == 8) {
+          lista.innerHTML = ""
             newQuery = ""
             for(let i = 0; i < query.length-1; i++) {
                 newQuery += query[i]
@@ -402,17 +407,16 @@
           
                     if(document.getElementById(data[i]['nome']) == null) {
                         let li = document.createElement('li')
-                        li.innerHTML = data[i]['nome'] + " | " + data[i]['tipo']
-                        li.setAttribute('id', data[i]['nome']);
-                        lista.appendChild(li);
+                        let a = document.createElement('a')
+                        a.innerHTML = data[i]['nome'] + " | " + data[i]['tipo']
+                        a.setAttribute('id', data[i]['nome']);
+                        lista.appendChild(a);
+                        li.appendChild(a);
                     }
     
                 }
             });
-
-            
         }
-      
   }
 </script>
 @endsection

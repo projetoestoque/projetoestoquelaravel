@@ -310,6 +310,16 @@ a.modal-trigger.radius{
   background-image:linear-gradient(to right, #00b4db, #0083b0);
   color:white;
 }
+div #resultados{
+  border-radius: 8px;
+}
+#resultados #lista_resultados li{
+  padding:10px;
+  transition: 0.2s;
+}
+div #resultados #lista_resultados li:hover{
+  background: #e4e4e485;
+}
 @media only screen and (max-width: 400px) {
   .mobile-hide{ display: none !important; }
   .alinhamento{
