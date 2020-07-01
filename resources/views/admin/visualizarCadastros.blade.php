@@ -54,11 +54,12 @@
 </h4>
 <div class="row sem-fundo">
 <div class="input-field col s12 input-outlined">
-        <i class="material-icons prefix right">search</i>
-        <input onkeydown="buscarCadastros(event)" id="icon_prefix" type="text" placeholder="Pesquisar...">
+        <a class="material-icons prefix right">search</a>
+        <input onkeydown="pesquisarCadastros(event)" id="icon_prefix" type="text" title="Pressione enter ou clique no icone para pesquisar..." placeholder="Pesquisar...">
         <div id="resultados" class="z-depth-2">
-          <ul id="lista_resultados">
-          </ul>
+          <table id="tabela_resultados">
+
+          </table>
         </div>
 
     </div>
@@ -149,7 +150,7 @@
           </thead>
           <tbody>
           @foreach($produtos_cadastrados as $produto)
-              <tr>
+              <tr name="{{$produto->nome}}">
                   <td class="grey-text text-darken-3" name="{{$produto->nome}}">{{$produto->nome}}</td>
                   <td class="grey-text text-darken-2">{{$produto->marca}}</td>
                   <td class="grey-text text-darken-2">{{$produto->tipo}}</td>
@@ -193,7 +194,12 @@
           </thead>
           <tbody>
           @foreach($doadores as $doador)
-              <tr>
+            @if($doador->tipo == 'fisico' || $doador->tipo != 'juridico')
+            <tr name="{{$doador->nome}}">
+            @else
+            <tr name="{{$doador->instituicao}}">
+            
+            @endif
               @if($doador->tipo=="fisico")
                 <td class="grey-text text-darken-3" name="{{$doador->nome}}">{{$doador->nome}}</td>
                 <td class="grey-text text-darken-3">{{$doador->cpf}}</td>
@@ -246,7 +252,7 @@
           </thead>
           <tbody>
           @foreach($tipos as $tipo)
-              <tr>
+              <tr name="{{$tipo->tipo}}">
                 <td class="grey-text text-darken-3">{{$tipo->tipo}}</td>
                   @if(auth()->user()->is_admin)
                   <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarTipo({{$tipo->id}})"><i class="material-icons">edit</i></a>
@@ -284,7 +290,7 @@
           </thead>
           <tbody>
           @foreach($medidas as $medida)
-              <tr>
+              <tr name="{{$medida->medida}}">
                 <td class="grey-text text-darken-3">{{$medida->medida}}</td>
                 @if(empty($medida->abreviacao))
                 <td class="grey-text text-darken-3">N/A</td>
@@ -325,7 +331,7 @@
           </thead>
           <tbody>
           @foreach($marcas as $marca)
-              <tr>
+              <tr name="{{$marca->marca}}">
                 <td class="grey-text text-darken-3">{{$marca->marca}}</td>
                   @if(auth()->user()->is_admin)
                   <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarMarca({{$marca->id}})"><i class="material-icons">edit</i></a>
@@ -361,7 +367,7 @@
           </thead>
           <tbody>
           @foreach($estoques_disponiveis as $estoque)
-              <tr>
+              <tr name="{{$estoque->estoque}}">
               @if($estoque->estoque=="sem estoque")
                 @continue
               @else
@@ -580,65 +586,57 @@
     </div>
   </div>
 </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css">
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
+
 <script>
 
-    function buscarCadastros(event) {
-        
-        input = document.getElementById('icon_prefix')
-        query = input.value
-        let keyCode = event.keyCode
+    function pesquisarCadastros(event) {
+        if(event.key == 'Enter') {
+            input = document.getElementById('icon_prefix')
+            query = input.value
+            tabela = document.getElementById('tabela_resultados')
+            tabela.innerHTML = "" 
 
-        da = ""
+            //verificar se é codigo de barras
+            if(!isNaN(parseFloat(query)) && isFinite(query)) {
+                console.log('numero')
 
-        let lista = document.getElementById("lista_resultados");
-        let produtos = []
-        
-        if((keyCode >= 65 && keyCode <= 90) && (keyCode != 20) || keyCode == 186) {
-            lista.innerHTML = ""
-            let letra = event.key
-            query += letra
-
-            let li = document.createElement('li')
-            let a = document.createElement('a')
-
-
-            $.get("{{url('/admin/buscar/cadastros?query=')}}" + query, (data, status) => {  
-                for(let i = 0; i < data.length; i++) {
-                    if(document.getElementById(data[i]['nome']) == null) {
-                        let li = document.createElement('li')
-                        let a = document.createElement('a')
-                        a.innerHTML = `${data[i]['nome']} | ${data[i]['tipo']}`
-                        a.setAttribute('id', data[i]['nome'])
-                        a.setAttribute('href', `#${data[i]['nome']}`)
-                        lista.appendChild(li)
-                        li.appendChild(a)
+                $.get("{{url('/admin/buscar/codigo_barra?query=')}}" + query, (data, status) => {
+                    for(let i = 0; i < data.length; i++) {
+                        if(document.getElementById(data[i]['nome']) == null) {
+                            var tr = document.getElementsByName(data[i]['nome'])[0].outerHTML
+                            tabela.innerHTML += tr
+                        }
                     }
-                }
-            });
-        } else if(keyCode == 8) {
-            newQuery = ""
-            for(let i = 0; i < query.length-1; i++) {
-                newQuery += query[i]
+                });
+
+            } else {
+                $.get("{{url('/admin/buscar/cadastros?query=')}}" + query, (data, status) => { 
+                    
+                    for(let i = 0; i < data.length; i++) {
+                        if(data[i]['tipo'] == 'juridico') {
+                            if(document.getElementById(data[i]['instituicao']) == null) {
+                                var tr = document.getElementsByName(data[i]['instituicao'])[0].outerHTML
+                                tabela.innerHTML += tr
+                            }
+                        } else {
+                            if(document.getElementById(data[i]['nome']) == null) {
+                                var tr = document.getElementsByName(data[i]['nome'])[0].outerHTML
+                                tabela.innerHTML += tr
+                            }
+                        }
+                        
+                    }
+                }); 
             }
 
-            $.get("{{url('/admin/buscar/cadastros?query=')}}" + newQuery, (data, status) => {
-                for(let i = 0; i < data.length; i++) {
-          
-                    if(document.getElementById(data[i]['nome']) == null) {
-                        let li = document.createElement('li')
-                        let a = document.createElement('a')
-                        a.innerHTML = data[i]['nome'] + " | " + data[i]['tipo']
-                        a.setAttribute('id', data[i]['nome']);
-                        lista.appendChild(li);
-                        li.appendChild(a);
-                    }
-    
-                }
-            });
-
-            
+                       
         }
     }
+
+
     function changeFilter(id){
         switch(id){
             case "All":
@@ -693,6 +691,7 @@
                 }
 
     }
+    
 
     function sleep (time) {
         return new Promise((resolve) => setTimeout(resolve, time));
@@ -830,6 +829,7 @@
         } else {
             window.location.href = "{{route('entradaProduto')}}?doador=" + id;
         }
+        
         
     }
 </script>

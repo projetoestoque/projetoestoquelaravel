@@ -214,6 +214,7 @@ class CadastroController extends Controller
 		$produto->Id_medida = $req->get('Id_medida');
 		$produto->Id_doador = $req->get('Id_doador');
 		$produto->quantidade = $req->get('quantidade');
+		$produto->quantidade_minima = $req->get('quantidade_minima');
 		$produto->vencimento = $req->get('vencimento');
 		$produto->save();
 
@@ -453,7 +454,6 @@ class CadastroController extends Controller
 	
 	public function pesquisarCadastros()
   	{
-		sleep(0.5);
 		$produtos_em_estoque = DB::table('produto_em_estoques')->get();
 		$items = [];
 		$query = "";
@@ -461,7 +461,7 @@ class CadastroController extends Controller
 		if(!$query) return false;
 
 		//filtrar produtos cadastrados
-		$produtos_cadastrados_filtrados = Produto::where('nome', 'LIKE', '%'.$query.'%')->get();
+		$produtos_cadastrados_filtrados = Produto::where('nome', 'LIKE', $query.'%')->get();
 		foreach($produtos_cadastrados_filtrados as $produto) {
 			if($produto->nome[0] == $query[0]) {
 				$produto->tipo = "Produto";
@@ -470,7 +470,7 @@ class CadastroController extends Controller
 		}
 		
 		//filtrar doadores
-		$doadores_fisicos_filtrados = Doador::where('nome', 'LIKE', '%'.$query.'%')->get();
+		$doadores_fisicos_filtrados = Doador::where('nome', 'LIKE', $query.'%')->get();
 		$doadores_juridicos_filtrados = Doador::where('instituicao', 'LIKE', '%'.$query.'%')->get();
 		foreach($doadores_fisicos_filtrados as $doador) {
 			if($query[0] == $doador->nome[0]) {
@@ -484,7 +484,7 @@ class CadastroController extends Controller
 		}
 
 		//filtrar tipos
-		$tipos_filtrados = Tipo::where('tipo', 'LIKE', '%'.$query.'%')->get();
+		$tipos_filtrados = Tipo::where('tipo', 'LIKE', $query.'%')->get();
 		foreach($tipos_filtrados as $tipo) {
 			if($query[0] == $tipo->tipo[0]) {
 				$tipo->nome = $tipo->tipo;
@@ -494,7 +494,7 @@ class CadastroController extends Controller
 		}
 
 		//filtrar medidas
-		$medidas_filtradas = Medida::where('medida', 'LIKE', '%'.$query.'%')->get();
+		$medidas_filtradas = Medida::where('medida', 'LIKE', $query.'%')->get();
 		foreach($medidas_filtradas as $medida) {
 			if($query[0] == $medida->medida[0]) {
 				$medida->nome = $medida->medida;
@@ -504,7 +504,7 @@ class CadastroController extends Controller
 		}
 
 		//filtrar marcas
-		$marcas_filtradas = Marca::where('marca', 'LIKE', '%'.$query.'%')->get();
+		$marcas_filtradas = Marca::where('marca', 'LIKE', $query.'%')->get();
 		foreach($marcas_filtradas as $marca) {
 			if($query[0] == $marca->marca[0]) {
 				$marca->nome = $marca->marca;
@@ -514,16 +514,33 @@ class CadastroController extends Controller
 		}
 
 		//filtrar estoques
-		$estoques_filtrados = Estoque_disponivel::where('estoque', 'LIKE', '%'.$query.'%')->get();
+		$estoques_filtrados = Estoque_disponivel::where('estoque', 'LIKE', $query.'%')->get();
 		foreach($estoques_filtrados as $estoque) {
-			if($query[0] == $estoque->estoque[0]) {
-				$estoque->nome = $estoque->estoque;
+			// if($query[0] == $estoque->estoque[0]) {
+				
+			// }
+
+			$estoque->nome = $estoque->estoque;
 				$estoque->tipo = "Estoque";
 				array_push($items, $estoque);
-			}
 		}
 		
 		
 		return $items;
   }
+
+  public function pesquisarCodigoBarra() {
+	$items = [];
+	$query = "";
+	if(isset($_GET['query'])) $query = $_GET['query'];
+	if(!$query) return false;
+
+	$produtos_filtrados = Produto::where('codigo_barra', 'LIKE', $query.'%')->get();
+	foreach($produtos_filtrados as $produto) {
+		array_push($items, $produto);
+	}
+	
+	return $items;
+  }
+
 }
