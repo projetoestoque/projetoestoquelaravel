@@ -22,9 +22,9 @@
     margin-top:8px !important;
     border-radius:30px !important;
  }
- div #resultados{
+ /* div #resultados{
    display:none;
- }
+ } */
  .row:after{
    clear:none !important;
  }
@@ -62,10 +62,11 @@
 <div class="row sem-fundo">
 <div class="input-field col s12 input-outlined">
         <i class="material-icons prefix right">search</i>
-        <input onkeydown="buscarEntrada(event)" id="icon_prefix" type="text" placeholder="Pesquisar...">
+        <input onkeydown="buscarEntrada(event)" id="icon_prefix" type="text" title="Pressione enter ou clique no icone para pesquisar..." placeholder="Pesquisar...">
         <div id="resultados" class="z-depth-2">
-          <ul id="lista_resultados">
-          </ul>
+
+          <table id="tabela_resultados"></table>
+
         </div>
     </div>
 </div>
@@ -106,7 +107,7 @@
           </thead>
           <tbody>
           @foreach($produtos_estoque as $produto)
-              <tr>
+              <tr name="{{$produto->nome}}">
                   <td name="{{$produto->nome}}">{{$produto->nome}}</td>
                   <td>{{$produto->marca}}</td>
                   <td class="grey-text text-darken-3">
@@ -145,7 +146,7 @@
           </thead>
           <tbody>
           @foreach($produtos_acima as $produto)
-              <tr>
+              <tr name="$produto->nome">
                   <td>{{$produto->nome}}</td>
                   <td>{{$produto->marca}}</td>
                   <td class="grey-text text-darken-3">
@@ -184,7 +185,7 @@
           </thead>
           <tbody>
           @foreach($produtos_abaixo as $produto)
-              <tr>
+              <tr name="{{$produto->nome}}">
                   <td>{{$produto->nome}}</td>
                   <td>{{$produto->marca}}</td>
                   <td class="grey-text text-darken-3">
@@ -222,7 +223,7 @@
           </thead>
           <tbody>
           @foreach($produtos_sem as $produto)
-              <tr>
+              <tr name="{{$produto->nome}}">
                   <td>{{$produto->nome}}</td>
                   <td>{{$produto->marca}}</td>
                   <td class="grey-text text-darken-3">{{$produto->codigo_barra}}</td>
@@ -364,59 +365,21 @@
   let query
 
   function buscarEntrada(event) {
-    document.getElementById("resultados").style.display="block"
-    input = document.getElementById('icon_prefix')
-        query = input.value
-        let keyCode = event.keyCode
+        if(event.key == 'Enter') {
+            input = document.getElementById('icon_prefix')
+            query = input.value
+            tabela = document.getElementById('tabela_resultados')
+            tabela.innerHTML = ""
 
-        let lista = document.getElementById("lista_resultados");
-        let produtos = []
-        
-        if((keyCode >= 65 && keyCode <= 90) && (keyCode != 20) || keyCode == 186) {
-            lista.innerHTML = ""
-            let letra = event.key
-            query += letra
-            let li = document.createElement('li')
-            let a = document.createElement('a')
-
-            $.get("{{url('/admin/buscar/cadastros?query=')}}" + query, (data, status) => {  
+            $.get("{{url('/admin/buscar/entrada?query=')}}" + query, (data, status) => {  
                 for(let i = 0; i < data.length; i++) {
                     if(document.getElementById(data[i]['nome']) == null) {
-                        let li = document.createElement('li')
-                        let a = document.createElement('a')
-                        a.innerHTML = `${data[i]['nome']} | ${data[i]['tipo']}`
-                        a.setAttribute('id', data[i]['nome'])
-                        a.setAttribute('href', `#${data[i]['nome']}`)
-                        lista.appendChild(li)
-                        li.appendChild(a)
-                        
+                        var tr = document.getElementsByName(data[i]['nome'])[0].outerHTML
+                        tabela.innerHTML += tr
                     }
                 }
-            
-        });
+            });            
         }
-        else if(keyCode == 8) {
-          lista.innerHTML = ""
-            newQuery = ""
-            for(let i = 0; i < query.length-1; i++) {
-                newQuery += query[i]
-            }
-
-            $.get("{{url('/admin/buscar/cadastros?query=')}}" + newQuery, (data, status) => {
-                for(let i = 0; i < data.length; i++) {
-          
-                    if(document.getElementById(data[i]['nome']) == null) {
-                        let li = document.createElement('li')
-                        let a = document.createElement('a')
-                        a.innerHTML = data[i]['nome'] + " | " + data[i]['tipo']
-                        a.setAttribute('id', data[i]['nome']);
-                        lista.appendChild(a);
-                        li.appendChild(a);
-                    }
-    
-                }
-            });
-        }
-  }
+    }
 </script>
 @endsection
