@@ -7,24 +7,26 @@
      margin-bottom:10px;
  }
  .listAcima{
-    display:none;
+    display:none !important;;
  }
  .listAbaixo{
-    display:none;
+    display:none !important;;
  }
  .listSem{
-    display:none;
+    display:none !important;; 
  }
  .sem-fundo{
     margin-bottom:0 ;
  }
- .btn.waves-effect.waves-light.gradient.right{
+ .btn.waves-effect.waves-light.gradient{
     margin-top:8px !important;
     border-radius:30px !important;
  }
- /* div #resultados{
-   display:none;
- } */
+ @media only screen and (max-width: 400px){
+    .container .waves-effect.waves-light.btn-flat.gradient{
+    display:Flex;
+  }
+ }
  .row:after{
    clear:none !important;
  }
@@ -48,25 +50,40 @@
 </div>
 <br>
 <br>
+<div class="mobile-hide">
+  <div class="container">
+    <h4><b>Visualizar Estoque</b>
+      @if(auth()->user()->is_admin)
+      <a class="btn waves-effect waves-light gradient right" href="{{route('admin.insercoes')}}">Dar Entrada No Estoque
+      <i class="material-icons right">add_circle_outline</i>
+      @else
+      <a class="btn waves-effect waves-light gradient right" href="{{route('estoqueMenu')}}">Dar Entrada No Estoque
+      <i class="material-icons right">add_circle_outline</i>
+      @endif
+      </a>
+    </h4>
+  </div>
+</div>
+<div class="desktop-hide">
+<h4 class="center"><b>Visualizar Estoque</b>
+      @if(auth()->user()->is_admin)
+      <a class="btn waves-effect waves-light gradient" href="{{route('admin.insercoes')}}">Dar Entrada No Estoque
+      <i class="material-icons right">add_circle_outline</i>
+      @else
+      <a class="btn waves-effect waves-light gradient" href="{{route('estoqueMenu')}}">Dar Entrada No Estoque
+      <i class="material-icons right">add_circle_outline</i>
+      @endif
+      </a>
+    </h4>
+</div>
 <div class="container">
-<h4><b>Visualizar Estoque</b>
-@if(auth()->user()->is_admin)
-<a class="btn waves-effect waves-light gradient right" href="{{route('admin.insercoes')}}">Dar Entrada No Estoque
-<i class="material-icons right">add_circle_outline</i>
-@else
-<a class="btn waves-effect waves-light gradient right" href="{{route('estoqueMenu')}}">Dar Entrada No Estoque
-<i class="material-icons right">add_circle_outline</i>
-@endif
-</a>
-</h4>
 <div class="row sem-fundo">
 <div class="input-field col s12 input-outlined">
         <i class="material-icons prefix right">search</i>
         <input onkeydown="buscarEntrada(event)" id="icon_prefix" type="text" title="Pressione enter ou clique no icone para pesquisar..." placeholder="Pesquisar...">
         <div id="resultados" class="z-depth-2">
-
-          <table id="tabela_resultados"></table>
-
+          <table id="tabela_resultados" class="highlight centered responsive-table">
+          </table>
         </div>
     </div>
 </div>
@@ -370,8 +387,9 @@
             query = input.value
             tabela = document.getElementById('tabela_resultados')
             tabela.innerHTML = ""
-
+                                
             $.get("{{url('/admin/buscar/entrada?query=')}}" + query, (data, status) => {  
+              tabela.innerHTML="<thead class='grey-text '><tr><th>Nome</th><th>Marca</th><th>Quantidade</th><th>Estoque</th><th>Vencimento</th></tr></thead>"
                 for(let i = 0; i < data.length; i++) {
                     if(document.getElementById(data[i]['nome']) == null) {
                         var tr = document.getElementsByName(data[i]['nome'])[0].outerHTML

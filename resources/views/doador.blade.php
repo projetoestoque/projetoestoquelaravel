@@ -112,13 +112,54 @@
         <div class="row">
         <div class="col l1"></div>
             <div class="input-field col s12 l4">
+                <i class="material-icons prefix">location_on</i>
+                @if(isset($doador))
+                    <input value="{{$doador->endereco}}" type="text" name="cep" placeholder="55290-000"></input>
+                @else
+                    <input value="{{old('endereco')}}" type="text" name="cep" placeholder="55290-000"></input>
+                @endif
+                <label>CEP</label>
+            </div>
+            <div class="col l2"></div>
+            <div class="input-field col s12 l4">
                 <i class="material-icons prefix">home</i>
                 @if(isset($doador))
-                    <input value="{{$doador->endereco}}" type="text" name="endereco" placeholder="Rua Exemplo  nºxx,Exemplo"></input>
+                    <input value="{{$doador->endereco}}" type="text" name="logradouro" placeholder="Rua Exemplo"></input>
                 @else
-                    <input value="{{old('endereco')}}" type="text" name="endereco" placeholder="Rua Exemplo  nºxx,Exemplo"></input>
+                    <input value="{{old('endereco')}}" type="text" name="logradouro" placeholder="Rua Exemplo"></input>
                 @endif
-                <label>Endereço</label>
+                <label>Logradouro</label>
+            </div>
+        </div>
+        <div class="row">
+        <div class="col l1"></div>
+            <div class="input-field col s12 l3">
+                <i class="material-icons prefix">location_city</i>
+                @if(isset($doador))
+                    <input value="{{$doador->endereco}}" type="text" name="cidade" placeholder="Garanhuns"></input>
+                @else
+                    <input value="{{old('endereco')}}" type="text" name="cidade" placeholder="Garanhuns"></input>
+                @endif
+                <label>Cidade</label>
+            </div>
+            <div class="input-field col s12 l2">
+                <i class="material-icons prefix">flag</i>
+                @if(isset($doador))
+                    <input value="{{$doador->endereco}}" type="text" name="uf" placeholder="PE"></input>
+                @else
+                    <input value="{{old('endereco')}}" type="text" name="uf" placeholder="PE"></input>
+                @endif
+                <label>Estado</label>
+            </div>
+            <div class="col l1"></div>
+            <div class="input-field col s12 l4">
+                <i class="material-icons prefix">home</i>
+                @if(isset($doador))
+                    <input value="{{$doador->endereco}}" type="text" name="bairro" placeholder="Bairro"></input>
+                @else
+                    <input value="{{old('endereco')}}" type="text" name="bairro" placeholder="Bairro"></input>
+                @endif
+                <label>Bairro</label>
             </div>
         </div>
         <div class="row valign center">

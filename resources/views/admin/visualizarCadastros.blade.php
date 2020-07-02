@@ -27,7 +27,7 @@
  .sem-fundo{
     margin-bottom:0 !important;
  }
- .btn.waves-effect.waves-light.gradient.right{
+ .btn.waves-effect.waves-light.gradient{
     margin-top:8px !important;
     border-radius:30px !important;
  }
@@ -46,18 +46,34 @@
 </div>
 <br>
 <br>
+<div class="mobile-hide">
+    <div class="container">
+    <h4><b>Visualizar Cadastros</b>
+    <a class="btn waves-effect waves-light gradient right" href="{{route('admin.cadastros')}}">Cadastrar Produto
+    <i class="material-icons right">add_circle_outline</i>
+    </a>
+    </h4>
+  </div>
+</div>
+<div class="desktop-hide">
+    <h4 class="center"><b>Visualizar Estoque</b>
+      @if(auth()->user()->is_admin)
+      <a class="btn waves-effect waves-light gradient" href="{{route('admin.insercoes')}}">Dar Entrada No Estoque
+      <i class="material-icons right">add_circle_outline</i>
+      @else
+      <a class="btn waves-effect waves-light gradient" href="{{route('estoqueMenu')}}">Dar Entrada No Estoque
+      <i class="material-icons right">add_circle_outline</i>
+      @endif
+      </a>
+    </h4>
+</div>
 <div class="container">
-<h4><b>Visualizar Cadastros</b>
-<a class="btn waves-effect waves-light gradient right" href="{{route('admin.cadastros')}}">Cadastrar Produto
-<i class="material-icons right">add_circle_outline</i>
-</a>
-</h4>
 <div class="row sem-fundo">
 <div class="input-field col s12 input-outlined">
         <a class="material-icons prefix right">search</a>
         <input onkeydown="pesquisarCadastros(event)" id="icon_prefix" type="text" title="Pressione enter ou clique no icone para pesquisar..." placeholder="Pesquisar...">
         <div id="resultados" class="z-depth-2">
-          <table id="tabela_resultados">
+          <table id="tabela_resultados" class="highlight centered responsive-table">
 
           </table>
         </div>
