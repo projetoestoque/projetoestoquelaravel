@@ -11,6 +11,7 @@ use App\Medida;
 use App\Refeicao;
 use App\Estoque_disponivel;
 use App\Produto_em_estoque;
+use App\Endereco;
 use DB;
 
 class CadastroController extends Controller
@@ -43,8 +44,15 @@ class CadastroController extends Controller
 		if(isset($_GET['id'])) {
 			$doador_id = $_GET['id'];
 			$doador = Doador::find($doador_id);
-			return view('doador', compact('doador'));
+			$endereco = null;
+
+			if($doador->Id_endereco != null) {
+				$endereco = Endereco::find($doador->Id_endereco);
+			}
+
+			return view('doador', compact('doador','endereco'));
 		}
+
 		return view('doador');
 	}
 
@@ -91,6 +99,17 @@ class CadastroController extends Controller
 			$doador->telefone = $req->get('telefone_fisico');
 			$doador->email = $req->get('email_fisico');
 			$doador->tipo = $req->get('tipo');
+
+			if($req->get('cidade') != "") {
+				$endereco = new Endereco();
+				$endereco->cep = $req->get('cep');
+				$endereco->cidade = $req->get('cidade');
+				$endereco->logradouro = $req->get('numero');
+				$endereco->bairro = $req->get('bairro');
+				$endereco->numero = $req->get('numero');
+				$endereco->save();
+				$doador->Id_endereco = $endereco->id;
+			}
 			$doador->save();
 		} else {
 			return redirect()->route("doador")
@@ -218,7 +237,7 @@ class CadastroController extends Controller
 		$produto->vencimento = $req->get('vencimento');
 		$produto->save();
 
-		return redirect()->back()->with('status', 'Entrada realizada com sucesso!');
+		return redirect()->route('entradaProduto')->with('status', 'Entrada realizada com sucesso!');
 	}
 
 	public function cadastrarMarca(Request $req)

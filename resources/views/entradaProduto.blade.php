@@ -63,7 +63,8 @@
                 <div class="input-field col s12 l4">
                 @if(isset($produto))
                 <i class="material-icons prefix blue-text">style</i>
-                <input id="icon_prefix" type="text" value="{{$produto->nome}}">
+                <input readonly id="icon_prefix" type="text" value="{{$produto->nome}}">
+                <input name="Id_produto" value="{{$produto->id}}" type="hidden">
                 <label for="icon_prefix">
                     Produto Selecionado
                 </label>
@@ -83,7 +84,8 @@
                 <div class="input-field col s12 l4">
                 @if(isset($produto))
                 <i class="material-icons prefix blue-text">style</i>
-                <input id="icon_prefix" type="text" value="{{$produto->nome}}">
+                <input readonly id="icon_prefix" type="text" value="{{$produto->nome}}">
+                <input name="Id_produto" value="{{$produto->id}}" type="hidden">
                 <label for="icon_prefix">
                     Produto Selecionado
                 </label>
@@ -126,9 +128,11 @@
                 @if(isset($doador))
                     <i class="material-icons prefix blue-text">style</i>
                     @if($doador->tipo == "fisico" || $doador->tipo != "fisico" )
-                    <input id="icon_prefix" id="id_doador" type="text" value="{{$doador->nome}}">
+                    <input readonly id="icon_prefix" id="id_doador" type="text" value="{{$doador->nome}}">
+                    <input name="Id_doador" value="{{$produto->id}}" type="hidden">
                     @else
-                    <input id="icon_prefix" id="id_doador" type="text" value="{{$doador->instituicao}}">
+                    <input readonly id="icon_prefix" id="id_doador" type="text" value="{{$doador->instituicao}}">
+                    <input name="Id_doador" value="{{$produto->id}}" type="hidden">
                     @endif
                     <label for="icon_prefix">
                         Doador Selecionado
@@ -149,10 +153,12 @@
                 <div class="input-field col s12 l4">
                 @if(isset($doador))
                     <i class="material-icons prefix blue-text">style</i>
-                    @if($doador->tipo == "fisico" || $doador->tipo != "fisico" )
-                    <input id="icon_prefix" id="id_doador" type="text" value="{{$doador->nome}}">
+                    @if($doador->tipo == "fisico" || $doador->tipo != "juridico" )
+                    <input readonly id="icon_prefix" id="id_doador" type="text" value="{{$doador->nome}}">
+                    <input name="Id_doador" value="{{$produto->id}}" type="hidden">
                     @else
-                    <input id="icon_prefix" id="id_doador" type="text" value="{{$doador->instituicao}}">
+                    <input readonly id="icon_prefix" id="id_doador" type="text" value="{{$doador->instituicao}}">
+                    <input name="Id_doador" value="{{$produto->id}}" type="hidden">
                     @endif
                     <label for="icon_prefix">
                         Doador Selecionado

@@ -8,6 +8,12 @@
     }
 </style>
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
 @section('conteudo')
 
 @if(session('update'))
@@ -113,20 +119,24 @@
         <div class="col l1"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">location_on</i>
-                @if(isset($doador))
-                    <input value="{{$doador->endereco}}" type="text" name="cep" placeholder="55290-000"></input>
+                @if(isset($doador) && $endereco != null)
+                    <input onkeyup="buscarCEPFisico()" value="{{$endereco->cep}}" id="cep_fisico" type="text" name="cep" placeholder="55290-000"></input>
+                @elseif(isset($doador) && $endereco == null)
+                    <input onkeyup="buscarCEPFisico()"  id="cep_fisico" type="text" name="cep" placeholder="55290-000"></input>
                 @else
-                    <input value="{{old('endereco')}}" type="text" name="cep" placeholder="55290-000"></input>
+                    <input onkeyup="buscarCEPFisico()" id="cep_fisico" type="text" name="cep" placeholder="55290-000"></input>
                 @endif
                 <label>CEP</label>
             </div>
             <div class="col l2"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">nature_people</i>
-                @if(isset($doador))
-                    <input value="{{$doador->endereco}}" type="text" name="bairro" placeholder="Bairro"></input>
+                @if(isset($doador) && $endereco != null)
+                    <input value="{{$endereco->bairro}}" id="bairro_fisico" type="text" name="bairro" placeholder="Bairro">
+                @elseif(isset($doador) && $endereco == null)
+                    <input id="bairro_fisico" type="text" name="bairro" placeholder="Bairro">
                 @else
-                    <input value="{{old('endereco')}}" type="text" name="bairro" placeholder="Bairro"></input>
+                    <input type="text" id="bairro_fisico" name="bairro" placeholder="Bairro">
                 @endif
                 <label>Bairro</label>
             </div>
@@ -136,20 +146,24 @@
             <div class="col l1"></div>
                 <div class="input-field col s12 l4">
                     <i class="material-icons prefix">location_city</i>
-                    @if(isset($doador))
-                        <input value="{{$doador->endereco}}" type="text" name="cidade" placeholder="Garanhuns"></input>
+                    @if(isset($doador) && $endereco != null)
+                        <input value="{{$endereco->cidade}}" id="cidade_fisica" type="text" name="cidade" placeholder="Garanhuns"></input>
+                    @elseif(isset($doador) && $endereco == null)
+                        <input  id="cidade_fisica" type="text" name="cidade" placeholder="Garanhuns"></input>
                     @else
-                        <input value="{{old('endereco')}}" type="text" name="cidade" placeholder="Garanhuns"></input>
+                        <input type="text" id="cidade_fisica" name="cidade" placeholder="Garanhuns"></input>
                     @endif
                     <label>Cidade</label>
                 </div>
                 <div class="col l2"></div>
                 <div class="input-field col s12 l4">
                     <i class="material-icons prefix">home</i>
-                    @if(isset($doador))
-                        <input value="{{$doador->endereco}}" type="text" name="logradouro" placeholder="Rua Exemplo"></input>
+                    @if(isset($doador) && $endereco != null)
+                        <input value="{{$endereco->logradouro}}" id="logradouro_fisico" type="text" name="logradouro" placeholder="Rua Exemplo"></input>
+                    @elseif(isset($doador) && $endereco == null)
+                        <input id="logradouro_fisico" type="text" name="logradouro" placeholder="Rua Exemplo"></input>
                     @else
-                        <input value="{{old('endereco')}}" type="text" name="logradouro" placeholder="Rua Exemplo"></input>
+                        <input type="text" id="logradouro_fisico" name="logradouro" placeholder="Rua Exemplo"></input>
                     @endif
                     <label>Logradouro</label>
                 </div>
@@ -158,67 +172,82 @@
             <div class="col l1"></div>
             <div class="input-field col s12 l2">
                     <i class="material-icons prefix">flag</i>
-                    @if(isset($doador))
-                        <input value="{{$doador->endereco}}" type="text" name="uf" placeholder="PE"></input>
+                    @if(isset($doador) && $endereco != null)
+                        <input maxlength="2" value="{{$endereco->uf}}" id="estado_fisico" type="text" name="uf" placeholder="PE"></input>
+                    @elseif(isset($doador) && $endereco == null)
+                        <input maxlength="2" id="estado_fisico" type="text" name="uf" placeholder="PE"></input>
                     @else
-                        <input value="{{old('endereco')}}" type="text" name="uf" placeholder="PE"></input>
+                        <input maxlength="2"  type="text" id="estado_fisico" name="uf" placeholder="PE"></input>
                     @endif
                     <label>Estado</label>
                 </div>
             <div class="col l4"></div>
             <div class="input-field col s12 l2">
                     <i class="material-icons prefix">looks_5</i>
-                    @if(isset($doador))
-                        <input value="{{$doador->endereco}}" type="text" name="logradouro" placeholder="25"></input>
-                    @else
-                        <input value="{{old('endereco')}}" type="text" name="logradouro" placeholder="25"></input>
+                    @if(isset($doador) && $endereco != null)
+                        <input value="{{$endereco->numero}}" id="numero_fisico" type="text" name="numero" placeholder="25"></input>
+                    @elseif(isset($doador) && $endereco == null)
+                        <input id="numero_fisico" type="text" name="numero" placeholder="25"></input>
+                    @else 
+                        <input type="text" id="numero_fisico" name="numero" placeholder="25"></input>
                     @endif
                     <label>Número</label>
                 </div>
             </div>
         </div>
-        <div class="desktop-hide">
-        <div class="row">
-            <div class="input-field col s12">
-                    <i class="material-icons prefix">home</i>
-                    @if(isset($doador))
-                        <input value="{{$doador->endereco}}" type="text" name="logradouro" placeholder="Rua Exemplo"></input>
-                    @else
-                        <input value="{{old('endereco')}}" type="text" name="logradouro" placeholder="Rua Exemplo"></input>
-                    @endif
-                    <label>Logradouro</label>
-            </div>
-            <div class="input-field col s12 ">
-                <i class="material-icons prefix">looks_5</i>
-                @if(isset($doador))
-                    <input value="{{$doador->endereco}}" type="text" name="logradouro" placeholder="25"></input>
-                @else
-                    <input value="{{old('endereco')}}" type="text" name="logradouro" placeholder="25"></input>
-                @endif
-                <label>Número</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                    <i class="material-icons prefix">location_city</i>
-                    @if(isset($doador))
-                        <input value="{{$doador->endereco}}" type="text" name="cidade" placeholder="Garanhuns"></input>
-                    @else
-                        <input value="{{old('endereco')}}" type="text" name="cidade" placeholder="Garanhuns"></input>
-                    @endif
-                    <label>Cidade</label>
+        <!-- <div class="desktop-hide">
+            <div class="row">
+                <div class="input-field col s12">
+                        <i class="material-icons prefix">home</i>
+                        @if(isset($doador) && $endereco != null)
+                            <input value="{{$endereco->logradouro}}" id="logradouro_fisico" type="text" name="logradouro" placeholder="Rua Exemplo"></input>
+                        @elseif(isset($doador) && $endereco == null)
+                            <input id="logradouro_fisico" type="text" name="logradouro" placeholder="Rua Exemplo"></input>
+                        @else
+                            <input type="text" id="logradouro_fisico" name="logradouro" placeholder="Rua Exemplo"></input>
+                        @endif
+                        <label>Logradouro</label>
                 </div>
-            <div class="input-field col s12">
-                    <i class="material-icons prefix">flag</i>
-                    @if(isset($doador))
-                        <input value="{{$doador->endereco}}" type="text" name="uf" placeholder="PE"></input>
+                <div class="input-field col s12 ">
+                    <i class="material-icons prefix">looks_5</i>
+                    @if(isset($doador) && $endereco != null)
+                        <input value="{{$endereco->numero}}" id="numero_fisico" type="text" name="numero" placeholder="25"></input>
+                    @elseif(isset($doador) && $endereco == null)
+                        <input id="numero_fisico" type="text" name="numero" placeholder="25"></input>
                     @else
-                        <input value="{{old('endereco')}}" type="text" name="uf" placeholder="PE"></input>
+                        <input  type="text" id="numero_fisico" name="numero" placeholder="25"></input>
                     @endif
-                    <label>Estado</label>
+                    <label>Número</label>
                 </div>
-        </div>
-        </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                        <i class="material-icons prefix">location_city</i>
+                        @if(isset($doador) && $endereco != null)
+                            <input value="{{$endereco->cidade}}" id="cidade_fisico" type="text" name="cidade" placeholder="Garanhuns"></input>
+                        @elseif(isset($doador) && $endereco == null)
+                            <input id="cidade_fisico" type="text" name="cidade" placeholder="Garanhuns"></input>
+                        @else
+                            <input type="text" id="cidade_fisico" name="cidade" placeholder="Garanhuns"></input>
+                        @endif
+                        <label>Cidade</label>
+                </div>
+
+                <div class="input-field col s12">
+                        <i class="material-icons prefix">flag</i>
+                        @if(isset($doador) && $endereco != null)
+                            <input value="{{$endereco->uf}}" id="uf_fisico" type="text" name="uf" placeholder="PE"></input>
+                        @elseif(isset($doador) && $endereco == null)
+                            <input id="uf_fisico" type="text" name="uf" placeholder="PE"></input>
+                        @else
+                            <input type="text" id="uf_fisico" name="uf" placeholder="PE"></input>
+                        @endif
+                        <label>Estado</label>
+                </div>
+            </div>
+
+        </div> -->
+
         <div class="row valign center">
             <button class="btn waves-effect waves-light blue darken-4"><b>Submit
                     <i class="material-icons right">send</i>
@@ -227,6 +256,7 @@
             <br>
             <label><span class="important">*</span> Campos Obrigatórios</label>
         </div>
+
         <br>
         <input type="hidden" name="tipo" value="fisico"/>
 </div>
@@ -301,7 +331,17 @@
 <br>
 <br>
 <br>
+
 <script>
+    var typingTimer; //timer identifier
+    var doneTypingInterval = 1000; //time in ms, 1 second for example
+
+    //on keyup, start the countdown
+    function buscarCEPFisico() {
+        clearTimeout(typingTimer); 
+        typingTimer = setTimeout(pesquisacepfisico, doneTypingInterval);
+    }
+    
     function SomenteNumero(e){
         var tecla=(window.event)?event.keyCode:e.which;   
         if((tecla>47 && tecla<58)) return true;
@@ -332,67 +372,45 @@
         document.getElementById("btnJuridico").classList.add('butaoAtivado');
     }
     
-    function limpa_formulário_cep() {
-            //Limpa valores do formulário de cep.
-            // document.getElementById('rua').value=("");
-            // document.getElementById('bairro').value=("");
-            // document.getElementById('cidade').value=("");
-    }
 
     function meu_callback(conteudo) {
         if (!("erro" in conteudo)) {
             //Atualiza os campos com os valores.
-            // document.getElementById('rua').value=(conteudo.logradouro);
-            // document.getElementById('bairro').value=(conteudo.bairro);
-            // document.getElementById('cidade').value=(conteudo.localidade);
+            document.getElementById('logradouro_fisico').value = conteudo.logradouro
+            document.getElementById('bairro_fisico').value=(conteudo.bairro);
+            document.getElementById('cidade_fisica').value=(conteudo.localidade);
+            document.getElementById('estado_fisico').value = conteudo.uf
             console.log(conteudo)
-        } //end if.
-        else {
-            //CEP não Encontrado.
-            limpa_formulário_cep();
-            alert("CEP não encontrado.");
-        }
+        } 
     }
         
-    function pesquisacep(valor) {
-
+    function pesquisacepfisico() {
+        valor = document.getElementById('cep_fisico').value
         //Nova variável "cep" somente com dígitos.
         var cep = valor.replace(/\D/g, '');
-
         //Verifica se campo cep possui valor informado.
         if (cep != "") {
-
             //Expressão regular para validar o CEP.
             var validacep = /^[0-9]{8}$/;
-
             //Valida o formato do CEP.
             if(validacep.test(cep)) {
-
-                //Preenche os campos com "..." enquanto consulta webservice.
-                // document.getElementById('rua').value="...";
-                // document.getElementById('bairro').value="...";
-                // document.getElementById('cidade').value="...";
+                document.getElementById('logradouro_fisico').value = "..."
+                document.getElementById('bairro_fisico').value= "..."
+                document.getElementById('cidade_fisica').value= "..."
+                document.getElementById('estado_fisico').value = "..."
 
                 //Cria um elemento javascript.
                 var script = document.createElement('script');
-
                 //Sincroniza com o callback.
                 script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
-
                 //Insere script no documento e carrega o conteúdo.
                 document.body.appendChild(script);
-
-            } //end if.
+            }
             else {
-                //cep é inválido.
-                limpa_formulário_cep();
                 alert("Formato de CEP inválido.");
             }
-        } //end if.
-        else {
-            //cep sem valor, limpa formulário.
-            limpa_formulário_cep();
-        }
+        } 
     }
+
 </script>
 @endsection

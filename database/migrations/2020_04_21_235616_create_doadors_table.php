@@ -22,9 +22,11 @@ class CreateDoadorsTable extends Migration
             $table->string('telefone')->nullable();
             $table->string('email');
             $table->string('tipo');
-            $table->string('endereco')->nullable();
+            $table->unsignedBigInteger('Id_endereco')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('Id_endereco')->references('id')->on('enderecos');
         });
     }
 

@@ -48,7 +48,7 @@ class EstoqueController extends Controller
     }
 
     //pesquisa entradas de acordo com a query teste
-    $produtos_id = Produto::where('nome', 'LIKE', "%"."$query"."%")->get();
+    $produtos_id = Produto::where('nome', 'LIKE', $query."%")->get();
     foreach($produtos_id as $produto) {
       $produtos_filtrados = Produto_em_estoque::where('Id_produto', 'LIKE', '%'.$produto->id.'%')->get();
       foreach($produtos_filtrados as $produto) {
@@ -63,7 +63,7 @@ class EstoqueController extends Controller
     
 
     //pesquisa os produtos sem estoque
-    $produto_id = Produto::where('nome', 'LIKE', "%"."$query"."%")->get();
+    $produto_id = Produto::where('nome', 'LIKE', $query."%")->get();
     foreach($produto_id as $produto) {
       if(Produto_em_estoque::where('Id_produto', $produto->id)->exists() == false) {
         if($query[0] == $produto->nome[0]) array_push($produtos, $produto);
