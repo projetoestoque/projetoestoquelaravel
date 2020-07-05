@@ -89,8 +89,8 @@
 </div>
 <div class="chips-chips" id="chips">
 <a id="listEstoque" class="waves-effect waves-light btn-flat gradient" onclick="changeFilter(id)" >Em Estoque</a>
-<a id="listAcima" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)" ><i class="material-icons left">add_circle</i>Em grande quantidade</a>
-<a id="listAbaixo" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">remove_circle</i>Em baixa Quantidade</a>
+<a id="listAcima" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)" ><i class="material-icons left">add_circle</i>Em dia</a>
+<a id="listAbaixo" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)"><i class="material-icons left">remove_circle</i>Em Alerta</a>
 <a id="listSem" class="waves-effect waves-light btn-flat" onclick="changeFilter(id)" "><i class="material-icons left">cancel</i>Sem Estoque</a>
 </div>
 </div>
@@ -206,14 +206,22 @@
                   <td>{{$produto->nome}}</td>
                   <td>{{$produto->marca}}</td>
                   <td class="grey-text text-darken-3">
-                  @if($produto->quantidade<=$produto->quantidade_minima)
-                  <div>{{$produto->quantidade}} {{$produto->abreviacao}}<i class="tiny material-icons red-text">brightness_1</i></div>
-                  @else
-                  {{$produto->quantidade}} {{$produto->abreviacao}}
-                  @endif
+                    @if($produto->quantidade <= $produto->quantidade_minima)
+                    <div>{{$produto->quantidade}} {{$produto->abreviacao}}<i class="tiny material-icons red-text">brightness_1</i></div>
+                    @else
+                    {{$produto->quantidade}} {{$produto->abreviacao}}
+                    @endif
                   </td>
                   <td class="grey-text text-darken-3">{{$produto->estoque->estoque}}</td>
-                  <td class="grey-text text-darken-3">{{$produto->vencimento}}</td>
+                  <td class="grey-text text-darken-3">
+                  @if(isset($produto->vencendo))
+                    <div>
+                    {{$produto->vencimento}}<i class="tiny material-icons red-text">brightness_1</i>
+                    </div>
+                  @else
+                    {{$produto->vencimento}}
+                  @endif 
+                  </td>
               </tr>
           @endforeach
           </tbody>

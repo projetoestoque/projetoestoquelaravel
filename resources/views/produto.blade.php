@@ -55,7 +55,7 @@
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">mode_edit</i>
                 @if(isset($produto))
-                    <input required type="text" value="{{$produto->nome}}" placeholder="nome"  name="nome">
+                    <input readonly required type="text" value="{{$produto->nome}}" placeholder="nome"  name="nome">
                 @else
                     <input required type="text" placeholder="nome"  name="nome">
                 @endif

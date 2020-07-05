@@ -37,8 +37,23 @@ class ProdutoController extends Controller
             $produto_estoque->abreviacao = Medida::findOrFail($produto->Id_medida)->abreviacao;
             array_push($produtos_estoque, $produto_estoque);
 
+             // transforma a data do formato BR para o formato americano, ANO-MES-DIA
+             $vencimento = implode('-', array_reverse(explode('/', $produto->vencimento)));
+             $hoje = implode('-', array_reverse(explode('/', date('d/m/Y'))));
+ 
+             // converte as datas para o formato timestamp
+             $v = strtotime($vencimento); 
+             $h = strtotime($hoje);
+ 
+             // verifica a diferença em segundos entre as duas datas e divide pelo número de segundos que um dia possui
+             $dataFinal = ($h - $v) /86400;
+ 
+             // caso a data 2 seja menor que a data 1, multiplica o resultado por -1
+             if($dataFinal < 0)
+             $dataFinal *= -1;
+
             //listando produtos acima do nivel critico
-            if($produto->quantidade >= 5) {
+            if($produto->quantidade > $produto->quantidade_minima && $dataFinal <= 5) {
                 $produto_acima = $produto;
                 $produto_acima->nome = Produto::findOrFail($produto->Id_produto)->nome;
                 $produto_acima->estoque = Estoque_disponivel::findOrFail($produto->Id_estoque);
@@ -47,8 +62,13 @@ class ProdutoController extends Controller
                 array_push($produtos_acima, $produto_acima);
             }
 
+
             //listando produtos abaixo do nivel critico
-            if($produto->quantidade < $produto->quantidade_minima) {
+            if($produto->quantidade <= $produto->quantidade_minima || $dataFinal <= 5) {
+                if($dataFinal <= 5) {
+                    $produto->vencendo = true;
+                }
+
                 $produto_abaixo = $produto;
                 $produto_abaixo->nome = Produto::findOrFail($produto->Id_produto)->nome;
                 $produto_abaixo->estoque = Estoque_disponivel::findOrFail($produto->Id_estoque);
