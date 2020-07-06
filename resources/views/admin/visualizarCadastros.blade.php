@@ -49,19 +49,19 @@
 <div class="mobile-hide">
     <div class="container">
     <h4><b>Visualizar Cadastros</b>
-    <a class="btn waves-effect waves-light gradient right" href="{{route('admin.cadastros')}}">Cadastrar Produto
+    <a class="btn waves-effect waves-light gradient right" href="{{route('admin.cadastros')}}">Cadastrar 
     <i class="material-icons right">add_circle_outline</i>
     </a>
     </h4>
   </div>
 </div>
 <div class="desktop-hide">
-    <h4 class="center"><b>Visualizar Estoque</b>
+    <h4 class="center"><b>Visualizar Cadastros</b>
       @if(auth()->user()->is_admin)
-      <a class="btn waves-effect waves-light gradient" href="{{route('admin.insercoes')}}">Dar Entrada No Estoque
+      <a class="btn waves-effect waves-light gradient" href="{{route('admin.insercoes')}}">Cadastrar 
       <i class="material-icons right">add_circle_outline</i>
       @else
-      <a class="btn waves-effect waves-light gradient" href="{{route('estoqueMenu')}}">Dar Entrada No Estoque
+      <a class="btn waves-effect waves-light gradient" href="{{route('estoqueMenu')}}">Cadastrar
       <i class="material-icons right">add_circle_outline</i>
       @endif
       </a>
@@ -830,9 +830,13 @@
 
     function adicionarProduto(id) {
         url_anterior = "{{$_SERVER['HTTP_REFERER']}}"
-        if(url_anterior.indexOf('?') != -1) {
+        if(url_anterior.indexOf('produto') != -1) {
+            let url=new URL(url_anterior);
+            let productId=url.searchParams.get("produto");
+            window.location.href = url_anterior.replace(`produto=${productId}`,`produto=${id}`)
+        } else if(url_anterior.indexOf('doador') != -1){
             window.location.href = url_anterior + "&produto=" + id;
-        } else {
+        }else{
             window.location.href = "{{route('entradaProduto')}}?produto=" + id;
         }
         
@@ -840,9 +844,14 @@
 
     function adicionarDoador(id) {
         url_anterior = "{{$_SERVER['HTTP_REFERER']}}"
-        if(url_anterior.indexOf('?') != -1) {
+        if(url_anterior.indexOf('doador') != -1) {
+            let url=new URL(url_anterior);
+            console.log(url_anterior)
+            let productId=url.searchParams.get("doador");
+            window.location.href = url_anterior.replace(`doador=${productId}`,`doador=${id}`)
+        } else if(url_anterior.indexOf('produto') != -1){
             window.location.href = url_anterior + "&doador=" + id;
-        } else {
+        }else{
             window.location.href = "{{route('entradaProduto')}}?doador=" + id;
         }
         

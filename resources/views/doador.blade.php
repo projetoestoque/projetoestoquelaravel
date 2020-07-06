@@ -8,11 +8,7 @@
     }
 </style>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
 
 @section('conteudo')
 
@@ -44,7 +40,6 @@
 @endif
 </div>
 <br>
-<input type="checkbox">
 
 @if(isset($doador))
     <h3 class="center-align"><b>Atualizar Doador</h3>
@@ -141,7 +136,6 @@
                 <label>Bairro</label>
             </div>
         </div>
-        <div class="mobile-hide">
             <div class="row">
             <div class="col l1"></div>
                 <div class="input-field col s12 l4">
@@ -156,21 +150,7 @@
                     <label>Cidade</label>
                 </div>
                 <div class="col l2"></div>
-                <div class="input-field col s12 l4">
-                    <i class="material-icons prefix">home</i>
-                    @if(isset($doador) && $endereco != null)
-                        <input value="{{$endereco->logradouro}}" id="logradouro_fisico" type="text" name="logradouro" placeholder="Rua Exemplo"></input>
-                    @elseif(isset($doador) && $endereco == null)
-                        <input id="logradouro_fisico" type="text" name="logradouro" placeholder="Rua Exemplo"></input>
-                    @else
-                        <input type="text" id="logradouro_fisico" name="logradouro" placeholder="Rua Exemplo"></input>
-                    @endif
-                    <label>Logradouro</label>
-                </div>
-            </div>
-            <div class="row">
-            <div class="col l1"></div>
-            <div class="input-field col s12 l2">
+                <div class="input-field col s12 l2">
                     <i class="material-icons prefix">flag</i>
                     @if(isset($doador) && $endereco != null)
                         <input maxlength="2" value="{{$endereco->uf}}" id="estado_fisico" type="text" name="uf" placeholder="PE"></input>
@@ -181,7 +161,21 @@
                     @endif
                     <label>Estado</label>
                 </div>
-            <div class="col l4"></div>
+            </div>
+            <div class="row">
+            <div class="col l1"></div>
+            <div class="input-field col s12 l4">
+                    <i class="material-icons prefix">home</i>
+                    @if(isset($doador) && $endereco != null)
+                        <input value="{{$endereco->logradouro}}" id="logradouro_fisico" type="text" name="logradouro" placeholder="Rua Exemplo"></input>
+                    @elseif(isset($doador) && $endereco == null)
+                        <input id="logradouro_fisico" type="text" name="logradouro" placeholder="Rua Exemplo"></input>
+                    @else
+                        <input type="text" id="logradouro_fisico" name="logradouro" placeholder="Rua Exemplo"></input>
+                    @endif
+                    <label>Logradouro</label>
+                </div>
+            <div class="col l2"></div>
             <div class="input-field col s12 l2">
                     <i class="material-icons prefix">looks_5</i>
                     @if(isset($doador) && $endereco != null)
@@ -194,60 +188,6 @@
                     <label>Número</label>
                 </div>
             </div>
-        </div>
-        <!-- <div class="desktop-hide">
-            <div class="row">
-                <div class="input-field col s12">
-                        <i class="material-icons prefix">home</i>
-                        @if(isset($doador) && $endereco != null)
-                            <input value="{{$endereco->logradouro}}" id="logradouro_fisico" type="text" name="logradouro" placeholder="Rua Exemplo"></input>
-                        @elseif(isset($doador) && $endereco == null)
-                            <input id="logradouro_fisico" type="text" name="logradouro" placeholder="Rua Exemplo"></input>
-                        @else
-                            <input type="text" id="logradouro_fisico" name="logradouro" placeholder="Rua Exemplo"></input>
-                        @endif
-                        <label>Logradouro</label>
-                </div>
-                <div class="input-field col s12 ">
-                    <i class="material-icons prefix">looks_5</i>
-                    @if(isset($doador) && $endereco != null)
-                        <input value="{{$endereco->numero}}" id="numero_fisico" type="text" name="numero" placeholder="25"></input>
-                    @elseif(isset($doador) && $endereco == null)
-                        <input id="numero_fisico" type="text" name="numero" placeholder="25"></input>
-                    @else
-                        <input  type="text" id="numero_fisico" name="numero" placeholder="25"></input>
-                    @endif
-                    <label>Número</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                        <i class="material-icons prefix">location_city</i>
-                        @if(isset($doador) && $endereco != null)
-                            <input value="{{$endereco->cidade}}" id="cidade_fisico" type="text" name="cidade" placeholder="Garanhuns"></input>
-                        @elseif(isset($doador) && $endereco == null)
-                            <input id="cidade_fisico" type="text" name="cidade" placeholder="Garanhuns"></input>
-                        @else
-                            <input type="text" id="cidade_fisico" name="cidade" placeholder="Garanhuns"></input>
-                        @endif
-                        <label>Cidade</label>
-                </div>
-
-                <div class="input-field col s12">
-                        <i class="material-icons prefix">flag</i>
-                        @if(isset($doador) && $endereco != null)
-                            <input value="{{$endereco->uf}}" id="uf_fisico" type="text" name="uf" placeholder="PE"></input>
-                        @elseif(isset($doador) && $endereco == null)
-                            <input id="uf_fisico" type="text" name="uf" placeholder="PE"></input>
-                        @else
-                            <input type="text" id="uf_fisico" name="uf" placeholder="PE"></input>
-                        @endif
-                        <label>Estado</label>
-                </div>
-            </div>
-
-        </div> -->
-
         <div class="row valign center">
             <button class="btn waves-effect waves-light blue darken-4"><b>Submit
                     <i class="material-icons right">send</i>

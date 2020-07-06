@@ -129,10 +129,10 @@
                     <i class="material-icons prefix blue-text">style</i>
                     @if($doador->tipo == "fisico" || $doador->tipo != "fisico" )
                     <input readonly id="icon_prefix" id="id_doador" type="text" value="{{$doador->nome}}">
-                    <input name="Id_doador" value="{{$produto->id}}" type="hidden">
+                    <input name="Id_doador" value="{{$doador->id}}" type="hidden">
                     @else
                     <input readonly id="icon_prefix" id="id_doador" type="text" value="{{$doador->instituicao}}">
-                    <input name="Id_doador" value="{{$produto->id}}" type="hidden">
+                    <input name="Id_doador" value="{{$doador->id}}" type="hidden">
                     @endif
                     <label for="icon_prefix">
                         Doador Selecionado
@@ -155,10 +155,10 @@
                     <i class="material-icons prefix blue-text">style</i>
                     @if($doador->tipo == "fisico" || $doador->tipo != "juridico" )
                     <input readonly id="icon_prefix" id="id_doador" type="text" value="{{$doador->nome}}">
-                    <input name="Id_doador" value="{{$produto->id}}" type="hidden">
+                    <input name="Id_doador" value="{{$doador->id}}" type="hidden">
                     @else
                     <input readonly id="icon_prefix" id="id_doador" type="text" value="{{$doador->instituicao}}">
-                    <input name="Id_doador" value="{{$produto->id}}" type="hidden">
+                    <input name="Id_doador" value="{{$doador->id}}" type="hidden">
                     @endif
                     <label for="icon_prefix">
                         Doador Selecionado
