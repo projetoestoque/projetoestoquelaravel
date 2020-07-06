@@ -409,7 +409,6 @@
     query = input.value
     tabela = document.getElementById('tabela_resultados')
     tabela.innerHTML = ""
-    tabela.innerHTML="<thead class='grey-text '><tr><th>Nome</th><th>Marca</th><th>Quantidade</th><th>Estoque</th><th>Vencimento</th></tr></thead>"        
     
     $.get("{{url('/admin/buscar/entrada?query=')}}" + query, (data, status) => {
       if(data.length == 0) {
