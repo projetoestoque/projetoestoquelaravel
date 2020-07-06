@@ -71,7 +71,7 @@
 <div class="row sem-fundo">
 <div class="input-field col s12 input-outlined">
         <a class="material-icons prefix right">search</a>
-        <input onkeydown="pesquisarCadastros(event)" id="icon_prefix" type="text" title="Pressione enter ou clique no icone para pesquisar..." placeholder="Pesquisar...">
+        <input onkeydown="digitandoCadastros()" id="icon_prefix" type="text" placeholder="Pesquisar...">
         <div id="resultados" class="z-depth-2">
           <table id="tabela_resultados" class="highlight centered responsive-table">
 
@@ -166,7 +166,7 @@
           </thead>
           <tbody>
           @foreach($produtos_cadastrados as $produto)
-              <tr name="{{$produto->nome}}">
+              <tr name="{{$produto->nome}}{{$produto->id}}">
                   <td class="grey-text text-darken-3" name="{{$produto->nome}}">{{$produto->nome}}</td>
                   <td class="grey-text text-darken-2">{{$produto->marca}}</td>
                   <td class="grey-text text-darken-2">{{$produto->tipo}}</td>
@@ -211,9 +211,9 @@
           <tbody>
           @foreach($doadores as $doador)
             @if($doador->tipo == 'fisico' || $doador->tipo != 'juridico')
-            <tr name="{{$doador->nome}}">
+            <tr name="{{$doador->nome}}{{$doador->id}}">
             @else
-            <tr name="{{$doador->instituicao}}">
+            <tr name="{{$doador->instituicao}}{{$doador->id}}}">
             
             @endif
               @if($doador->tipo=="fisico")
@@ -268,7 +268,7 @@
           </thead>
           <tbody>
           @foreach($tipos as $tipo)
-              <tr name="{{$tipo->tipo}}">
+              <tr name="{{$tipo->tipo}}{{$tipo->id}}">
                 <td class="grey-text text-darken-3">{{$tipo->tipo}}</td>
                   @if(auth()->user()->is_admin)
                   <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarTipo({{$tipo->id}})"><i class="material-icons">edit</i></a>
@@ -306,7 +306,7 @@
           </thead>
           <tbody>
           @foreach($medidas as $medida)
-              <tr name="{{$medida->medida}}">
+              <tr name="{{$medida->medida}}{{$medida->id}}">
                 <td class="grey-text text-darken-3">{{$medida->medida}}</td>
                 @if(empty($medida->abreviacao))
                 <td class="grey-text text-darken-3">N/A</td>
@@ -347,7 +347,7 @@
           </thead>
           <tbody>
           @foreach($marcas as $marca)
-              <tr name="{{$marca->marca}}">
+              <tr name="{{$marca->marca}}{{$marca->id}}">
                 <td class="grey-text text-darken-3">{{$marca->marca}}</td>
                   @if(auth()->user()->is_admin)
                   <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarMarca({{$marca->id}})"><i class="material-icons">edit</i></a>
@@ -383,7 +383,7 @@
           </thead>
           <tbody>
           @foreach($estoques_disponiveis as $estoque)
-              <tr name="{{$estoque->estoque}}">
+              <tr name="{{$estoque->estoque}}{{$estoque->id}}">
               @if($estoque->estoque=="sem estoque")
                 @continue
               @else
@@ -608,8 +608,16 @@
 
 <script>
 
-    function pesquisarCadastros(event) {
-        if(event.key == 'Enter') {
+    var typingTimer; //timer identifier
+    var doneTypingInterval = 1000; //time in ms, 1 second for example
+
+    //on keyup, start the countdown
+    function digitandoCadastros() {
+        clearTimeout(typingTimer); 
+        typingTimer = setTimeout(buscarCadastros, doneTypingInterval);
+    }
+
+    function buscarCadastros() {
             input = document.getElementById('icon_prefix')
             query = input.value
             tabela = document.getElementById('tabela_resultados')
@@ -622,7 +630,7 @@
                 $.get("{{url('/admin/buscar/codigo_barra?query=')}}" + query, (data, status) => {
                     for(let i = 0; i < data.length; i++) {
                         if(document.getElementById(data[i]['nome']) == null) {
-                            var tr = document.getElementsByName(data[i]['nome'])[0].outerHTML
+                            var tr = document.getElementsByName(data[i]['nome'] + data[i]['id'])[0].outerHTML
                             tabela.innerHTML += tr
                         }
                     }
@@ -634,12 +642,12 @@
                     for(let i = 0; i < data.length; i++) {
                         if(data[i]['tipo'] == 'juridico') {
                             if(document.getElementById(data[i]['instituicao']) == null) {
-                                var tr = document.getElementsByName(data[i]['instituicao'])[0].outerHTML
+                                var tr = document.getElementsByName(data[i]['instituicao'] + data[i]['id'])[0].outerHTML
                                 tabela.innerHTML += tr
                             }
                         } else {
                             if(document.getElementById(data[i]['nome']) == null) {
-                                var tr = document.getElementsByName(data[i]['nome'])[0].outerHTML
+                                var tr = document.getElementsByName(data[i]['nome'] + data[i]['id'])[0].outerHTML
                                 tabela.innerHTML += tr
                             }
                         }
@@ -648,8 +656,6 @@
                 }); 
             }
 
-                       
-        }
     }
 
 
