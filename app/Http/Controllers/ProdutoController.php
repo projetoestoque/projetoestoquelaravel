@@ -53,7 +53,7 @@ class ProdutoController extends Controller
              $dataFinal *= -1;
 
             //listando produtos acima do nivel critico
-            if($produto->quantidade > $produto->quantidade_minima && $dataFinal <= 5) {
+            if($produto->quantidade > $produto->quantidade_minima && $dataFinal > 5) {
                 $produto_acima = $produto;
                 $produto_acima->nome = Produto::findOrFail($produto->Id_produto)->nome;
                 $produto_acima->estoque = Estoque_disponivel::findOrFail($produto->Id_estoque);
