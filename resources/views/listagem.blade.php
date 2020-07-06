@@ -80,7 +80,7 @@
 <div class="row sem-fundo">
 <div class="input-field col s12 input-outlined">
         <i class="material-icons prefix right">search</i>
-        <input onkeydown="buscarEntrada(event)" id="icon_prefix" type="text" title="Pressione enter ou clique no icone para pesquisar..." placeholder="Pesquisar...">
+        <input onkeydown="digitandoEntrada()" id="icon_prefix" type="text" placeholder="Pesquisar...">
         <div id="resultados" class="z-depth-2">
           <table id="tabela_resultados" class="highlight centered responsive-table">
           </table>
@@ -124,7 +124,7 @@
           </thead>
           <tbody>
           @foreach($produtos_estoque as $produto)
-              <tr name="{{$produto->nome}}">
+              <tr name="{{$produto->id}}{{$produto->nome}}">
                   <td name="{{$produto->nome}}">{{$produto->nome}}</td>
                   <td>{{$produto->marca}}</td>
                   <td class="grey-text text-darken-3">
@@ -135,7 +135,13 @@
                   @endif
                   </td>
                   <td class="grey-text text-darken-3">{{$produto->estoque->estoque}}</td>
-                  <td class="grey-text text-darken-3">{{$produto->vencimento}}</td>
+                  <td class="grey-text text-darken-3">@if(isset($produto->vencendo))
+                    <div>
+                    {{$produto->vencimento}}<i class="tiny material-icons red-text">brightness_1</i>
+                    </div>
+                  @else
+                    {{$produto->vencimento}}
+                  @endif </td>
               </tr>
           @endforeach
           </tbody>
@@ -163,7 +169,7 @@
           </thead>
           <tbody>
           @foreach($produtos_acima as $produto)
-              <tr name="$produto->nome">
+              <tr name="{{$produto->id}}{{$produto->nome}}">
                   <td>{{$produto->nome}}</td>
                   <td>{{$produto->marca}}</td>
                   <td class="grey-text text-darken-3">
@@ -202,7 +208,7 @@
           </thead>
           <tbody>
           @foreach($produtos_abaixo as $produto)
-              <tr name="{{$produto->nome}}">
+              <tr name="{{$produto->id}}{{$produto->nome}}">
                   <td>{{$produto->nome}}</td>
                   <td>{{$produto->marca}}</td>
                   <td class="grey-text text-darken-3">
@@ -248,7 +254,7 @@
           </thead>
           <tbody>
           @foreach($produtos_sem as $produto)
-              <tr name="{{$produto->nome}}">
+              <tr name="{{$produto->id}}{{$produto->nome}}">
                   <td>{{$produto->nome}}</td>
                   <td>{{$produto->marca}}</td>
                   <td class="grey-text text-darken-3">{{$produto->codigo_barra}}</td>
@@ -389,23 +395,35 @@
 
   let query
 
-  function buscarEntrada(event) {
-        if(event.key == 'Enter') {
-            input = document.getElementById('icon_prefix')
-            query = input.value
-            tabela = document.getElementById('tabela_resultados')
-            tabela.innerHTML = ""
-                                
-            $.get("{{url('/admin/buscar/entrada?query=')}}" + query, (data, status) => {  
-              tabela.innerHTML="<thead class='grey-text '><tr><th>Nome</th><th>Marca</th><th>Quantidade</th><th>Estoque</th><th>Vencimento</th></tr></thead>"
-                for(let i = 0; i < data.length; i++) {
-                    if(document.getElementById(data[i]['nome']) == null) {
-                        var tr = document.getElementsByName(data[i]['nome'])[0].outerHTML
-                        tabela.innerHTML += tr
-                    }
-                }
-            });            
-        }
+  var typingTimer; //timer identifier
+  var doneTypingInterval = 1000; //time in ms, 1 second for example
+
+  //on keyup, start the countdown
+  function digitandoEntrada() {
+    clearTimeout(typingTimer); 
+    typingTimer = setTimeout(buscarEntrada, doneTypingInterval);
+  }
+
+  function buscarEntrada() {
+    input = document.getElementById('icon_prefix')
+    query = input.value
+    tabela = document.getElementById('tabela_resultados')
+    tabela.innerHTML = ""
+    tabela.innerHTML="<thead class='grey-text '><tr><th>Nome</th><th>Marca</th><th>Quantidade</th><th>Estoque</th><th>Vencimento</th></tr></thead>"        
+    
+    $.get("{{url('/admin/buscar/entrada?query=')}}" + query, (data, status) => {
+      if(data.length == 0) {
+        tabela.innerHTML = ""
+      } 
+
+      for(let i = 0; i < data.length; i++) {
+        
+        if(document.getElementById(data[i]['nome']) == null) {
+          var tr = document.getElementsByName(data[i]['id'] + data[i]['nome'])[0].outerHTML
+          tabela.innerHTML += tr
+        } 
+      }
+    });          
     }
 </script>
 @endsection
