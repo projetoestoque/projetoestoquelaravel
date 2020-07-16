@@ -39,7 +39,21 @@
             </div>
 </div>
 <div class="row white-text ">
-            <a href="#" class="white-text">
+            <a href="{{route('saida')}}" class="white-text">
+                <div class=" card-panel blue darken-4 col s5 hoverable">
+                    <div class="row">
+                    <span class="row"></span>
+                        <div class="col ">
+                            <i class="material-icons medium white-text pt-5">exit_to_app</i>
+                            <h6>Saídas do Sistema</h6>
+                        </div>
+                        <span class="row"></span>
+                    </div>
+                </div>
+            </a>
+            <div class="col s2">
+            </div>
+            <a href="{{route('relatorio')}}" class="white-text">
                 <div class=" card-panel blue darken-4 col s5 hoverable">
                     <div class="row">
                     <span class="row"></span>
@@ -51,8 +65,6 @@
                     </div>
                 </div>
             </a>
-            <div class="col s1">
-            </div>
 </div>
 </div>
 <div class="mobile-hide" ><img class="ipanema" src="{{asset('fluid2.png')}}"></div>
