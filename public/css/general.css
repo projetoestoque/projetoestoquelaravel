@@ -320,6 +320,10 @@ div #resultados{
 div #resultados #lista_resultados li:hover{
   background: #e4e4e485;
 }
+.browser-default{
+  border-color:rgba(142, 142, 142, 0.39);
+  border-radius: 8px;
+}
 @media only screen and (max-width: 400px) {
   .mobile-hide{ display: none !important; }
   .alinhamento{
