@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Relatorios extends Migration
+class CreateRelatoriosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,15 +15,14 @@ class Relatorios extends Migration
     {
         Schema::create('relatorios', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('Id_produto');
-            $table->string('diaria');
-            $table->string('semanal');
-            $table->string('mensal');
-            $table->string('anual');
+            $table->unsignedBigInteger('Id_doador')-> nullable();
+            $table->string('tipo')->enum();
+            $table->string('relatorio');
+            $table->string('data');
             $table->timestamps();
-            $table->softDeletes();
 
-            $table->foreign('Id_produto')->references('id')->on('produtos');
+            $table->foreign('Id_doador')->references('id')->on('doadors');
+            $table->softDeletes();
         });
     }
 
