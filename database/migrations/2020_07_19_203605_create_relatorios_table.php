@@ -17,7 +17,7 @@ class CreateRelatoriosTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('Id_doador')->nullable();
             $table->unsignedBigInteger('Id_produto')->nullable();
-            $table->enum('tipo', ['entrada', 'geral', 'baixa', 'vencimento']);
+            $table->enum('tipo', ['entrada', 'geral', 'baixa', 'vencimento', 'saida']);
             $table->string('relatorio');
             $table->string('data');
             $table->timestamps();

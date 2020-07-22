@@ -47,6 +47,7 @@ select{
         <select class="date" id="data">
             <option value="hoje" >Geral</option>
             <option value="semana">Entrada</option>
+            <option value="mes">Saída</option>
             <option value="mes">Vencimento</option>
             <option value="ano">Quantidade baixa</option>
         </select>

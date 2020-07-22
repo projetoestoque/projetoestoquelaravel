@@ -97,5 +97,6 @@ Route::get('/estoque/entrada', 'HomeController@estoqueEntradas')->name('estoqueE
 Route::get('/home/cadastros', 'CadastroController@CadastrosSupervisor')->name('superv.cadastros');
 
 Route::get('/saida', ['as'=> 'saida', 'uses'=>'SaidaController@index']);
+Route::post('/saida', ['as'=> 'saida.post', 'uses'=>'SaidaController@saida']);
 
 
