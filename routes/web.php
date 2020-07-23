@@ -77,6 +77,7 @@ Route::group(['middleware' => 'is_admin'], function () {
 Route::get('/produto', ['as'=> 'produto', 'uses'=>'CadastroController@produto']);
 Route::get('/doador', ['as'=> 'doador', 'uses'=>'CadastroController@doador']);
 Route::get('/relatorio', ['as'=> 'relatorio', 'uses'=>'RelatorioController@index']);
+Route::post('/relatorio/gerar', ['as'=> 'relatorio.gerar', 'uses'=>'RelatorioController@gerarRelatorio']);
 Route::get('/refeicao', ['as'=> 'refeicao', 'uses'=>'CadastroController@refeicao']);
 Route::get('/entradaProduto', ['as'=> 'entradaProduto', 'uses'=>'CadastroController@entradaProduto']);
 Route::post('/entradaProduto', ['as'=> 'entradaProdutoPost', 'uses'=>'CadastroController@entradaProdutoPost']);
@@ -97,5 +98,6 @@ Route::get('/estoque/entrada', 'HomeController@estoqueEntradas')->name('estoqueE
 Route::get('/home/cadastros', 'CadastroController@CadastrosSupervisor')->name('superv.cadastros');
 
 Route::get('/saida', ['as'=> 'saida', 'uses'=>'SaidaController@index']);
+Route::post('/saida', ['as'=> 'saida.post', 'uses'=>'SaidaController@saida']);
 
 
