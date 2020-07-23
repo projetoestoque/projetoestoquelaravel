@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Produto_em_estoque;
+use DB;
 
 class RelatorioController extends Controller
 {
@@ -12,70 +14,45 @@ class RelatorioController extends Controller
 
     public function gerarRelatorio(Request $req) {
         date_default_timezone_set('America/Sao_Paulo');
-
-        switch($req->get('tipo')) {
-            case 'geral':
-                switch($req->get('periodo')) {
-                    case 'dia':
-                        $hoje = date('Y-m-d');
-                        $relatorios = DB::table('relatorios')->where('data', $hoje)->where('tipo','geral')->get();
-                        foreach($relatorio as $relatorios) {
-                            $relatorio_saida += $relatorio->relatorio;
-                        }
-                    break;
-                    case 'semana':
-
-                    break;
-                    case 'mes':
-
-                    break;
-                    case 'ano':
-
-                    break;
-                }
+        $relatorio_texto = "";
+        $relatorios = [];
+        
+        //definir as datas do periodo
+        switch($req->get('data')) {
+            case 'hoje':
+                $data_inicial = date('Y-m-d');
+                $data_final = $data_inicial;
             break;
-            case 'entrada':
-                case 'dia':
-
-                break;
-                case 'semana':
-
-                break;
-                case 'mes':
-
-                break;
-                case 'ano':
-
-                break;
+            case 'semana':
+                $data_inicial = date('Y-m-d', strtotime('-1 week'));
+                $data_final = date("Y-m-d");
             break;
-            case 'vencimento':
-                case 'dia':
-
-                break;
-                case 'semana':
-
-                break;
-                case 'mes':
-
-                break;
-                case 'ano':
-
-                break;
+            case 'mes':
+                $data_inicial = date('Y-m-d', strtotime('-4 week'));
+                $data_final = date("Y-m-d");
             break;
-            case 'baixa':
-                case 'dia':
-
-                break;
-                case 'semana':
-
-                break;
-                case 'mes':
-
-                break;
-                case 'ano':
-
-                break;
+            case 'ano':
+                $data_inicial = date('Y-m-d', strtotime('-12 week'));
+                $data_final = date("Y-m-d");
             break;
         }
+
+        $relatorios = DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo', $req->get('tipo'))->get();
+
+        
+        if(count($relatorios) != 0) {
+            $relatorio_texto .= strtoupper($req->get('tipo')). "S\n\n";
+        }
+        
+        foreach($relatorios as $relatorio) {
+            $relatorio_texto .= "$relatorio->relatorio\n";
+        }
+
+        if($relatorio_texto == "") {
+            return "Sem relatorio desse tipo no periodo!";
+        }
+                
+        return $relatorio_texto;
+        
     }
 }

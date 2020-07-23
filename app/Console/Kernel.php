@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Relatorio;
 
 class Kernel extends ConsoleKernel
 {
@@ -25,6 +26,16 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            $relatorio = new Relatorio();
+            $relatorio->tipo = "saida";
+            $relatorio->data = date('Y-m-d');
+            $relatorio->relatorio = "teste";
+            $relatorio->Id_produto = 1;
+            $relatorio->Id_entrada = 1;
+            $relatorio->Id_doador = 1;
+            $relatorio->save();
+        })->daily();
     }
 
     /**

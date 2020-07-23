@@ -56,7 +56,9 @@
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">account_circle</i>
-                <input required min="1" placeholder="10" id="qtd" name="quantidade" type="number" >
+                @if(isset($entrada))
+                <input required min="1" max="{{$entrada->quantidade}}" placeholder="10" id="qtd" name="quantidade" type="number" >
+                @endif
                 <label for="qtd">Quantidade</label>
             </div>
             <div class="input-field col s6">
@@ -74,7 +76,7 @@
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
-      <button class="modal-close btn waves-effect waves-light red darken-2 " type="submit">Retirar</button>
+      <button class="btn waves-effect waves-light red darken-2 " type="submit">Retirar</button>
     </div>
     </form>
 </div>
@@ -95,22 +97,6 @@
             const instance = M.Modal.init(elem, {dismissible: false});
             instance.open();
         });
-    }
-
-    function postModal(produto, doador){
-        dados = [produto,doador];
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "{{route('saida.post')}}");
-        xhr.addEventListener("load", function() {
-            if (xhr.status == 200) {
-                console.log('sucesso: ' + xhr);
-                //sucesso!
-            } else {
-                console.log("erro");
-            }
-        });
-
-        xhr.send(dados);
     }
 </script>
 

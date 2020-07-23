@@ -77,6 +77,7 @@ Route::group(['middleware' => 'is_admin'], function () {
 Route::get('/produto', ['as'=> 'produto', 'uses'=>'CadastroController@produto']);
 Route::get('/doador', ['as'=> 'doador', 'uses'=>'CadastroController@doador']);
 Route::get('/relatorio', ['as'=> 'relatorio', 'uses'=>'RelatorioController@index']);
+Route::post('/relatorio/gerar', ['as'=> 'relatorio.gerar', 'uses'=>'RelatorioController@gerarRelatorio']);
 Route::get('/refeicao', ['as'=> 'refeicao', 'uses'=>'CadastroController@refeicao']);
 Route::get('/entradaProduto', ['as'=> 'entradaProduto', 'uses'=>'CadastroController@entradaProduto']);
 Route::post('/entradaProduto', ['as'=> 'entradaProdutoPost', 'uses'=>'CadastroController@entradaProdutoPost']);
