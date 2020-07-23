@@ -37,16 +37,57 @@ class RelatorioController extends Controller
             break;
         }
 
-        $relatorios = DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo', $req->get('tipo'))->get();
+        if($req->get('tipo') != "geral") {
+            $relatorios = DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo', $req->get('tipo'))->get();
+            if(count($relatorios) != 0) {
+                $relatorio_texto .= strtoupper($req->get('tipo')). "S\n\n";
+            }
+            
+            foreach($relatorios as $relatorio) {
+                $relatorio_texto .= "$relatorio->relatorio\n";
+            }
+        } else {
+            //parte de entrada
+            if(DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo',"entrada")->exists()) {
+                $relatorio_texto .= "\nENTRADAS\n";
 
-        
-        if(count($relatorios) != 0) {
-            $relatorio_texto .= strtoupper($req->get('tipo')). "S\n\n";
+                $relatorios = DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo',"entrada")->get();
+                foreach($relatorios as $relatorio) {
+                    $relatorio_texto .= "$relatorio->relatorio\n";
+                }
+            }
+
+            if(DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo',"saida")->exists()) {
+                $relatorio_texto .= "\nSAÍDAS\n";
+
+                $relatorios = DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo',"saida")->get();
+                foreach($relatorios as $relatorio) {
+                    $relatorio_texto .= "$relatorio->relatorio\n";
+                }
+            }
+
+            if(DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo',"vencimento")->exists()) {
+                $relatorio_texto .= "\nPRODUTOS EM VENCIMENTO\n";
+                
+                $relatorios = DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo',"vencimento")->get();
+               
+                foreach($relatorios as $relatorio) {
+                    $relatorio_texto .= "$relatorio->relatorio\n";
+                }
+            }
+
+            if(DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo',"baixa")->exists()) {
+                $relatorio_texto .= "\nPRODUTOS COME ESTOQUE BAIXO\n";
+
+                $relatorios = DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo',"baixa")->get();
+                foreach($relatorios as $relatorio) {
+                    $relatorio_texto .= "$relatorio->relatorio\n";
+                }
+            }
+
         }
         
-        foreach($relatorios as $relatorio) {
-            $relatorio_texto .= "$relatorio->relatorio\n";
-        }
+       
 
         if($relatorio_texto == "") {
             return "Sem relatorio desse tipo no periodo!";
