@@ -25,17 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
-        $schedule->call(function () {
-            $relatorio = new Relatorio();
-            $relatorio->tipo = "saida";
-            $relatorio->data = date('Y-m-d');
-            $relatorio->relatorio = "teste";
-            $relatorio->Id_produto = 1;
-            $relatorio->Id_entrada = 1;
-            $relatorio->Id_doador = 1;
-            $relatorio->save();
-        })->daily();
+        $schedule->command('teste:testar')->everyMinute();
     }
 
     /**
