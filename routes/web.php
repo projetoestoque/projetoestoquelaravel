@@ -78,6 +78,8 @@ Route::get('/produto', ['as'=> 'produto', 'uses'=>'CadastroController@produto'])
 Route::get('/doador', ['as'=> 'doador', 'uses'=>'CadastroController@doador']);
 Route::get('/relatorio', ['as'=> 'relatorio', 'uses'=>'RelatorioController@index']);
 Route::post('/relatorio/gerar', ['as'=> 'relatorio.gerar', 'uses'=>'RelatorioController@gerarRelatorio']);
+Route::post('/relatorio/pdf', ['as'=> 'relatorio.pdf', 'uses'=>'RelatorioController@gerarPdf']);
+Route::post('/relatorio', ['as'=> 'relatorio.print', 'uses'=>'RelatorioController@gerarPrint']);
 Route::get('/refeicao', ['as'=> 'refeicao', 'uses'=>'CadastroController@refeicao']);
 Route::get('/entradaProduto', ['as'=> 'entradaProduto', 'uses'=>'CadastroController@entradaProduto']);
 Route::post('/entradaProduto', ['as'=> 'entradaProdutoPost', 'uses'=>'CadastroController@entradaProdutoPost']);

@@ -4,13 +4,18 @@
 
 <script>
 
- function fazerRequisicao() {
+ function fazerRequisicao(rota) {
     data = document.getElementById('data').value
     tipo = document.getElementById('tipo').value
 
     // Exemplo de requisição POST
     var ajax = new XMLHttpRequest();
-    const url = "{{route('relatorio.gerar')}}"
+    let url = ""
+    if(rota == 'gerar') {
+        url = "{{route('relatorio.gerar')}}"
+    } else if(rota == 'pdf') {
+        url = "{{route('relatorio.pdf')}}"
+    }
 
     // Seta tipo de requisição: Post e a URL da API
     ajax.open("POST", url, true);
@@ -34,6 +39,12 @@
 </script>
 
 <style>
+
+#section-to-print {
+    font-weight: normal;
+    display: none;
+}
+
 .row{
     margin-bottom:0 !important;
 }
@@ -46,6 +57,21 @@ select{
 }
 .waves-effect.waves-light.btn-flat.gradient{
     margin-top:20px;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #section-to-print, #section-to-print * {
+    visibility: visible;
+  }
+  #section-to-print {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
 }
 </style>
 <meta id="token" name="csrf-token" content="{{ csrf_token() }}">
@@ -65,8 +91,9 @@ select{
 <br>
 <div class="container">
     <h4><b>Relatório</b></h4>
-    {{csrf_field()}}
     <div class="row">
+    <form method="post" action="{{route('relatorio.print')}}">
+    {{csrf_field()}}
     <div class="input-field col l3">
         <select class="date" id="data" name="data">
             <option value="hoje" >Hoje</option>
@@ -87,17 +114,37 @@ select{
         <label for="data">Tipo de relatório</label>
     </div>
     <div class="col l3">
-        <a onclick="fazerRequisicao()" class="waves-effect waves-light btn-flat gradient">Gerar Relatório</a>
+        <a onclick="fazerRequisicao('gerar')" class="waves-effect waves-light btn-flat gradient">Gerar Relatório</a>
     </div>
 
     <div class="col l1"></div>
-        <a class="btn-floating btn-large waves-effect waves-light white"><i class="material-icons black-text">print</i></a>
-        <a class="btn-floating btn-large waves-effect waves-light white"><i class="material-icons black-text">picture_as_pdf</i></a>
+        <button type="submit" class="btn-floating btn-large waves-effect waves-light white"><i class="material-icons black-text">print</i></button>
+        <a onclick="fazerRequisicao('pdf')" class="btn-floating btn-large waves-effect waves-light white"><i class="material-icons black-text">picture_as_pdf</i></a>
     </div>
+    </form>
 </div>
 
-<div class="container z-depth-2 ">
+<div class="container z-depth-2">
 <nav class="nav-form blue lighten-1"></nav>
 <textarea id="texto_relatorio" cols="300" rows="300"></textarea>
 </div>
+
+@if(isset($print))
+<div id="section-to-print">
+    @foreach($print as $item)
+        <b>{{$item['tipo']}}</b><br/>
+        @foreach($item['texto'] as $texto)
+        {{$texto}}<br/><br/>
+        @endforeach
+        <br/>
+    @endforeach
+</div>
+@endif
+
+@if(isset($print))
+<script>
+   window.print()
+</script>
+@endif
+
 @endsection

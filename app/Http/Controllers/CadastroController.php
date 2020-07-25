@@ -243,7 +243,7 @@ class CadastroController extends Controller
 		$relatorio->Id_doador = $produto->Id_doador;
 		$relatorio->Id_entrada = $produto->id;
 		$relatorio->tipo = "entrada";
-		$relatorio->relatorio = "Entrada de ". $produto->quantidade . " " .$produto->medida ." de ". Produto::find($produto->Id_produto)->nome . Produto::find($produto->Id_produto)->marca ." em ". date('d/m/Y') ." doado pelo/a ". (Doador::find($produto->Id_doador)->nome == null?Doador::find($produto->Id_doador)->instituicao:Doador::find($produto->Id_doador)->nome) ." de cpf/cpnj " . (Doador::find($produto->Id_doador)->nome == null?Doador::find($produto->Id_doador)->cnpj:Doador::find($produto->Id_doador)->cpf). "com vencimento em ". $produto->vencimento;
+		$relatorio->relatorio = "Entrada de ". $produto->quantidade . " " .$produto->medida ." de ". Produto::find($produto->Id_produto)->nome . " " .Produto::find($produto->Id_produto)->marca ." em ". date('d/m/Y') ." doado pelo/a ". (Doador::find($produto->Id_doador)->nome == null?Doador::find($produto->Id_doador)->instituicao:Doador::find($produto->Id_doador)->nome) ." de cpf/cpnj " . (Doador::find($produto->Id_doador)->nome == null?Doador::find($produto->Id_doador)->cnpj:Doador::find($produto->Id_doador)->cpf). "com vencimento em ". $produto->vencimento;
 		$relatorio->data = date("Y-m-d");
 		$relatorio->save();
 
