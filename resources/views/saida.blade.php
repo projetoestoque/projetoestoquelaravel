@@ -2,12 +2,12 @@
 
 @section('titulo','Menu')
 
+@section('conteudo')
 <style>
-.container.z-depth-2{
-   height:50vh;
+.gradient{
+    background: linear-gradient(to left, #cb2d3e, #ef473a);;
 }
 </style>
-@section('conteudo')
 <div class="butaoEspaco">
     <a href="{{ URL::route('admin.home') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
     <i class="large material-icons">reply</i>
@@ -40,7 +40,7 @@
                 <td>{{$produto->tipo}}</td>
                 <td>{{$produto->marca}}</td>
                 <td>{{$produto->vencimento}}</td>
-                <td><a onclick="abrirModal('{{$produto->id}}')" class="btn-floating waves-effect waves-light gradient"><i class="material-icons">add</i></a></td>
+                <td><a onclick="abrirModal('{{$produto->id}}')" class="btn-floating waves-effect waves-light gradient"><i class="material-icons">remove</i></a></td>
               </tr>
               @endforeach
           </tbody>

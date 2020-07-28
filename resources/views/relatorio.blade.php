@@ -25,13 +25,13 @@
 
     // Seta paramêtros da requisição e envia a requisição
     ajax.send("data=" + data + "&tipo=" + tipo);
-
     // Cria um evento para receber o retorno.
     ajax.onreadystatechange = function() {
     // Caso o state seja 4 e o http.status for 200, é porque a requisiçõe deu certo.
         if (ajax.readyState == 4 && ajax.status == 200) {
             var data = ajax.responseText;
         // Retorno do Ajax
+            removeBackground()
             document.getElementById('texto_relatorio').value = data;
         }
     }
@@ -44,21 +44,20 @@
     font-weight: normal;
     display: none;
 }
-
 .row{
     margin-bottom:0 !important;
-}
-.container.z-depth-2{
-   height:50vh;
-}
-select{
-  border:1px solid rgba(142, 142, 142, 0.39) !important;
-  border-radius: 8px !important;
 }
 .waves-effect.waves-light.btn-flat.gradient{
     margin-top:20px;
 }
-
+textarea {
+  outline: none;
+  height:50% !important;
+  resize:none;
+  font:16px 'Noto Sans JP',sans-serif !important;
+  background: url({{asset('relatorio.png')}}) center center no-repeat;
+  background-size: 500px 200px;
+}
 @media print {
   body * {
     visibility: hidden;
@@ -74,8 +73,10 @@ select{
   }
 }
 </style>
-<meta id="token" name="csrf-token" content="{{ csrf_token() }}">
+<meta id="token" name="csrf-token" content="{{ csrf_token() }}"/>
 @section('conteudo')
+
+<div class="butaoEspaco">
 @if(auth()->user()->is_admin)
     <a href="{{ URL::route('admin.home') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
     <i class="large material-icons">reply</i>
@@ -87,6 +88,7 @@ select{
         <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
 @endif
+</div>
 <br>
 <br>
 <div class="container">
@@ -97,9 +99,9 @@ select{
     <div class="input-field col l3">
         <select class="date" id="data" name="data">
             <option value="hoje" >Hoje</option>
-            <option value="semana">Essa Semana</option>
-            <option value="mes">Esse Mês</option>
-            <option value="ano">Esse Ano</option>
+            <option value="semana">Semana</option>
+            <option value="mes">Mês</option>
+            <option value="ano">Ano</option>
         </select>
         <label for="data">Período</label>
     </div>
@@ -126,7 +128,7 @@ select{
 
 <div class="container z-depth-2">
 <nav class="nav-form blue lighten-1"></nav>
-<textarea id="texto_relatorio" cols="300" rows="300"></textarea>
+<textarea id="texto_relatorio" cols="50" rows="10" onchange="removeBackground()"></textarea>
 </div>
 
 @if(isset($print))
@@ -148,3 +150,8 @@ select{
 @endif
 
 @endsection
+<script>
+    function removeBackground(){
+        document.querySelector('textarea').style.background='none';
+    }
+</script>

@@ -86,7 +86,8 @@
   <li ><a href="{{route('admin.listarCadastros')}}">Visualizar Cadastros</a></li>
   <li><a href="{{ route('admin.cadastros')}}">Cadastrar</a></li>
   <li><a href="{{ route('admin.insercoes')}}">Entradas</a></li>
-  <li><a href="#">Relatório</a></li>
+  <li><a href="{{ route('saida')}}">Saídas</a></li>
+  <li><a href="{{route('relatorio')}}">Relatório</a></li>
        <li>
        <a class="dropdown-trigger"href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
        Logout<i class="material-icons right">power_settings_new</i>
@@ -102,7 +103,8 @@
   <li ><a href="{{route('produtos.listar')}}">Visualizar Estoque</a></li>
   <li><a href="{{ route('superv.cadastros')}}">Cadastrar</a></li>
   <li><a href="{{ route('superv.cadastros')}}">Entradas</a></li>
-  <li><a href="#">Relatório</a></li>
+  <li><a href="{{ route('saida')}}">Saídas</a></li>
+  <li><a href="{{route('relatorio')}}">Relatório</a></li>
   <li>
   <a class="dropdown-trigger"href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
   Logout<i class="material-icons right">power_settings_new</i>
@@ -118,12 +120,14 @@
     <li ><a href="{{route('admin.listarCadastros')}}">Visualizar Cadastros</a></li>
     <li><a href="{{ route('admin.cadastros')}}">Cadastrar</a></li>
     <li><a href="{{ route('admin.insercoes')}}">Entradas</a></li>
-    <li><a href="#">Relatório</a></li>
+    <li><a href="{{ route('saida')}}">Saídas</a></li>
+    <li><a href="{{route('relatorio')}}">Relatório</a></li>
   </ul> 
   <ul id="dropdown2" class="dropdown-content"  >
     <li ><a href="{{route('produtos.listar')}}">Visualizar Estoque</a></li>
     <li><a href="{{ route('superv.cadastros')}}">Cadastrar</a></li>
     <li><a href="{{ route('superv.cadastros')}}">Entradas</a></li>
-    <li><a href="#">Relatório</a></li>
+    <li><a href="{{ route('saida')}}">Saídas</a></li>
+    <li><a href="{{route('relatorio')}}">Relatório</a></li>
   </ul> 
 </header>
