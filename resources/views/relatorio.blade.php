@@ -4,6 +4,13 @@
 
 <script>
 
+function baixarPdf() {
+    let form = document.getElementById('form1')
+    form.action = "{{route('relatorio.pdf')}}"
+    document.formulario.submit()
+    form.action = "{{route('relatorio.print')}}"
+}
+
  function fazerRequisicao(rota) {
     data = document.getElementById('data').value
     tipo = document.getElementById('tipo').value
@@ -94,7 +101,7 @@ textarea {
 <div class="container">
     <h4><b>Relatório</b></h4>
     <div class="row">
-    <form method="post" action="{{route('relatorio.print')}}">
+    <form id="form1" name="formulario" method="post" action="{{route('relatorio.print')}}">
     {{csrf_field()}}
     <div class="input-field col l3">
         <select class="date" id="data" name="data">
@@ -121,7 +128,7 @@ textarea {
 
     <div class="col l1"></div>
         <button type="submit" class="btn-floating btn-large waves-effect waves-light white"><i class="material-icons black-text">print</i></button>
-        <a onclick="fazerRequisicao('pdf')" class="btn-floating btn-large waves-effect waves-light white"><i class="material-icons black-text">picture_as_pdf</i></a>
+        <a onclick="baixarPdf()" class="btn-floating btn-large waves-effect waves-light white"><i class="material-icons black-text">picture_as_pdf</i></a>
     </div>
     </form>
 </div>
