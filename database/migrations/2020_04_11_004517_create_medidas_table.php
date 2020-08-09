@@ -30,6 +30,8 @@ class CreateMedidasTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('medidas');
+        Schema::enableForeignKeyConstraints();
     }
 }

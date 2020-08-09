@@ -26,7 +26,7 @@ class CreateDoadorsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('Id_endereco')->references('id')->on('enderecos');
+            $table->foreign('Id_endereco')->references('id')->on('enderecos')->onDelete('cascade');
         });
     }
 
@@ -37,6 +37,8 @@ class CreateDoadorsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('doadors');
+        Schema::enableForeignKeyConstraints();
     }
 }

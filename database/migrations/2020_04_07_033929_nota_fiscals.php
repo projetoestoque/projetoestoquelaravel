@@ -20,7 +20,7 @@ class NotaFiscals extends Migration
             $table->decimal('valor');
             $table->timestamps();
 
-            $table->foreign('Id_produto')->references('id')->on('produtos');
+            $table->foreign('Id_produto')->references('id')->on('produtos')->onDelete('cascade');
             $table->softDeletes();
         });
     }
@@ -32,6 +32,6 @@ class NotaFiscals extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nota_fiscal');
+        Schema::dropIfExists('nota_fiscals');
     }
 }
