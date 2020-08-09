@@ -31,6 +31,7 @@ class Produtos extends Migration
      */
     public function down()
     {
+        DB::statement('DROP TABLE if exists produtos cascade;');
         Schema::dropIfExists('produtos');
     }
 }

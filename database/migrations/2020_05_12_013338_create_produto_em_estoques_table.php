@@ -24,10 +24,10 @@ class CreateProdutoEmEstoquesTable extends Migration
             $table->string('vencimento');
             $table->timestamps();
 
-             $table->foreign('Id_estoque')->references('id')->on('estoque_disponivels');
-             $table->foreign('Id_produto')->references('id')->on('produtos');
-             $table->foreign('Id_medida')->references('id')->on('medidas');
-             $table->foreign('Id_doador')->references('id')->on('doadors');
+             $table->foreign('Id_estoque')->references('id')->on('estoque_disponivels')->onDelete('cascade');
+             $table->foreign('Id_produto')->references('id')->on('produtos')->onDelete('cascade');
+             $table->foreign('Id_medida')->references('id')->on('medidas')->onDelete('cascade');
+             $table->foreign('Id_doador')->references('id')->on('doadors')->onDelete('cascade');
              $table->softDeletes();
         });
     }
@@ -39,6 +39,8 @@ class CreateProdutoEmEstoquesTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('produto_em_estoques');
+        Schema::enableForeignKeyConstraints();
     }
 }

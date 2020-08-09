@@ -19,8 +19,8 @@ class CreateEstoquesTable extends Migration
             $table->unsignedBigInteger('Id_estoque');
             $table->timestamps();
 
-            $table->foreign('Id_produto')->references('id')->on('produtos');
-            $table->foreign('Id_estoque')->references('id')->on('estoque_disponivels');
+            $table->foreign('Id_produto')->references('id')->on('produtos')->onDelete('cascade');
+            $table->foreign('Id_estoque')->references('id')->on('estoque_disponivels')->onDelete('cascade');
             $table->softDeletes();
         });
     }
@@ -32,6 +32,8 @@ class CreateEstoquesTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('estoques');
+        Schema::enableForeignKeyConstraints();
     }
 }

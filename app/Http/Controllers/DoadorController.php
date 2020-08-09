@@ -45,7 +45,14 @@ class DoadorController extends Controller
   {
       $doador_id = $_GET['id'];
       $doador = Doador::find($doador_id);
-      $doador->delete();
-      return redirect()->back()->with('status', 'Doador deletado com sucesso!');
+      
+      if(DB::table('produto_em_estoques')->where('Id_doador', $doador_id)->exists()) {
+        return redirect()->back()->withErrors(['errors' => ['Doador não pode ser deletado pois possui um produto vinculado ao seu nome!']]);
+      } else {
+        $doador->delete();
+        return redirect()->back()->with('status', 'Doador deletado com sucesso!');
+      }
+
+      
   }
 }

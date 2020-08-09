@@ -23,9 +23,9 @@ class CreateRelatoriosTable extends Migration
             $table->string('data');
             $table->timestamps();
 
-            $table->foreign('Id_doador')->references('id')->on('doadors');
-            $table->foreign('Id_produto')->references('id')->on('produtos');
-            $table->foreign('Id_entrada')->references('id')->on('produto_em_estoques');
+            $table->foreign('Id_doador')->references('id')->on('doadors')->onDelete('cascade');
+            $table->foreign('Id_produto')->references('id')->on('produtos')->onDelete('cascade');
+            $table->foreign('Id_entrada')->references('id')->on('produto_em_estoques')->onDelete('cascade');
             $table->softDeletes();
         });
     }
@@ -37,6 +37,8 @@ class CreateRelatoriosTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('relatorios');
+        Schema::enableForeignKeyConstraints();
     }
 }
