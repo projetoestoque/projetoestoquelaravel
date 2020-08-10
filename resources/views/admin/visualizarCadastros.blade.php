@@ -625,7 +625,6 @@
 
             //verificar se é codigo de barras
             if(!isNaN(parseFloat(query)) && isFinite(query)) {
-                console.log('numero')
 
                 $.get("{{url('/admin/buscar/codigo_barra?query=')}}" + query, (data, status) => {
                     for(let i = 0; i < data.length; i++) {
@@ -637,7 +636,9 @@
                 });
 
             } else {
-                $.get("{{url('/admin/buscar/cadastros?query=')}}" + query, (data, status) => { 
+                $.get("{{url('/admin/buscar/cadastros?query=')}}" + query, (data, status) => {
+                    console.log("testando...") 
+                    console.log(data)
                     
                     for(let i = 0; i < data.length; i++) {
                         if(data[i]['tipo'] == 'juridico') {
@@ -835,8 +836,7 @@
     }
 
     function adicionarProduto(id) {
-        
-        url_anterior = "http://localhost:8000/admin/listarCadastros"
+        url_anterior = "{{$_SERVER['HTTP_REFERER']}}"
         if(url_anterior.indexOf('produto') != -1) {
             let url=new URL(url_anterior);
             let productId=url.searchParams.get("produto");
@@ -850,8 +850,7 @@
     }
 
     function adicionarDoador(id) {
-        
-        url_anterior = "http://localhost:8000/admin/listarCadastros"
+        url_anterior = "{{$_SERVER['HTTP_REFERER']}}"
         if(url_anterior.indexOf('doador') != -1) {
             let url=new URL(url_anterior);
             console.log(url_anterior)
