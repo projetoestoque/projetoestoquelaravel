@@ -32,6 +32,6 @@ public function listar_marcas()
     $marca_id = $_GET['id'];
     $marca = Marca::find($marca_id);
     $marca->delete();
-    return redirect()->back()->with('status', 'Marca deletada com sucesso!');
+    return redirect()->route('admin.listarCadastros', ['rel' => 'marca'])->with('status', 'Marca deletada com sucesso!');
   }
 }

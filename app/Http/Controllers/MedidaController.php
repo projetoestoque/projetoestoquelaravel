@@ -29,6 +29,6 @@ class MedidaController extends Controller
       $medida_id = $_GET['id'];
       $medida = Medida::find($medida_id);
       $medida->delete();
-      return redirect()->back()->with('status', 'Medida deletada com sucesso!');
+      return redirect()->route('admin.listarCadastros', ['rel' => 'medida'])->with('status', 'Medida deletada com sucesso!');
   }
 }

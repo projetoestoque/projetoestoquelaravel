@@ -835,7 +835,8 @@
     }
 
     function adicionarProduto(id) {
-        url_anterior = "{{$_SERVER['HTTP_REFERER']}}"
+        
+        url_anterior = "http://localhost:8000/admin/listarCadastros"
         if(url_anterior.indexOf('produto') != -1) {
             let url=new URL(url_anterior);
             let productId=url.searchParams.get("produto");
@@ -849,7 +850,8 @@
     }
 
     function adicionarDoador(id) {
-        url_anterior = "{{$_SERVER['HTTP_REFERER']}}"
+        
+        url_anterior = "http://localhost:8000/admin/listarCadastros"
         if(url_anterior.indexOf('doador') != -1) {
             let url=new URL(url_anterior);
             console.log(url_anterior)
@@ -867,6 +869,37 @@
 @if(isset($_GET['tipo']) && $_GET['tipo'] == "doador")
 <script>
     changeFilter("Doador");
+</script>
+@endif
+
+@if(isset($_GET['rel']))
+<script>
+   let tipos = [
+       'Produto',
+       'Doador',
+       'Tipo',
+       'Marca',
+       'Medida',
+       'Estoque'
+   ]
+
+    var query = location.search.slice(1);
+    var partes = query.split('&');
+    var data = {};
+    partes.forEach(function (parte) {
+        var chaveValor = parte.split('=');
+        var chave = chaveValor[0];
+        var valor = chaveValor[1];
+        data[chave] = valor;
+    });
+
+   for(let i = 0; i < tipos.length; i++) {
+       if(data.rel == tipos[i].toLowerCase()) {
+           changeFilter(tipos[i])
+           break;
+       }
+   }
+
 </script>
 @endif
 

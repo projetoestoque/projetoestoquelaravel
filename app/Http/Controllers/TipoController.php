@@ -28,6 +28,6 @@ class TipoController extends Controller
       $tipo_id = $_GET['id'];
       $tipo = Tipo::findOrFail($tipo_id);
       $tipo->delete();
-      return redirect()->back()->with('status', 'Tipo deletado com sucesso!');
+      return redirect()->route('admin.listarCadastros', ['rel' => 'tipo'])->with('status', 'Tipo deletado com sucesso!');
   }
 }
