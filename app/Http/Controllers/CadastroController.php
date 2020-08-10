@@ -483,24 +483,77 @@ class CadastroController extends Controller
 	
 	public function pesquisarCadastros()
   	{
+
 		$produtos_em_estoque = DB::table('produto_em_estoques')->get();
 		$items = [];
 		$query = "";
 		if(isset($_GET['query'])) $query = $_GET['query'];
 		if(!$query) return false;
+		$query = mb_strtolower($query, 'UTF-8');
 
-		//filtrar produtos cadastrados
-		$produtos_cadastrados_filtrados = Produto::where('nome', 'LIKE', $query.'%')->get();
+		$todos_produtos = DB::table('produtos')->get();
+		$produtos_cadastrados_filtrados = [];
+		$nome_buscado = "";
+
+		foreach($todos_produtos as $produto) {
+			$produto->nome = mb_strtolower($produto->nome, 'UTF-8');
+
+			for($i = 0; $i < strlen($query); $i++) {
+				$nome_buscado .= $produto->nome[$i];
+			}
+
+			if($nome_buscado == $query) {
+				array_push($produtos_cadastrados_filtrados, $produto);
+			}
+
+			$nome_buscado = "";
+		}
+
 		foreach($produtos_cadastrados_filtrados as $produto) {
-			if($produto->nome[0] == $query[0]) {
-				$produto->tipo = "Produto";
-				array_push($items, $produto);
+			$produto->tipo = "Produto";
+			array_push($items, $produto);
+			
+		}
+
+		//filtrar doadores
+		$nome_buscado = "";
+		$todos_doadores = DB::table('doadors')->get();
+		$doadores_fisicos_filtrados = [];
+		$doadores_juridicos_filtrados = [];
+
+		foreach($todos_doadores as $doador) {
+			if($doador->nome != null) {
+				foreach($todos_doadores as $doador) {
+					$doador->nome = mb_strtolower($doador->nome, 'UTF-8');
+		
+					for($i = 0; $i < strlen($query); $i++) {
+						$nome_buscado .= $doador->nome[$i];
+					}
+		
+					if($nome_buscado == $query) {
+						array_push($doadores_fisicos_filtrados, $doador);
+					}
+		
+					$nome_buscado = "";
+				}
+			} else  {
+				foreach($todos_doadores as $doador) {
+					$doador->instituicao = mb_strtolower($doador->instituicao, 'UTF-8');
+		
+					for($i = 0; $i < strlen($query); $i++) {
+						$nome_buscado .= $doador->instituicao[$i];
+					}
+		
+					if($nome_buscado == $query) {
+						array_push($doadores_juridicos_filtrados, $doador);
+					}
+		
+					$nome_buscado = "";
+				}
 			}
 		}
 		
-		//filtrar doadores
-		$doadores_fisicos_filtrados = Doador::where('nome', 'LIKE', $query.'%')->get();
-		$doadores_juridicos_filtrados = Doador::where('instituicao', 'LIKE', '%'.$query.'%')->get();
+
 		foreach($doadores_fisicos_filtrados as $doador) {
 			if($query[0] == $doador->nome[0]) {
 				array_push($items, $doador);
@@ -554,8 +607,8 @@ class CadastroController extends Controller
 				array_push($items, $estoque);
 		}
 		
-		
 		return $items;
+		
   }
 
   public function pesquisarCodigoBarra() {
