@@ -50,7 +50,7 @@ class DoadorController extends Controller
         return redirect()->back()->withErrors(['errors' => ['Doador não pode ser deletado pois possui um produto vinculado ao seu nome!']]);
       } else {
         $doador->delete();
-        return redirect()->back()->with('status', 'Doador deletado com sucesso!');
+        return redirect()->route('admin.listarCadastros', ['rel' => 'doador'])->with('status', 'Doador deletado com sucesso!');
       }
 
       

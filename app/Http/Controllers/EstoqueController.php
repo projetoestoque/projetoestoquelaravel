@@ -32,7 +32,7 @@ class EstoqueController extends Controller
       $estoque_id = $_GET['id'];
       $estoque = Estoque_disponivel::find($estoque_id);
       $estoque->delete();
-      return redirect()->back()->with('status', 'Estoque deletado com sucesso!');
+      return redirect()->route('admin.listarCadastros', ['rel' => 'estoque'])->with('status', 'Estoque deletado com sucesso!');
   }
 
   public function pesquisarEntrada()
