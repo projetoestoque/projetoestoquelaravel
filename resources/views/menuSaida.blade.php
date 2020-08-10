@@ -25,13 +25,13 @@
 <br>
 <div class="container">
 <div class="row white text ">
-<a href="{{route('entradaProduto')}}" class="white-text">
+<a href="{{route('saida')}}" class="white-text">
                 <div class=" card-panel blue darken-3 col s5 hoverable mobile">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col ">
                             <i class="material-icons large white-text pt-5">kitchen</i>
-                            <h6>Entrada de Produtos</h6>
+                            <h6>Saída de Produtos</h6>
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                     <span class="row"></span>
                         <div class="col">
                             <i class="material-icons large blue-text text-darken-3 ">restaurant</i>
-                            <h6 class="no-padding txt-md blue-text text-darken-3"><b>Inserir Refeição</b></h6>
+                            <h6 class="no-padding txt-md blue-text text-darken-3"><b>Saída por Refeição</b></h6>
                         </div>
                 </div>
             </div>

@@ -67,4 +67,7 @@ class SaidaController extends Controller
 
         return redirect()->route('saida')->with('status', 'Saída realizada com sucesso!');
     }
+    public function menu(){
+        return view('menuSaida');
+    }
 }

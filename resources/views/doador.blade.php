@@ -121,19 +121,19 @@
                 @else
                     <input onkeyup="buscarCEPFisico()" id="cep_fisico" type="text" name="cep" placeholder="55290-000"></input>
                 @endif
-                <label>CEP</label>
+                <label>CEP<span class="important">*</span></label>
             </div>
             <div class="col l2"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">nature_people</i>
                 @if(isset($doador) && $endereco != null)
-                    <input value="{{$endereco->bairro}}" id="bairro_fisico" type="text" name="bairro" placeholder="Bairro">
+                    <input value="{{$endereco->bairro}}" id="bairro_fisico" type="text" name="bairro" placeholder="Bairro Exemplo">
                 @elseif(isset($doador) && $endereco == null)
-                    <input id="bairro_fisico" type="text" name="bairro" placeholder="Bairro">
+                    <input id="bairro_fisico" type="text" name="bairro" placeholder="Bairro Exemplo">
                 @else
-                    <input type="text" id="bairro_fisico" name="bairro" placeholder="Bairro">
+                    <input type="text" id="bairro_fisico" name="bairro" placeholder="Bairro Exemplo">
                 @endif
-                <label>Bairro</label>
+                <label>Bairro/Condomínio/Apartamento<span class="important">*</span></label>
             </div>
         </div>
             <div class="row">
@@ -147,7 +147,7 @@
                     @else
                         <input type="text" id="cidade_fisica" name="cidade" placeholder="Garanhuns"></input>
                     @endif
-                    <label>Cidade</label>
+                    <label>Cidade<span class="important">*</span></label>
                 </div>
                 <div class="col l2"></div>
                 <div class="input-field col s12 l2">
@@ -159,7 +159,7 @@
                     @else
                         <input maxlength="2"  type="text" id="estado_fisico" name="uf" placeholder="PE"></input>
                     @endif
-                    <label>Estado</label>
+                    <label>Estado<span class="important">*</span></label>
                 </div>
             </div>
             <div class="row">
@@ -176,16 +176,16 @@
                     <label>Logradouro</label>
                 </div>
             <div class="col l2"></div>
-            <div class="input-field col s12 l2">
+            <div class="input-field col s12 l3">
                     <i class="material-icons prefix">looks_5</i>
                     @if(isset($doador) && $endereco != null)
-                        <input value="{{$endereco->numero}}" id="numero_fisico" type="text" name="numero" placeholder="25"></input>
+                        <input value="{{$endereco->numero}}" id="numero_fisico" type="text" name="numero" placeholder="25 / 5b"></input>
                     @elseif(isset($doador) && $endereco == null)
-                        <input id="numero_fisico" type="text" name="numero" placeholder="25"></input>
+                        <input id="numero_fisico" type="text" name="numero" placeholder="25 / 5b"></input>
                     @else 
-                        <input type="text" id="numero_fisico" name="numero" placeholder="25"></input>
+                        <input type="text" id="numero_fisico" name="numero" placeholder="25 / 5b"></input>
                     @endif
-                    <label>Número</label>
+                    <label>Número/ Bloco-lote<span class="important">*</span></label>
                 </div>
             </div>
         <div class="row valign center">

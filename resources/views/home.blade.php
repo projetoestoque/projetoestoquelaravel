@@ -11,7 +11,7 @@
 <br>
 <div class="container ">
 <div class="row white-text ">
-            <a href="{{route('estoqueMenu')}}" class="white-text">
+            <a href="{{route('produtos.listar')}}" class="white-text">
                 <div class=" card-panel blue accent-1 col s5 hoverable  ">
                     <div class="row">
                     <span class="row"></span>
@@ -41,7 +41,21 @@
             </div>
 </div>
 <div class="row white text">
-            <a href="#" class="white-text">
+            <a href="{{route('saida.menu')}}" class="white-text">   
+                <div class=" card-panel blue darken-4 col s5 hoverable">
+                    <div class="row">
+                    <span class="row"></span>
+                        <div class="col ">
+                            <i class="material-icons medium white-text pt-5">exit_to_app</i>
+                            <h6>Saídas do Sistema</h6>
+                        </div>
+                        <span class="row"></span>
+                    </div>
+                </div>
+            </a>
+            <div class="col s2">
+            </div>
+            <a href="{{route('relatorio')}}" class="white-text">
                 <div class=" card-panel blue darken-4 col s5 hoverable">
                     <div class="row">
                     <span class="row"></span>
