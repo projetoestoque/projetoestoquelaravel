@@ -27,7 +27,6 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::get('/admin/cadastros', 'CadastroController@Cadastros')->name('admin.cadastros');
     Route::get('/admin/MenuEstoque', 'CadastroController@CadastrosInsercoes')->name('admin.MenuEstoque');
     Route::get('/admin/MenuCadastros', 'CadastroController@menuCadastros')->name('admin.MenuCadastros');
-    Route::get('/admin/MenuInsercoes', 'CadastroController@Insercoes')->name('admin.insercoes');
     Route::get('/admin/listarCadastros/{reference?}', 'CadastroController@listarCadastros')->name('admin.listarCadastros');
     Route::get('/admin/produto/editar/{id}', 'CadastroController@editarProduto')->name('admin.produto.editar');
     Route::put('/admin/produto/atualizar/{id}', 'CadastroController@salvarAlteracoes')->name('admin.produto.atualizar');
@@ -99,6 +98,7 @@ Route::get('/estoque', 'HomeController@estoqueMenu')->name('estoqueMenu');
 Route::get('/estoque/entrada', 'HomeController@estoqueEntradas')->name('estoqueEntradas');
 Route::get('/home/cadastros', 'CadastroController@CadastrosSupervisor')->name('superv.cadastros');
 
+Route::get('/saida/menu','SaidaController@menu')->name('saida.menu');
 Route::get('/saida', ['as'=> 'saida', 'uses'=>'SaidaController@index']);
 Route::post('/saida', ['as'=> 'saida.post', 'uses'=>'SaidaController@saida']);
 

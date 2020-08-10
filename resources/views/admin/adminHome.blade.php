@@ -39,7 +39,7 @@
             </div>
 </div>
 <div class="row white-text ">
-            <a href="{{route('saida')}}" class="white-text">
+            <a href="{{route('saida.menu')}}" class="white-text">
                 <div class=" card-panel blue darken-4 col s5 hoverable">
                     <div class="row">
                     <span class="row"></span>

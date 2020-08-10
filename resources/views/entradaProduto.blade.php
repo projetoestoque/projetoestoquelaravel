@@ -26,17 +26,10 @@
         <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
 @else
-    @if(auth()->user()->is_admin)
-        <a href="{{ URL::route('admin.insercoes') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
-        <i class="large material-icons">reply</i>
-        <span class="ButtaoEspacoTexto"><b>Voltar</span>
-        </a>
-    @else
-        <a href="{{ URL::route('superv.cadastros') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4 ">
-        <i class="large material-icons">reply</i>
-        <span class="ButtaoEspacoTexto"><b>Voltar</span>
+    <a href="{{ URL::route('produtos.listar') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
+    <i class="large material-icons">reply</i>
+    <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
-    @endif
 @endif
 </div>
 <br>

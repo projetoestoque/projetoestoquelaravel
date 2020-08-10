@@ -57,13 +57,8 @@
 </div>
 <div class="desktop-hide">
     <h4 class="center"><b>Visualizar Cadastros</b>
-      @if(auth()->user()->is_admin)
-      <a class="btn waves-effect waves-light gradient" href="{{route('admin.insercoes')}}">Cadastrar 
+      <a class="btn waves-effect waves-light gradient" href="{{route('admin.MenuCadastros')}}">Cadastrar 
       <i class="material-icons right">add_circle_outline</i>
-      @else
-      <a class="btn waves-effect waves-light gradient" href="{{route('estoqueMenu')}}">Cadastrar
-      <i class="material-icons right">add_circle_outline</i>
-      @endif
       </a>
     </h4>
 </div>

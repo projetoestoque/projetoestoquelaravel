@@ -40,7 +40,9 @@
        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
        <ul class="right hide-on-med-and-down">  
        <li><a href="{{route ('admin.home') }}">Início</a></li>
-       <li><a class="dropdown-trigger" href="#" data-target="dropdown1" >Menu<i class="material-icons right">arrow_drop_down</i></a></li>
+       <li><a class="dropdown-trigger" href="#" data-target="dropdown1" >Visualizar<i class="material-icons right">arrow_drop_down</i></a></li>
+       <li><a class="dropdown-trigger" href="#" data-target="dropdownacoes" >Ações<i class="material-icons right">arrow_drop_down</i></a></li>
+       <li><a href="{{route('relatorio')}}">Relatório</a></li>
        <li>
        <a class="dropdown-trigger"href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
        Logout<i class="material-icons right">power_settings_new</i>
@@ -60,7 +62,9 @@
        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
        <ul class="right hide-on-med-and-down">  
        <li><a href="{{ route('home') }}">Início</a></li>
-       <li><a class="dropdown-trigger" href="#" data-target="dropdown2">Menu<i class="material-icons right">arrow_drop_down</i></a></li>
+       <li ><a href="{{route('produtos.listar')}}">Estoque</a></li>
+       <li><a class="dropdown-trigger" href="#" data-target="dropdownacoes2">Ações<i class="material-icons right">arrow_drop_down</i></a></li>
+       <li><a href="{{route('relatorio')}}">Relatório</a></li>
        <li>
        <a class="dropdown-trigger"href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
        Logout<i class="material-icons right">power_settings_new</i>
@@ -85,7 +89,7 @@
   <li ><a href="{{route('produtos.listar')}}">Visualizar Estoque</a></li>
   <li ><a href="{{route('admin.listarCadastros')}}">Visualizar Cadastros</a></li>
   <li><a href="{{ route('admin.cadastros')}}">Cadastrar</a></li>
-  <li><a href="{{ route('admin.insercoes')}}">Entradas</a></li>
+  <li><a href="{{ route('entradaProduto')}}">Entrada</a></li>
   <li><a href="{{ route('saida')}}">Saídas</a></li>
   <li><a href="{{route('relatorio')}}">Relatório</a></li>
        <li>
@@ -102,8 +106,8 @@
   <li><a href="{{ route('home') }}">Menu</a></li>
   <li ><a href="{{route('produtos.listar')}}">Visualizar Estoque</a></li>
   <li><a href="{{ route('superv.cadastros')}}">Cadastrar</a></li>
-  <li><a href="{{ route('superv.cadastros')}}">Entradas</a></li>
-  <li><a href="{{ route('saida')}}">Saídas</a></li>
+  <li><a href="{{ route('entradaProduto')}}">Entrada</a></li>
+  <li><a href="{{ route('saida.menu')}}">Saídas</a></li>
   <li><a href="{{route('relatorio')}}">Relatório</a></li>
   <li>
   <a class="dropdown-trigger"href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
@@ -118,16 +122,15 @@
  <ul id="dropdown1" class="dropdown-content"  >
     <li ><a href="{{route('produtos.listar')}}">Visualizar Estoque</a></li>
     <li ><a href="{{route('admin.listarCadastros')}}">Visualizar Cadastros</a></li>
-    <li><a href="{{ route('admin.cadastros')}}">Cadastrar</a></li>
-    <li><a href="{{ route('admin.insercoes')}}">Entradas</a></li>
-    <li><a href="{{ route('saida')}}">Saídas</a></li>
-    <li><a href="{{route('relatorio')}}">Relatório</a></li>
   </ul> 
-  <ul id="dropdown2" class="dropdown-content"  >
-    <li ><a href="{{route('produtos.listar')}}">Visualizar Estoque</a></li>
-    <li><a href="{{ route('superv.cadastros')}}">Cadastrar</a></li>
-    <li><a href="{{ route('superv.cadastros')}}">Entradas</a></li>
+  <ul id="dropdownacoes" class="dropdown-content"  >
+    <li><a href="{{ route('admin.cadastros')}}">Cadastrar</a></li>
+    <li><a href="{{ route('entradaProduto')}}">Entrada</a></li>
     <li><a href="{{ route('saida')}}">Saídas</a></li>
-    <li><a href="{{route('relatorio')}}">Relatório</a></li>
+  </ul> 
+  <ul id="dropdownacoes2" class="dropdown-content"  >
+    <li><a href="{{ route('superv.cadastros')}}">Cadastrar</a></li>
+    <li><a href="{{ route('entradaProduto')}}">Entrada</a></li>
+    <li><a href="{{ route('saida')}}">Saídas</a></li>
   </ul> 
 </header>

@@ -42,7 +42,7 @@
     <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
   @else
-    <a href="{{ URL::route('estoqueMenu') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4 ">
+    <a href="{{ URL::route('home') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4 ">
     <i class="large material-icons">reply</i>
     <span class="ButtaoEspacoTexto"><b>Voltar</span>
   </a>
@@ -53,26 +53,16 @@
 <div class="mobile-hide">
   <div class="container">
     <h4><b>Visualizar Estoque</b>
-      @if(auth()->user()->is_admin)
-      <a class="btn waves-effect waves-light gradient right" href="{{route('admin.insercoes')}}">Dar Entrada No Estoque
+      <a class="btn waves-effect waves-light gradient right" href="{{route('entradaProduto')}}">Dar Entrada No Estoque
       <i class="material-icons right">add_circle_outline</i>
-      @else
-      <a class="btn waves-effect waves-light gradient right" href="{{route('estoqueMenu')}}">Dar Entrada No Estoque
-      <i class="material-icons right">add_circle_outline</i>
-      @endif
       </a>
     </h4>
   </div>
 </div>
 <div class="desktop-hide">
 <h4 class="center"><b>Visualizar Estoque</b>
-      @if(auth()->user()->is_admin)
-      <a class="btn waves-effect waves-light gradient" href="{{route('admin.insercoes')}}">Dar Entrada No Estoque
+      <a class="btn waves-effect waves-light gradient" href="{{route('entradaProduto')}}">Dar Entrada No Estoque
       <i class="material-icons right">add_circle_outline</i>
-      @else
-      <a class="btn waves-effect waves-light gradient" href="{{route('estoqueMenu')}}">Dar Entrada No Estoque
-      <i class="material-icons right">add_circle_outline</i>
-      @endif
       </a>
     </h4>
 </div>
@@ -107,7 +97,7 @@
             <img src="{{asset('caixa.png')}}" class="list-image" >
             <p class="center-align">Ops! Você ainda não deu entrada de nenhum produto.</p>
             <p class="center-align">Mas não se preocupe! Você pode fazer isso aqui:
-            <a href="{{route('admin.insercoes')}}"class="btn-floating btn-medium waves-effect waves-light blue"><i class="material-icons">add</i></a>
+            <a href="{{route('entradaProduto')}}"class="btn-floating btn-medium waves-effect waves-light blue"><i class="material-icons">add</i></a>
             </p>
             <br>
             <br>
