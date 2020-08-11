@@ -624,5 +624,7 @@ class CadastroController extends Controller
 	
 	return $items;
   }
-
+  function cadastroUsuario(){
+	  return view('admin/adminCadastraUsuario');
+  }
 }

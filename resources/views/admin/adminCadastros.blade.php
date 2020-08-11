@@ -102,6 +102,19 @@
                 </div>
             </a>
 </div>
+<div class="row">
+<a href="{{route('admin.cadastroUsuario')}}" class="white-text">
+                <div class="card-panel blue darken-3 col s3 hoverable ">
+                    <div class="row">
+                    <span class="row"></span>
+                        <div class="col cadastro">
+                            <i class="material-icons large white-text">account_circle</i>
+                            <h6 class="back">Usuários</h6>
+                        </div>
+                    </div>
+                </div>
+            </a>
+</div>
 </div>
 </div>
 <div class="mobile"><div class="desktop-hide">
