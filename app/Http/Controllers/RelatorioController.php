@@ -191,7 +191,8 @@ class RelatorioController extends Controller
         
         return \PDF::loadView('relatorio_pdf', compact('retorno'))
             ->setPaper('a4', 'landscape')
-            ->download('relatorio_'.date('d-m-Y_h:i:s').'.pdf');
+            ->stream();
+            // ->download('relatorio_'.date('d-m-Y_h:i:s').'.pdf');
     }
 
     function gerarPrint(Request $req) {

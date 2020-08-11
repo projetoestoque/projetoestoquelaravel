@@ -65,6 +65,9 @@ textarea {
   background: url({{asset('relatorio.png')}}) center center no-repeat;
   background-size: 500px 200px;
 }
+h4{
+    text-align:center;
+}
 @media print {
   body * {
     visibility: hidden;
@@ -97,22 +100,35 @@ textarea {
 @endif
 </div>
 <br>
-<br>
+<h4><b>Relatório</b></h4>
+    <!-- <div class="col l1"></div>
+        <button type="submit" class="btn-floating btn-large waves-effect waves-light white"><i class="material-icons black-text">print</i></button>
+        <a onclick="baixarPdf()" class="btn-floating btn-large waves-effect waves-light white"><i class="material-icons black-text">picture_as_pdf</i></a>
+    </div> -->
+    <br>
 <div class="container">
-    <h4><b>Relatório</b></h4>
+<div class="container z-depth-2 ">
+<nav class="nav-form blue lighten-1"></nav>
     <div class="row">
+    <div class="col l1"></div>
     <form id="form1" name="formulario" method="post" action="{{route('relatorio.print')}}">
     {{csrf_field()}}
-    <div class="input-field col l3">
-        <select class="date" id="data" name="data">
-            <option value="hoje" >Hoje</option>
-            <option value="semana">Semana</option>
-            <option value="mes">Mês</option>
-            <option value="ano">Ano</option>
-        </select>
-        <label for="data">Período</label>
+    <div class="input-field col s12 l4">
+        <i class="material-icons prefix">date_range</i>
+        <input type="text" class="datepicker" id="data" name="data">
+        <label for="data">Data Inicial</label>
     </div>
-    <div class="input-field col l3">
+    <div class="col l2"></div>
+    <div class="input-field col s12 l4">
+        <i class="material-icons prefix">date_range</i>
+        <input type="text" class="datepicker" id="data" name="data">
+        <label for="data">Data final</label>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col l1"></div>
+    <div class="input-field col s12 l4">
+        <i class="material-icons prefix">reorder</i>
         <select class="date" id="tipo" name="tipo">
             <option value="geral" >Geral</option>
             <option value="entrada">Entrada</option>
@@ -122,22 +138,44 @@ textarea {
         </select>
         <label for="data">Tipo de relatório</label>
     </div>
-    <div class="col l3">
-        <a onclick="fazerRequisicao('gerar')" class="waves-effect waves-light btn-flat gradient">Gerar Relatório</a>
+    <div class="col l2"></div>
+    <div class="input-field col s12 l4">
+        <i class="material-icons prefix">portrait</i>
+        <select class="date" id="usuario" name="usuario">
+            <option value="ambos" >Ambos</option>
+            <option value="admin" >Admin</option>
+            <option value="super">Supervisor</option>
+        </select>
+        <label for="data">Usuário</label>
     </div>
-
+    </div>
+    <div class="row">
     <div class="col l1"></div>
-        <button type="submit" class="btn-floating btn-large waves-effect waves-light white"><i class="material-icons black-text">print</i></button>
-        <a onclick="baixarPdf()" class="btn-floating btn-large waves-effect waves-light white"><i class="material-icons black-text">picture_as_pdf</i></a>
+    <div class="input-field col s12 l4">
+        <i class="material-icons prefix">portrait</i>
+        <select class="date" id="produto" name="produto">
+            <option value="ambos">Todos</option>
+            <option value="Produto1" >Produto1</option>
+            <option value="Produto2">Produto2</option>
+        </select>
+        <label for="data">Produto</label>
     </div>
-    </form>
+    </div>
+    <div class="row valign center">
+        <a onclick="fazerRequisicao('gerar')" class="btn waves-effect waves-light btn-flat gradient"><b>Gerar Relatório
+                <i class="material-icons right">send</i>
+        </a>
+    </div>
+    <br>
 </div>
-
-<div class="container z-depth-2">
-<nav class="nav-form blue lighten-1"></nav>
-<textarea id="texto_relatorio" cols="50" rows="10" onchange="removeBackground()"></textarea>
 </div>
-
+<div class="desktop-hide">
+<br>
+<br>
+<br>
+<br>
+<br>
+</div>
 @if(isset($print))
 <div id="section-to-print">
     @foreach($print as $item)
@@ -157,8 +195,4 @@ textarea {
 @endif
 
 @endsection
-<script>
-    function removeBackground(){
-        document.querySelector('textarea').style.background='none';
-    }
-</script>
+
