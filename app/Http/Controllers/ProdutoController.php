@@ -96,6 +96,89 @@ class ProdutoController extends Controller
    //     return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
    // }
 
+   public function atualizar_produtos() {
+    $produtos_cadastrados = DB::table('produtos')->orderBy('nome')->get();
+    $produtos_em_estoque = DB::table('produto_em_estoques')->get();
+
+    $produtos_estoque = [];
+    $produtos_acima = [];
+    $produtos_abaixo = [];
+    $produtos_sem = [];
+
+
+    foreach($produtos_em_estoque as $produto) {
+        //listando todo os produtos em estoque
+        $produto_estoque = new Produto();
+        $produto_estoque->nome = Produto::findOrFail($produto->Id_produto)->nome;
+        $produto_estoque->marca = Produto::findOrFail($produto->Id_produto)->marca;
+        $produto_estoque->quantidade = $produto->quantidade.Medida::findOrFail($produto->Id_medida)->abreviacao;
+        $produto_estoque->estoque = Estoque_disponivel::findOrFail($produto->Id_estoque)->estoque;
+        $produto_estoque->vencimento = $produto->vencimento;
+       
+        array_push($produtos_estoque, $produto_estoque);
+
+         // transforma a data do formato BR para o formato americano, ANO-MES-DIA
+         $vencimento = implode('-', array_reverse(explode('/', $produto->vencimento)));
+         $hoje = implode('-', array_reverse(explode('/', date('d/m/Y'))));
+
+         // converte as datas para o formato timestamp
+         $v = strtotime($vencimento); 
+         $h = strtotime($hoje);
+
+         // verifica a diferença em segundos entre as duas datas e divide pelo número de segundos que um dia possui
+         $dataFinal = ($h - $v) /86400;
+
+         // caso a data 2 seja menor que a data 1, multiplica o resultado por -1
+         if($dataFinal < 0)
+         $dataFinal *= -1;
+
+        //listando produtos acima do nivel critico
+        if($produto->quantidade > $produto->quantidade_minima && $dataFinal > 5) {
+            $produto_acima = new Produto();
+            $produto_acima->nome = Produto::findOrFail($produto->Id_produto)->nome;
+            $produto_acima->marca = Produto::findOrFail($produto->Id_produto)->marca;
+            $produto_acima->quantidade = $produto->quantidade.Medida::findOrFail($produto->Id_medida)->abreviacao;
+            $produto_acima->estoque = Estoque_disponivel::findOrFail($produto->Id_estoque)->estoque;
+            $produto_acima->vencimento = $produto->vencimento;
+        
+            array_push($produtos_acima, $produto_acima);
+        }
+
+
+        //listando produtos abaixo do nivel critico
+        if($produto->quantidade <= $produto->quantidade_minima || $dataFinal <= 5) {
+            $produto_abaixo = new Produto();
+            $produto_abaixo->nome = Produto::findOrFail($produto->Id_produto)->nome;
+            $produto_abaixo->marca = Produto::findOrFail($produto->Id_produto)->marca;
+            $produto_abaixo->quantidade = $produto->quantidade.Medida::findOrFail($produto->Id_medida)->abreviacao;
+            $produto_abaixo->estoque = Estoque_disponivel::findOrFail($produto->Id_estoque)->estoque;
+            $produto_abaixo->vencimento = $produto->vencimento;
+
+            if($dataFinal <= 5) {
+                $produto_abaixo->vencendo = true;
+            }
+
+            array_push($produtos_abaixo, $produto_abaixo);
+        }
+
+        
+    }
+
+    foreach($produtos_cadastrados as $produto) {
+        if((DB::table('produto_em_estoques')->where('Id_produto', $produto->id)->exists()) == false){
+            $produto_sem = new Produto();
+            $produto_sem->nome = $produto->nome;
+            $produto_sem->marca = $produto->marca;
+            $produto_sem->codigo_barra = $produto->codigo_barra;
+            $produto_sem->tipo = $produto->tipo;
+            array_push($produtos_sem, $produto_sem);
+        }
+    }
+
+    $data = ['estoque' => $produtos_estoque, 'acima' => $produtos_acima, 'abaixo' => $produtos_abaixo, 'sem' => $produtos_sem];
+    return $data;
+   }
+
     public function deletarProduto()
 	{
         $produto_id = $_GET['id'];
