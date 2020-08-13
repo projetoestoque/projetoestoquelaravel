@@ -86,7 +86,7 @@
 </div>
 </div>
 <div class="container z-depth-2 ">
-<table class="listEstoque highlight centered responsive-table">
+<table id="tabela_estoque" class="listEstoque highlight centered responsive-table">
         <thead>
         <nav class="nav-form blue lighten-1"></nav>
         </thead>
@@ -113,31 +113,27 @@
             </tr>
           </thead>
           <tbody>
-          @foreach($produtos_estoque as $produto)
-              <tr name="{{$produto->id}}{{$produto->nome}}">
-                  <td name="{{$produto->nome}}">{{$produto->nome}}</td>
-                  <td>{{$produto->marca}}</td>
+            <!-- não remover pois é necessario! -->
+              <tr style="display: none;">
+                  <td>nome</td>
+                  <td>marca</td>
                   <td class="grey-text text-darken-3">
-                  @if($produto->quantidade<=$produto->quantidade_minima)
-                  <div>{{$produto->quantidade}} {{$produto->abreviacao}}<i class="tiny material-icons red-text">brightness_1</i></div>
-                  @else
-                  {{$produto->quantidade}} {{$produto->abreviacao}}
-                  @endif
+                  
+                  produto->quantidade / produto->abreviacao
+                  
                   </td>
-                  <td class="grey-text text-darken-3">{{$produto->estoque->estoque}}</td>
-                  <td class="grey-text text-darken-3">@if(isset($produto->vencendo))
-                    <div>
-                    {{$produto->vencimento}}<i class="tiny material-icons red-text">brightness_1</i>
-                    </div>
-                  @else
-                    {{$produto->vencimento}}
-                  @endif </td>
+                  <td class="grey-text text-darken-3">produto->estoque->estoque</td>
+                  <td class="grey-text text-darken-3">
+                  
+                    produto->vencimento
+                  
+                  </td>
               </tr>
-          @endforeach
+            <!-- não remover pois é necessario! -->
           </tbody>
           @endif
       </table>
-      <table class="listAcima highlight centered responsive-table">
+      <table id="tabela_acima" class="listAcima highlight centered responsive-table">
       @if(empty($produtos_acima))
       <div class="listAcima">
       <br>
@@ -158,25 +154,21 @@
             </tr>
           </thead>
           <tbody>
-          @foreach($produtos_acima as $produto)
-              <tr name="{{$produto->id}}{{$produto->nome}}">
-                  <td>{{$produto->nome}}</td>
-                  <td>{{$produto->marca}}</td>
+          <!-- não remover pois é necessario! -->
+              <tr style="display: none;">
+                  <td>nome</td>
+                  <td>marca</td>
                   <td class="grey-text text-darken-3">
-                  @if($produto->quantidade<=$produto->quantidade_minima)
-                  <div>{{$produto->quantidade}} {{$produto->abreviacao}}<i class="tiny material-icons red-text">brightness_1</i></div>
-                  @else
-                  {{$produto->quantidade}} {{$produto->abreviacao}}
-                  @endif
+                  quantidade abreviacao
                   </td>
-                  <td class="grey-text text-darken-3">{{$produto->estoque->estoque}}</td>
-                  <td class="grey-text text-darken-3">{{$produto->vencimento}}</td>
+                  <td class="grey-text text-darken-3">estoque</td>
+                  <td class="grey-text text-darken-3">vencimento}}</td>
               </tr>
-          @endforeach
+          <!-- não remover pois é necessario! -->
           </tbody>
           @endif
       </table>
-      <table class="listAbaixo highlight centered responsive-table">
+      <table id="tabela_abaixo" class="listAbaixo highlight centered responsive-table">
       @if(empty($produtos_abaixo))
       <div class="listAbaixo">
       <br>
@@ -197,33 +189,23 @@
             </tr>
           </thead>
           <tbody>
-          @foreach($produtos_abaixo as $produto)
-              <tr name="{{$produto->id}}{{$produto->nome}}">
-                  <td>{{$produto->nome}}</td>
-                  <td>{{$produto->marca}}</td>
+          <!-- não remover pois é necessario! -->
+              <tr style="display: none">
+                  <td>nome</td>
+                  <td>marca</td>
                   <td class="grey-text text-darken-3">
-                    @if($produto->quantidade <= $produto->quantidade_minima)
-                    <div>{{$produto->quantidade}} {{$produto->abreviacao}}<i class="tiny material-icons red-text">brightness_1</i></div>
-                    @else
-                    {{$produto->quantidade}} {{$produto->abreviacao}}
-                    @endif
+                    quantidade abreviacao
                   </td>
-                  <td class="grey-text text-darken-3">{{$produto->estoque->estoque}}</td>
+                  <td class="grey-text text-darken-3">estoque</td>
                   <td class="grey-text text-darken-3">
-                  @if(isset($produto->vencendo))
-                    <div>
-                    {{$produto->vencimento}}<i class="tiny material-icons red-text">brightness_1</i>
-                    </div>
-                  @else
-                    {{$produto->vencimento}}
-                  @endif 
+                    vencimento
                   </td>
               </tr>
-          @endforeach
+          <!-- não remover pois é necessario! -->
           </tbody>
           @endif
       </table>
-      <table class="listSem highlight centered responsive-table">
+      <table id="tabela_sem" class="listSem highlight centered responsive-table">
       @if(empty($produtos_sem))
       <div class="listSem">
       <br>
@@ -243,14 +225,14 @@
             </tr>
           </thead>
           <tbody>
-          @foreach($produtos_sem as $produto)
-              <tr name="{{$produto->id}}{{$produto->nome}}">
-                  <td>{{$produto->nome}}</td>
-                  <td>{{$produto->marca}}</td>
-                  <td class="grey-text text-darken-3">{{$produto->codigo_barra}}</td>
-                  <td class="grey-text text-darken-3">{{$produto->tipo}}</td>
+          <!-- não remover pois é necessario! -->
+              <tr style="display: none">
+                  <td>nome</td>
+                  <td>marca</td>
+                  <td class="grey-text text-darken-3">codigo_barra</td>
+                  <td class="grey-text text-darken-3">tipo</td>
               </tr>
-          @endforeach
+          <!-- não remover pois é necessario! -->
           </tbody>
           @endif
       </table>
@@ -397,22 +379,41 @@
   function buscarEntrada() {
     input = document.getElementById('icon_prefix')
     query = input.value
-    tabela = document.getElementById('tabela_resultados')
-    tabela.innerHTML = ""
     
     $.get("{{url('/admin/buscar/entrada?query=')}}" + query, (data, status) => {
-      if(data.length == 0) {
-        tabela.innerHTML = ""
-      } 
-
-      for(let i = 0; i < data.length; i++) {
-        
-        if(document.getElementById(data[i]['nome']) == null) {
-          var tr = document.getElementsByName(data[i]['id'] + data[i]['nome'])[0].outerHTML
-          tabela.innerHTML += tr
-        } 
-      }
+      console.log(data)
     });          
     }
+
+    function carregarVariaveis() {
+      $.get("{{route('produtos.listar.atualizar')}}",(data, status) => {
+        for(let item in data) {
+          data[item].forEach(value => {
+            let array = Object.values(value)
+
+            
+            let tabela = document.getElementById("tabela_" + item)
+            let numero_de_linhas = tabela.rows.length
+            let numero_de_colunas = tabela.rows[numero_de_linhas-1].cells.length;
+            let nova_linha = tabela.insertRow(numero_de_linhas);
+
+            for (var j = 0; j < numero_de_colunas; j++) {
+              // Insere uma coluna na nova linha 
+              novo_item = nova_linha.insertCell(j);
+              // Insere um conteúdo na coluna
+              novo_item.innerHTML = array[j]
+            }
+      
+          })
+        }
+        
+      }); 
+    
+    }
+
+    window.onload = function () {
+    carregarVariaveis()
+  }
 </script>
+
 @endsection

@@ -48,7 +48,24 @@ class EstoqueController extends Controller
     }
 
     //pesquisa entradas de acordo com a query
-    $produtos_id = Produto::where('nome', 'LIKE', $query."%")->get();
+    $todos_os_produtos = DB::table('produtos')->get();
+    $produtos_id = [];
+    $nome_buscado = "";
+    
+    foreach($todos_os_produtos as $produto) {
+			$produto->nome = mb_strtolower($produto->nome, 'UTF-8');
+
+			for($i = 0; $i < strlen($query); $i++) {
+				$nome_buscado .= $produto->nome[$i];
+			}
+
+			if($nome_buscado == $query) {
+				array_push($produtos_id, $produto);
+			}
+
+			$nome_buscado = "";
+    }
+
     foreach($produtos_id as $produto) {
       $produtos_filtrados = Produto_em_estoque::where('Id_produto', 'LIKE', '%'.$produto->id.'%')->get();
       foreach($produtos_filtrados as $produto) {
@@ -61,15 +78,30 @@ class EstoqueController extends Controller
       }
     }
     
-
     //pesquisa os produtos sem estoque
-    $produto_id = Produto::where('nome', 'LIKE', $query."%")->get();
+    $produtos_filtrados = [];
+    $produto_id = [];
+
+    foreach($todos_os_produtos as $produto) {
+			$produto->nome = mb_strtolower($produto->nome, 'UTF-8');
+
+			for($i = 0; $i < strlen($query); $i++) {
+				$nome_buscado .= $produto->nome[$i];
+			}
+
+			if($nome_buscado == $query) {
+				array_push($produto_id, $produto);
+			}
+
+			$nome_buscado = "";
+    }
+
     foreach($produto_id as $produto) {
       if(Produto_em_estoque::where('Id_produto', $produto->id)->exists() == false) {
         if($query[0] == $produto->nome[0]) array_push($produtos, $produto);
       }
     }
-    
+ 
     return $produtos;
   }
 }

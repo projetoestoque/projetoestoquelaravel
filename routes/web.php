@@ -89,6 +89,7 @@ Route::post('/doador/juridico', ['as'=> 'doador.juridico', 'uses'=>'CadastroCont
 Route::post('/produto/cadastrar', ['as'=> 'produto.cadastrar', 'uses'=>'CadastroController@cadastrarProduto']);
 Route::post('/refeicao/cadastros', ['as'=> 'refeicao.cadastrar', 'uses'=>'CadastroController@cadastrarRefeicao']);
 Route::get('/produto/listar', ['as'=> 'produtos.listar', 'uses'=>'ProdutoController@listar_produtos']);
+Route::get('/produto/listar/atualizar', ['as'=> 'produtos.listar.atualizar', 'uses'=>'ProdutoController@atualizar_produtos']);
 
 Route::get('/produto/deletar', 'ProdutoController@deletarProduto')->name('produto.deletar');
 Route::get('/produto/entrada/deletar', 'ProdutoController@deletarEntrada')->name('entrada.deletar');

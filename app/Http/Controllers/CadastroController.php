@@ -523,37 +523,34 @@ class CadastroController extends Controller
 
 		foreach($todos_doadores as $doador) {
 			if($doador->nome != null) {
-				foreach($todos_doadores as $doador) {
-					$doador->nome = mb_strtolower($doador->nome, 'UTF-8');
+				
+				$doador->nome = mb_strtolower($doador->nome, 'UTF-8');
 		
-					for($i = 0; $i < strlen($query); $i++) {
-						$nome_buscado .= $doador->nome[$i];
-					}
-		
-					if($nome_buscado == $query) {
-						array_push($doadores_fisicos_filtrados, $doador);
-					}
-		
-					$nome_buscado = "";
+				for($i = 0; $i < strlen($query); $i++) {
+					$nome_buscado .= $doador->nome[$i];
 				}
+		
+				if($nome_buscado == $query) {
+					array_push($doadores_fisicos_filtrados, $doador);
+				}
+		
+				$nome_buscado = "";
 			} else  {
-				foreach($todos_doadores as $doador) {
-					$doador->instituicao = mb_strtolower($doador->instituicao, 'UTF-8');
+				
+				$doador->instituicao = mb_strtolower($doador->instituicao, 'UTF-8');
 		
-					for($i = 0; $i < strlen($query); $i++) {
-						$nome_buscado .= $doador->instituicao[$i];
-					}
-		
-					if($nome_buscado == $query) {
-						array_push($doadores_juridicos_filtrados, $doador);
-					}
-		
-					$nome_buscado = "";
+				for($i = 0; $i < strlen($query); $i++) {
+					$nome_buscado .= $doador->instituicao[$i];
 				}
+		
+				if($nome_buscado == $query) {
+					array_push($doadores_juridicos_filtrados, $doador);
+				}
+				
+				$nome_buscado = "";
 			}
 		}
 		
-
 		foreach($doadores_fisicos_filtrados as $doador) {
 			if($query[0] == $doador->nome[0]) {
 				array_push($items, $doador);
@@ -566,7 +563,24 @@ class CadastroController extends Controller
 		}
 
 		//filtrar tipos
-		$tipos_filtrados = Tipo::where('tipo', 'LIKE', $query.'%')->get();
+		$nome_buscado = "";
+		$todos_os_tipos = DB::table('tipos')->get();
+		$tipos_filtrados = [];
+
+		foreach($todos_os_tipos as $tipo) {
+			$tipo->tipo = mb_strtolower($tipo->tipo, 'UTF-8');
+
+			for($i = 0; $i < strlen($query); $i++) {
+				$nome_buscado .= $tipo->tipo[$i];
+			}
+
+			if($nome_buscado == $query) {
+				array_push($tipos_filtrados, $tipo);
+			}
+
+			$nome_buscado = "";
+		}
+
 		foreach($tipos_filtrados as $tipo) {
 			if($query[0] == $tipo->tipo[0]) {
 				$tipo->nome = $tipo->tipo;
@@ -576,7 +590,23 @@ class CadastroController extends Controller
 		}
 
 		//filtrar medidas
-		$medidas_filtradas = Medida::where('medida', 'LIKE', $query.'%')->get();
+		$todas_as_medidas = DB::table('medidas')->get();
+		$medidas_filtradas = [];
+
+		foreach($todas_as_medidas as $medida) {
+			$medida->medida = mb_strtolower($medida->medida, 'UTF-8');
+
+			for($i = 0; $i < strlen($query); $i++) {
+				$nome_buscado .= $medida->medida[$i];
+			}
+
+			if($nome_buscado == $query) {
+				array_push($medidas_filtradas, $medida);
+			}
+
+			$nome_buscado = "";
+		}
+
 		foreach($medidas_filtradas as $medida) {
 			if($query[0] == $medida->medida[0]) {
 				$medida->nome = $medida->medida;
@@ -586,7 +616,23 @@ class CadastroController extends Controller
 		}
 
 		//filtrar marcas
-		$marcas_filtradas = Marca::where('marca', 'LIKE', $query.'%')->get();
+		$marcas_filtradas = [];
+		$todas_as_marcas = DB::table('marcas')->get();
+
+		foreach($todas_as_marcas as $marca) {
+			$marca->marca = mb_strtolower($marca->marca, 'UTF-8');
+
+			for($i = 0; $i < strlen($query); $i++) {
+				$nome_buscado .= $marca->marca[$i];
+			}
+
+			if($nome_buscado == $query) {
+				array_push($marcas_filtradas, $marca);
+			}
+
+			$nome_buscado = "";
+		}
+
 		foreach($marcas_filtradas as $marca) {
 			if($query[0] == $marca->marca[0]) {
 				$marca->nome = $marca->marca;
@@ -596,17 +642,29 @@ class CadastroController extends Controller
 		}
 
 		//filtrar estoques
-		$estoques_filtrados = Estoque_disponivel::where('estoque', 'LIKE', $query.'%')->get();
-		foreach($estoques_filtrados as $estoque) {
-			// if($query[0] == $estoque->estoque[0]) {
-				
-			// }
+		$estoques_filtrados = [];
+		$todos_os_estoques = DB::table('estoques')->get();
 
-			$estoque->nome = $estoque->estoque;
-				$estoque->tipo = "Estoque";
-				array_push($items, $estoque);
+		foreach($todos_os_estoques as $estoque) {
+			$estoque->estoque = mb_strtolower($estoque->estoque, 'UTF-8');
+
+			for($i = 0; $i < strlen($query); $i++) {
+				$nome_buscado .= $estoque->estoque[$i];
+			}
+
+			if($nome_buscado == $query) {
+				array_push($estoques_filtrados, $estoque);
+			}
+
+			$nome_buscado = "";
 		}
-		
+
+		foreach($estoques_filtrados as $estoque) {
+			$estoque->nome = $estoque->estoque;
+			$estoque->tipo = "Estoque";
+			array_push($items, $estoque);
+		}
+
 		return $items;
 		
   }
