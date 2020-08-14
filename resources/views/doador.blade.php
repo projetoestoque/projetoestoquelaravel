@@ -93,9 +93,9 @@
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">assignment_ind</i>
                 @if(isset($doador))
-                    <input required value="{{$doador->cpf}}" type="text" name="cpf" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" placeholder="000.000.000-00" title="Digite um cpf válido formatado ou não" maxlength="14"></input>
+                    <input required value="{{$doador->cpf}}" type="text" name="cpf" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" placeholder="000.000.000-00" title="Digite um cpf válido formatado ou não" maxlength="14" minlength="11"></input>
                 @else
-                    <input required value="{{old('cpf')}}" type="text" name="cpf" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" placeholder="000.000.000-00" title="Digite um cpf válido formatado ou não" maxlength="14"></input>
+                    <input required value="{{old('cpf')}}" type="text" name="cpf" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" placeholder="000.000.000-00" title="Digite um cpf válido formatado ou não" maxlength="14" minlength="11"></input>
                 @endif
                 <label>CPF<span class="important">*</span></label>
             </div>
@@ -115,11 +115,11 @@
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">location_on</i>
                 @if(isset($doador) && $endereco != null)
-                    <input onkeyup="buscarCEPFisico()" value="{{$endereco->cep}}" id="cep_fisico" type="text" name="cep" placeholder="55290-000" maxlength="9"></input>
+                    <input onkeyup="buscarCEPFisico()" value="{{$endereco->cep}}" id="cep_fisico" type="text" name="cep" placeholder="55290-000" maxlength="9" minlength="8"></input>
                 @elseif(isset($doador) && $endereco == null)
-                    <input onkeyup="buscarCEPFisico()"  id="cep_fisico" type="text" name="cep" placeholder="55290-000" maxlength="9"></input>
+                    <input onkeyup="buscarCEPFisico()"  id="cep_fisico" type="text" name="cep" placeholder="55290-000" maxlength="9" minlength="8"></input>
                 @else
-                    <input onkeyup="buscarCEPFisico()" id="cep_fisico" type="text" name="cep" placeholder="55290-000" maxlength="9"></input>
+                    <input onkeyup="buscarCEPFisico()" id="cep_fisico" type="text" name="cep" placeholder="55290-000" maxlength="9" minlength="8"></input>
                 @endif
                 <label>CEP<span class="important">*</span></label>
             </div>
@@ -238,9 +238,9 @@
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">gavel</i>
                 @if(isset($doador))
-                    <input required value="{{$doador->cpnj}}" type="text" name="cnpj" class="cnpj" pattern="/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$" placeholder="00000000000000" maxlength="14"/>
+                    <input required value="{{$doador->cpnj}}" type="text" name="cnpj" class="cnpj" pattern="/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$" placeholder="XX.XXX.XXX/0001-ZZ" maxlength="18" minlength="14"/>
                 @else
-                    <input required value="{{old('cnpj')}}" type="text" name="cnpj" class="cnpj" pattern="/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$" placeholder="00000000000000" maxlength="14"/>
+                    <input required value="{{old('cnpj')}}" type="text" name="cnpj" class="cnpj" pattern="/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$" placeholder="XX.XXX.XXX/0001-ZZ" maxlength="18" minlength="14"/>
                 @endif
                 <label>CNPJ<span class="important">*</span></label>
             </div>
