@@ -93,9 +93,9 @@
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">assignment_ind</i>
                 @if(isset($doador))
-                    <input required value="{{$doador->cpf}}" type="text" name="cpf" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" placeholder="000.000.000-00" title="Digite um cpf válido formatado ou não"></input>
+                    <input required value="{{$doador->cpf}}" type="text" name="cpf" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" placeholder="000.000.000-00" title="Digite um cpf válido formatado ou não" maxlength="14" minlength="11"></input>
                 @else
-                    <input required value="{{old('cpf')}}" type="text" name="cpf" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" placeholder="000.000.000-00" title="Digite um cpf válido formatado ou não"></input>
+                    <input required value="{{old('cpf')}}" type="text" name="cpf" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" placeholder="000.000.000-00" title="Digite um cpf válido formatado ou não" maxlength="14" minlength="11"></input>
                 @endif
                 <label>CPF<span class="important">*</span></label>
             </div>
@@ -103,9 +103,9 @@
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">call</i>
                 @if(isset($doador) && $doador->tipo == "fisico")
-                    <input required value="{{$doador->telefone}}" type="tel" name="telefone_fisico" maxlength="15" onkeypress='return SomenteNumero(event)' placeholder="87981167793">
+                    <input required value="{{$doador->telefone}}" type="tel" name="telefone_fisico" maxlength="15" onkeypress='return SomenteNumero(event)' placeholder="00000000000">
                 @else
-                    <input required value="{{old('telefone_fisico')}}" type="tel" name="telefone_fisico" maxlength="15" onkeypress='return SomenteNumero(event)' placeholder="87981167793">
+                    <input required value="{{old('telefone_fisico')}}" type="tel" name="telefone_fisico" maxlength="15" onkeypress='return SomenteNumero(event)' placeholder="00000000000">
                 @endif
                 <label>Telefone<span class="important">*</span></label>
             </div>
@@ -115,11 +115,11 @@
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">location_on</i>
                 @if(isset($doador) && $endereco != null)
-                    <input onkeyup="buscarCEPFisico()" value="{{$endereco->cep}}" id="cep_fisico" type="text" name="cep" placeholder="55290-000"></input>
+                    <input onkeyup="buscarCEPFisico()" value="{{$endereco->cep}}" id="cep_fisico" type="text" name="cep" placeholder="55290-000" maxlength="9" minlength="8"></input>
                 @elseif(isset($doador) && $endereco == null)
-                    <input onkeyup="buscarCEPFisico()"  id="cep_fisico" type="text" name="cep" placeholder="55290-000"></input>
+                    <input onkeyup="buscarCEPFisico()"  id="cep_fisico" type="text" name="cep" placeholder="55290-000" maxlength="9" minlength="8"></input>
                 @else
-                    <input onkeyup="buscarCEPFisico()" id="cep_fisico" type="text" name="cep" placeholder="55290-000"></input>
+                    <input onkeyup="buscarCEPFisico()" id="cep_fisico" type="text" name="cep" placeholder="55290-000" maxlength="9" minlength="8"></input>
                 @endif
                 <label>CEP<span class="important">*</span></label>
             </div>
@@ -127,11 +127,11 @@
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">nature_people</i>
                 @if(isset($doador) && $endereco != null)
-                    <input value="{{$endereco->bairro}}" id="bairro_fisico" type="text" name="bairro" placeholder="Bairro Exemplo">
+                    <input value="{{$endereco->bairro}}" id="bairro_fisico" type="text" name="bairro" placeholder="Bairro">
                 @elseif(isset($doador) && $endereco == null)
-                    <input id="bairro_fisico" type="text" name="bairro" placeholder="Bairro Exemplo">
+                    <input id="bairro_fisico" type="text" name="bairro" placeholder="Bairro">
                 @else
-                    <input type="text" id="bairro_fisico" name="bairro" placeholder="Bairro Exemplo">
+                    <input type="text" id="bairro_fisico" name="bairro" placeholder="Bairro">
                 @endif
                 <label>Bairro/Condomínio/Apartamento<span class="important">*</span></label>
             </div>
@@ -167,11 +167,11 @@
             <div class="input-field col s12 l4">
                     <i class="material-icons prefix">home</i>
                     @if(isset($doador) && $endereco != null)
-                        <input value="{{$endereco->logradouro}}" id="logradouro_fisico" type="text" name="logradouro" placeholder="Rua Exemplo"></input>
+                        <input value="{{$endereco->logradouro}}" id="logradouro_fisico" type="text" name="logradouro" placeholder="Rua"></input>
                     @elseif(isset($doador) && $endereco == null)
-                        <input id="logradouro_fisico" type="text" name="logradouro" placeholder="Rua Exemplo"></input>
+                        <input id="logradouro_fisico" type="text" name="logradouro" placeholder="Rua"></input>
                     @else
-                        <input type="text" id="logradouro_fisico" name="logradouro" placeholder="Rua Exemplo"></input>
+                        <input type="text" id="logradouro_fisico" name="logradouro" placeholder="Rua"></input>
                     @endif
                     <label>Logradouro</label>
                 </div>
@@ -182,7 +182,7 @@
                         <input value="{{$endereco->numero}}" id="numero_fisico" type="text" name="numero" placeholder="25 / 5b"></input>
                     @elseif(isset($doador) && $endereco == null)
                         <input id="numero_fisico" type="text" name="numero" placeholder="25 / 5b"></input>
-                    @else 
+                    @else
                         <input type="text" id="numero_fisico" name="numero" placeholder="25 / 5b"></input>
                     @endif
                     <label>Número/ Bloco-lote<span class="important">*</span></label>
@@ -238,9 +238,9 @@
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">gavel</i>
                 @if(isset($doador))
-                    <input required value="{{$doador->cpnj}}" type="text" name="cnpj" class="cnpj" pattern="/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$" placeholder="00000000000000" />
+                    <input required value="{{$doador->cpnj}}" type="text" name="cnpj" class="cnpj" pattern="/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$" placeholder="XX.XXX.XXX/0001-ZZ" maxlength="18" minlength="14"/>
                 @else
-                    <input required value="{{old('cnpj')}}" type="text" name="cnpj" class="cnpj" pattern="/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$" placeholder="00000000000000" />
+                    <input required value="{{old('cnpj')}}" type="text" name="cnpj" class="cnpj" pattern="/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$" placeholder="XX.XXX.XXX/0001-ZZ" maxlength="18" minlength="14"/>
                 @endif
                 <label>CNPJ<span class="important">*</span></label>
             </div>
@@ -248,9 +248,9 @@
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">call</i>
                 @if(isset($doador) && $doador->tipo == "juridico")
-                    <input required value="{{$doador->telefone}}" type="tel" name="telefone_juridico" maxlength="15" onkeypress='return SomenteNumero(event)' placeholder="87981283493">
+                    <input required value="{{$doador->telefone}}" type="tel" name="telefone_juridico" maxlength="15" onkeypress='return SomenteNumero(event)' placeholder="00000000000">
                 @else
-                    <input required value="{{old('telefone_juridico')}}" type="tel" name="telefone_juridico" maxlength="15" onkeypress='return SomenteNumero(event)' placeholder="87981283493">
+                    <input required value="{{old('telefone_juridico')}}" type="tel" name="telefone_juridico" maxlength="15" onkeypress='return SomenteNumero(event)' placeholder="00000000000">
                 @endif
                 <label>Telefone<span class="important">*</span></label>
             </div>
@@ -278,12 +278,12 @@
 
     //on keyup, start the countdown
     function buscarCEPFisico() {
-        clearTimeout(typingTimer); 
+        clearTimeout(typingTimer);
         typingTimer = setTimeout(pesquisacepfisico, doneTypingInterval);
     }
-    
+
     function SomenteNumero(e){
-        var tecla=(window.event)?event.keyCode:e.which;   
+        var tecla=(window.event)?event.keyCode:e.which;
         if((tecla>47 && tecla<58)) return true;
         else{
             if (tecla==8 || tecla==0) return true;
@@ -311,7 +311,7 @@
         document.getElementById("btnJuridico").classList.remove('butao');
         document.getElementById("btnJuridico").classList.add('butaoAtivado');
     }
-    
+
 
     function meu_callback(conteudo) {
         if (!("erro" in conteudo)) {
@@ -321,9 +321,9 @@
             document.getElementById('cidade_fisica').value=(conteudo.localidade);
             document.getElementById('estado_fisico').value = conteudo.uf
             console.log(conteudo)
-        } 
+        }
     }
-        
+
     function pesquisacepfisico() {
         valor = document.getElementById('cep_fisico').value
         //Nova variável "cep" somente com dígitos.
@@ -349,7 +349,7 @@
             else {
                 alert("Formato de CEP inválido.");
             }
-        } 
+        }
     }
 
 </script>

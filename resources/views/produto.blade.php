@@ -55,7 +55,7 @@
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">mode_edit</i>
                 @if(isset($produto))
-                    <input readonly required type="text" value="{{$produto->nome}}" placeholder="nome"  name="nome">
+                    <input required type="text" value="{{$produto->nome}}" placeholder="nome"  name="nome">
                 @else
                     <input required type="text" placeholder="nome"  name="nome">
                 @endif
@@ -201,7 +201,7 @@
 
 <script>
      function SomenteNumero(e){
-        var tecla=(window.event)?event.keyCode:e.which;   
+        var tecla=(window.event)?event.keyCode:e.which;
         if((tecla>47 && tecla<58)) return true;
         else{
             if (tecla==8 || tecla==0) return true;
