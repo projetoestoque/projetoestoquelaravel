@@ -29,11 +29,11 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::get('/admin/MenuCadastros', 'CadastroController@menuCadastros')->name('admin.MenuCadastros');
     Route::get('/admin/cadastroUsuario', 'CadastroController@cadastroUsuario')->name('admin.cadastroUsuario');
     Route::get('/admin/listarCadastros/{reference?}', 'CadastroController@listarCadastros')->name('admin.listarCadastros');
+    Route::get('/admin/carregar/cadastros', 'CadastroController@carregarCadastros')->name('admin.listarCadastros.carregar');
     Route::get('/admin/produto/editar/{id}', 'CadastroController@editarProduto')->name('admin.produto.editar');
     Route::put('/admin/produto/atualizar/{id}', 'CadastroController@salvarAlteracoes')->name('admin.produto.atualizar');
     Route::delete('/admin/produto/remover/{id}', 'CadastroController@deletarAlteracoes')->name('admin.produto.deletar');
     
-
    Route::get('/admin/marca', ['as'=> 'admin.marca', 'uses'=>'CadastroController@marca']);
    Route::get('/admin/tipo', ['as'=> 'admin.tipo', 'uses'=>'CadastroController@tipo']);
    Route::get('/admin/medida', ['as'=> 'admin.medida', 'uses'=>'CadastroController@medida']);

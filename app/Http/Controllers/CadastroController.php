@@ -417,12 +417,15 @@ class CadastroController extends Controller
         $produtos_cadastrados = DB::table('produtos')->orderBy('nome')->get();
         $doadores_fisicos = DB::table('doadors')->where('nome', '!=', '')->orderBy('nome')->get();
 		$doadores_juridicos = DB::table('doadors')->where('instituicao', '!=', '')->orderBy('nome')->get();
+
 		foreach($doadores_fisicos as $doador) {
 			array_push($doadores, $doador);
 		}
+
 		foreach($doadores_juridicos as $doador) {
 			array_push($doadores, $doador);
 		}
+
         $tipos = DB::table('tipos')->orderBy('tipo')->get();
         $medidas = DB::table('medidas')->orderBy('medida')->get();
         $marcas = DB::table('marcas')->orderBy('marca')->get();
@@ -479,6 +482,138 @@ class CadastroController extends Controller
 		}
 	
         return view('admin/visualizarCadastros', compact('all','produtos_cadastrados','tipos','medidas','marcas','estoques_disponiveis','doadores','marca_antiga','medida_antiga','tipo_antigo','estoque_antigo'));
+	}
+
+	public function carregarCadastros() {
+		$retorno_todos = [];
+		$retorno_produtos = [];
+		$retorno_doadores = [];
+		$retorno_tipos = [];
+		$retorno_medidas = [];
+		$retorno_marcas = [];
+		$retorno_estoques = [];
+
+		//carregar produtos
+		$produtos_cadastrados = DB::table('produtos')->orderBy('nome')->get();
+		foreach($produtos_cadastrados as $produto) {
+			$novo_produto = new Produto();
+			$novo_produto->nome = $produto->nome;
+			$novo_produto->marca = $produto->marca;
+			$novo_produto->tipo = $produto->tipo;
+			$novo_produto->codigo_barra = $produto->codigo_barra;
+			$novo_produto->id = $produto->id;
+
+			$todo = new Produto();
+			$todo->nome = $novo_produto->nome;
+			$todo->tipo = "produto/".$produto->tipo;
+			array_push($retorno_todos, $todo);
+			array_push($retorno_produtos, $novo_produto);
+		}
+
+		//carregar doadores
+		$doadores_fisicos = DB::table('doadors')->where('nome', '!=', "")->orderBy('nome')->get();
+		$doadores_juridicos = DB::table('doadors')->where('instituicao', '!=', "")->orderBy('instituicao')->get();
+
+		foreach($doadores_fisicos as $doador_fisico) {
+			$doador = new Doador();
+			$doador->nome = $doador_fisico->nome;
+			$doador->cpf = $doador_fisico->cpf;
+			$doador->telefone = $doador_fisico->telefone;
+			$doador->email = $doador_fisico->email;
+			$doador->id = $doador_fisico->id;
+
+			$todo = new Produto();
+			$todo->nome = $doador_fisico->nome;
+			$todo->tipo = "doador/Fisico";
+			array_push($retorno_todos, $todo);
+			array_push($retorno_doadores, $doador);
+		}
+
+		foreach($doadores_juridicos as $doador_juridico) {
+			$doador = new Doador();
+			$doador->instituicao = $doador_fisico->nome;
+			$doador->cnpj = $doador_fisico->cpf;
+			$doador->telefone = $doador_fisico->telefone;
+			$doador->email = $doador_fisico->email;
+			$doador->id = $doador_juridico->id;
+
+			$todo = new Produto();
+			$todo->nome = $doador_juridico->instituicao;
+			$todo->tipo = "doador/Juridico";
+			array_push($retorno_todos, $todo);
+			array_push($retorno_doadores, $doador);
+		}
+
+		
+
+		//carregar tipos
+		$tipos = DB::table('tipos')->orderBy('tipo')->get();
+		foreach($tipos as $tipo) {
+			$novo_tipo = new Tipo();
+			$novo_tipo->tipo = $tipo->tipo;
+			$novo_tipo->id = $tipo->id;
+
+			$todo = new Produto();
+			$todo->nome = $novo_tipo->tipo;
+			$todo->tipo = "tipo";
+			array_push($retorno_todos, $todo);
+			array_push($retorno_tipos, $novo_tipo);
+		}
+
+		//carregar medidas
+		$medidas = DB::table('medidas')->orderBy('medida')->get();
+		foreach($medidas as $medida) {
+			$nova_medida = new Medida();
+			$nova_medida->medida = $medida->medida;
+			$nova_medida->abreviacao = $medida->abreviacao;
+			$nova_medida->id = $medida->id;
+
+			$todo = new Produto();
+			$todo->nome = $nova_medida->medida;
+			$todo->tipo = "medida";
+			array_push($retorno_todos, $todo);
+			array_push($retorno_medidas, $nova_medida);
+		}
+
+		//carregar marca
+		$marcas = DB::table('marcas')->orderBy('marca')->get();
+		foreach($marcas as $marca) {
+			$nova_marca = new Marca();
+			$nova_marca->marca = $marca->marca;
+			$nova_marca->id = $marca->id;
+
+			$todo = new Produto();
+			$todo->nome = $nova_marca->marca;
+			$todo->tipo = "marca";
+			array_push($retorno_todos, $todo);
+			array_push($retorno_marcas, $nova_marca);
+		}
+
+		//carregar estoques
+		$estoques = DB::table('estoque_disponivels')->orderBy('estoque')->get();
+		foreach($estoques as $estoque) {
+			$novo_estoque = new Estoque_disponivel();
+			$novo_estoque->estoque = $estoque->estoque;
+			$novo_estoque->id = $estoque->id;
+
+			$todo = new Produto();
+			$todo->nome = $novo_estoque->estoque;
+			$todo->tipo = "estoque";
+			array_push($retorno_todos, $todo);
+			array_push($retorno_estoques, $novo_estoque);
+		}
+
+		$data = [
+			'todos' => $retorno_todos,
+			'produtos' =>$retorno_produtos,
+			'doadores' => $retorno_doadores,
+			'tipos' => $retorno_tipos,
+			'medidas' => $retorno_medidas,
+			'marcas' => $retorno_marcas,
+			'estoques' => $retorno_estoques,
+		];
+
+		return $data;
 	}
 	
 	public function pesquisarCadastros()

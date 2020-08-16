@@ -39,9 +39,12 @@ class EstoqueController extends Controller
   {
     sleep(0.5);
     $produtos_em_estoque = DB::table('produto_em_estoques')->get();
-    $produtos = [];
+    $produtos_sem = [];
+    $produtos_estoque = [];
+    $produtos_acima = [];
+    $produtos_abaixo = [];
     $query = "";
-    if(isset($_GET['query'])) $query = $_GET['query'];
+    if(isset($_GET['query'])) $query = mb_strtolower($_GET['query'], 'UTF-8');
 
     if(!$query) {
       return false;
@@ -53,7 +56,7 @@ class EstoqueController extends Controller
     $nome_buscado = "";
     
     foreach($todos_os_produtos as $produto) {
-			$produto->nome = mb_strtolower($produto->nome, 'UTF-8');
+      $produto->nome = mb_strtolower($produto->nome, 'UTF-8');
 
 			for($i = 0; $i < strlen($query); $i++) {
 				$nome_buscado .= $produto->nome[$i];
@@ -69,12 +72,37 @@ class EstoqueController extends Controller
     foreach($produtos_id as $produto) {
       $produtos_filtrados = Produto_em_estoque::where('Id_produto', 'LIKE', '%'.$produto->id.'%')->get();
       foreach($produtos_filtrados as $produto) {
-          $produto->nome = Produto::findOrFail($produto->Id_produto)->nome;
-          if($query[0] == $produto->nome[0]) {
-            $produto->marca = Produto::findOrFail($produto->Id_produto)->marca;
-            $produto->estoque = Estoque_disponivel::findOrFail($produto->Id_estoque)->estoque;
-            array_push($produtos, $produto);
+          $entrada = new Produto_em_estoque();
+          $entrada->nome = Produto::findOrFail($produto->Id_produto)->nome;
+          $entrada->marca = Produto::findOrFail($produto->Id_produto)->marca;
+          $entrada->quantidade = $produto->quantidade;
+          $entrada->estoque = Estoque_disponivel::findOrFail($produto->Id_estoque)->estoque;
+          $entrada->vencimento = $produto->vencimento;
+
+          // transforma a data do formato BR para o formato americano, ANO-MES-DIA
+          $vencimento = implode('-', array_reverse(explode('/', $produto->vencimento)));
+          $hoje = implode('-', array_reverse(explode('/', date('d/m/Y'))));
+
+          // converte as datas para o formato timestamp
+          $v = strtotime($vencimento); 
+          $h = strtotime($hoje);
+
+          // verifica a diferença em segundos entre as duas datas e divide pelo número de segundos que um dia possui
+          $dataFinal = ($h - $v) /86400;
+
+          // caso a data 2 seja menor que a data 1, multiplica o resultado por -1
+          if($dataFinal < 0)
+          $dataFinal *= -1;
+        
+          if($produto->quantidade > $produto->quantidade_minima && $dataFinal > 5) {
+            array_push($produtos_acima, $entrada);
           }
+
+          if($produto->quantidade <= $produto->quantidade_minima || $dataFinal <= 5) {
+            array_push($produtos_abaixo, $entrada);
+          }
+
+          array_push($produtos_estoque, $entrada);
       }
     }
     
@@ -83,7 +111,8 @@ class EstoqueController extends Controller
     $produto_id = [];
 
     foreach($todos_os_produtos as $produto) {
-			$produto->nome = mb_strtolower($produto->nome, 'UTF-8');
+      $produto->nome = mb_strtolower($produto->nome, 'UTF-8');
+      
 
 			for($i = 0; $i < strlen($query); $i++) {
 				$nome_buscado .= $produto->nome[$i];
@@ -98,10 +127,16 @@ class EstoqueController extends Controller
 
     foreach($produto_id as $produto) {
       if(Produto_em_estoque::where('Id_produto', $produto->id)->exists() == false) {
-        if($query[0] == $produto->nome[0]) array_push($produtos, $produto);
+        $produto_sem = new Produto();
+        $produto_sem->nome = $produto->nome;
+        $produto_sem->marca = $produto->marca;
+        $produto_sem->codigo_barra = $produto->codigo_barra;
+        $produto_sem->tipo = $produto->tipo;
+        if($query[0] == $produto->nome[0]) array_push($produtos_sem, $produto_sem);
       }
     }
- 
-    return $produtos;
+
+    $data = ['estoque' => $produtos_estoque, 'acima' => $produtos_acima, 'abaixo' => $produtos_abaixo, 'sem' => $produtos_sem];
+    return $data;
   }
 }

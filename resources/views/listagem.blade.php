@@ -376,22 +376,61 @@
     typingTimer = setTimeout(buscarEntrada, doneTypingInterval);
   }
 
+  function limparTabelas() {
+    let tabela_estoque = document.getElementById('tabela_estoque')
+    let tabela_acima = document.getElementById('tabela_acima')
+    let tabela_abaixo = document.getElementById('tabela_abaixo')
+    let tabela_sem = document.getElementById('tabela_sem')
+
+    let tabelas = [tabela_estoque, tabela_acima, tabela_abaixo, tabela_sem]
+    tabelas.forEach(tabela => {
+      let numero_de_linhas = tabela.rows.length
+      let linha = 2
+      while (numero_de_linhas != 2) {
+        tabela.deleteRow(linha)
+        numero_de_linhas = tabela.rows.length
+      }
+    })
+  }
+
   function buscarEntrada() {
     input = document.getElementById('icon_prefix')
     query = input.value
+
+    if(query == "") {
+      carregarVariaveis()
+    } else {
     
-    $.get("{{url('/admin/buscar/entrada?query=')}}" + query, (data, status) => {
-      console.log(data)
-    });          
-    }
+      $.get("{{url('/admin/buscar/entrada?query=')}}" + query, (data, status) => {
+        
+        limparTabelas()
+
+        for(let item in data) {
+              data[item].forEach(value => {
+              let array = Object.values(value)
+              let tabela = document.getElementById("tabela_" + item)
+              let numero_de_linhas = tabela.rows.length
+              let numero_de_colunas = tabela.rows[numero_de_linhas-1].cells.length;
+              let nova_linha = tabela.insertRow(numero_de_linhas);
+
+              for (var j = 0; j < numero_de_colunas; j++) {
+                // Insere uma coluna na nova linha 
+                novo_item = nova_linha.insertCell(j);
+                // Insere um conteúdo na coluna
+                novo_item.innerHTML = array[j]
+              }
+        
+            })
+          }
+      });    
+    }      
+  }
 
     function carregarVariaveis() {
       $.get("{{route('produtos.listar.atualizar')}}",(data, status) => {
         for(let item in data) {
           data[item].forEach(value => {
             let array = Object.values(value)
-
-            
             let tabela = document.getElementById("tabela_" + item)
             let numero_de_linhas = tabela.rows.length
             let numero_de_colunas = tabela.rows[numero_de_linhas-1].cells.length;
