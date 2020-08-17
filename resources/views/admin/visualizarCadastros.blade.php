@@ -110,22 +110,9 @@
           <tbody>
             <!-- Não remover -->
               <tr>
-                  <td class="grey-text text-darken-3">item nome</td>
+                  <td style="display: none" class="grey-text text-darken-3">item nome</td>
                   
-                  <td><span class="new badge red" data-badge-caption="">alimento</span></td>
-                  
-                  <!-- <td><span class="new badge blue" data-badge-caption="">escritorio</span></td>
-                 
-                  <td><span class="new badge green" data-badge-caption="">tipo</span></td>
-                 
-                  <td><span class="new badge orange" data-badge-caption="">medida</span></td>
-                  
-                  <td><span class="new badge teal" data-badge-caption="">marca</span></td>
-                  
-                  <td><span class="new badge pink darken-3" data-badge-caption="">estoque</span></td>
-
-                  
-                  <td class="grey-text text-darken-2">outro</td> -->
+                  <td style="display: none"><span class="new badge red" data-badge-caption="">alimento</span></td>
                   
               </tr>
             <!-- Não remover -->
@@ -579,21 +566,82 @@
         typingTimer = setTimeout(buscarCadastros, doneTypingInterval);
     }
 
+    function limparTabelas() {
+        let tabela_todos = document.getElementById('tabela_todos')
+        let tabela_produtos = document.getElementById('tabela_produtos')
+        let tabela_doadores = document.getElementById('tabela_doadores')
+        let tabela_tipos = document.getElementById('tabela_tipos')
+        let tabela_medidas = document.getElementById('tabela_medidas')
+        let tabela_marcas = document.getElementById('tabela_marcas')
+        let tabela_estoques = document.getElementById('tabela_estoques')
+
+        let tabelas = [tabela_todos, tabela_produtos, tabela_doadores, tabela_tipos, tabela_medidas, tabela_marcas, tabela_estoques]
+        tabelas.forEach(tabela => {
+        let numero_de_linhas = tabela.rows.length
+        let linha = 2
+        while (numero_de_linhas != 2) {
+            tabela.deleteRow(linha)
+            numero_de_linhas = tabela.rows.length
+        }
+        })
+    }
+
     function buscarCadastros() {
             input = document.getElementById('icon_prefix')
             query = input.value
             tabela = document.getElementById('tabela_resultados')
             tabela.innerHTML = "" 
 
-            //verificar se é codigo de barras
-            if(!isNaN(parseFloat(query)) && isFinite(query)) {
+            if(query == "") {
+                limparTabelas()
+                carregarVariaveis()
+            }  else if(!isNaN(parseFloat(query)) && isFinite(query)) {//verificar se é codigo de barras
 
                 $.get("{{url('/admin/buscar/codigo_barra?query=')}}" + query, (data, status) => {
-                    for(let i = 0; i < data.length; i++) {
-                        if(document.getElementById(data[i]['nome']) == null) {
-                            var tr = document.getElementsByName(data[i]['nome'] + data[i]['id'])[0].outerHTML
-                            tabela.innerHTML += tr
+                    limparTabelas()
+
+                    for(let item in data) {
+                        data[item].forEach(value => {
+                        let array = Object.values(value)
+                        let tabela = document.getElementById("tabela_" + item)
+                        let numero_de_linhas = tabela.rows.length
+                        let numero_de_colunas = tabela.rows[numero_de_linhas-1].cells.length;
+                        let nova_linha = tabela.insertRow(numero_de_linhas);
+
+                        for (var j = 0; j < numero_de_colunas; j++) {
+                            // Insere uma coluna na nova linha 
+                            novo_item = nova_linha.insertCell(j);
+                            if(j == (numero_de_colunas - 1) && item != "todos") {
+                            @if(auth()->user()->is_admin && isset($_GET['tipo']) && $_GET['tipo'] == "produto")
+                                novo_item.innerHTML = `<td><a onclick="adicionar_${item}(${array[j]})" class="btn-floating waves-effect waves-light gradient"><i class="material-icons">add</i></a></td>`
+                            @else
+                                novo_item.innerHTML = `
+                                <a onclick="atualizar_${item}(${array[j]})" class="btn-floating waves-effect waves-light blue"><i class="material-icons">edit</i></a>
+                                <button onclick="confirmar_${item}(${array[j]})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger"><i class="material-icons">delete</i></button>`
+                            @endif
+                            } else if(j == (numero_de_colunas - 1) && item == "todos") {
+                                if(array[j] == "produto/Alimento") {
+                                    novo_item.innerHTML = `<td><span class="new badge red" data-badge-caption="">${array[j]}</span></td>`
+                                } else if(array[j] == "produto/Escritorio") {
+                                    novo_item.innerHTML = `<td><span class="new badge blue" data-badge-caption="">${array[j]}</span></td>`
+                                } else if(array[j] == "tipo") {
+                                    novo_item.innerHTML = `<td><span class="new badge green" data-badge-caption="">${array[j]}</span></td>`
+                                } else if(array[j] == "medida") {
+                                    novo_item.innerHTML = `<td><span class="new badge orange" data-badge-caption="">${array[j]}</span></td>`
+                                } else if(array[j] == "marca") {
+                                    novo_item.innerHTML = `<td><span class="new badge teal" data-badge-caption="">${array[j]}</span></td>`
+                                } else if(array[j] == "estoque") {
+                                    novo_item.innerHTML = `<td><span class="new badge pink darken-3" data-badge-caption="">${array[j]}</span></td>`
+                                } else {
+                                    novo_item.innerHTML = `<td><span class="grey-text text-darken-2" data-badge-caption="">${array[j]}</span></td>`
+                                }
+                        
+                            } else {
+                                novo_item.innerHTML = array[j]
+                            }
                         }
+                    
+                        })
                     }
                 });
 
@@ -601,6 +649,52 @@
                 $.get("{{url('/admin/buscar/cadastros?query=')}}" + query, (data, status) => {
                     console.log("testando...") 
                     console.log(data)
+
+                    limparTabelas()
+
+                    for(let item in data) {
+                        data[item].forEach(value => {
+                        let array = Object.values(value)
+                        let tabela = document.getElementById("tabela_" + item)
+                        let numero_de_linhas = tabela.rows.length
+                        let numero_de_colunas = tabela.rows[numero_de_linhas-1].cells.length;
+                        let nova_linha = tabela.insertRow(numero_de_linhas);
+
+                        for (var j = 0; j < numero_de_colunas; j++) {
+                            // Insere uma coluna na nova linha 
+                            novo_item = nova_linha.insertCell(j);
+                            if(j == (numero_de_colunas - 1) && item != "todos") {
+                            @if(auth()->user()->is_admin && isset($_GET['tipo']) && $_GET['tipo'] == "produto")
+                                novo_item.innerHTML = `<td><a onclick="adicionar_${item}(${array[j]})" class="btn-floating waves-effect waves-light gradient"><i class="material-icons">add</i></a></td>`
+                            @else
+                                novo_item.innerHTML = `
+                                <a onclick="atualizar_${item}(${array[j]})" class="btn-floating waves-effect waves-light blue"><i class="material-icons">edit</i></a>
+                                <button onclick="confirmar_${item}(${array[j]})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger"><i class="material-icons">delete</i></button>`
+                            @endif
+                            } else if(j == (numero_de_colunas - 1) && item == "todos") {
+                                if(array[j] == "produto/Alimento") {
+                                    novo_item.innerHTML = `<td><span class="new badge red" data-badge-caption="">${array[j]}</span></td>`
+                                } else if(array[j] == "produto/Escritorio") {
+                                    novo_item.innerHTML = `<td><span class="new badge blue" data-badge-caption="">${array[j]}</span></td>`
+                                } else if(array[j] == "tipo") {
+                                    novo_item.innerHTML = `<td><span class="new badge green" data-badge-caption="">${array[j]}</span></td>`
+                                } else if(array[j] == "medida") {
+                                    novo_item.innerHTML = `<td><span class="new badge orange" data-badge-caption="">${array[j]}</span></td>`
+                                } else if(array[j] == "marca") {
+                                    novo_item.innerHTML = `<td><span class="new badge teal" data-badge-caption="">${array[j]}</span></td>`
+                                } else if(array[j] == "estoque") {
+                                    novo_item.innerHTML = `<td><span class="new badge pink darken-3" data-badge-caption="">${array[j]}</span></td>`
+                                } else {
+                                    novo_item.innerHTML = `<td><span class="grey-text text-darken-2" data-badge-caption="">${array[j]}</span></td>`
+                                }
+                        
+                            } else {
+                                novo_item.innerHTML = array[j]
+                            }
+                        }
+                    
+                        })
+                    }
                 }); 
             }
 
@@ -919,8 +1013,6 @@ function carregarVariaveis() {
                             novo_item.innerHTML = array[j]
                         }
 
-                        
-                        
                     }
             }
         }

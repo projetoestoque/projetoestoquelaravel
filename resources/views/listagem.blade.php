@@ -398,6 +398,7 @@
     query = input.value
 
     if(query == "") {
+      limparTabelas()
       carregarVariaveis()
     } else {
     
@@ -417,7 +418,22 @@
                 // Insere uma coluna na nova linha 
                 novo_item = nova_linha.insertCell(j);
                 // Insere um conteúdo na coluna
-                novo_item.innerHTML = array[j]
+                if(item != "sem" && item != "acima" && j == 2) {
+                  if(value.acabando) {
+                    novo_item.innerHTML = `${array[j]}<i class="tiny material-icons red-text">brightness_1</i>`
+                  } else {
+                    novo_item.innerHTML = array[j]
+                  }
+                } else if(item != "sem" && item != "acima" && j == 4) {
+                  if(value.vencendo) {
+                    novo_item.innerHTML = `${array[j]}<i class="tiny material-icons red-text">brightness_1</i>`
+                  } else {
+                    novo_item.innerHTML = array[j]
+                  }
+                } else {
+                  novo_item.innerHTML = array[j]
+                }
+               
               }
         
             })
@@ -440,7 +456,23 @@
               // Insere uma coluna na nova linha 
               novo_item = nova_linha.insertCell(j);
               // Insere um conteúdo na coluna
-              novo_item.innerHTML = array[j]
+              if(item != "sem" && item != "acima" && j == 2) {
+                if(value.acabando) {
+                  novo_item.innerHTML = `${array[j]}<i class="tiny material-icons red-text">brightness_1</i>`
+                } else {
+                  novo_item.innerHTML = array[j]
+                }
+                
+              } else if(item != "sem" && item != "acima" && j == 4) {
+                if(value.vencendo) {
+                  novo_item.innerHTML = `${array[j]}<i class="tiny material-icons red-text">brightness_1</i>`
+                } else {
+                  novo_item.innerHTML = array[j]
+                }
+              } else {
+                novo_item.innerHTML = array[j]
+              }
+              
             }
       
           })
