@@ -408,8 +408,6 @@
         for(let item in data) {
               data[item].forEach(value => {
               let array = Object.values(value)
-
-              
               let tabela = document.getElementById("tabela_" + item)
               let numero_de_linhas = tabela.rows.length
               let numero_de_colunas = tabela.rows[numero_de_linhas-1].cells.length;
@@ -430,12 +428,9 @@
 
     function carregarVariaveis() {
       $.get("{{route('produtos.listar.atualizar')}}",(data, status) => {
-        console.log("Carregando variaveis: " + data)
         for(let item in data) {
           data[item].forEach(value => {
             let array = Object.values(value)
-
-            
             let tabela = document.getElementById("tabela_" + item)
             let numero_de_linhas = tabela.rows.length
             let numero_de_colunas = tabela.rows[numero_de_linhas-1].cells.length;

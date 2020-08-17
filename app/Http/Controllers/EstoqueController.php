@@ -111,7 +111,8 @@ class EstoqueController extends Controller
     $produto_id = [];
 
     foreach($todos_os_produtos as $produto) {
-			$produto->nome = mb_strtolower($produto->nome, 'UTF-8');
+      $produto->nome = mb_strtolower($produto->nome, 'UTF-8');
+      
 
 			for($i = 0; $i < strlen($query); $i++) {
 				$nome_buscado .= $produto->nome[$i];
@@ -126,7 +127,12 @@ class EstoqueController extends Controller
 
     foreach($produto_id as $produto) {
       if(Produto_em_estoque::where('Id_produto', $produto->id)->exists() == false) {
-        if($query[0] == $produto->nome[0]) array_push($produtos_sem, $produto);
+        $produto_sem = new Produto();
+        $produto_sem->nome = $produto->nome;
+        $produto_sem->marca = $produto->marca;
+        $produto_sem->codigo_barra = $produto->codigo_barra;
+        $produto_sem->tipo = $produto->tipo;
+        if($query[0] == $produto->nome[0]) array_push($produtos_sem, $produto_sem);
       }
     }
 

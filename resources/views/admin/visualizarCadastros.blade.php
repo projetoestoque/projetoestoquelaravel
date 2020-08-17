@@ -87,7 +87,7 @@
 </div>
 <div class="container z-depth-2 ">
 <nav class="nav-form blue lighten-1"></nav>
-<table class="All highlight centered ">
+<table id="tabela_todos" class="All highlight centered ">
 @if(empty($all))
 <div class="All ">
           <br>
@@ -105,36 +105,34 @@
             <tr>
                 <th>Nome</th>
                 <th>Tipo</th>
-                @if(auth()->user()->is_admin)
-                @endif
             </tr>
           </thead>
           <tbody>
-          @foreach($all as $allItem)
+            <!-- Não remover -->
               <tr>
-                  <td class="grey-text text-darken-3">{{$allItem['nome']}}</td>
-                  @if($allItem['tipo']=="produto/Alimento")
-                  <td><span class="new badge red" data-badge-caption="">{{$allItem['tipo']}}</span></td>
-                  @elseif($allItem['tipo']=="produto/Escritorio")
-                  <td><span class="new badge blue" data-badge-caption="">{{$allItem['tipo']}}</span></td>
-                  @elseif($allItem['tipo']=="tipo")
-                  <td><span class="new badge green" data-badge-caption="">{{$allItem['tipo']}}</span></td>
-                  @elseif($allItem['tipo']=="medida")
-                  <td><span class="new badge orange" data-badge-caption="">{{$allItem['tipo']}}</span></td>
-                  @elseif($allItem['tipo']=="marca")
-                  <td><span class="new badge teal" data-badge-caption="">{{$allItem['tipo']}}</span></td>
-                  @elseif($allItem['tipo']=="estoque")
-                  <td><span class="new badge pink darken-3" data-badge-caption="">{{$allItem['tipo']}}</span></td>
+                  <td class="grey-text text-darken-3">item nome</td>
+                  
+                  <td><span class="new badge red" data-badge-caption="">alimento</span></td>
+                  
+                  <!-- <td><span class="new badge blue" data-badge-caption="">escritorio</span></td>
+                 
+                  <td><span class="new badge green" data-badge-caption="">tipo</span></td>
+                 
+                  <td><span class="new badge orange" data-badge-caption="">medida</span></td>
+                  
+                  <td><span class="new badge teal" data-badge-caption="">marca</span></td>
+                  
+                  <td><span class="new badge pink darken-3" data-badge-caption="">estoque</span></td>
 
-                  @else
-                  <td class="grey-text text-darken-2">{{$allItem['tipo']}}</td>
-                  @endif
+                  
+                  <td class="grey-text text-darken-2">outro</td> -->
+                  
               </tr>
-          @endforeach
+            <!-- Não remover -->
           </tbody>
 @endif
 </table>
-<table class="Produto highlight centered responsive-table">
+<table id="tabela_produtos" class="Produto highlight centered responsive-table">
 @if(empty($produtos_cadastrados))
 <div class="Produto">
           <br>
@@ -160,25 +158,22 @@
             </tr>
           </thead>
           <tbody>
-          @foreach($produtos_cadastrados as $produto)
-              <tr name="{{$produto->nome}}{{$produto->id}}">
-                  <td class="grey-text text-darken-3" name="{{$produto->nome}}">{{$produto->nome}}</td>
-                  <td class="grey-text text-darken-2">{{$produto->marca}}</td>
-                  <td class="grey-text text-darken-2">{{$produto->tipo}}</td>
-                  <td class="grey-text text-darken-2">{{$produto->codigo_barra}}</td>
-                  @if(auth()->user()->is_admin && isset($_GET['tipo']) && $_GET['tipo'] == "produto")
-                  <td><a onclick="adicionarProduto({{$produto->id}})" class="btn-floating waves-effect waves-light gradient"><i class="material-icons">add</i></a></td>
-                  @elseif(auth()->user()->is_admin )
-                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarProduto({{$produto->id}})"><i class="material-icons">edit</i></a>
-                  <button onclick="confirmarProduto({{$produto->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger"><i class="material-icons">delete</i></button>
+          
+              <tr style="display: none;">
+                  <td class="grey-text text-darken-3">nome</td>
+                  <td class="grey-text text-darken-2">marca</td>
+                  <td class="grey-text text-darken-2">tipo</td>
+                  <td class="grey-text text-darken-2">codigo_barra</td>
+                  <td>
+                    
                   </td>
-                  @endif
+                 
               </tr>
-          @endforeach
+          
           </tbody>
 @endif
 </table>
-<table class="Doador highlight centered responsive-table">
+<table id="tabela_doadores" class="Doador highlight centered responsive-table">
 @if(empty($doadores))
 <div class="Doador">
           <br>
@@ -193,7 +188,7 @@
 </div>
 @else
 <thead class="grey-text text-darken-4">
-            <tr>
+            <tr >
                 <th>Nome/Instituição</th>
                 <th>CPF/CNPJ</th>
                 <th>Telefone</th>
@@ -204,42 +199,21 @@
             </tr>
           </thead>
           <tbody>
-          @foreach($doadores as $doador)
-            @if($doador->tipo == 'fisico' || $doador->tipo != 'juridico')
-            <tr name="{{$doador->nome}}{{$doador->id}}">
-            @else
-            <tr name="{{$doador->instituicao}}{{$doador->id}}}">
-            
-            @endif
-              @if($doador->tipo=="fisico")
-                <td class="grey-text text-darken-3" name="{{$doador->nome}}">{{$doador->nome}}</td>
-                <td class="grey-text text-darken-3">{{$doador->cpf}}</td>
-                <td class="grey-text text-darken-2">{{$doador->telefone}}</td>
-                <td class="grey-text text-darken-2">{{$doador->email}}</td>
-              @elseif($doador->tipo=="juridico")
-                <td class="grey-text text-darken-3" name="{{$doador->instituicao}}">{{$doador->instituicao}}</td>
-                <td class="grey-text text-darken-3">{{$doador->cnpj}}</td>
-                <td class="grey-text text-darken-2">{{$doador->telefone}}</td>
-                <td class="grey-text text-darken-2">{{$doador->email}}</td>
-              @else
-              <td class="grey-text text-darken-3" name="{{$doador->nome}}">{{$doador->nome}}</td>
-              <td class="grey-text text-darken-3">N/A</td>
-              <td class="grey-text text-darken-3">N/A</td>
-              <td class="grey-text text-darken-3">N/A</td>
-              @endif
-                  @if(auth()->user()->is_admin && isset($_GET['tipo']) && $_GET['tipo'] == "doador")
-                  <td><a onclick="adicionarDoador({{$doador->id}})" class="btn-floating waves-effect waves-light gradient"><i class="material-icons">add</i></a></td>
-                  @elseif(auth()->user()->is_admin )
-                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarDoador({{$doador->id}})"><i class="material-icons">edit</i></a>
-                  <button onclick="confirmarDoador({{$doador->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" ><i class="material-icons">delete</i></button>
-                  </td>
-                  @endif
+          
+            <tr style="display: none;">
+                <td class="grey-text text-darken-3">nome</td>
+                <td class="grey-text text-darken-3">cpf</td>
+                <td class="grey-text text-darken-2">telefon</td>
+                <td class="grey-text text-darken-2">email</td>
+                <td>
+                    
+                </td>
               </tr>
-          @endforeach
+          
           </tbody>
 @endif
 </table>
-<table class="Tipo highlight centered ">
+<table id="tabela_tipos" class="Tipo highlight centered ">
 @if(empty($tipos))
 <div class="Tipo">
           <br>
@@ -262,21 +236,19 @@
             </tr>
           </thead>
           <tbody>
-          @foreach($tipos as $tipo)
-              <tr name="{{$tipo->tipo}}{{$tipo->id}}">
-                <td class="grey-text text-darken-3">{{$tipo->tipo}}</td>
-                  @if(auth()->user()->is_admin)
-                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarTipo({{$tipo->id}})"><i class="material-icons">edit</i></a>
-                  <button onclick="confirmarTipo({{$tipo->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger"><i class="material-icons">delete</i></button>
+          
+              <tr style="display: none;">
+                <td class="grey-text text-darken-3">tipo</td>
+                  <td>
+                 
                   </td>
-                  @endif
               </tr>
-          @endforeach
+          
           </tbody>
 @endif
 
 </table>
-<table class="Medida highlight centered ">
+<table id="tabela_medidas" class="Medida highlight centered ">
 @if(empty($medidas))
 <div class="Medida">
           <br>
@@ -300,25 +272,23 @@
             </tr>
           </thead>
           <tbody>
-          @foreach($medidas as $medida)
-              <tr name="{{$medida->medida}}{{$medida->id}}">
-                <td class="grey-text text-darken-3">{{$medida->medida}}</td>
-                @if(empty($medida->abreviacao))
-                <td class="grey-text text-darken-3">N/A</td>
-                @else
-                <td class="grey-text text-darken-3">{{$medida->abreviacao}}</td>
-                @endif
-                  @if(auth()->user()->is_admin)
-                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarMedida({{$medida->id}})"><i class="material-icons">edit</i></a>
-                  <button onclick="confirmarMedida({{$medida->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" ><i class="material-icons">delete</i></button>
-                  </td>
-                  @endif
+          
+              <tr style="display: none;">
+                <td class="grey-text text-darken-3">medida</td>
+                
+                <td class="grey-text text-darken-3">abreviacao</td>
+               
+                 
+                <td>
+                  
+                </td>
+                  
               </tr>
-          @endforeach
+
           </tbody>
 @endif
 </table>
-<table class="Marca highlight centered ">
+<table id="tabela_marcas" class="Marca highlight centered ">
 @if(empty($marcas))
 <div class="Marca">
           <br>
@@ -341,20 +311,20 @@
             </tr>
           </thead>
           <tbody>
-          @foreach($marcas as $marca)
-              <tr name="{{$marca->marca}}{{$marca->id}}">
-                <td class="grey-text text-darken-3">{{$marca->marca}}</td>
-                  @if(auth()->user()->is_admin)
-                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarMarca({{$marca->id}})"><i class="material-icons">edit</i></a>
-                  <button onclick="confirmarMarca({{$marca->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" ><i class="material-icons">delete</i></button>
+          
+              <tr style="display: none;">
+                <td class="grey-text text-darken-3">marca</td>
+                  
+                  <td>
+                 
                   </td>
-                  @endif
+                  
               </tr>
-          @endforeach
+          
           </tbody>
 @endif
 </table>
-<table class="Estoque highlight centered ">
+<table id="tabela_estoques" class="Estoque highlight centered ">
 @if(empty($estoques_disponiveis))
 <div class="Estoque">
           <br>
@@ -377,20 +347,17 @@
             </tr>
           </thead>
           <tbody>
-          @foreach($estoques_disponiveis as $estoque)
-              <tr name="{{$estoque->estoque}}{{$estoque->id}}">
-              @if($estoque->estoque=="sem estoque")
-                @continue
-              @else
-                <td class="grey-text text-darken-3">{{$estoque->estoque}}</td>
-              @endif
-                  @if(auth()->user()->is_admin)
-                  <td><a class="btn-floating waves-effect waves-light blue" onclick="atualizarEstoque({{$estoque->id}})"><i class="material-icons">edit</i></a>
-                  <button onclick="confirmarEstoque({{$estoque->id}})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger" ><i class="material-icons">delete</i></button>
+          
+              <tr style="display: none;">
+             
+                <td class="grey-text text-darken-3">estoque</td>
+        
+                  <td>
+                  
                   </td>
-                  @endif
+                  
               </tr>
-          @endforeach
+          
           </tbody>
 @endif
 </table>
@@ -634,21 +601,6 @@
                 $.get("{{url('/admin/buscar/cadastros?query=')}}" + query, (data, status) => {
                     console.log("testando...") 
                     console.log(data)
-                    
-                    for(let i = 0; i < data.length; i++) {
-                        if(data[i]['tipo'] == 'juridico') {
-                            if(document.getElementById(data[i]['instituicao']) == null) {
-                                var tr = document.getElementsByName(data[i]['instituicao'] + data[i]['id'])[0].outerHTML
-                                tabela.innerHTML += tr
-                            }
-                        } else {
-                            if(document.getElementById(data[i]['nome']) == null) {
-                                var tr = document.getElementsByName(data[i]['nome'] + data[i]['id'])[0].outerHTML
-                                tabela.innerHTML += tr
-                            }
-                        }
-                        
-                    }
                 }); 
             }
 
@@ -723,12 +675,12 @@
     }
 
     //produto
-    function atualizarProduto(id) {
+    function atualizar_produtos(id) {
         document.getElementById('produto_id').value = id;
         window.location.href = "{{route('produto')}}?id=" + id;
     }
 
-    function confirmarProduto(id) {
+    function confirmar_produtos(id) {
         document.getElementById('produto_id').value = id;
         const elem = document.getElementById('modal1');
         const instance = M.Modal.init(elem, {dismissible: false});
@@ -741,12 +693,12 @@
     }
 
     //doador
-    function atualizarDoador(id) {
+    function atualizar_doadores(id) {
         document.getElementById('produto_id').value = id;
         window.location.href = "{{route('doador')}}?id=" + id;
     }
 
-    function confirmarDoador(id) {
+    function confirmar_doadores(id) {
         document.getElementById('produto_id').value = id;
         const elem = document.getElementById('modal2');
         const instance = M.Modal.init(elem, {dismissible: false});
@@ -759,12 +711,12 @@
     }
 
     //tipo
-    function atualizarTipo(id) {
+    function atualizar_tipos(id) {
         document.getElementById('produto_id').value = id;
         window.location.href = "{{route('admin.listarCadastros')}}?tipo_id=" + id;
     }
 
-    function confirmarTipo(id) {
+    function confirmar_tipos(id) {
         document.getElementById('produto_id').value = id;
         const elem = document.getElementById('modal3');
         const instance = M.Modal.init(elem, {dismissible: false});
@@ -777,12 +729,12 @@
     }
 
     //medida
-    function atualizarMedida(id) {
+    function atualizar_medidas(id) {
         document.getElementById('produto_id').value = id;
         window.location.href = "{{route('admin.listarCadastros')}}?medida_id=" + id;
     }
 
-    function confirmarMedida(id) {
+    function confirmar_medidas(id) {
         document.getElementById('produto_id').value = id;
         const elem = document.getElementById('modal4');
         const instance = M.Modal.init(elem, {dismissible: false});
@@ -795,12 +747,12 @@
     }
 
     //marca
-    function atualizarMarca(id) {
+    function atualizar_marcas(id) {
         document.getElementById('produto_id').value = id;
         window.location.href = "{{route('admin.listarCadastros')}}?marca_id=" + id;
     }
 
-    function confirmarMarca(id) {
+    function confirmar_marcas(id) {
         document.getElementById('produto_id').value = id;
         const elem = document.getElementById('modal5');
         const instance = M.Modal.init(elem, {dismissible: false});
@@ -813,12 +765,12 @@
     }
 
     //estoque
-    function atualizarEstoque(id) {
+    function atualizar_estoques(id) {
         document.getElementById('produto_id').value = id;
         window.location.href = "{{route('admin.listarCadastros')}}?estoque_id=" + id;
     }
 
-    function confirmarEstoque(id) {
+    function confirmar_estoques(id) {
         document.getElementById('produto_id').value = id;
         const elem = document.getElementById('modal6');
         const instance = M.Modal.init(elem, {dismissible: false});
@@ -830,7 +782,7 @@
         window.location.href = "{{route('admin.estoque.deletar')}}?id=" + id;
     }
 
-    function adicionarProduto(id) {
+    function adicionar_produtos(id) {
         url_anterior = "{{$_SERVER['HTTP_REFERER']}}"
         if(url_anterior.indexOf('produto') != -1) {
             let url=new URL(url_anterior);
@@ -844,7 +796,7 @@
         
     }
 
-    function adicionarDoador(id) {
+    function adicionar_doadores(id) {
         url_anterior = "{{$_SERVER['HTTP_REFERER']}}"
         if(url_anterior.indexOf('doador') != -1) {
             let url=new URL(url_anterior);
@@ -920,5 +872,66 @@
     exibirModal('modal10')
  </script>
 @endif
+
+<script>
+
+function carregarVariaveis() {
+    $.get("{{route('admin.listarCadastros.carregar')}}",(data, status) => {
+        for(let item in data) {
+
+            for(i in data[item]) {
+                    let array = Object.values(data[item][i])
+                    let tabela = document.getElementById("tabela_" + item)
+                    let numero_de_linhas = tabela.rows.length
+                    let numero_de_colunas = tabela.rows[numero_de_linhas-1].cells.length;
+                    let nova_linha = tabela.insertRow(numero_de_linhas);
+
+                    for (var j = 0; j < numero_de_colunas; j++) {
+                        // Insere uma coluna na nova linha 
+                        novo_item = nova_linha.insertCell(j);
+                        // Insere um conteúdo na coluna
+                        if(j == (numero_de_colunas - 1) && item != "todos") {
+                            @if(auth()->user()->is_admin && isset($_GET['tipo']) && $_GET['tipo'] == "produto")
+                                novo_item.innerHTML = `<td><a onclick="adicionar_${item}(${array[j]})" class="btn-floating waves-effect waves-light gradient"><i class="material-icons">add</i></a></td>`
+                            @else
+                                novo_item.innerHTML = `
+                                <a onclick="atualizar_${item}(${array[j]})" class="btn-floating waves-effect waves-light blue"><i class="material-icons">edit</i></a>
+                                <button onclick="confirmar_${item}(${array[j]})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger"><i class="material-icons">delete</i></button>`
+                            @endif
+                        } else if(j == (numero_de_colunas - 1) && item == "todos") {
+                            if(array[j] == "produto/Alimento") {
+                                novo_item.innerHTML = `<td><span class="new badge red" data-badge-caption="">${array[j]}</span></td>`
+                            } else if(array[j] == "produto/Escritorio") {
+                                novo_item.innerHTML = `<td><span class="new badge blue" data-badge-caption="">${array[j]}</span></td>`
+                            } else if(array[j] == "tipo") {
+                                novo_item.innerHTML = `<td><span class="new badge green" data-badge-caption="">${array[j]}</span></td>`
+                            } else if(array[j] == "medida") {
+                                novo_item.innerHTML = `<td><span class="new badge orange" data-badge-caption="">${array[j]}</span></td>`
+                            } else if(array[j] == "marca") {
+                                novo_item.innerHTML = `<td><span class="new badge teal" data-badge-caption="">${array[j]}</span></td>`
+                            } else if(array[j] == "estoque") {
+                                novo_item.innerHTML = `<td><span class="new badge pink darken-3" data-badge-caption="">${array[j]}</span></td>`
+                            } else {
+                                novo_item.innerHTML = `<td><span class="grey-text text-darken-2" data-badge-caption="">${array[j]}</span></td>`
+                            }
+                        
+                        } else {
+                            novo_item.innerHTML = array[j]
+                        }
+
+                        
+                        
+                    }
+            }
+        }
+        
+    });
+}
+
+window.onload = function () {
+    carregarVariaveis()
+}
+
+</script>
 
 @endsection
