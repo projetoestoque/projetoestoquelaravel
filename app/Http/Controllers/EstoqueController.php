@@ -7,6 +7,7 @@ use App\Estoque_disponivel;
 use App\Produto;
 use App\Produto_em_estoque;
 use App\Marca;
+use App\Medida;
 use DB;
 
 class EstoqueController extends Controller
@@ -59,6 +60,9 @@ class EstoqueController extends Controller
       $produto->nome = mb_strtolower($produto->nome, 'UTF-8');
 
 			for($i = 0; $i < strlen($query); $i++) {
+        if($i > (strlen($produto->nome) - 1)) {
+          break;
+        }
 				$nome_buscado .= $produto->nome[$i];
 			}
 
@@ -75,9 +79,11 @@ class EstoqueController extends Controller
           $entrada = new Produto_em_estoque();
           $entrada->nome = Produto::findOrFail($produto->Id_produto)->nome;
           $entrada->marca = Produto::findOrFail($produto->Id_produto)->marca;
-          $entrada->quantidade = $produto->quantidade;
+          $entrada->quantidade = $produto->quantidade.Medida::findOrFail($produto->Id_medida)->abreviacao;
           $entrada->estoque = Estoque_disponivel::findOrFail($produto->Id_estoque)->estoque;
           $entrada->vencimento = $produto->vencimento;
+          $entrada->vencendo = false;
+          $entrada->faltando = false;
 
           // transforma a data do formato BR para o formato americano, ANO-MES-DIA
           $vencimento = implode('-', array_reverse(explode('/', $produto->vencimento)));
@@ -93,6 +99,9 @@ class EstoqueController extends Controller
           // caso a data 2 seja menor que a data 1, multiplica o resultado por -1
           if($dataFinal < 0)
           $dataFinal *= -1;
+
+          if($produto->quantidade <= $produto->quantidade_minima) $entrada->acabando = true;
+          if($dataFinal <= 5) $entrada->vencendo = true;
         
           if($produto->quantidade > $produto->quantidade_minima && $dataFinal > 5) {
             array_push($produtos_acima, $entrada);
@@ -115,6 +124,9 @@ class EstoqueController extends Controller
       
 
 			for($i = 0; $i < strlen($query); $i++) {
+        if($i > (strlen($produto->nome) - 1)) {
+          break;
+        }
 				$nome_buscado .= $produto->nome[$i];
 			}
 

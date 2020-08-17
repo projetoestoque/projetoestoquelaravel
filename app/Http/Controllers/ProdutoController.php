@@ -114,8 +114,8 @@ class ProdutoController extends Controller
         $produto_estoque->quantidade = $produto->quantidade.Medida::findOrFail($produto->Id_medida)->abreviacao;
         $produto_estoque->estoque = Estoque_disponivel::findOrFail($produto->Id_estoque)->estoque;
         $produto_estoque->vencimento = $produto->vencimento;
-       
-        array_push($produtos_estoque, $produto_estoque);
+        $produto_estoque->vencendo = false;
+        $produto_estoque->acabando = false;
 
          // transforma a data do formato BR para o formato americano, ANO-MES-DIA
          $vencimento = implode('-', array_reverse(explode('/', $produto->vencimento)));
@@ -132,36 +132,24 @@ class ProdutoController extends Controller
          if($dataFinal < 0)
          $dataFinal *= -1;
 
-        //listando produtos acima do nivel critico
+        //listando produtos em alta
         if($produto->quantidade > $produto->quantidade_minima && $dataFinal > 5) {
-            $produto_acima = new Produto();
-            $produto_acima->nome = Produto::findOrFail($produto->Id_produto)->nome;
-            $produto_acima->marca = Produto::findOrFail($produto->Id_produto)->marca;
-            $produto_acima->quantidade = $produto->quantidade.Medida::findOrFail($produto->Id_medida)->abreviacao;
-            $produto_acima->estoque = Estoque_disponivel::findOrFail($produto->Id_estoque)->estoque;
-            $produto_acima->vencimento = $produto->vencimento;
-        
-            array_push($produtos_acima, $produto_acima);
+            array_push($produtos_acima, $produto_estoque);
         }
 
-
-        //listando produtos abaixo do nivel critico
-        if($produto->quantidade <= $produto->quantidade_minima || $dataFinal <= 5) {
-            $produto_abaixo = new Produto();
-            $produto_abaixo->nome = Produto::findOrFail($produto->Id_produto)->nome;
-            $produto_abaixo->marca = Produto::findOrFail($produto->Id_produto)->marca;
-            $produto_abaixo->quantidade = $produto->quantidade.Medida::findOrFail($produto->Id_medida)->abreviacao;
-            $produto_abaixo->estoque = Estoque_disponivel::findOrFail($produto->Id_estoque)->estoque;
-            $produto_abaixo->vencimento = $produto->vencimento;
-
-            if($dataFinal <= 5) {
-                $produto_abaixo->vencendo = true;
-            }
-
-            array_push($produtos_abaixo, $produto_abaixo);
+        //listando produtos vencendo
+        if($dataFinal <= 5) {
+            $produto_estoque->vencendo = true;
+            array_push($produtos_abaixo, $produto_estoque);
         }
 
-        
+        //listando produtos acabando
+        if($produto->quantidade <= $produto->quantidade_minima) {
+            $produto_estoque->acabando = true;
+            array_push($produtos_abaixo, $produto_estoque);
+        }
+
+        array_push($produtos_estoque, $produto_estoque);
     }
 
     foreach($produtos_cadastrados as $produto) {

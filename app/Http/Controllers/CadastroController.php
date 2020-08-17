@@ -628,33 +628,42 @@ class CadastroController extends Controller
 
 		$todos_produtos = DB::table('produtos')->get();
 		$produtos_cadastrados_filtrados = [];
+		$retorno_todos = [];
 		$nome_buscado = "";
 
 		foreach($todos_produtos as $produto) {
 			$produto->nome = mb_strtolower($produto->nome, 'UTF-8');
 
 			for($i = 0; $i < strlen($query); $i++) {
+				if($i > strlen($produto->nome)) {
+					break;
+				}
 				$nome_buscado .= $produto->nome[$i];
 			}
 
 			if($nome_buscado == $query) {
-				array_push($produtos_cadastrados_filtrados, $produto);
+				$novo_produto = new Produto();
+				$novo_produto->nome = $produto->nome;
+				$novo_produto->marca = $produto->marca;
+				$novo_produto->tipo = $produto->tipo;
+				$novo_produto->codigo_barra = $produto->codigo_barra;
+				$novo_produto->id = $produto->id;
+
+				$todo = new Produto();
+				$todo->nome = $novo_produto->nome;
+				$todo->tipo = "produto/".$produto->tipo;
+				array_push($retorno_todos, $todo);
+				array_push($produtos_cadastrados_filtrados, $novo_produto);
 			}
 
 			$nome_buscado = "";
 		}
 
-		foreach($produtos_cadastrados_filtrados as $produto) {
-			$produto->tipo = "Produto";
-			array_push($items, $produto);
-			
-		}
 
 		//filtrar doadores
 		$nome_buscado = "";
 		$todos_doadores = DB::table('doadors')->get();
-		$doadores_fisicos_filtrados = [];
-		$doadores_juridicos_filtrados = [];
+		$doadores_filtrados = [];
 
 		foreach($todos_doadores as $doador) {
 			if($doador->nome != null) {
@@ -662,11 +671,25 @@ class CadastroController extends Controller
 				$doador->nome = mb_strtolower($doador->nome, 'UTF-8');
 		
 				for($i = 0; $i < strlen($query); $i++) {
+					if($i > (strlen($doador->nome) - 1)) {
+						break;
+					}
 					$nome_buscado .= $doador->nome[$i];
 				}
 		
 				if($nome_buscado == $query) {
-					array_push($doadores_fisicos_filtrados, $doador);
+					$novo_doador = new Doador();
+					$novo_doador->nome = $doador->nome;
+					$novo_doador->cpf = $doador->cpf;
+					$novo_doador->telefone = $doador->telefone;
+					$novo_doador->email = $doador->email;
+					$novo_doador->id = $doador->id;
+
+					$todo = new Produto();
+					$todo->nome = $doador->nome;
+					$todo->tipo = "doador/Fisico";
+					array_push($retorno_todos, $todo);
+					array_push($doadores_filtrados, $novo_doador);
 				}
 		
 				$nome_buscado = "";
@@ -675,27 +698,31 @@ class CadastroController extends Controller
 				$doador->instituicao = mb_strtolower($doador->instituicao, 'UTF-8');
 		
 				for($i = 0; $i < strlen($query); $i++) {
+					if($i > (strlen($doador->instituicao) - 1)) {
+						break;
+					}
 					$nome_buscado .= $doador->instituicao[$i];
 				}
 		
 				if($nome_buscado == $query) {
-					array_push($doadores_juridicos_filtrados, $doador);
+					$novo_doador = new Doador();
+					$novo_doador->instituicao = $doador->instituicao;
+					$novo_doador->cnpj = $doador->cnpj;
+					$novo_doador->telefone = $doador->telefone;
+					$novo_doador->email = $doador->email;
+					$novo_doador->id = $doador->id;
+
+					$todo = new Produto();
+					$todo->nome = $doador->instituicao;
+					$todo->tipo = "doador/Juridico";
+					array_push($retorno_todos, $todo);
+					array_push($doadores_filtrados, $novo_doador);
 				}
 				
 				$nome_buscado = "";
 			}
 		}
 		
-		foreach($doadores_fisicos_filtrados as $doador) {
-			if($query[0] == $doador->nome[0]) {
-				array_push($items, $doador);
-			}
-		}
-		foreach($doadores_juridicos_filtrados as $doador) {
-			if($query[0] == $doador->instituicao[0]) {
-				array_push($items, $doador);
-			}
-		}
 
 		//filtrar tipos
 		$nome_buscado = "";
@@ -706,23 +733,27 @@ class CadastroController extends Controller
 			$tipo->tipo = mb_strtolower($tipo->tipo, 'UTF-8');
 
 			for($i = 0; $i < strlen($query); $i++) {
+				if($i > (strlen($tipo->tipo) - 1)) {
+					break;
+				}
 				$nome_buscado .= $tipo->tipo[$i];
 			}
 
 			if($nome_buscado == $query) {
-				array_push($tipos_filtrados, $tipo);
+				$novo_tipo = new Tipo();
+				$novo_tipo->tipo = $tipo->tipo;
+				$novo_tipo->id = $tipo->id;
+
+				$todo = new Produto();
+				$todo->nome = $novo_tipo->tipo;
+				$todo->tipo = "tipo";
+				array_push($retorno_todos, $todo);
+				array_push($tipos_filtrados, $novo_tipo);
 			}
 
 			$nome_buscado = "";
 		}
 
-		foreach($tipos_filtrados as $tipo) {
-			if($query[0] == $tipo->tipo[0]) {
-				$tipo->nome = $tipo->tipo;
-				$tipo->tipo = "Tipo";
-				array_push($items, $tipo);
-			}
-		}
 
 		//filtrar medidas
 		$todas_as_medidas = DB::table('medidas')->get();
@@ -732,22 +763,26 @@ class CadastroController extends Controller
 			$medida->medida = mb_strtolower($medida->medida, 'UTF-8');
 
 			for($i = 0; $i < strlen($query); $i++) {
+				if($i > (strlen($medida->medida) - 1)) {
+					break;
+				}
 				$nome_buscado .= $medida->medida[$i];
 			}
 
 			if($nome_buscado == $query) {
-				array_push($medidas_filtradas, $medida);
+				$nova_medida = new Medida();
+				$nova_medida->medida = $medida->medida;
+				$nova_medida->abreviacao = $medida->abreviacao;
+				$nova_medida->id = $medida->id;
+
+				$todo = new Produto();
+				$todo->nome = $nova_medida->medida;
+				$todo->tipo = "medida";
+				array_push($retorno_todos, $todo);
+				array_push($medidas_filtradas, $nova_medida);
 			}
 
 			$nome_buscado = "";
-		}
-
-		foreach($medidas_filtradas as $medida) {
-			if($query[0] == $medida->medida[0]) {
-				$medida->nome = $medida->medida;
-				$medida->tipo = "Medida";
-				array_push($items, $medida);
-			}
 		}
 
 		//filtrar marcas
@@ -758,64 +793,100 @@ class CadastroController extends Controller
 			$marca->marca = mb_strtolower($marca->marca, 'UTF-8');
 
 			for($i = 0; $i < strlen($query); $i++) {
+				if($i > (strlen($marca->marca) - 1)) {
+					break;
+				}
 				$nome_buscado .= $marca->marca[$i];
 			}
 
 			if($nome_buscado == $query) {
-				array_push($marcas_filtradas, $marca);
+				$nova_marca = new Marca();
+				$nova_marca->marca = $marca->marca;
+				$nova_marca->id = $marca->id;
+
+				$todo = new Produto();
+				$todo->nome = $nova_marca->marca;
+				$todo->tipo = "marca";
+				array_push($retorno_todos, $todo);
+				array_push($marcas_filtradas, $nova_marca);
 			}
 
 			$nome_buscado = "";
 		}
 
-		foreach($marcas_filtradas as $marca) {
-			if($query[0] == $marca->marca[0]) {
-				$marca->nome = $marca->marca;
-				$marca->tipo = "Marca";
-				array_push($items, $marca);
-			}
-		}
 
 		//filtrar estoques
 		$estoques_filtrados = [];
-		$todos_os_estoques = DB::table('estoques')->get();
+		$todos_os_estoques = DB::table('estoque_disponivels')->get();
 
 		foreach($todos_os_estoques as $estoque) {
 			$estoque->estoque = mb_strtolower($estoque->estoque, 'UTF-8');
 
 			for($i = 0; $i < strlen($query); $i++) {
+				if($i > (strlen($estoque->estoque) - 1)) {
+					break;
+				}
 				$nome_buscado .= $estoque->estoque[$i];
 			}
 
 			if($nome_buscado == $query) {
-				array_push($estoques_filtrados, $estoque);
+				$novo_estoque = new Estoque_disponivel();
+				$novo_estoque->estoque = $estoque->estoque;
+				$novo_estoque->id = $estoque->id;
+
+				$todo = new Produto();
+				$todo->nome = $novo_estoque->estoque;
+				$todo->tipo = "estoque";
+				array_push($retorno_todos, $todo);
+				array_push($estoques_filtrados, $novo_estoque);
 			}
 
 			$nome_buscado = "";
 		}
 
-		foreach($estoques_filtrados as $estoque) {
-			$estoque->nome = $estoque->estoque;
-			$estoque->tipo = "Estoque";
-			array_push($items, $estoque);
-		}
+		$data = [
+			'todos' => $retorno_todos,
+			'produtos' =>$produtos_cadastrados_filtrados,
+			'doadores' => $doadores_filtrados,
+			'tipos' => $tipos_filtrados,
+			'medidas' => $medidas_filtradas,
+			'marcas' => $marcas_filtradas,
+			'estoques' => $estoques_filtrados,
+		];
 
-		return $items;
-		
+		return $data;
+
   }
 
   public function pesquisarCodigoBarra() {
-	$items = [];
+	$produtos = [];
+	$todos = [];
 	$query = "";
 	if(isset($_GET['query'])) $query = $_GET['query'];
 	if(!$query) return false;
 
 	$produtos_filtrados = Produto::where('codigo_barra', 'LIKE', $query.'%')->get();
 	foreach($produtos_filtrados as $produto) {
-		array_push($items, $produto);
+		$novo_produto = new Produto();
+		$novo_produto->nome = $produto->nome;
+		$novo_produto->marca = $produto->marca;
+		$novo_produto->tipo = $produto->tipo;
+		$novo_produto->codigo_barra = $produto->codigo_barra;
+		$novo_produto->id = $produto->id;
+
+		$todo = new Produto();
+		$todo->nome = $produto->nome;
+		$todo->tipo = "produto/".$produto->tipo;
+		array_push($todos, $todo);
+		array_push($produtos, $novo_produto);
 	}
 	
-	return $items;
+	$data = [
+		'todos' => $todos,
+		'produtos' =>$produtos,
+	];
+
+	return $data;
   }
   function cadastroUsuario(){
 	  return view('admin/adminCadastraUsuario');
