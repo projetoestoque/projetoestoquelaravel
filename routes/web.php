@@ -28,6 +28,7 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::get('/admin/MenuEstoque', 'CadastroController@CadastrosInsercoes')->name('admin.MenuEstoque');
     Route::get('/admin/MenuCadastros', 'CadastroController@menuCadastros')->name('admin.MenuCadastros');
     Route::get('/admin/cadastroUsuario', 'CadastroController@cadastroUsuario')->name('admin.cadastroUsuario');
+    Route::post('/admin/cadastroUsuario', 'RegistrarController@registrar')->name('admin.cadastrar.usuario');
     Route::get('/admin/listarCadastros/{reference?}', 'CadastroController@listarCadastros')->name('admin.listarCadastros');
     Route::get('/admin/carregar/cadastros', 'CadastroController@carregarCadastros')->name('admin.listarCadastros.carregar');
     Route::get('/admin/produto/editar/{id}', 'CadastroController@editarProduto')->name('admin.produto.editar');

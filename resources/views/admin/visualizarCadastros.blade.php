@@ -38,12 +38,18 @@
 
 <input type="hidden" id="produto_id" name="id"/>
 
+<!-- @if(isset($_GET['tipo']) && ($_GET['tipo'] == 'produto' || $_GET['tipo'] == 'doador'))
+
+@else
+
+@endif -->
 <div class="butaoEspaco">
-    <a href="{{ URL::route('admin.home') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
+    <a href="{{ URL::previous() }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
     <i class="large material-icons">reply</i>
     <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
 </div>
+
 <br>
 <br>
 <div class="mobile-hide">
@@ -985,13 +991,20 @@ function carregarVariaveis() {
                         novo_item = nova_linha.insertCell(j);
                         // Insere um conteúdo na coluna
                         if(j == (numero_de_colunas - 1) && item != "todos") {
-                            @if(auth()->user()->is_admin && isset($_GET['tipo']) && $_GET['tipo'] == "produto")
+                            if(item == "produtos" || item == "doadores") {
+                                @if(auth()->user()->is_admin && isset($_GET['tipo']) && $_GET['tipo'] == "produto" || isset($_GET['tipo']) && $_GET['tipo'] == "doador" )
                                 novo_item.innerHTML = `<td><a onclick="adicionar_${item}(${array[j]})" class="btn-floating waves-effect waves-light gradient"><i class="material-icons">add</i></a></td>`
-                            @else
+                                @else
+                                    novo_item.innerHTML = `
+                                    <a onclick="atualizar_${item}(${array[j]})" class="btn-floating waves-effect waves-light blue"><i class="material-icons">edit</i></a>
+                                    <button onclick="confirmar_${item}(${array[j]})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger"><i class="material-icons">delete</i></button>`
+                                @endif
+                            } else {
                                 novo_item.innerHTML = `
                                 <a onclick="atualizar_${item}(${array[j]})" class="btn-floating waves-effect waves-light blue"><i class="material-icons">edit</i></a>
-                                <button onclick="confirmar_${item}(${array[j]})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger"><i class="material-icons">delete</i></button>`
-                            @endif
+                                <button onclick="confirmar_${item}(${array[j]})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger"><i class="material-icons">delete</i></button>` 
+                            }
+                            
                         } else if(j == (numero_de_colunas - 1) && item == "todos") {
                             if(array[j] == "produto/Alimento") {
                                 novo_item.innerHTML = `<td><span class="new badge red" data-badge-caption="">${array[j]}</span></td>`

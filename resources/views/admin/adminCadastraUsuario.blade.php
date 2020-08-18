@@ -1,6 +1,6 @@
 @extends('template.site')
 
-@section('titulo','Doador')
+@section('titulo','Cadastrar Usuário')
 
 @section('conteudo')
     <div class="butaoEspaco">
@@ -15,22 +15,23 @@
     <br>
     <div class="container z-depth-2 valing-wrapper white">
     <nav class="nav-form blue darken-4"></nav>
-    <form method="post">
+    <form name="formulario" method="post" action="{{route('admin.cadastrar.usuario')}}">
+    {{csrf_field()}}
     <br>
     <div class="row">
         <div class="col l1"></div>
         <div class="input-field col s12 l4">
           <i class="material-icons prefix">account_circle</i>
-          <input id="nome" name="nome" type="text" placeholder="admin" required>
+          <input id="nome" name="name" type="text" placeholder="admin" required>
           <label for="nome">Nome do Usuário<span class="important">*</span></label>
         </div>
         <div class="col l2"></div>
         <div class="input-field col s12 l4">
           <i class="material-icons prefix">supervisor_account</i>
-          <select required name="type_user" id="type_user" onchange="alertAdm(event)">
+          <select required name="is_admin" id="type_user" onchange="alertAdm(event)">
           <option value="" disabled selected>Escolha um tipo para o usuário</option>
-          <option value="adm">Administrador</option>
-          <option value="sup">Supervisor</option>
+          <option value="1">Administrador</option>
+          <option value="0">Supervisor</option>
           </select>
           <label>Tipo de Usuário<span class="important">*</span></label>
         </div>
@@ -39,18 +40,18 @@
         <div class="col l1"></div>
         <div class="input-field col s12 l4">
           <i class="material-icons prefix">lock</i>
-          <input id="senha" name="senha" type="password" placeholder="admin2020abc1" required>
+          <input value="{{old('password')}}" id="senha" name="password" type="password" placeholder="admin2020abc1" required>
           <label>Senha<span class="important">*</span></label>
         </div>
         <div class="col l2"></div>
         <div class="input-field col s12 l4">
           <i class="material-icons prefix">lock</i>
-          <input id="confirmar_senha" name="confirmar_senha" type="text" placeholder="admin2020abc1" required> 
+          <input id="confirmar_senha" name="confirmar_senha" type="password" placeholder="admin2020abc1" required> 
           <label>Repita a senha<span class="important">*</span></label>
         </div>
     </div>
     <div class="row valign center">
-            <button class="btn waves-effect waves-light blue darken-4"><b>Enviar
+            <button type="button" onclick="validar()" class="btn waves-effect waves-light blue darken-4"><b>Enviar
                     <i class="material-icons right">send</i>
             </button>
             <br>
@@ -66,6 +67,31 @@
         if(e.target.value==="adm"){
             alert("Um usuário do tipo Adminstrador possui acesso total ao sistema, portanto apenas cadastre novos adminstradores caso for necessário.")
         }
+    }
+
+    function validar() {
+      let valido = true
+      let msg = ""
+
+      let nome = document.getElementById('nome').value
+      let senha = document.getElementById('senha').value
+      let repita_senha = document.getElementById('confirmar_senha').value
+
+      if(nome == "" || senha == "" || repita_senha == "") {
+        valido = false
+        msg = "Não pode haver campos em branco!"
+      } 
+      if(senha != repita_senha) {
+        valido = false
+        msg = "Confirmação de senha incorreta"
+      } 
+
+      if(valido) {
+        document.formulario.submit()
+      } else {
+        alert(msg)
+        return false
+      }
     }
     </script>
 @endsection
