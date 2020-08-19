@@ -38,7 +38,7 @@ class DoadorController extends Controller
       $doador->save();
     }
 
-    return redirect()->route('admin.cadastros')->with('update', 'Doador atualizado com sucesso!');
+    return redirect()->route('admin.listarCadastros', ['rel' => 'doador'])->with('status', 'Doador atualizado com sucesso!');
   }
 
   public function deletarDoador()

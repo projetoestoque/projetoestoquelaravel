@@ -21,7 +21,7 @@ class MedidaController extends Controller
     $medida->medida = $req->get('medida');
     $medida->abreviacao = $req->get('abreviacao');
     $medida->save();
-    return redirect()->route('admin.cadastros')->with('update', 'Medida atualizada com sucesso!');
+    return redirect()->route('admin.listarCadastros', ['rel' => 'medida'])->with('status', 'Medida atualizada com sucesso!');
   }
 
   public function deletarMedida()
