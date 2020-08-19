@@ -38,17 +38,21 @@
 
 <input type="hidden" id="produto_id" name="id"/>
 
-<!-- @if(isset($_GET['tipo']) && ($_GET['tipo'] == 'produto' || $_GET['tipo'] == 'doador'))
-
-@else
-
-@endif -->
+@if((isset($_GET['tipo']) && ($_GET['tipo'] == 'produto' || $_GET['tipo'] == 'doador')) || isset($_GET['rel']) && $_GET['rel'] == 'doador')
 <div class="butaoEspaco">
-    <a href="{{ URL::previous() }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
+    <a href="{{ URL::previous()}}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
     <i class="large material-icons">reply</i>
     <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
 </div>
+@else
+<div class="butaoEspaco">
+    <a href="{{ URL::route('admin.home')}}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
+    <i class="large material-icons">reply</i>
+    <span class="ButtaoEspacoTexto"><b>Voltar</span>
+    </a>
+</div>
+@endif
 
 <br>
 <br>
@@ -918,8 +922,9 @@
 </script>
 @endif
 
-@if(isset($_GET['rel']))
+@if( isset($_GET['rel']) )
 <script>
+
    let tipos = [
        'Produto',
        'Doador',
@@ -940,6 +945,7 @@
     });
 
    for(let i = 0; i < tipos.length; i++) {
+
        if(data.rel == tipos[i].toLowerCase()) {
            changeFilter(tipos[i])
            break;

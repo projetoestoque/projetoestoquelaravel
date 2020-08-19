@@ -25,7 +25,7 @@ class EstoqueController extends Controller
     $estoque = Estoque_disponivel::findOrFail($estoque_id);
     $estoque->estoque = $req->get('estoque');
     $estoque->save();
-    return redirect()->route('admin.cadastros')->with('update', 'Estoque atualizado com sucesso!');
+    return redirect()->route('admin.listarCadastros', ['rel' => 'estoque'])->with('status', 'Estoque atualizado com sucesso!');
   }
 
   public function deletarEstoque()

@@ -16,7 +16,7 @@
 <div class="butaoEspaco">
 
 @if(isset($produto))
-    <a href="{{ URL::previous()}}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
+    <a href="{{ URL::route('admin.listarCadastros')}}?rel=produto" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
     <i class="large material-icons">reply</i>
         <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
