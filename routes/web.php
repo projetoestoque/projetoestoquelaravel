@@ -74,6 +74,7 @@ Route::group(['middleware' => 'is_admin'], function () {
    Route::get('/admin/buscar/codigo_barra/', 'CadastroController@pesquisarCodigoBarra')->name('admin.buscar.codigo_barra');
 });
 
+Route::get('/buscar/saida', 'SaidaController@pesquisar_saida')->name('saida.pesquisar');
 
 Route::get('/produto', ['as'=> 'produto', 'uses'=>'CadastroController@produto']);
 Route::get('/doador', ['as'=> 'doador', 'uses'=>'CadastroController@doador']);
@@ -103,6 +104,7 @@ Route::get('/home/cadastros', 'CadastroController@CadastrosSupervisor')->name('s
 
 Route::get('/saida/menu','SaidaController@menu')->name('saida.menu');
 Route::get('/saida', ['as'=> 'saida', 'uses'=>'SaidaController@index']);
+Route::get('/saida/carregar', ['as'=> 'saida.carregar', 'uses'=>'SaidaController@carregar']);
 Route::post('/saida', ['as'=> 'saida.post', 'uses'=>'SaidaController@saida']);
 
 
