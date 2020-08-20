@@ -15,7 +15,7 @@
     <span class="ButtaoEspacoTexto"><b>Voltar</span>
     </a>
   @else
-    <a href="{{ URL::route('superv.cadastros') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4 ">
+    <a href="{{ URL::route('saida.menu') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4 ">
     <i class="large material-icons">reply</i>
     <span class="ButtaoEspacoTexto"><b>Voltar</span>
   </a>
