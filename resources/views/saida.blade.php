@@ -23,17 +23,13 @@
 <div class="row sem-fundo">
 <div class="input-field col s12 input-outlined">
         <i class="material-icons prefix right">search</i>
-        <input id="icon_prefix" type="text" placeholder="Pesquisar...">
-        <div id="resultados" class="z-depth-2">
-          <table id="tabela_resultados" class="highlight centered responsive-table">
-          </table>
-        </div>
+        <input onkeydown="digitandoEntrada()" id="icon_prefix" type="text" placeholder="Pesquisar...">
     </div>
 </div>
 </div>
 <div class="container z-depth-2 ">
 <nav class="nav-form blue lighten-1"></nav>
-    <table class="highlight centered responsive-table">
+    <table id="tabela_saida" class="highlight centered responsive-table">
         <thead class="grey-text text-darken-4">
             <tr>
                 <th>Nome</th>
@@ -45,16 +41,18 @@
             </tr>
           </thead>
           <tbody>
-              @foreach($produtos_estoque as $produto)
-              <tr>
-                <td>{{$produto->nome}}</td>
-                <td>{{$produto->quantidade}}</td>
-                <td>{{$produto->tipo}}</td>
-                <td>{{$produto->marca}}</td>
-                <td>{{$produto->vencimento}}</td>
-                <td><a onclick="abrirModal('{{$produto->id}}')" class="btn-floating waves-effect waves-light gradient"><i class="material-icons">remove</i></a></td>
+              
+              <tr style="display: none">
+                <td>nome</td>
+                <td>quantidade</td>
+                <td>tipo</td>
+                <td>marca</td>
+                <td>vencimento</td>
+                <td>
+                
+                </td>
               </tr>
-              @endforeach
+              
           </tbody>
     </table>
 </div>
@@ -123,6 +121,104 @@
             instance.open();
         });
     }
+
+    function limparTabelas() {
+        let tabela_saida = document.getElementById('tabela_saida')
+
+        let tabelas = [tabela_saida]
+        tabelas.forEach(tabela => {
+        let numero_de_linhas = tabela.rows.length
+        let linha = 2
+        while (numero_de_linhas != 2) {
+            tabela.deleteRow(linha)
+            numero_de_linhas = tabela.rows.length
+        }
+        })
+  }
+
+    let query
+
+    var typingTimer; //timer identifier
+    var doneTypingInterval = 1000; //time in ms, 1 second for example
+
+    //on keyup, start the countdown
+    function digitandoEntrada() {
+        clearTimeout(typingTimer); 
+        typingTimer = setTimeout(buscarEntrada, doneTypingInterval);
+    }
+
+    function buscarEntrada() {
+        input = document.getElementById('icon_prefix')
+        query = input.value
+
+        if(query == "") {
+        limparTabelas()
+        carregarVariaveis()
+        } else {
+        
+        $.get("{{url('/buscar/saida?query=')}}" + query, (data, status) => {
+            
+            limparTabelas()
+
+            for(let item in data) {
+                data[item].forEach(value => {
+                let array = Object.values(value)
+                let tabela = document.getElementById("tabela_" + item)
+                let numero_de_linhas = tabela.rows.length
+                let numero_de_colunas = tabela.rows[numero_de_linhas-1].cells.length;
+                let nova_linha = tabela.insertRow(numero_de_linhas);
+
+                for (var j = 0; j < numero_de_colunas; j++) {
+                    // Insere uma coluna na nova linha 
+                    novo_item = nova_linha.insertCell(j);
+                    // Insere um conteúdo na coluna
+                    if(j == 5) {
+                        novo_item.innerHTML = `<a onclick="abrirModal('${array[j]}')" class="btn-floating waves-effect waves-light gradient"><i class="material-icons">remove</i></a>`
+                    } else {
+                        novo_item.innerHTML = array[j]
+                    }
+                
+                }
+            
+                })
+            }
+        });    
+    }      
+  }
+
+  function carregarVariaveis() {
+      $.get("{{route('saida.carregar')}}",(data, status) => {
+        for(let item in data) {
+          data[item].forEach(value => {
+            let array = Object.values(value)
+            let tabela = document.getElementById("tabela_" + item)
+            let numero_de_linhas = tabela.rows.length
+            let numero_de_colunas = tabela.rows[numero_de_linhas-1].cells.length;
+            let nova_linha = tabela.insertRow(numero_de_linhas);
+
+            for (var j = 0; j < numero_de_colunas; j++) {
+              // Insere uma coluna na nova linha 
+              novo_item = nova_linha.insertCell(j);
+              // Insere um conteúdo na coluna
+              if(j == 5) {
+                novo_item.innerHTML = `<a onclick="abrirModal('${array[j]}')" class="btn-floating waves-effect waves-light gradient"><i class="material-icons">remove</i></a>`
+              } else {
+                novo_item.innerHTML = array[j]
+              }
+              
+            }
+      
+          })
+        }
+        
+      }); 
+    
+    }
+
+    window.onload = function () {
+    carregarVariaveis()
+  }
+
 </script>
 
 @if(isset($entrada))
