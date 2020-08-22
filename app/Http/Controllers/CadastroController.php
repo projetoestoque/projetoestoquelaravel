@@ -531,10 +531,10 @@ class CadastroController extends Controller
 
 		foreach($doadores_juridicos as $doador_juridico) {
 			$doador = new Doador();
-			$doador->instituicao = $doador_fisico->nome;
-			$doador->cnpj = $doador_fisico->cpf;
-			$doador->telefone = $doador_fisico->telefone;
-			$doador->email = $doador_fisico->email;
+			$doador->instituicao = $doador_juridico->instituicao;
+			$doador->cnpj = $doador_juridico->cnpj;
+			$doador->telefone = $doador_juridico->telefone;
+			$doador->email = $doador_juridico->email;
 			$doador->id = $doador_juridico->id;
 
 			$todo = new Produto();
