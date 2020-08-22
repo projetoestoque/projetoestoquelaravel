@@ -38,7 +38,7 @@
 
 <input type="hidden" id="produto_id" name="id"/>
 
-@if((isset($_GET['tipo']) && ($_GET['tipo'] == 'produto' || $_GET['tipo'] == 'doador')) || isset($_GET['rel']) && $_GET['rel'] == 'doador')
+@if((isset($_GET['tipo']) && ($_GET['tipo'] == 'produto' || $_GET['tipo'] == 'doador')))
 <div class="butaoEspaco">
     <a href="{{ URL::previous()}}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
     <i class="large material-icons">reply</i>
@@ -817,7 +817,7 @@
     //tipo
     function atualizar_tipos(id) {
         document.getElementById('produto_id').value = id;
-        window.location.href = "{{route('admin.listarCadastros')}}?tipo_id=" + id;
+        window.location.href = "{{route('admin.listarCadastros')}}?tipo_id=" + id + "&rel=tipo";
     }
 
     function confirmar_tipos(id) {
@@ -835,7 +835,7 @@
     //medida
     function atualizar_medidas(id) {
         document.getElementById('produto_id').value = id;
-        window.location.href = "{{route('admin.listarCadastros')}}?medida_id=" + id;
+        window.location.href = "{{route('admin.listarCadastros')}}?medida_id=" + id + "&rel=medida";
     }
 
     function confirmar_medidas(id) {
@@ -853,7 +853,7 @@
     //marca
     function atualizar_marcas(id) {
         document.getElementById('produto_id').value = id;
-        window.location.href = "{{route('admin.listarCadastros')}}?marca_id=" + id;
+        window.location.href = "{{route('admin.listarCadastros')}}?marca_id=" + id + "&rel=marca";
     }
 
     function confirmar_marcas(id) {
@@ -871,7 +871,7 @@
     //estoque
     function atualizar_estoques(id) {
         document.getElementById('produto_id').value = id;
-        window.location.href = "{{route('admin.listarCadastros')}}?estoque_id=" + id;
+        window.location.href = "{{route('admin.listarCadastros')}}?estoque_id=" + id + "&rel=estoque";
     }
 
     function confirmar_estoques(id) {

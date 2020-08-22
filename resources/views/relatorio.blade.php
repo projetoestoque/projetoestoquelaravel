@@ -111,61 +111,62 @@ h4{
 <nav class="nav-form blue lighten-1"></nav>
     <div class="row">
     <div class="col l1"></div>
-    <form id="form1" name="formulario" method="post" action="{{route('relatorio.print')}}">
-    {{csrf_field()}}
-    <div class="input-field col s12 l4">
-        <i class="material-icons prefix">date_range</i>
-        <input type="text" class="datepicker" id="data" name="data">
-        <label for="data">Data Inicial</label>
-    </div>
-    <div class="col l2"></div>
-    <div class="input-field col s12 l4">
-        <i class="material-icons prefix">date_range</i>
-        <input type="text" class="datepicker" id="data" name="data">
-        <label for="data">Data final</label>
-    </div>
-    </div>
-    <div class="row">
-    <div class="col l1"></div>
-    <div class="input-field col s12 l4">
-        <i class="material-icons prefix">reorder</i>
-        <select class="date" id="tipo" name="tipo">
-            <option value="geral" >Geral</option>
-            <option value="entrada">Entrada</option>
-            <option value="saida">Saída</option>
-            <option value="vencimento">Vencimento</option>
-            <option value="baixa">Quantidade baixa</option>
-        </select>
-        <label for="data">Tipo de relatório</label>
-    </div>
-    <div class="col l2"></div>
-    <div class="input-field col s12 l4">
-        <i class="material-icons prefix">portrait</i>
-        <select class="date" id="usuario" name="usuario">
-            <option value="ambos" >Ambos</option>
-            <option value="admin" >Admin</option>
-            <option value="super">Supervisor</option>
-        </select>
-        <label for="data">Usuário</label>
-    </div>
-    </div>
-    <div class="row">
-    <div class="col l1"></div>
-    <div class="input-field col s12 l4">
-        <i class="material-icons prefix">portrait</i>
-        <select class="date" id="produto" name="produto">
-            <option value="ambos">Todos</option>
-            <option value="Produto1" >Produto1</option>
-            <option value="Produto2">Produto2</option>
-        </select>
-        <label for="data">Produto</label>
-    </div>
-    </div>
-    <div class="row valign center">
-        <a onclick="fazerRequisicao('gerar')" class="btn waves-effect waves-light btn-flat gradient"><b>Gerar Relatório
-                <i class="material-icons right">send</i>
-        </a>
-    </div>
+    <form id="form1" method="post" action="{{route('relatorio.gerar')}}">
+        {{csrf_field()}}
+        <div class="input-field col s12 l4">
+            <i class="material-icons prefix">date_range</i>
+            <input required type="text" class="datepicker" id="data" name="data_inicial">
+            <label for="data">Data Inicial</label>
+        </div>
+        <div class="col l2"></div>
+        <div class="input-field col s12 l4">
+            <i class="material-icons prefix">date_range</i>
+            <input required type="text" class="datepicker" id="data" name="data_final">
+            <label for="data">Data final</label>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col l1"></div>
+        <div class="input-field col s12 l4">
+            <i class="material-icons prefix">reorder</i>
+            <select class="date" id="tipo" name="tipo">
+                <option value="geral" >Geral</option>
+                <option value="entrada">Entrada</option>
+                <option value="saida">Saída</option>
+                <option value="vencimento">Vencimento</option>
+                <option value="baixa">Quantidade baixa</option>
+            </select>
+            <label for="data">Tipo de relatório</label>
+        </div>
+        <div class="col l2"></div>
+        <div class="input-field col s12 l4">
+            <i class="material-icons prefix">portrait</i>
+            <select class="date" id="usuario" name="usuario">
+                <option value="ambos" >Ambos</option>
+                <option value="admin" >Admin</option>
+                <option value="super">Supervisor</option>
+            </select>
+            <label for="data">Usuário</label>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col l1"></div>
+        <div class="input-field col s12 l4">
+            <i class="material-icons prefix">portrait</i>
+            <select class="date" id="produto" name="produto">
+                <option value="ambos">Todos</option>
+                <option value="Produto1" >Produto1</option>
+                <option value="Produto2">Produto2</option>
+            </select>
+            <label for="data">Produto</label>
+        </div>
+        </div>
+        <div class="row valign center">
+            <button type="submit" class="btn waves-effect waves-light btn-flat gradient">
+                Gerar Relatório<i class="material-icons right">send</i>  
+            </button>
+        </div>
+    </form>
     <br>
 </div>
 </div>
