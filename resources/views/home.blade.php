@@ -25,22 +25,6 @@
             </a>
             <div class="col s2">
             </div>
-            <a href="{{route('superv.cadastros')}}" class="white-text">
-                <div class=" card-panel blue accent-2 col s5 hoverable">
-                    <div class="row">
-                    <span class="row"></span>
-                        <div class="col ">
-                            <i class="material-icons medium white-text pt-5">playlist_add</i>
-                            <h6>Cadastros</h6>
-                        </div>
-                        <span class="row"></span>
-                    </div>
-                </div>
-            </a>
-            <div class="col s1">
-            </div>
-</div>
-<div class="row white text">
             <a href="{{route('saida.menu')}}" class="white-text">   
                 <div class=" card-panel blue darken-4 col s5 hoverable">
                     <div class="row">
@@ -53,26 +37,8 @@
                     </div>
                 </div>
             </a>
-            <div class="col s2">
-            </div>
-            <a href="{{route('relatorio')}}" class="white-text">
-                <div class=" card-panel blue darken-4 col s5 hoverable">
-                    <div class="row">
-                    <span class="row"></span>
-                        <div class="col ">
-                            <i class="material-icons medium white-text pt-5">assignment</i>
-                            <h6 class="no-padding txt-md">Auditoria e Relatório</h6>
-                        </div>
-                        <span class="row"></span>
-                    </div>
-                </div>
-            </a>
-            <span class="col s1"></span>
-</div>      
+</div>     
 </div>
 </div>
 <div class="mobile-hide"><img class="ipanema" src="{{asset('fluid2.png')}}"></div>
-<br>
-<br>
-<br>
 @endsection
