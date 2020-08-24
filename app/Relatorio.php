@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class relatorio extends Model
 {
     protected $fillable = [
-    	'tipo',  'relatorio', 'data'
+    	'tipo',  'relatorio', 'data', 'usuario'
     ];
 }

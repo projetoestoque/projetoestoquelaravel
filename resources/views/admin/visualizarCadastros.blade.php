@@ -900,6 +900,10 @@
         
     }
 
+    function relatorio_produtos(id) {
+        window.location.href = "{{route('relatorio')}}?produto=" + id;      
+    }
+
     function adicionar_doadores(id) {
         url_anterior = "{{$_SERVER['HTTP_REFERER']}}"
         if(url_anterior.indexOf('doador') != -1) {
@@ -997,13 +1001,29 @@ function carregarVariaveis() {
                         novo_item = nova_linha.insertCell(j);
                         // Insere um conteúdo na coluna
                         if(j == (numero_de_colunas - 1) && item != "todos") {
-                            if(item == "produtos" || item == "doadores") {
-                                @if(auth()->user()->is_admin && isset($_GET['tipo']) && $_GET['tipo'] == "produto" || isset($_GET['tipo']) && $_GET['tipo'] == "doador" )
-                                novo_item.innerHTML = `<td><a onclick="adicionar_${item}(${array[j]})" class="btn-floating waves-effect waves-light gradient"><i class="material-icons">add</i></a></td>`
+                            if(item == "produtos") {
+                                @if(auth()->user()->is_admin && isset($_GET['tipo']) && $_GET['tipo'] == "produto" && $_GET['acao'] != 'relatorio')
+                                    novo_item.innerHTML = `<td><a onclick="adicionar_${item}(${array[j]})" class="btn-floating waves-effect waves-light gradient"><i class="material-icons">add</i></a></td>`
                                 @else
+                                    @if(auth()->user()->is_admin && isset($_GET['tipo']) && $_GET['tipo'] == "produto" && $_GET['acao'] == 'relatorio')
+                                        novo_item.innerHTML = `<td><a onclick="relatorio_${item}(${array[j]})" class="btn-floating waves-effect waves-light gradient"><i class="material-icons">add</i></a></td>`
+                                    @else
+                                        novo_item.innerHTML = `
+                                        <a onclick="atualizar_${item}(${array[j]})" class="btn-floating waves-effect waves-light blue"><i class="material-icons">edit</i></a>
+                                        <button onclick="confirmar_${item}(${array[j]})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger"><i class="material-icons">delete</i></button>`
+                                    @endif
+                                @endif
+                            } else if(item == "doador") {
+                                @if(auth()->user()->is_admin && isset($_GET['tipo']) && $_GET['tipo'] == "doador" && $_GET['acao'] != "relatorio")
+                                    novo_item.innerHTML = `<td><a onclick="relatorio_${item}(${array[j]})" class="btn-floating waves-effect waves-light gradient"><i class="material-icons">add</i></a></td>`
+                                @else
+                                    @if(auth()->user()->is_admin && isset($_GET['tipo']) && $_GET['tipo'] == "doador" && $_GET['acao'] == "relatorio")
+
+                                    @else
                                     novo_item.innerHTML = `
-                                    <a onclick="atualizar_${item}(${array[j]})" class="btn-floating waves-effect waves-light blue"><i class="material-icons">edit</i></a>
-                                    <button onclick="confirmar_${item}(${array[j]})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger"><i class="material-icons">delete</i></button>`
+                                        <a onclick="atualizar_${item}(${array[j]})" class="btn-floating waves-effect waves-light blue"><i class="material-icons">edit</i></a>
+                                        <button onclick="confirmar_${item}(${array[j]})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger"><i class="material-icons">delete</i></button>`
+                                    @endif
                                 @endif
                             } else {
                                 novo_item.innerHTML = `

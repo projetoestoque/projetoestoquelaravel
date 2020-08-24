@@ -20,6 +20,7 @@ class RelatorioSeeder extends Seeder
               'tipo' => 'saida',
               'relatorio' => 'Saída de 0kg arroz tio jõao em 00/00/2020, doado pelo(a) doador anônimo de cpf/cnpj  em 25/07/2020 restando 40kg da entrada.',
               'data' => date('Y-m-d', strtotime('-1 week')),
+              'usuario' => 'admin',
             ],
             [
               'Id_doador' => 1,
@@ -28,6 +29,7 @@ class RelatorioSeeder extends Seeder
               'tipo' => 'entrada',
               'relatorio' => 'Entrada de 0  de Folha sulfite hp em 00/00/2020 doado pelo/a sem doador de cpf/cpnj com vencimento em 00/00/2020',
               'data' => date('Y-m-d', strtotime('-1 week')),
+              'usuario' => 'supervisor',
             ],
             [
               'Id_doador' => 1,
@@ -36,6 +38,7 @@ class RelatorioSeeder extends Seeder
               'tipo' => 'baixa',
               'relatorio' => 'Folha sulfite hp doado pelo/a sem doador de cpf/cnpj  em 00/00/2020 restando 2 dias para o vencimento do mesmo!',
               'data' => date('Y-m-d', strtotime('-1 week')),
+              'usuario' => 'admin,'
             ]
           ];
 

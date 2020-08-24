@@ -109,7 +109,7 @@ h4{
 <div class="container z-depth-2 ">
 <nav class="nav-form blue lighten-1"></nav>
     <div class="col l1"></div>
-    <form id="form1" method="post" action="{{route('relatorio.gerar')}}">
+    <form id="form1" method="post" action="{{route('relatorio.gerar')}}" target="_blank">
         {{ csrf_field() }}
         <div class="row">
         <div class="col l1"></div>
@@ -144,7 +144,7 @@ h4{
             <select class="date" id="usuario" name="usuario">
                 <option value="ambos" >Ambos</option>
                 <option value="admin" >Admin</option>
-                <option value="super">Supervisor</option>
+                <option value="supervisor">Supervisor</option>
             </select>
             <label for="data">Usuário</label>
         </div>
@@ -152,17 +152,20 @@ h4{
         <div class="row">
         <div class="col l1"></div>
         <div class="input-field col s12 l5">
-            <!-- comentado pois vamos precisar desse input, na hora que a informação voltar da listagem
-            <i class="material-icons prefix">portrait</i>
-            <select class="date" id="produto" name="produto">
-                <option value="ambos">Todos</option>
-                <option value="Produto1" >Produto1</option>
-                <option value="Produto2">Produto2</option>
-            </select>
-            <label for="data">Produto</label> -->
-            <a onclick="listarCadastrosDoador()" href="{{route('admin.listarCadastros')}}?tipo=produto" class="btn-floating btn waves-effect waves-light gradient">
-            <i class="material-icons left">account_box</i></a>
-            <span>Escolher o Doador</span>
+            @if(isset($_GET['produto']))
+                <input readonly type="text" value="{{$produto->nome}}">
+                <input type="hidden" name="produto" value="{{$produto->id}}">
+            @else
+                <select name="produto">
+                    <option value="todos">Todos os produtos</option>
+                </select>
+
+                <a href="{{route('admin.listarCadastros')}}?acao=relatorio&tipo=produto" class="btn-floating btn waves-effect waves-light gradient">
+                    <i class="material-icons left">account_box</i>
+                </a>
+                
+                <span>Escolher o Produto</span>
+            @endif
         </div>
         </div>
         <div class="row valign center">
