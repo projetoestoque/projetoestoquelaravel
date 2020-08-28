@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
              MedidaSeeder::class,
              ProdutoSeeder::class,
              EntradaSeeder::class,
-             RelatorioSeeder::class
+             RelatorioSeeder::class,
+             OngSeeder::class
          ]);
     }
 }

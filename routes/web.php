@@ -66,6 +66,8 @@ Route::middleware(['auth'])->group(function () {
     
        Route::get('/admin/profile', ['as'=> 'admin.profile', 'uses'=>'HomeController@profile']);
        Route::get('/admin/profile/edit', ['as'=> 'admin.profile.edit', 'uses'=>'HomeController@editProfile']);
+
+       Route::post('/admin/profile/cadastrar/logo', ['as'=> 'admin.perfil.cadastrar.logo', 'uses'=>'OngController@ongPost']);
     
         Route::get('/admin/buscar/entrada/', 'EstoqueController@pesquisarEntrada')->name('admin.buscar.entrada');
         Route::get('/admin/buscar/cadastros/', 'CadastroController@pesquisarCadastros')->name('admin.buscar.cadastros');
