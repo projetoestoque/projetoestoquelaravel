@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Produto_em_estoque;
 use App\Produto;
+use App\Relatorio;
+use App\Doador;
 use DB;
 
 class RelatorioController extends Controller
@@ -20,15 +22,30 @@ class RelatorioController extends Controller
 
     function gerarRelatorio(Request $req) {
         date_default_timezone_set('America/Sao_Paulo');
-        $relatorio_texto = [];
-        $relatorios = [];
-        $retorno = [];
-        $entrada_texto = [];
-        $saida_texto = [];
-        $vencimento_texto = [];
-        $estoque_texto = [];
         $data_inicial = implode('-', array_reverse(explode('/', $req->get('data_inicial'))));
         $data_final = implode('-', array_reverse(explode('/', $req->get('data_final'))));
+
+        $data = [
+            "ong" => [
+                "razao_social" => "", 
+                "email" => "",
+                "endereco" => [],
+                "cnpj" => "",
+                "telefone" => ""
+            ],
+            "filtragem" => [
+                "data_inicial" => $data_inicial,
+                "data_final" => $data_final,
+                "usuario" => $req->get('usuario'),
+                "produto" => ( $req->get('produto') == "todos" ? "Todos" : Produto::findOrFail($req->get('produto'))->nome )
+            ],
+            "relatorio" => [
+                "entrada" => [],
+                "saida" => [],
+                "vencimento" => [],
+                "baixa" => []
+            ]
+        ];
 
         //wheres adicionais
         $wheres = [];
@@ -43,63 +60,62 @@ class RelatorioController extends Controller
 
         //atualizar entradas em baixa ou se vencendo
         $output = shell_exec('cd .. && php artisan verificar:produtos');
+
+        $tipos = [];
         
         if($req->get('tipo') != "geral") {
-            $relatorios = DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo', $req->get('tipo'))->where($wheres)->get();
-            
-            foreach($relatorios as $relatorio) {
-                array_push($relatorio_texto, $relatorio->relatorio);
-            }
-
-            if(count($relatorio_texto) == 0) {
-                return "Impossivel gerar PDF, sem relatorio desse tipo no periodo!";
-            }
-
-            array_push($retorno, ['tipo' => $req->get('tipo'), 'texto' => $relatorio_texto]);
-
+            $tipos = [$req->get('tipo')];
         } else {
-            //parte de entrada
-            if(DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo',"entrada")->where($wheres)->exists()) {
-                $relatorios = DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo',"entrada")->where($wheres)->get();
+            $tipos = [
+                'entrada',
+                'saida',
+                'baixa',
+                'vencimento'
+            ];
+        }
+
+        foreach($tipos as $tipo) {
+        
+            
+
+            if(DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo', $tipo)->where($wheres)->exists()) {
                
-                foreach($relatorios as $relatorio) {
-                    array_push($entrada_texto, $relatorio->relatorio);
-                }
-
-                array_push($retorno, ["tipo" => "Entrada","texto" => $entrada_texto]);
-            }
-
-            if(DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo',"saida")->where($wheres)->exists()) {
+                $relatorios = DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo', $tipo)->where($wheres)->get();
                 
-                $relatorios = DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo',"saida")->where($wheres)->get();
                 foreach($relatorios as $relatorio) {
-                    array_push($saida_texto, $relatorio->relatorio);
-                }
-                array_push($retorno, ["tipo" => "Saída", "texto" => $saida_texto]);
-            }
 
-            if(DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo',"vencimento")->where($wheres)->exists()) {
+                    $dados = [
+                        "produto" => Produto::findOrFail($relatorio->Id_produto)->nome,
+                        "marca" => Produto::findOrFail($relatorio->Id_produto)->marca,
+                        "data_acao" => date('d/m/Y', strtotime($relatorio->data)),
+                        "doador" => (Doador::findOrFail($relatorio->Id_doador)->nome == null ? Doador::findOrFail($relatorio->Id_doador)->instituicao:Doador::findOrFail($relatorio->Id_doador)->nome),
+                    ];
+
+                    switch($tipo) {
+                        case 'entrada':
+                            $dados["quantidade"] = $relatorio->quantidade;
+                        break;
+                        case 'saida':
+                            $dados["quantidade"] = $relatorio->quantidade;
+                            $dados["resto"] = $relatorio->resto;
+                        break;
+                        case 'vencimento':
+                            $dados["resto"] = $relatorio->resto;
+                        break;
+                        case 'baixa':
+                            $dados["resto"] = $relatorio->resto;
+                            $dados["quantidade_minima"] = $relatorio->quantidade_minima;
+                        break;
+                    }
+
+
+                    array_push($data["relatorio"][$tipo], $dados);
+                }
                 
-                $relatorios = DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo',"vencimento")->where($wheres)->get();
-               
-                foreach($relatorios as $relatorio) {
-                    array_push($vencimento_texto, $relatorio->relatorio);
-                }
-                array_push($retorno, ["tipo" => "Produtos em vencimento", "texto" => $vencimento_texto]);
-            }
-
-            if(DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo',"baixa")->where($wheres)->exists()) {
-               
-                $relatorios = DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo',"baixa")->where($wheres)->get();
-                foreach($relatorios as $relatorio) {
-                    array_push($estoque_texto, $relatorio->relatorio);
-                }
-                array_push($retorno, ["tipo" => "Produtos com estoque baixo", "texto" => $estoque_texto]);
             }
         }
         
-        
-        return \PDF::loadView('relatorio_pdf', compact('retorno'))
+        return \PDF::loadView('relatorio_pdf', compact('data'))
             ->setPaper('a4', 'portrait')
             ->stream();
             // ->download('relatorio_'.date('d-m-Y_h:i:s').'.pdf');

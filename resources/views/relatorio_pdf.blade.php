@@ -134,13 +134,5 @@
         </tbody>
     </table>
     <br><br>
-    @if(isset($retorno))
-        @foreach($retorno as $item)
-            <b>{{$item['tipo']}}</b><br/>
-            @foreach($item['texto'] as $texto)
-            {{$texto}}<br/><br/>
-            @endforeach
-            <br/>
-        @endforeach
-    @endif
+    
 @endsection

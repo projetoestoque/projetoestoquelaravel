@@ -15,9 +15,12 @@ class CreateOngsTable extends Migration
     {
         Schema::create('ongs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nome');
-            $table->string('cnpj')-> nullabe();
+            $table->string('razao_social');
+            $table->string('cnpj')->nullabe();
             $table->string('telefone');
+            $table->string('email');
+            $table->string('imagem');
+            $table->string('cor');
             $table->unsignedBigInteger('Id_endereco')->nullable();
             $table->timestamps();
             $table->softDeletes();
