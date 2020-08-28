@@ -2,10 +2,9 @@
 
 @section('titulo','Menu')
 @section('conteudo')
-<div class="mobile-hide"><img class="fluid1" src="{{asset('fluid1.png')}}"></div>
 <br>
-<h3 class=" alinhamento blue-text text-darken-4"><b>Olá, Admin! </h3>
-<h5 class=" alinhamento blue-text text-darken-4 ">Escolha uma das opções abaixo: </h3>
+<h3 class="blue-text text-darken-4 center"><b>Olá, Admin! </h3>
+<h5 class="blue-text text-darken-4 center">Escolha uma das opções abaixo: </h3>
 <br>
 <div class="container ">
 <div class="row white-text ">
@@ -40,7 +39,7 @@
 </div>
 <div class="row white-text ">
             <a href="{{route('saida.menu')}}" class="white-text">
-                <div class=" card-panel blue darken-4 col s5 hoverable">
+                <div class=" card-panel blue darken-3 col s5 hoverable">
                     <div class="row">
                     <span class="row"></span>
                         <div class="col ">
@@ -67,5 +66,4 @@
             </a>
 </div>
 </div>
-<div class="mobile-hide" ><img class="ipanema" src="{{asset('fluid2.png')}}"></div>
 @endsection

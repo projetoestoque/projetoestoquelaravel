@@ -44,6 +44,7 @@
 }
 body{
   font-family: 'Noto Sans JP', sans-serif;
+  font-size:16px;
 }
 hr{
   border-color: #64b5f6 ;
@@ -115,12 +116,8 @@ nav{
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0), 0 3px 1px -2px rgba(0,0,0,0), 0 1px 5px 0 rgba(0,0,0,0);
 }
 .Background3{
-  background-image:linear-gradient(to right, #30cfd0 5%, #330867 100%);
-}
-.welcomeImg{
-  float: left;
-  width: 1100px;
-  margin-left:150px;
+  background:linear-gradient(to left, #00b4db, #0083b0);
+  width: 100%;
 }
 .welcomeImgMobile{
   max-width: 100%;
@@ -130,12 +127,6 @@ nav{
   align-items: center;
   display: flex;
   justify-content: center;
-}
-.welcomeButton{
-  float:left;
-  margin-left:220px;
-  margin-top:-100px;
-
 }
 .white{
   background-color: transparent !important;

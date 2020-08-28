@@ -1,0 +1,15 @@
+body{
+    font-family:'Noto Sans JP', sans-serif;
+    font-size:16px;
+}
+img{
+    width:8rem;
+    height: 8rem;
+}
+#title{
+    font-size:2rem;
+    margin:0 !important;
+}
+#nome_ong{
+    font-size:1.5rem;
+}

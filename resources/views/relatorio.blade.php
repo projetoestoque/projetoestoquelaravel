@@ -108,26 +108,24 @@ h4{
 <div class="container">
 <div class="container z-depth-2 ">
 <nav class="nav-form blue lighten-1"></nav>
-    <div class="col l1"></div>
     <form id="form1" method="post" action="{{route('relatorio.gerar')}}" target="_blank">
         {{ csrf_field() }}
         <div class="row">
-        <div class="col l1"></div>
-            <div class="input-field col s12 l4">
+        <br>
+            <div class="input-field col s12 l4 offset-l1">
                 <i class="material-icons prefix">date_range</i>
-                <input required type="text" class="datepicker" id="data" name="data_inicial">
+                <input required type="text" class="datepicker" id="data_inicial" name="data_inicial">
                 <label for="data">Data Inicial</label>
             </div>
             <div class="col l2"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">date_range</i>
-                <input required type="text" class="datepicker" id="data" name="data_final">
+                <input required type="text" class="datepicker" id="data_final" name="data_final">
                 <label for="data">Data final</label>
             </div>
         </div>
         <div class="row">
-        <div class="col l1"></div>
-        <div class="input-field col s12 l4">
+        <div class="input-field col s12 l4 offset-l1">
             <i class="material-icons prefix">reorder</i>
             <select class="date" id="tipo" name="tipo">
                 <option value="geral" >Geral</option>
@@ -150,21 +148,20 @@ h4{
         </div>
         </div>
         <div class="row">
-        <div class="col l1"></div>
-        <div class="input-field col s12 l5">
+        <div class="input-field col s12 l5 offset-l1">
+            <i class="material-icons prefix">portrait</i>
             @if(isset($_GET['produto']))
                 <input readonly type="text" value="{{$produto->nome}}">
                 <input type="hidden" name="produto" value="{{$produto->id}}">
             @else
-                <select name="produto">
+                <select name="produto" id="produto">
                     <option value="todos">Todos os produtos</option>
                 </select>
-
-                <a href="{{route('admin.listarCadastros')}}?acao=relatorio&tipo=produto" class="btn-floating btn waves-effect waves-light gradient">
-                    <i class="material-icons left">account_box</i>
-                </a>
-                
-                <span>Escolher o Produto</span>
+                <label for="produto">Produto</label>
+                <a href="{{route('admin.listarCadastros')}}?acao=relatorio&tipo=produto" class="modal-trigger radius white-text">
+                      <i class="tiny material-icons ">add_circle_outline</i>
+                      <span>Escolher Produto</span>
+                </a>     
             @endif
         </div>
         </div>
@@ -176,13 +173,9 @@ h4{
     </form>
     <br>
 </div>
-<div class="desktop-hide">
-<br>
-<br>
-<br>
-<br>
-<br>
 </div>
+<br>
+<br>
 @if(isset($print))
 <div id="section-to-print">
     @foreach($print as $item)

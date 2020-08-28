@@ -23,7 +23,7 @@
     border-radius:30px !important;
  }
  @media only screen and (max-width: 400px){
-    .container .waves-effect.waves-light.btn-flat.gradient{
+  .container .waves-effect.waves-light.btn-flat.gradient{
     display:Flex;
   }
  }

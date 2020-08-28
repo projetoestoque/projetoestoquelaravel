@@ -100,7 +100,7 @@ class RelatorioController extends Controller
         
         
         return \PDF::loadView('relatorio_pdf', compact('retorno'))
-            ->setPaper('a4', 'landscape')
+            ->setPaper('a4', 'portrait')
             ->stream();
             // ->download('relatorio_'.date('d-m-Y_h:i:s').'.pdf');
     }
