@@ -18,10 +18,13 @@ class CreateRelatoriosTable extends Migration
             $table->unsignedBigInteger('Id_doador')->nullable();
             $table->unsignedBigInteger('Id_produto')->nullable();
             $table->unsignedBigInteger('Id_entrada')->nullable();
-            $table->enum('tipo', ['entrada', 'geral', 'baixa', 'vencimento', 'saida']);
-            $table->string('relatorio');
+            $table->enum('tipo', ['entrada', 'baixa', 'vencimento', 'saida']);
             $table->string('data');
             $table->string('usuario');
+            $table->integer('quantidade')->nullable();
+            $table->string('vencimento')->nullable();
+            $table->integer('resto')->nullable();
+            $table->integer('quantidade_minima')->nullable();
             $table->timestamps();
 
             $table->foreign('Id_doador')->references('id')->on('doadors')->onDelete('cascade');
