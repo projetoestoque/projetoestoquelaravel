@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <!--  linkando o template ao css -->
   <link href="{{asset('css/general.css')}}" rel="stylesheet">
+  @yield('cssLinks')
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -32,7 +33,7 @@
        </ul>
        @elseif(Auth::user()->is_admin==true)
         <nav>
-        <div class="nav-wrapper z-depth-1" style="background:linear-gradient(to right, #30cfd0 0%, #330867 100%);"  >
+        <div class="nav-wrapper z-depth-1" style="background:linear-gradient(to left, #00b4db, #0083b0);"  >
      <div class="container">
      <a class="brand-logo">
        SysONG<i class="material-icons ">filter_drama</i>
@@ -42,7 +43,7 @@
        <li><a href="{{route ('admin.home') }}">Início</a></li>
        <li><a class="dropdown-trigger" href="#" data-target="dropdown1" >Visualizar<i class="material-icons right">arrow_drop_down</i></a></li>
        <li><a class="dropdown-trigger" href="#" data-target="dropdownacoes" >Ações<i class="material-icons right">arrow_drop_down</i></a></li>
-       <li><a href="{{route('relatorio')}}">Relatório</a></li>
+       <li><a class="dropdown-trigger" href="#" data-target="dropdownOng" >ONG<i class="material-icons right">arrow_drop_down</i></a></li>
        <li>
        <a class="dropdown-trigger"href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
        Logout<i class="material-icons right">power_settings_new</i>
@@ -54,7 +55,7 @@
        </ul>                           
        @else
        <nav>
-        <div class="nav-wrapper z-depth-1" style="background:linear-gradient(to right, #30cfd0 0%, #330867 100%);"  >
+        <div class="nav-wrapper z-depth-1" style="background:linear-gradient(to left, #00b4db, #0083b0);"  >
      <div class="container">
      <a class="brand-logo">
        SysONG<i class="material-icons ">filter_drama</i>
@@ -126,5 +127,9 @@
     <li><a href="{{ route('admin.cadastros')}}">Cadastrar</a></li>
     <li><a href="{{ route('entradaProduto')}}">Entrada</a></li>
     <li><a href="{{ route('saida')}}">Saídas</a></li>
+  </ul> 
+  <ul id="dropdownOng" class="dropdown-content"  >
+    <li><a href="{{route('relatorio')}}">Relatório</a></li>
+    <li ><a href="{{route('admin.profile')}}">Perfil</a></li>
   </ul> 
 </header>

@@ -3,42 +3,81 @@
 @section('titulo','Menu')
 
 @section('conteudo')
-<div class="mobile-hide"><img class="fluid1" src="{{asset('fluid1.png')}}"></div>
 <br>
-<h3 class="alinhamento blue-text text-darken-4"><b>Olá, Supervisor! </h3>
-<h5 class="alinhamento blue-text text-darken-4 ">Escolha uma das opções abaixo: </h3>
+<h3 class="blue-text text-darken-4 center"><b>Olá, Supervisor! </h3>
+<h5 class="blue-text text-darken-4 center">Escolha uma das opções abaixo: </h3>
 <br>
 <br>
 <div class="container ">
-<div class="row white-text ">
-            <a href="{{route('produtos.listar')}}" class="white-text">
-                <div class=" card-panel blue accent-1 col s5 hoverable  ">
-                    <div class="row">
-                    <span class="row"></span>
-                        <div class="col ">
-                            <i class="material-icons medium white-text pt-5">view_compact</i>
-                            <h6 class="no-padding txt-md">Estoque</h6>
-                        </div>
-                        <span class="row"></span>
-                    </div>
-                </div>
-            </a>
-            <div class="col s2">
+<div class="row">
+<div class="col l12">
+    <a href="{{route('produtos.listar')}}" class="black-text">
+        <div class="card horizontal">
+            <div class="card-image-fade">
+                <div class="row"></div>
+                <div class="row"></div>
+                <div class="col l1"></div>
+                <div class="col l4"><i class="material-icons medium white-text pt-5">format_list_bulleted</i></div>
+                <div class="col l2"></div>
+                <div class="row"></div>
+                <div class="row"></div>
             </div>
-            <a href="{{route('saida.menu')}}" class="white-text">   
-                <div class=" card-panel blue darken-4 col s5 hoverable">
-                    <div class="row">
-                    <span class="row"></span>
-                        <div class="col ">
-                            <i class="material-icons medium white-text pt-5">exit_to_app</i>
-                            <h6>Saídas do Sistema</h6>
-                        </div>
-                        <span class="row"></span>
+        <div class="card-stacked white">
+        <div class="mobile-hide"><div class="row"></div></div>
+            <div class="card-content white">
+            <div class="row valign-wrapper">
+                <div class="col l6">
+                    <h5>
+                        <b>Visualisar Estoque</b>
+                    </h5> 
+                </div>
+                <div class="col l6">
+                    <div class="mobile-hide"> 
+                        <i class="material-icons small right">send</i>
                     </div>
                 </div>
-            </a>
-</div>     
+            </div>         
+        </div>
+        </div>
+        </div>
+    </a>
+  </div>
+  </div>
+  <br>
+  <div class="row">
+<div class="col l12">
+    <a href="{{route('saida.menu')}}" class="black-text">
+        <div class="card horizontal">
+            <div class="card-image-fade">
+                <div class="row"></div>
+                <div class="row"></div>
+                <div class="col l1"></div>
+                <div class="col l4"><i class="material-icons medium white-text pt-5">format_list_bulleted</i></div>
+                <div class="col l2"></div>
+                <div class="row"></div>
+                <div class="row"></div>
+            </div>
+        <div class="card-stacked white">
+        <div class="mobile-hide"><div class="row"></div></div>
+            <div class="card-content white">
+            <div class="row valign-wrapper">
+                <div class="col l6">
+                    <h5>
+                        <b>Saídas no Sistema</b>
+                    </h5> 
+                </div>
+                <div class="col l6">
+                    <div class="mobile-hide"> 
+                        <i class="material-icons small right">send</i>
+                    </div>
+                </div>
+            </div>         
+            </div>
+        </div>
+        </div>
+    </a>
+  </div>
+  </div>
+
 </div>
-</div>
-<div class="mobile-hide"><img class="ipanema" src="{{asset('fluid2.png')}}"></div>
 @endsection

@@ -35,4 +35,10 @@ class HomeController extends Controller
     public function estoqueEntradas(){
         return view('entrada');
     }
+    public function profile(){
+        return view('admin.perfil');
+    }
+    public function editProfile(){
+        return view('admin.editarPerfil');
+    }
 }

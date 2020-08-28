@@ -1,9 +1,7 @@
 
-
 @include('template._includes.top')
 
 @yield('conteudo')
-
 
 @if (session('status'))
     <script>

@@ -64,8 +64,8 @@ Route::middleware(['auth'])->group(function () {
        Route::post('/admin/entrada/produto/atualizar', ['as'=> 'admin.entrada.produto.atualizar', 'uses'=>'ProdutoController@entradaAtualizar']);
        Route::post('/admin/produto/atualizar', ['as'=> 'admin.produto.atualizar', 'uses'=>'ProdutoController@produtoAtualizar']);
     
-      
-        
+       Route::get('/admin/profile', ['as'=> 'admin.profile', 'uses'=>'HomeController@profile']);
+       Route::get('/admin/profile/edit', ['as'=> 'admin.profile.edit', 'uses'=>'HomeController@editProfile']);
     
         Route::get('/admin/buscar/entrada/', 'EstoqueController@pesquisarEntrada')->name('admin.buscar.entrada');
         Route::get('/admin/buscar/cadastros/', 'CadastroController@pesquisarCadastros')->name('admin.buscar.cadastros');
@@ -84,13 +84,14 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/doador/fisico', ['as'=> 'doador.fisico', 'uses'=>'CadastroController@doadorFisico']);
         Route::post('/doador/juridico', ['as'=> 'doador.juridico', 'uses'=>'CadastroController@doadorJuridico']);
         Route::post('/produto/cadastrar', ['as'=> 'produto.cadastrar', 'uses'=>'CadastroController@cadastrarProduto']);
-        Route::get('/produto/listar', ['as'=> 'produtos.listar', 'uses'=>'ProdutoController@listar_produtos']);
-        Route::get('/produto/listar/atualizar', ['as'=> 'produtos.listar.atualizar', 'uses'=>'ProdutoController@atualizar_produtos']);
+        
 
         Route::get('/produto/deletar', 'ProdutoController@deletarProduto')->name('produto.deletar');
         Route::get('/produto/entrada/deletar', 'ProdutoController@deletarEntrada')->name('entrada.deletar');
         Route::get('/home/cadastros', 'CadastroController@CadastrosSupervisor')->name('superv.cadastros');
     });
+    Route::get('/produto/listar', ['as'=> 'produtos.listar', 'uses'=>'ProdutoController@listar_produtos']);
+    Route::get('/produto/listar/atualizar', ['as'=> 'produtos.listar.atualizar', 'uses'=>'ProdutoController@atualizar_produtos']);
 
     Route::get('/buscar/saida', 'SaidaController@pesquisar_saida')->name('saida.pesquisar');
 
