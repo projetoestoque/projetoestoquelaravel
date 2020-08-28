@@ -47,22 +47,30 @@ class SaidaController extends Controller
 
         if($entrada->quantidade - $req->get('quantidade') > 0) {
           $entrada->quantidade -= $req->get('quantidade');
+          $restando = $entrada->quantidade;
           $entrada->save();
           $doado_em = explode(" ", $entrada->created_at)[0];
           $doado_em = implode('/', array_reverse(explode('-', $doado_em)));
-          $relatorio_modelo = "Saída de ".$req->get('quantidade') . Medida::find($entrada->Id_medida)->abreviacao . " " . Produto::find($entrada->Id_produto)->nome . " " . Produto::find($entrada->Id_produto)->marca ." em ".date('d/m/Y') .", doado pelo(a) ". (Doador::find($entrada->Id_doador)->nome == null?Doador::find($entrada->Id_doador)->instituicao:Doador::find($entrada->Id_doador)->nome) ." de cpf/cnpj ". (Doador::find($entrada->Id_doador)->nome == null?Doador::find($entrada->Id_doador)->cnpj:Doador::find($entrada->Id_doador)->cpf) ." em ". $doado_em ." restando ".$entrada->quantidade . Medida::findOrFail($entrada->Id_medida)->abreviacao ." da entrada.";
         } else {
-          $relatorio_modelo = "Saída de ".$req->get('quantidade') . Medida::find($entrada->Id_medida)->abreviacao . " " . Produto::find($entrada->Id_produto)->nome . " " . Produto::find($entrada->Id_produto)->marca ." em ".date('d/m/Y') .", doado pelo(a) ". (Doador::find($entrada->Id_doador)->nome == null?Doador::find($entrada->Id_doador)->instituicao:Doador::find($entrada->Id_doador)->nome) ." de cpf/cnpj ". (Doador::find($entrada->Id_doador)->nome == null?Doador::find($entrada->Id_doador)->cnpj:Doador::find($entrada->Id_doador)->cpf) ." em ". $doado_em ." restando nada da entrada";
           $entrada->delete();
+          $restando = 0;
         }
         
         $relatorio = new Relatorio();
         $relatorio->tipo = "saida";
         $relatorio->data = date('Y-m-d');
-        $relatorio->relatorio = $relatorio_modelo;
         $relatorio->Id_produto = $produto_da_entrada->id;
         $relatorio->Id_entrada = $entrada->id;
         $relatorio->Id_doador = $doador_da_entrada->id;
+
+        if(auth()->user()->is_admin) {
+          $relatorio->usuario = "admin";
+        } else {
+          $relatorio->usuario = "supervisor";
+        }
+
+        $relatorio->quantidade = $req->get('quantidade');
+        $relatorio->resto = $restando;
         $relatorio->save();
 
         return redirect()->route('saida')->with('status', 'Saída realizada com sucesso!');

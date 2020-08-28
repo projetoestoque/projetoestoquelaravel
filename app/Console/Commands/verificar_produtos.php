@@ -62,10 +62,18 @@ class verificar_produtos extends Command
                     $relatorio->data = date('Y-m-d');
                     $doado_em = explode(" ", $entrada->created_at)[0];
                     $doado_em = implode('/', array_reverse(explode('-', $doado_em)));
-                    $relatorio->relatorio = Produto::find($entrada->Id_produto)->nome. " " . Produto::find($entrada->Id_produto)->marca . " doado pelo/a ". (Doador::find($entrada->Id_doador)->nome == null?Doador::find($entrada->Id_doador)->instituicao:Doador::find($entrada->Id_doador)->nome) ." de cpf/cnpj ". (Doador::find($entrada->Id_doador)->nome == null?Doador::find($entrada->Id_doador)->cnpj:Doador::find($entrada->Id_doador)->cpf) ." em ". $doado_em ." em alerta de quantidade baixa, restando " . $entrada->quantidade . Medida::find($entrada->Id_medida)->abreviacao ." com a quantidade mínima de ". $entrada->quantidade_minima . Medida::find($entrada->Id_medida)->abreviacao;
                     $relatorio->Id_produto = $entrada->Id_produto;
                     $relatorio->Id_entrada = $entrada->id;
                     $relatorio->Id_doador = $entrada->Id_doador;
+
+                    if(auth()->user()->is_admin) {
+                        $relatorio->usuario = "admin";
+                    } else {
+                        $relatorio->usuario = "supervisor";
+                    }
+
+                    $relatorio->resto = $entrada->quantidade;
+                    $relatorio->quantidade_minima = $entrada->quantidade_minima;
                     $relatorio->save();
                 }
 
@@ -92,10 +100,17 @@ class verificar_produtos extends Command
                     $relatorio1->data = date('Y-m-d');
                     $doado_em = explode(" ", $entrada->created_at)[0];
                     $doado_em = implode('/', array_reverse(explode('-', $doado_em)));
-                    $relatorio1->relatorio = Produto::find($entrada->Id_produto)->nome. " " . Produto::find($entrada->Id_produto)->marca . " doado pelo/a ". (Doador::find($entrada->Id_doador)->nome == null?Doador::find($entrada->Id_doador)->instituicao:Doador::find($entrada->Id_doador)->nome) ." de cpf/cnpj ". (Doador::find($entrada->Id_doador)->nome == null?Doador::find($entrada->Id_doador)->cnpj:Doador::find($entrada->Id_doador)->cpf) ." em ". $doado_em ." restando $dataFinal dia para o vencimento do mesmo!";
                     $relatorio1->Id_produto = $entrada->Id_produto;
                     $relatorio1->Id_entrada = $entrada->id;
                     $relatorio1->Id_doador = $entrada->Id_doador;
+
+                    if(auth()->user()->is_admin) {
+                        $relatorio->usuario = "admin";
+                    } else {
+                        $relatorio->usuario = "supervisor";
+                    }
+
+                    $relatorio->resto = $entrada->quantidade;
                     $relatorio1->save();
                 }
             }
