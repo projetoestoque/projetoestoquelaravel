@@ -1,16 +1,22 @@
 @extends('template.pdf')
 @section('cssLinks')
 <link href="{{public_path('css/pdf.css')}}" rel="stylesheet">
+@if(isset($data))
+    <script>
+    alert('oie')
+    console.log(data)
+    </script>
+@endif
 @endsection
-@section('titulo','Relatório dia xx/xx/xx')
+@section('titulo','Relatório dia ' .date("d/m/Y"))
 @section('cabecalho')
     <table style="border: 0px" cellspacing="0">
         <tr>
             <td>
                 <table cellspacing="0">
-                    <tr bgcolor="#0083b0">
+                    <tr bgcolor="{{$data['ong']['cor']}}">
                         <td>
-                            <img src="{{public_path('pepsi.png')}}" alt="Logo Empresa">
+                            <img src="{{public_path('/storage/ong/' . $data['ong']['logo'])}}" alt="Logo Empresa">
                         </td>
                         <td style="font-size: 0; line-height: 0;" width="150">
                             &nbsp;
@@ -37,7 +43,7 @@
             &nbsp;
             </td>
             <td style="vertical-align:middle;">
-                <p>Pepsi Cola Brasil LTDA</p>
+                <p>{{$data['ong']['razao_social']}}</p>
             </td>
             <td style="font-size: 0; line-height: 0;" width="40">
                 &nbsp;
@@ -49,7 +55,7 @@
             &nbsp;
             </td>
             <td style="vertical-align:middle;">
-                <p>87.553.860/0001-30</p>
+                <p>{{$data['ong']['cnpj']}}</p>
             </td>
         </tr>
         <tr>
@@ -60,7 +66,7 @@
             &nbsp;
             </td>
             <td style="vertical-align:middle;">
-                <p>pepsi.contato@mail.com</p>
+                <p>{{$data['ong']['email']}}</p>
             </td>
             <td style="font-size: 0; line-height: 0;" width="40">
                 &nbsp;
@@ -72,8 +78,8 @@
             &nbsp;
             </td>
             <td style="vertical-align:middle;">
-                <p>87 99999-9999</p>
-                <p>87 88888-8888</p>
+                <p>{{$data['ong']['telefones'][0]}}</p>
+                <p>{{$data['ong']['telefones'][1]}}</p>
             </td>
         </tr>
         <tr>
@@ -84,7 +90,7 @@
             &nbsp;
             </td>
             <td style="vertical-align:middle;">
-                <p>Avenida Paulista,Liberdade. São Paulo-SP. CEP:87813-788</p>
+                <p>{{$data['ong']['endereco']->logradouro}},{{$data['ong']['endereco']->bairro}}. {{$data['ong']['endereco']->cidade}}-{{$data['ong']['endereco']->uf}}. CEP:{{$data['ong']['endereco']->cep}}</p>
             </td>
         </tr>
     </table>
@@ -100,10 +106,10 @@
         </thead>
         <tbody>
             <tr>
-                <td style="padding-right:30px">20/08/2020 - 27/08/2020</td>
-                <td style="padding-right:30px">Geral</td>
-                <td style="padding-right:30px">Todos</td>
-                <td style="padding-right:30px">Todos</td>
+                <td style="padding-right:30px">{{$data['filtragem']['data_inicial']}} - {{$data['filtragem']['data_final']}}</td>
+                <td style="padding-right:30px">{{$data['filtragem']['tipo']}}</td>
+                <td style="padding-right:30px">{{$data['filtragem']['usuario']}}</td>
+                <td style="padding-right:30px">{{$data['filtragem']['produto']}}</td>
             </tr>
         </tbody>
     </table>

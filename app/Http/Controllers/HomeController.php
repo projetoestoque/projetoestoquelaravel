@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Ong;
+use App\Endereco;
 
 class HomeController extends Controller
 {
@@ -36,9 +38,15 @@ class HomeController extends Controller
         return view('entrada');
     }
     public function profile(){
-        return view('admin.perfil');
+        $ong = Ong::findOrFail(1);
+        $ong->telefones = json_decode($ong->telefones);
+        $endereco = Endereco::findOrFail($ong->Id_endereco);
+        return view('admin.perfil', compact('ong', 'endereco'));
     }
     public function editProfile(){
-        return view('admin.editarPerfil');
+        $ong = Ong::findOrFail(1);
+        $ong->telefones = json_decode($ong->telefones);
+        $endereco = Endereco::findOrFail($ong->Id_endereco);
+        return view('admin.editarPerfil', compact('ong', 'endereco'));
     }
 }

@@ -2,49 +2,6 @@
 
 @section('titulo','Menu')
 
-<script>
-
-function baixarPdf() {
-    let form = document.getElementById('form1')
-    form.action = "{{route('relatorio.pdf')}}"
-    document.formulario.submit()
-    form.action = "{{route('relatorio.print')}}"
-}
-
- function fazerRequisicao(rota) {
-    data = document.getElementById('data').value
-    tipo = document.getElementById('tipo').value
-
-    // Exemplo de requisição POST
-    var ajax = new XMLHttpRequest();
-    let url = ""
-    if(rota == 'gerar') {
-        url = "{{route('relatorio.gerar')}}"
-    } else if(rota == 'pdf') {
-        url = "{{route('relatorio.pdf')}}"
-    }
-
-    // Seta tipo de requisição: Post e a URL da API
-    ajax.open("POST", url, true);
-    
-    ajax.setRequestHeader('X-CSRF-TOKEN', document.getElementById('token').content);
-    ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-    // Seta paramêtros da requisição e envia a requisição
-    ajax.send("data=" + data + "&tipo=" + tipo);
-    // Cria um evento para receber o retorno.
-    ajax.onreadystatechange = function() {
-    // Caso o state seja 4 e o http.status for 200, é porque a requisiçõe deu certo.
-        if (ajax.readyState == 4 && ajax.status == 200) {
-            var data = ajax.responseText;
-        // Retorno do Ajax
-            removeBackground()
-            document.getElementById('texto_relatorio').value = data;
-        }
-    }
- }
-</script>
-
 <style>
 
 #section-to-print {
@@ -86,17 +43,10 @@ h4{
 @section('conteudo')
 
 <div class="butaoEspaco">
-@if(auth()->user()->is_admin)
-    <a href="{{ URL::route('admin.home') }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
+<a href="{{ URL::previous() }}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
     <i class="large material-icons">reply</i>
-        <span class="ButtaoEspacoTexto"><b>Voltar</span>
-    </a>
-    @else
-    <a href="{{ URL::route('home')}}" class="waves-effect waves-teal btn-flat grey-text text-darken-4">
-    <i class="large material-icons">reply</i>
-        <span class="ButtaoEspacoTexto"><b>Voltar</span>
-    </a>
-@endif
+    <span class="ButtaoEspacoTexto"><b>Voltar</span>
+</a>
 </div>
 <br>
 <h4><b>Relatório</b></h4>
