@@ -7,6 +7,8 @@ use App\Produto_em_estoque;
 use App\Produto;
 use App\Relatorio;
 use App\Doador;
+use App\Ong;
+use App\Endereco;
 use DB;
 
 class RelatorioController extends Controller
@@ -25,19 +27,24 @@ class RelatorioController extends Controller
         $data_inicial = implode('-', array_reverse(explode('/', $req->get('data_inicial'))));
         $data_final = implode('-', array_reverse(explode('/', $req->get('data_final'))));
 
+        $ong = Ong::findOrFail(1);
+
         $data = [
             "ong" => [
-                "razao_social" => "", 
-                "email" => "",
-                "endereco" => [],
-                "cnpj" => "",
-                "telefone" => ""
+                "razao_social" => $ong->razao_social, 
+                "email" => $ong->email,
+                "endereco" => Endereco::findOrFail($ong->Id_endereco),
+                "cnpj" => $ong->cnpj,
+                "telefones" => json_decode($ong->telefones),
+                "logo" => $ong->imagem,
+                "cor" => $ong->cor
             ],
             "filtragem" => [
                 "data_inicial" => $data_inicial,
                 "data_final" => $data_final,
                 "usuario" => $req->get('usuario'),
-                "produto" => ( $req->get('produto') == "todos" ? "Todos" : Produto::findOrFail($req->get('produto'))->nome )
+                "produto" => ( $req->get('produto') == "todos" ? "Todos" : Produto::findOrFail($req->get('produto'))->nome ),
+                "tipo" => $req->get('tipo')
             ],
             "relatorio" => [
                 "entrada" => [],
@@ -114,6 +121,8 @@ class RelatorioController extends Controller
                 
             }
         }
+
+       
         
         return \PDF::loadView('relatorio_pdf', compact('data'))
             ->setPaper('a4', 'portrait')
