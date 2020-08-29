@@ -15,9 +15,10 @@ class CreateOngsTable extends Migration
     {
         Schema::create('ongs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('nome_ficticio');
             $table->string('razao_social');
             $table->string('cnpj')->nullabe();
-            $table->string('telefone');
+            $table->json('telefones');
             $table->string('email');
             $table->string('imagem');
             $table->string('cor');

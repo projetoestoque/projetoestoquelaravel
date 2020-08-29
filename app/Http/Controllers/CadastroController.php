@@ -118,7 +118,7 @@ class CadastroController extends Controller
 				->withInput($req->input());
 		}
 
-		return redirect()->route('doador')->with('status', 'Doador cadastrado com sucesso!');;
+		return redirect()->route('doador')->with('status', 'Doador cadastrado com sucesso!');
 	}
 
 	public function doadorJuridico(Request $req)

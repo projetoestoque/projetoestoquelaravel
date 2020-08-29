@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Ong;
+use App\Endereco;
 use DB;
 
 class OngController extends Controller
@@ -28,22 +29,35 @@ class OngController extends Controller
             if(!$upload) {
                 return redirect()
                     ->back()
-                    ->with('error', ['Falha ao fazer upload!']);
+                    ->with('errors', ['Falha ao fazer upload!']);
             }
             
             $ong->imagem = $nomeArquivo;
             $ong->cor = $req->get('cor');
             $ong->save();
 
-            return redirect()->back();
-            
-            // if($req->photo == null) {
-            //     $req->photo1->storeAs('')
-            // } else {
-            //     $file = $req->photo;
-            // }
+            return redirect()->back()->with('status', 'Ong atualizada com sucesso');
         }
 
         
+    }
+
+    public function infoPost(Request $req)
+    {
+
+        $ong = Ong::findOrFail(1);
+        $ong->telefones = json_encode($req->get('telefone'));
+        $ong->email = $req->get('email_ong');
+        $ong->save();
+
+        $endereco = Endereco::findOrFail(1);
+        $endereco->cidade = $req->get('cidade_ong');
+        $endereco->uf = $req->get('estado_ong');
+        $endereco->logradouro = $req->get('rua_ong');
+        $endereco->cep = $req->get('cep_ong');
+        $endereco->save();
+
+
+        return redirect()->back()->with('status', 'Ong atualizada com sucesso');
     }
 }

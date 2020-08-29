@@ -33,9 +33,10 @@ class OngSeeder extends Seeder
 
         $ongs = [
             [
-              'razao_social' => "Nome teste",
+              'nome_ficticio' => 'Nome teste',
+              'razao_social' => "Razão teste",
               'cnpj' => "cnpj teste",
-              'telefone' => "telefone teste",
+              'telefones' => json_encode(["teste1", "teste2", "teste3"]),
               'email' => "email teste",
               'imagem' => "storage/ong/ong_logo.png",
               'Id_endereco' => 1,
