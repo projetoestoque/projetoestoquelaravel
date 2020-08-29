@@ -674,13 +674,31 @@
                             // Insere uma coluna na nova linha 
                             novo_item = nova_linha.insertCell(j);
                             if(j == (numero_de_colunas - 1) && item != "todos") {
-                            @if(auth()->user()->is_admin && isset($_GET['tipo']) && $_GET['tipo'] == "produto")
-                                novo_item.innerHTML = `<td><a onclick="adicionar_${item}(${array[j]})" class="btn-floating waves-effect waves-light gradient"><i class="material-icons">add</i></a></td>`
-                            @else
-                                novo_item.innerHTML = `
-                                <a onclick="atualizar_${item}(${array[j]})" class="btn-floating waves-effect waves-light blue"><i class="material-icons">edit</i></a>
-                                <button onclick="confirmar_${item}(${array[j]})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger"><i class="material-icons">delete</i></button>`
-                            @endif
+                                if(item == "produtos") {
+                                    @if(auth()->user()->is_admin && isset($_GET['tipo']) && $_GET['tipo'] == "produto" && isset($_GET['acao']) == false)
+                                        novo_item.innerHTML = `<td><a onclick="adicionar_${item}(${array[j]})" class="btn-floating waves-effect waves-light gradient"><i class="material-icons">add</i></a></td>`
+                                    @else
+                                        @if(auth()->user()->is_admin && isset($_GET['tipo']) && $_GET['tipo'] == "produto" && $_GET['acao'] == 'relatorio')
+                                            novo_item.innerHTML = `<td><a onclick="relatorio_${item}(${array[j]})" class="btn-floating waves-effect waves-light gradient"><i class="material-icons">add</i></a></td>`
+                                        @else
+                                            novo_item.innerHTML = `
+                                            <a onclick="atualizar_${item}(${array[j]})" class="btn-floating waves-effect waves-light blue"><i class="material-icons">edit</i></a>
+                                            <button onclick="confirmar_${item}(${array[j]})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger"><i class="material-icons">delete</i></button>`
+                                        @endif
+                                    @endif
+                                } else if(item == "doadores") {
+                                    @if(auth()->user()->is_admin && isset($_GET['tipo']) && $_GET['tipo'] == "doador" && isset($_GET['acao']) == false)
+                                        novo_item.innerHTML = `<td><a onclick="adicionar_${item}(${array[j]})" class="btn-floating waves-effect waves-light gradient"><i class="material-icons">add</i></a></td>`
+                                    @else
+                                        novo_item.innerHTML = `
+                                        <a onclick="atualizar_${item}(${array[j]})" class="btn-floating waves-effect waves-light blue"><i class="material-icons">edit</i></a>
+                                        <button onclick="confirmar_${item}(${array[j]})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger"><i class="material-icons">delete</i></button>`
+                                    @endif
+                                } else {
+                                    novo_item.innerHTML = `
+                                    <a onclick="atualizar_${item}(${array[j]})" class="btn-floating waves-effect waves-light blue"><i class="material-icons">edit</i></a>
+                                    <button onclick="confirmar_${item}(${array[j]})" class="btn-floating waves-effect waves-light red darken-2 modal-trigger"><i class="material-icons">delete</i></button>` 
+                                }
                             } else if(j == (numero_de_colunas - 1) && item == "todos") {
                                 if(array[j] == "produto/Alimento") {
                                     novo_item.innerHTML = `<td><span class="new badge red" data-badge-caption="">${array[j]}</span></td>`
