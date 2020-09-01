@@ -122,8 +122,6 @@ class RelatorioController extends Controller
             }
         }
 
-       
-        dd(storage_path('app/public/ong/' . $data['ong']['logo']));
         return \PDF::loadView('relatorio_pdf', compact('data'))
             ->setPaper('a4', 'portrait')
             ->stream();
