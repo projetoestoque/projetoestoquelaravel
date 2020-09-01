@@ -14,9 +14,9 @@
         <tr>
             <td>
                 <table cellspacing="0">
-                    <tr bgcolor="{{$data['ong']['cor']}}">
+                    <tr bgcolor="#0083b0">
                         <td>
-                            <img src="{{public_path('/storage/ong/' . $data['ong']['logo'])}}" alt="Logo Empresa">
+                            <img src="{{storage_path('app/public/ong/' . $data['ong']['logo'])}}" alt="Logo Empresa">
                         </td>
                         <td style="font-size: 0; line-height: 0;" width="150">
                             &nbsp;
@@ -25,15 +25,11 @@
                             <h3 id="title" style="font-family: 'Noto Sans JP', sans-serif; color:'#fff'">Relatório de Uso</h3>
                         </td>
                     </tr>
-                    <tr>
-                    <td>
-                        <h3>Detalhes da ONG</h3>
-                    </td>
-                    </tr>
                 </table>
             </td>
         </tr>
     </table>
+    <h2>Detalhes da ONG</h2>
     <table>
         <tr>
             <td style="vertical-align:middle; padding-right:20px">
@@ -94,7 +90,9 @@
             </td>
         </tr>
     </table>
-    <h3>Opções de Filtragem</h3>
+    <br>
+
+    <h2>Opções de Filtragem</h2>
     <table cellspacing="0px">
         <thead>
             <tr bgcolor="#0083b0" style="color:'#fff'">
@@ -113,32 +111,34 @@
             </tr>
         </tbody>
     </table>
-    <h3>Relatório</h3>
-    <b>Entrada</b>
+    <br>
+    <h2>Relatório</h2>
+    @foreach($data['relatorio'] as $data_key=> $datas)
+    <b>{{$data_key}}</b>
     <br>
     <br>
+    @if(key_exists('0',$datas))
     <table cellspacing="0px" style="text-align:center;">
     <thead style="display:table-header-group">
         <tr bgcolor="#00b4db" style="color:'#fff'">
-            <th style="padding:15px 10px">Produto</th>
-            <th style="padding:15px 10px ">quantidade</th>
-            <th style="padding:15px 10px">marca</th>
-            <th style="padding:15px 10px">dia</th>
-            <th style="padding:15px 10px">doador</th>
-            <th style="padding:15px 10px">vencimento</th>
+        @foreach($datas['0'] as $datas_key=>$valor)
+        <th style="padding:15px 10px">{{$datas_key}}</th>
+        @endforeach
         </tr>
         </thead>
         <tbody style="display:table-row-group">
             <tr>
-                <td style="padding:15px 10px">Folha Sulfite</td>
-                <td style="padding:15px 10px">0</td>
-                <td style="padding:15px 10px">hp</td>
-                <td style="padding:15px 10px">00/00/2020</td>
-                <td style="padding:15px 10px">sem doador</td>
-                <td style="padding:15px 10px">00/00/2020</td>
+                @foreach($datas['0'] as $datas_key=>$valor)
+                    <td style="padding:15px 10px">{{$valor}}</th>
+                @endforeach
             </tr>
         </tbody>
     </table>
+    @else
+    <p>Não há nada para mostar dessa categoria!</p>
+    @endif
+    <br>
+    @endforeach
     <br><br>
     
 @endsection

@@ -11,7 +11,7 @@
 </div>
 
 <br>
-<div style="background: {{$ong->cor}};" class="container z-depth-2">
+<div style="background: {{$ong->cor}};" class="container z-depth-1">
 <br>
    <div class="row valign-wrapper hide-on-med-and-down">
         <div class="col s12 l2 offset-l1 valign-wrapper">
@@ -24,8 +24,8 @@
             <img class="logo hide-on-med-and-down" src="../storage/ong/{{$ong->imagem}}" alt="Logo">
         </div>
         <div class="col s12 l5">
-            <h3><b>{{$ong->nome_ficticio}}</b></h3>
-            <h5>{{$ong->razao_social}}</h5>
+            <h3 style="color:white"><b>{{$ong->nome_ficticio}}</b></h3>
+            <h5 style="color:white">{{$ong->razao_social}}</h5>
         </div>
         <div class="col s12 l2 offset-l2 hide-on-med-and-down">
         <a class="btn-floating btn-large waves-effect waves-light white modal-trigger" href="#modal1"><i class="material-icons">create</i></a>
@@ -42,8 +42,8 @@
             <img class="logo hide-on-med-and-down" src="../storage/ong/{{$ong->imagem}}" alt="Logo">
         </div>
         <div class="col s12 l5">
-            <h3><b>{{$ong->nome_ficticio}}</b></h3>
-            <h5>{{$ong->razao_social}}}</h5>
+            <h3 style="color:white"><b>{{$ong->nome_ficticio}}</b></h3>
+            <h5 style="color:white">{{$ong->razao_social}}}</h5>
         </div>
         <div class="col s12 l2 offset-l2 hide-on-med-and-down">
         <a class="btn-floating btn-large waves-effect waves-light white modal-trigger" href="#modal1"><i class="material-icons">create</i></a>
@@ -176,43 +176,43 @@
         <input value="{{$ong->cor}}" type="hidden" id="cor" name="cor">
         <div class="row">
                 <div class="col l2 color-button">
-                    <a onclick="selecionarCor('black')" href="#" class="waves-effect waves-teal btn-flat color black"></a>
+                    <a onclick="selecionarCor('#080808')" href="#" class="waves-effect waves-teal btn-flat color black"></a>
                 </div>
                 <div class="col l2 color-button">
-                    <a onclick="selecionarCor('orange')" href="#" class="waves-effect waves-teal btn-flat color orange"></a>
+                    <a onclick="selecionarCor('#ff9800')" href="#" class="waves-effect waves-teal btn-flat color orange"></a>
                 </div>
                 <div class="col l2 color-button">
-                    <a onclick="selecionarCor('blue')" href="#" class="waves-effect waves-teal btn-flat color blue"></a>
+                    <a onclick="selecionarCor('#0d47a1')" href="#" class="waves-effect waves-teal btn-flat color blue"></a>
                 </div>
                 <div class="col l2 color-button">
-                    <a onclick="selecionarCor('red')" href="#" class="waves-effect waves-teal btn-flat color red"></a>
+                    <a onclick="selecionarCor('#f44336')" href="#" class="waves-effect waves-teal btn-flat color red"></a>
                 </div>
                 <div class="col l2 color-button">
-                    <a onclick="selecionarCor('yellow')" href="#" class="waves-effect waves-teal btn-flat color yellow"></a>
+                    <a onclick="selecionarCor('#ffeb3b')" href="#" class="waves-effect waves-teal btn-flat color yellow"></a>
                 </div>
                 <div class="col l2 color-button" >
-                    <a onclick="selecionarCor('green')" href="#" class="waves-effect waves-teal btn-flat color green"></a>
+                    <a onclick="selecionarCor('#4caf50')" href="#" class="waves-effect waves-teal btn-flat color green"></a>
                 </div>
         </div>
 
         <div class="row">
                 <div class="col l2 color-button">
-                    <a onclick="selecionarCor('pink')" href="#" class="waves-effect waves-teal btn-flat color pink"></a>
+                    <a onclick="selecionarCor('#e91e63')" href="#" class="waves-effect waves-teal btn-flat color pink"></a>
                 </div>
                 <div class="col l2 color-button">
-                    <a onclick="selecionarCor('purple')" href="#" class="waves-effect waves-teal btn-flat color purple"></a>
+                    <a onclick="selecionarCor('#9c27b0')" href="#" class="waves-effect waves-teal btn-flat color purple"></a>
                 </div>
                 <div class="col l2 color-button">
-                    <a onclick="selecionarCor('indigo')" href="#" class="waves-effect waves-teal btn-flat color indigo"></a>
+                    <a onclick="selecionarCor('#3f51b5')" href="#" class="waves-effect waves-teal btn-flat color indigo"></a>
                 </div>
                 <div class="col l2 color-button">
-                    <a onclick="selecionarCor('cyan')" href="#" class="waves-effect waves-teal btn-flat color cyan"></a>
+                    <a onclick="selecionarCor('#00bcd4')" href="#" class="waves-effect waves-teal btn-flat color cyan"></a>
                 </div>
                 <div class="col l2 color-button">
-                    <a onclick="selecionarCor('brown')" href="#" class="waves-effect waves-teal btn-flat color brown"></a>
+                    <a onclick="selecionarCor('#795548')" href="#" class="waves-effect waves-teal btn-flat color brown"></a>
                 </div>
                 <div class="col l2 color-button">
-                    <a onclick="selecionarCor('blue-grey')" href="#" class="waves-effect waves-teal btn-flat color blue-grey"></a>
+                    <a onclick="selecionarCor('#607d8b')" href="#" class="waves-effect waves-teal btn-flat color blue-grey"></a>
                 </div>
         </div>
 
@@ -227,7 +227,7 @@
 
 <script>
     function selecionarCor(cor) {
-        document.getElementById('cor').value = cor
+        const tagcor=document.getElementById('cor').value = cor
     }
 
     function submitForm() {

@@ -23,6 +23,21 @@ hr{
 }
 .waves-effect.waves-teal.btn-flat.color{
     padding:40px;
+    transition: all 5s;
+}
+.waves-effect.waves-teal.btn-flat.color:after{
+    content:"";
+    display: block;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 100px;
+    height: 100px;
+    transition: all 0.5s;
+}
+.waves-effect.waves-teal.btn-flat.color:hover:after{
+    background: rgba(255, 255, 255, 0.473);
+    transition: all 0.5s;
 }
 .modal{
     max-height:90% !important;
