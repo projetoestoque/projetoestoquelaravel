@@ -40,8 +40,9 @@ class HomeController extends Controller
     public function profile(){
         $ong = Ong::findOrFail(1);
         $ong->telefones = json_decode($ong->telefones);
+        $logo = $ong->imagem;
         $endereco = Endereco::findOrFail($ong->Id_endereco);
-        return view('admin.perfil', compact('ong', 'endereco'));
+        return view('admin.perfil', compact('ong', 'endereco','logo'));
     }
     public function editProfile(){
         $ong = Ong::findOrFail(1);
