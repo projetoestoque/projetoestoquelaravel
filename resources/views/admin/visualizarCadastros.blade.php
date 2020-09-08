@@ -906,8 +906,13 @@
 
     function adicionar_produtos(id) {
         url_anterior = "{{$_SERVER['HTTP_REFERER']}}"
+        
+        //remove esse amp não sei oq é
+        url_anterior = url_anterior.replace('amp;amp;', '');
+        url_anterior = url_anterior.replace('amp;', '');
+
         if(url_anterior.indexOf('produto') != -1) {
-            let url=new URL(url_anterior);
+            let url = new URL(url_anterior);
             let productId=url.searchParams.get("produto");
             window.location.href = url_anterior.replace(`produto=${productId}`,`produto=${id}`)
         } else if(url_anterior.indexOf('doador') != -1){
@@ -915,6 +920,7 @@
         }else{
             window.location.href = "{{route('entradaProduto')}}?produto=" + id;
         }
+
         
     }
 
@@ -924,6 +930,11 @@
 
     function adicionar_doadores(id) {
         url_anterior = "{{$_SERVER['HTTP_REFERER']}}"
+
+        //remove esse amp não sei oq é
+        url_anterior = url_anterior.replace('amp;amp;', '');
+        url_anterior = url_anterior.replace('amp;', '');
+
         if(url_anterior.indexOf('doador') != -1) {
             let url=new URL(url_anterior);
             console.log(url_anterior)
