@@ -77,8 +77,8 @@ h4{
         <div class="row">
         <div class="input-field col s12 l4 offset-l1">
             <i class="material-icons prefix">reorder</i>
-            <select class="date" id="tipo" name="tipo">
-                <option value="geral" >Geral</option>
+            <select class="date" id="tipo" name="tipo" multiple>
+                <option value="geral" selected >Geral</option>
                 <option value="entrada">Entrada</option>
                 <option value="saida">Saída</option>
                 <option value="vencimento">Vencimento</option>
@@ -89,8 +89,8 @@ h4{
         <div class="col l2"></div>
         <div class="input-field col s12 l4">
             <i class="material-icons prefix">portrait</i>
-            <select class="date" id="usuario" name="usuario">
-                <option value="ambos" >Ambos</option>
+            <select class="date" id="usuario" name="usuario" multiple>
+                <option value="ambos" selected>Ambos</option>
                 <option value="admin" >Admin</option>
                 <option value="supervisor">Supervisor</option>
             </select>
@@ -101,8 +101,16 @@ h4{
         <div class="input-field col s12 l5 offset-l1">
             <i class="material-icons prefix">portrait</i>
             @if(isset($_GET['produto']))
-                <input readonly type="text" value="{{$produto->nome}}">
-                <input type="hidden" name="produto" value="{{$produto->id}}">
+                <select name="produto" id="produto" multiple>
+                    <option value="todos" selected>Todos os produtos</option>
+                    @foreach($produtos as $produto )
+                        <option value="{{$produto['id']}}">{{$produto['nome']}}</option>
+                    @endforeach
+                </select>
+                <a href="{{route('admin.listarCadastros')}}?acao=relatorio&tipo=produto&produto=2" class="modal-trigger radius white-text">
+                      <i class="tiny material-icons">add_circle_outline</i>
+                      <span>Escolher outro Produto</span>
+                </a>   
             @else
                 <select name="produto" id="produto">
                     <option value="todos">Todos os produtos</option>
@@ -115,6 +123,7 @@ h4{
             @endif
         </div>
         </div>
+        <br>
         <div class="row valign center">
             <button type="submit" class="btn waves-effect waves-light btn-flat gradient">
                 <b>Gerar Relatório<i class="material-icons right">send</i></b> 
