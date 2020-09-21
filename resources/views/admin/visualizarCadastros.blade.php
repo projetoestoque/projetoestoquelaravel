@@ -919,7 +919,15 @@
     }
 
     function relatorio_produtos(id) {
-        window.location.href = "{{route('relatorio')}}?produto=" + id;      
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        if(urlParams.has('produto')){
+            urlParams.append('produto', id);
+            window.location.href = `{{route('relatorio')}}?produto[]=${urlParams.getAll('produto').toString().replace(/,/g,'&produto[]=')}`
+        }
+        else{
+          window.location.href = "{{route('relatorio')}}?produto=" + id;   
+        }   
     }
 
     function adicionar_doadores(id) {
