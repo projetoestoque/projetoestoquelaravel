@@ -15,7 +15,14 @@ class RelatorioController extends Controller
 {
     public function index(){
         if(isset($_GET['produto']) && $_GET['produto'] != "") {
-            $produtos = Produto::findOrFail($_GET['produto']);
+            $ids_produtos = explode(";", $_GET['produto']);
+            $produtos = [];
+
+            for($i = 0; $i < count($ids_produtos); $i++) {
+                $produto = Produto::findOrFail($ids_produtos[$i]);
+                array_push($produtos, $produto);
+            }
+            
             return view('relatorio', compact('produtos'));
         }
         return view('relatorio');
@@ -28,6 +35,29 @@ class RelatorioController extends Controller
         $data_final = implode('-', array_reverse(explode('/', $req->get('data_final'))));
 
         $ong = Ong::findOrFail(1);
+
+        //define o parametro produto de data/filtragem
+        $data_filtragem_produto = "";
+        if($req->get('produto')[0] == "todos") {
+            $data_filtragem_produto = "Todos";
+        } else {
+            for($i = 0; $i < count($req->get('produto')); $i++ ) {
+                $data_filtragem_produto .= Produto::findOrFail($req->get('produto')[$i])->nome . ", ";
+            }
+        }
+        
+        
+        //define o parametro usuario de data/filtragem
+        $data_filtragem_usuario = "";
+        for($i = 0; $i < count($req->get('usuario')); $i++ ) {
+            $data_filtragem_usuario .= $req->get('usuario')[$i] . ", ";
+        }
+
+         //define o parametro tipo de data/filtragem
+         $data_filtragem_tipo = "";
+         for($i = 0; $i < count($req->get('tipo')); $i++ ) {
+             $data_filtragem_tipo .= $req->get('tipo')[$i] . ", ";
+         }
 
         $data = [
             "ong" => [
@@ -42,9 +72,9 @@ class RelatorioController extends Controller
             "filtragem" => [
                 "data_inicial" => $data_inicial,
                 "data_final" => $data_final,
-                "usuario" => $req->get('usuario'),
-                "produto" => ( $req->get('produto') == "todos" ? "Todos" : Produto::findOrFail($req->get('produto'))->nome ),
-                "tipo" => $req->get('tipo')
+                "usuario" => $data_filtragem_usuario,
+                "produto" => $data_filtragem_produto,
+                "tipo" => $data_filtragem_tipo
             ],
             "relatorio" => [
                 "entrada" => [],
@@ -57,12 +87,10 @@ class RelatorioController extends Controller
         //wheres adicionais
         $wheres = [];
 
-        if($req->get('usuario') != "ambos") {
-            array_push($wheres, ['usuario', '=', $req->get('usuario')]);
-        }
-
-        if($req->get('produto') != "todos") {
-            array_push($wheres, ['Id_produto', '=', $req->get('produto')]);
+        if($req->get('usuario')[0] != "ambos") {
+            for($i = 0; $i < count($req->get('usuario')); $i++ ) {
+                array_push($wheres, ['usuario', '=', $req->get('usuario')[$i]]);
+            }
         }
 
         //atualizar entradas em baixa ou se vencendo
@@ -70,8 +98,8 @@ class RelatorioController extends Controller
 
         $tipos = [];
         
-        if($req->get('tipo') != "geral") {
-            $tipos = [$req->get('tipo')];
+        if($req->get('tipo')[0] != "geral") {
+            $tipos = $req->get('tipo');
         } else {
             $tipos = [
                 'entrada',
@@ -82,43 +110,85 @@ class RelatorioController extends Controller
         }
 
         foreach($tipos as $tipo) {
-        
-            
 
-            if(DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo', $tipo)->where($wheres)->exists()) {
-               
-                $relatorios = DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo', $tipo)->where($wheres)->get();
-                
-                foreach($relatorios as $relatorio) {
+            if($req->get('produto')[0] != "todos") {
 
-                    $dados = [
-                        "produto" => Produto::findOrFail($relatorio->Id_produto)->nome,
-                        "marca" => Produto::findOrFail($relatorio->Id_produto)->marca,
-                        "data_acao" => date('d/m/Y', strtotime($relatorio->data)),
-                        "doador" => (Doador::findOrFail($relatorio->Id_doador)->nome == null ? Doador::findOrFail($relatorio->Id_doador)->instituicao:Doador::findOrFail($relatorio->Id_doador)->nome),
-                    ];
+                foreach($req->get('produto') as $produto) {
+                    if(DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo', $tipo)->where('Id_produto', $produto)->where($wheres)->exists()) {
+                        
+                        $relatorios = DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo', $tipo)->where('Id_produto', $produto)->where($wheres)->get();
+                        
+                        foreach($relatorios as $relatorio) {
 
-                    switch($tipo) {
-                        case 'entrada':
-                            $dados["quantidade"] = $relatorio->quantidade;
-                        break;
-                        case 'saida':
-                            $dados["quantidade"] = $relatorio->quantidade;
-                            $dados["resto"] = $relatorio->resto;
-                        break;
-                        case 'vencimento':
-                            $dados["resto"] = $relatorio->resto;
-                        break;
-                        case 'baixa':
-                            $dados["resto"] = $relatorio->resto;
-                            $dados["quantidade_minima"] = $relatorio->quantidade_minima;
-                        break;
+                            $dados = [
+                                "produto" => Produto::findOrFail($relatorio->Id_produto)->nome,
+                                "marca" => Produto::findOrFail($relatorio->Id_produto)->marca,
+                                "data_acao" => date('d/m/Y', strtotime($relatorio->data)),
+                                "doador" => (Doador::findOrFail($relatorio->Id_doador)->nome == null ? Doador::findOrFail($relatorio->Id_doador)->instituicao:Doador::findOrFail($relatorio->Id_doador)->nome),
+                            ];
+
+                            switch($tipo) {
+                                case 'entrada':
+                                    $dados["quantidade"] = $relatorio->quantidade;
+                                break;
+                                case 'saida':
+                                    $dados["quantidade"] = $relatorio->quantidade;
+                                    $dados["resto"] = $relatorio->resto;
+                                break;
+                                case 'vencimento':
+                                    $dados["resto"] = $relatorio->resto;
+                                break;
+                                case 'baixa':
+                                    $dados["resto"] = $relatorio->resto;
+                                    $dados["quantidade_minima"] = $relatorio->quantidade_minima;
+                                break;
+                            }
+
+                            
+                            array_push($data["relatorio"][$tipo], $dados);
+                        }
+                        
                     }
 
-
-                    array_push($data["relatorio"][$tipo], $dados);
                 }
+
+            } else {
                 
+                    if(DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo', $tipo)->where($wheres)->exists()) {
+                        
+                        $relatorios = DB::table('relatorios')->whereBetween('data', [$data_inicial, $data_final])->where('tipo', $tipo)->where($wheres)->get();
+                        
+                        foreach($relatorios as $relatorio) {
+
+                            $dados = [
+                                "produto" => Produto::findOrFail($relatorio->Id_produto)->nome,
+                                "marca" => Produto::findOrFail($relatorio->Id_produto)->marca,
+                                "data_acao" => date('d/m/Y', strtotime($relatorio->data)),
+                                "doador" => (Doador::findOrFail($relatorio->Id_doador)->nome == null ? Doador::findOrFail($relatorio->Id_doador)->instituicao:Doador::findOrFail($relatorio->Id_doador)->nome),
+                            ];
+
+                            switch($tipo) {
+                                case 'entrada':
+                                    $dados["quantidade"] = $relatorio->quantidade;
+                                break;
+                                case 'saida':
+                                    $dados["quantidade"] = $relatorio->quantidade;
+                                    $dados["resto"] = $relatorio->resto;
+                                break;
+                                case 'vencimento':
+                                    $dados["resto"] = $relatorio->resto;
+                                break;
+                                case 'baixa':
+                                    $dados["resto"] = $relatorio->resto;
+                                    $dados["quantidade_minima"] = $relatorio->quantidade_minima;
+                                break;
+                            }
+
+                            
+                            array_push($data["relatorio"][$tipo], $dados);
+                        }
+                        
+                    }
             }
         }
 
