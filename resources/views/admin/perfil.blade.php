@@ -5,6 +5,7 @@
 <link href="{{asset('css/profile.css')}}" rel="stylesheet">
 @endsection
 @section('conteudo')
+
 <div class="container">
     <h4><b>Perfil da ONG</b>
     </h4>
@@ -16,12 +17,12 @@
    <div class="row valign-wrapper hide-on-med-and-down">
         <div class="col s12 l2 offset-l1 valign-wrapper">
             <div class="col s6 hide-on-large-only">
-                <img class="logo" src="../storage/ong/{{$ong->imagem}}" alt="Logo">
+                <img class="logo" src="{{asset('storage/ong/')}}/{{$ong->imagem}}" alt="Logo">
             </div>
             <div class="col s3 offset-s3 hide-on-large-only">
                 <a class="btn-floating btn-large waves-effect waves-light white modal-trigger hide-on-large-only" href="#modal1"><i class="material-icons">create</i></a>
             </div>
-            <img class="logo hide-on-med-and-down" src="../storage/ong/{{$ong->imagem}}" alt="Logo">
+            <img class="logo hide-on-med-and-down" src="{{asset('storage/ong/')}}/{{$ong->imagem}}" alt="Logo">
         </div>
         <div class="col s12 l5">
             <h3 style="color:white"><b>{{$ong->nome_ficticio}}</b></h3>
@@ -34,12 +35,12 @@
    <div class="row hide-on-large-only">
         <div class="col s12 l2 offset-l1 valign-wrapper">
             <div class="col s6 hide-on-large-only">
-                <img class="logo" src="../storage/ong/{{$ong->imagem}}" alt="Logo">
+                <img class="logo" src="{{asset('storage/ong/')}}/{{$ong->imagem}}" alt="Logo">
             </div>
             <div class="col s3 offset-s3 hide-on-large-only">
                 <a class="btn-floating btn-large waves-effect waves-light white modal-trigger hide-on-large-only" href="#modal1"><i class="material-icons">create</i></a>
             </div>
-            <img class="logo hide-on-med-and-down" src="../storage/ong/{{$ong->imagem}}" alt="Logo">
+            <img class="logo hide-on-med-and-down" src="{{asset('storage/ong/')}}/{{$ong->imagem}}" alt="Logo">
         </div>
         <div class="col s12 l5">
             <h3 style="color:white"><b>{{$ong->nome_ficticio}}</b></h3>

@@ -358,7 +358,7 @@ class CadastroController extends Controller
 	public function cadastrarRefeicao(Request $req)
 	{
 		Refeicao::create($req->all());
-		return redirect()->back()->with('status', 'Refeião registrada com sucesso!');
+		return redirect()->back()->with('status', 'Refeição registrada com sucesso!');
 	}
 	public function cadastrarEstoque(Request $req)
 	{

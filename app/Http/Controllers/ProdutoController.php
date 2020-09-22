@@ -177,7 +177,7 @@ class ProdutoController extends Controller
         foreach($produtos_em_estoque as $produtos) {
             if($produtos->Id_produto == $produto_id) {
                 return redirect()->back()
-				->withErrors(["errors" => ["Produto em estoque, impossivel deletar!"]]);
+				->withErrors(["errors" => ["Produto em estoque, não é permitido deletar!"]]);
             }
         }
 
@@ -192,7 +192,7 @@ class ProdutoController extends Controller
         $produto = Produto_em_estoque::find($produto_id);
 
         if($produto->quantidade > 0) {
-            return redirect()->back()->with('status', 'Entrada em estoque, impossivel deletar!');
+            return redirect()->back()->with('status', 'Entrada em estoque, não é permitido deletar!');
         }
 
         $produto->delete();

@@ -58,7 +58,7 @@ h4{
 <div class="container">
 <div class="container z-depth-2 ">
 <nav class="nav-form blue lighten-1"></nav>
-    <form id="form1" method="post" action="{{route('relatorio.gerar')}}" target="_blank">
+    <form name="form1" method="post" action="{{route('relatorio.gerar')}}" target="_blank">
         {{ csrf_field() }}
         <div class="row">
         <br>
@@ -77,22 +77,22 @@ h4{
         <div class="row">
         <div class="input-field col s12 l4 offset-l1">
             <i class="material-icons prefix">reorder</i>
-            <select class="date" id="tipo" name="tipo" multiple>
-                <option value="geral" selected >Geral</option>
-                <option value="entrada">Entrada</option>
-                <option value="saida">Saída</option>
-                <option value="vencimento">Vencimento</option>
-                <option value="baixa">Quantidade baixa</option>
+            <select class="date" id="tipo" name="tipo[]" multiple>
+                <option id="opc_geral" value="geral" selected >Geral</option>
+                <option id="opc_entrada" value="entrada">Entrada</option>
+                <option id="opc_saida" value="saida">Saída</option>
+                <option id="opc_vencimento" value="vencimento">Vencimento</option>
+                <option id="opc_baixa" value="baixa">Quantidade baixa</option>
             </select>
             <label for="data">Tipo de relatório</label>
         </div>
         <div class="col l2"></div>
         <div class="input-field col s12 l4">
             <i class="material-icons prefix">portrait</i>
-            <select class="date" id="usuario" name="usuario" multiple>
-                <option value="ambos" selected>Ambos</option>
-                <option value="admin" >Admin</option>
-                <option value="supervisor">Supervisor</option>
+            <select class="date" id="usuario" name="usuario[]" multiple>
+                <option selected id="opc_ambos" value="ambos">Ambos</option>
+                <option id="opc_admin" value="admin" >Admin</option>
+                <option id="opc_superv" value="supervisor">Supervisor</option>
             </select>
             <label for="data">Usuário</label>
         </div>
@@ -101,10 +101,10 @@ h4{
         <div class="input-field col s12 l5 offset-l1">
             <i class="material-icons prefix">portrait</i>
             @if(isset($_GET['produto']))
-                <select name="produto" id="produto" multiple>
-                    <option value="todos" selected>Todos os produtos</option>
+                <select name="produto[]" id="produto" multiple>
+                    <option id="opc_todos" value="todos">Todos os produtos</option>
                     @foreach($produtos as $produto )
-                        <option value="{{$produto['id']}}">{{$produto['nome']}}</option>
+                        <option class="opc_produto" selected value="{{$produto['id']}}">{{$produto['nome']}}</option>
                     @endforeach
                 </select>
                 <a href="{{route('admin.listarCadastros')}}?acao=relatorio&tipo=produto&produto=2" class="modal-trigger radius white-text">
@@ -112,7 +112,7 @@ h4{
                       <span>Escolher outro Produto</span>
                 </a>   
             @else
-                <select name="produto" id="produto">
+                <select name="produto[]" id="produto">
                     <option value="todos">Todos os produtos</option>
                 </select>
                 <label for="produto">Produto</label>
@@ -124,34 +124,84 @@ h4{
         </div>
         </div>
         <br>
+        
+    </form>
         <div class="row valign center">
-            <button type="submit" class="btn waves-effect waves-light btn-flat gradient">
+            <button onclick="submitForm()" class="btn waves-effect waves-light btn-flat gradient">
                 <b>Gerar Relatório<i class="material-icons right">send</i></b> 
             </button>
         </div>
-    </form>
     <br>
 </div>
 </div>
 <br>
 <br>
-@if(isset($print))
-<div id="section-to-print">
-    @foreach($print as $item)
-        <b>{{$item['tipo']}}</b><br/>
-        @foreach($item['texto'] as $texto)
-        {{$texto}}<br/><br/>
-        @endforeach
-        <br/>
-    @endforeach
-</div>
-@endif
 
-@if(isset($print))
 <script>
-   window.print()
+    function submitForm() {
+        
+        if(document.getElementById('data_final').value == "" || document.getElementById('data_inicial').value == "") {
+            alert("Preencha as datas!")
+        } else {
+            if(ambos() && geral() && todos()) {
+                document.form1.submit()
+            }
+        }
+    }
+
+    function ambos() {
+        let ambos = document.getElementById('opc_ambos')
+        let superv = document.getElementById('opc_superv')
+        let admin = document.getElementById('opc_admin')
+        let retorno = true
+
+        if(ambos.selected && (superv.selected || admin.selected)) {
+            alert("Selecione apenas AMBOS ou outro usuário!")
+            retorno = false
+        }
+
+        return retorno
+    }
+
+    function geral() {
+        let geral = document.getElementById('opc_geral')
+        let entrada = document.getElementById('opc_entrada')
+        let saida = document.getElementById('opc_saida')
+        let vencimento = document.getElementById('opc_vencimento')
+        let baixa = document.getElementById('opc_baixa')
+        let retorno = true
+
+        if(geral.selected) {
+            if(entrada.selected || saida.selected || vencimento.selected || baixa.selected) {
+                alert("Selecione apenas GERAL ou outro tipo de filtragem!")
+                retorno = false
+            }
+        }
+
+        return retorno
+
+    }
+
+    function todos() {
+        let todos = document.getElementById('opc_todos')
+        let elementos = document.getElementsByClassName('opc_produto')
+        let selecionado = false
+        let retorno = true
+
+        for(let i = 0; i < elementos.length; i++) {
+            if(elementos[i].selected) {
+                selecionado = true
+            }
+        }
+
+        if(todos.selected && selecionado) {
+            alert("Selecione apenas TODOS OS PRODUTOS ou outros produtos!")
+            retorno = false
+        }
+
+        return retorno
+    }
 </script>
-@endif
 
 @endsection
 

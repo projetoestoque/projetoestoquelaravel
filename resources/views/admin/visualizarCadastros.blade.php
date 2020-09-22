@@ -906,8 +906,13 @@
 
     function adicionar_produtos(id) {
         url_anterior = "{{$_SERVER['HTTP_REFERER']}}"
+        
+        //remove esse amp não sei oq é
+        url_anterior = url_anterior.replace('amp;amp;', '');
+        url_anterior = url_anterior.replace('amp;', '');
+
         if(url_anterior.indexOf('produto') != -1) {
-            let url=new URL(url_anterior);
+            let url = new URL(url_anterior);
             let productId=url.searchParams.get("produto");
             window.location.href = url_anterior.replace(`produto=${productId}`,`produto=${id}`)
         } else if(url_anterior.indexOf('doador') != -1){
@@ -915,23 +920,62 @@
         }else{
             window.location.href = "{{route('entradaProduto')}}?produto=" + id;
         }
+
         
     }
 
     function relatorio_produtos(id) {
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        if(urlParams.has('produto')){
-            urlParams.append('produto', id);
-            window.location.href = `{{route('relatorio')}}?produto[]=${urlParams.getAll('produto').toString().replace(/,/g,'&produto[]=')}`
+        url_anterior = "{{$_SERVER['HTTP_REFERER']}}"
+        
+        //remove esse amp não sei oq é
+        url_anterior = url_anterior.replace('amp;amp;', '');
+        url_anterior = url_anterior.replace('amp;', '');
+
+        if(url_anterior.indexOf('produto') != -1) {
+
+            let url = new URL(url_anterior);
+
+            //verificar se o produto já está adicionado
+            var query = url.search.slice(1);
+            var partes = query.split('&');
+            var data = {};
+            partes.forEach(function (parte) {
+                var chaveValor = parte.split('=');
+                var chave = chaveValor[0];
+                var valor = chaveValor[1];
+                data[chave] = valor;
+            });
+
+            let produtos = data.produto.split(";")
+            let adicionado = false
+            for(let i = 0; i < produtos.length; i++) {
+                if(produtos[i] == id) {
+                    adicionado = true
+                } 
+            }
+
+            if(adicionado) {
+                alert("Este Produto já foi adicionado!")
+            } else {
+                let productId=url.searchParams.get("produto");
+                window.location.href = url_anterior.replace(`produto=${productId}`,`produto=${productId};${id}`)
+            }
+            
+            
+        } else if(url_anterior.indexOf('doador') != -1){
+            window.location.href = url_anterior + "&produto=" + id;
+        }else{
+            window.location.href = "{{route('relatorio')}}?produto=" + id;
         }
-        else{
-          window.location.href = "{{route('relatorio')}}?produto=" + id;   
-        }   
     }
 
     function adicionar_doadores(id) {
         url_anterior = "{{$_SERVER['HTTP_REFERER']}}"
+
+        //remove esse amp não sei oq é
+        url_anterior = url_anterior.replace('amp;amp;', '');
+        url_anterior = url_anterior.replace('amp;', '');
+
         if(url_anterior.indexOf('doador') != -1) {
             let url=new URL(url_anterior);
             console.log(url_anterior)
