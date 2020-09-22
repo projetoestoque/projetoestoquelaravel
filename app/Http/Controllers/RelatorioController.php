@@ -15,8 +15,8 @@ class RelatorioController extends Controller
 {
     public function index(){
         if(isset($_GET['produto']) && $_GET['produto'] != "") {
-            $produto = Produto::findOrFail($_GET['produto']);
-            return view('relatorio', compact('produto'));
+            $produtos = Produto::findOrFail($_GET['produto']);
+            return view('relatorio', compact('produtos'));
         }
         return view('relatorio');
     }
