@@ -64,13 +64,13 @@ h4{
         <br>
             <div class="input-field col s12 l4 offset-l1">
                 <i class="material-icons prefix">date_range</i>
-                <input required type="text" class="datepicker" id="data_inicial" name="data_inicial">
+                <input required type="text" class="datepicker" id="data_inicial" name="data_inicial" placeholder="20/02/2020">
                 <label for="data">Data Inicial</label>
             </div>
             <div class="col l2"></div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">date_range</i>
-                <input required type="text" class="datepicker" id="data_final" name="data_final">
+                <input required type="text" class="datepicker" id="data_final" name="data_final" placeholder="20/02/2020">
                 <label for="data">Data final</label>
             </div>
         </div>
@@ -113,7 +113,7 @@ h4{
                 </a>   
             @else
                 <select name="produto[]" id="produto">
-                    <option value="todos">Todos os produtos</option>
+                    <option value="todos" selected>Todos os produtos</option>
                 </select>
                 <label for="produto">Produto</label>
                 <a href="{{route('admin.listarCadastros')}}?acao=relatorio&tipo=produto" class="modal-trigger radius white-text">
@@ -188,17 +188,21 @@ h4{
         let selecionado = false
         let retorno = true
 
-        for(let i = 0; i < elementos.length; i++) {
-            if(elementos[i].selected) {
-                selecionado = true
+        if(todos==null){
+            return true;
+        }else{
+            for(let i = 0; i < elementos.length; i++) {
+                if(elementos[i].selected) {
+                    selecionado = true
+                }
             }
-        }
 
-        if(todos.selected && selecionado) {
-            alert("Selecione apenas TODOS OS PRODUTOS ou outros produtos!")
-            retorno = false
-        }
+            if(todos.selected && selecionado) {
+                alert("Selecione apenas TODOS OS PRODUTOS ou outros produtos!")
+                retorno = false
+            }
 
+        }
         return retorno
     }
 </script>
