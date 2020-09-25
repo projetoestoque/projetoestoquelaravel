@@ -83,6 +83,8 @@ h4{
                 <option id="opc_saida" value="saida">Saída</option>
                 <option id="opc_vencimento" value="vencimento">Vencimento</option>
                 <option id="opc_baixa" value="baixa">Quantidade baixa</option>
+                <option id="opc_em_dia" value="baixa">Em dia</option>
+                <option id="opc_sem_estoque" value="baixa">Sem estoque</option>
             </select>
             <label for="data">Tipo de relatório</label>
         </div>
@@ -169,10 +171,12 @@ h4{
         let saida = document.getElementById('opc_saida')
         let vencimento = document.getElementById('opc_vencimento')
         let baixa = document.getElementById('opc_baixa')
+        let em_dia = document.getElementById('opc_em_dia')
+        let sem_estoque = document.getElementById('opc_sem_estoque')
         let retorno = true
 
         if(geral.selected) {
-            if(entrada.selected || saida.selected || vencimento.selected || baixa.selected) {
+            if(entrada.selected || saida.selected || vencimento.selected || baixa.selected || em_dia.selected || sem_estoque.selected) {
                 alert("Selecione apenas GERAL ou outro tipo de filtragem!")
                 retorno = false
             }

@@ -14,37 +14,25 @@ class RelatorioSeeder extends Seeder
     {
         $relatorios = [
             [
-              'Id_doador' => 1,
-              'Id_produto' => 1,
-              'Id_entrada' => 1,
-              'tipo' => 'saida',
-              'data' => date('Y-m-d', strtotime('-1 week')),
-              'usuario' => 'admin',
-              'quantidade' => "5",
-              'vencimento' => "00/00/0000",
-              'resto' => "8"
-            ],
-            [
-              'Id_doador' => 1,
-              'Id_produto' => 1,
+              'Id_doador' => 2,
+              'Id_produto' => 2,
               'Id_entrada' => 1,
               'tipo' => 'entrada',
-              'data' => date('Y-m-d', strtotime('-1 week')),
-              'usuario' => 'supervisor',
-              'quantidade' => "16",
-              'vencimento' => "00/00/0000",
+              'data' => date('Y-m-d'),
+              'usuario' => 'admin',
+              'quantidade' => "50",
+              'vencimento' => date('Y-m-d', strtotime('+2 week'))
             ],
             [
-              'Id_doador' => 1,
+              'Id_doador' => 2,
               'Id_produto' => 1,
-              'Id_entrada' => 1,
-              'tipo' => 'baixa',
-              'data' => date('Y-m-d', strtotime('-1 week')),
-              'usuario' => 'admin,',
-              'vencimento' => "00/00/0000",
-              'resto' => '2',
-              'quantidade_minima' => '5'
-            ]
+              'Id_entrada' => 2,
+              'tipo' => 'entrada',
+              'data' => date('Y-m-d'),
+              'usuario' => 'admin',
+              'quantidade' => "4",
+              'vencimento' => date('Y-m-d', strtotime('+2 week'))
+            ],
           ];
 
           foreach($relatorios as $relatorio => $value){

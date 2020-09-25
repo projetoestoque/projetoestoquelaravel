@@ -20,7 +20,7 @@ class EntradaSeeder extends Seeder
               'Id_doador' => 2,
               'quantidade' => 50,
               'quantidade_minima' => 5,
-              'vencimento' => '20/06/2002'
+              'vencimento' => date('Y-m-d', strtotime('+2 week'))
             ],
             [
                 'Id_estoque' => 2,
