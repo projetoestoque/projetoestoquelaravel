@@ -152,6 +152,7 @@ class ProdutoController extends Controller
         array_push($produtos_estoque, $produto_estoque);
     }
 
+    //listando produtos sem estoque
     foreach($produtos_cadastrados as $produto) {
         if((DB::table('produto_em_estoques')->where('Id_produto', $produto->id)->exists()) == false){
             $produto_sem = new Produto();

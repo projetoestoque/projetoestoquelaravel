@@ -30,6 +30,7 @@ class RelatorioController extends Controller
 
 
     function gerarRelatorio(Request $req) {
+
         date_default_timezone_set('America/Sao_Paulo');
         $data_inicial = implode('-', array_reverse(explode('/', $req->get('data_inicial'))));
         $data_final = implode('-', array_reverse(explode('/', $req->get('data_final'))));
@@ -37,26 +38,26 @@ class RelatorioController extends Controller
         $ong = Ong::findOrFail(1);
 
         //define o parametro produto de data/filtragem
-        $data_filtragem_produto = "";
+        $data_filtragem_produto = [];
         if($req->get('produto')[0] == "todos") {
-            $data_filtragem_produto = "Todos";
+            array_push($data_filtragem_produto, "Todos");
         } else {
             for($i = 0; $i < count($req->get('produto')); $i++ ) {
-                $data_filtragem_produto .= Produto::findOrFail($req->get('produto')[$i])->nome . ", ";
+                array_push($data_filtragem_produto, Produto::findOrFail($req->get('produto')[$i])->nome);
             }
         }
         
         
         //define o parametro usuario de data/filtragem
-        $data_filtragem_usuario = "";
+        $data_filtragem_usuario = [];
         for($i = 0; $i < count($req->get('usuario')); $i++ ) {
-            $data_filtragem_usuario .= $req->get('usuario')[$i] . ", ";
+            array_push($data_filtragem_usuario, $req->get('usuario')[$i]);
         }
 
          //define o parametro tipo de data/filtragem
-         $data_filtragem_tipo = "";
+         $data_filtragem_tipo = [];
          for($i = 0; $i < count($req->get('tipo')); $i++ ) {
-             $data_filtragem_tipo .= $req->get('tipo')[$i] . ", ";
+             array_push($data_filtragem_tipo, $req->get('tipo')[$i]);
          }
 
         $data = [
@@ -80,7 +81,9 @@ class RelatorioController extends Controller
                 "entrada" => [],
                 "saida" => [],
                 "vencimento" => [],
-                "baixa" => []
+                "baixa" => [],
+                "em_dia" => [],
+                "sem_estoque" => []
             ]
         ];
 
@@ -93,8 +96,9 @@ class RelatorioController extends Controller
             }
         }
 
-        //atualizar entradas em baixa ou se vencendo
-        $output = shell_exec('cd .. && php artisan verificar:produtos');
+        //atualizar entradas em baixa, vencendo, alta ou sem estoque.
+        $rel = new Relatorio();
+        $rel->verificarProdutos();
 
         $tipos = [];
         
@@ -105,7 +109,9 @@ class RelatorioController extends Controller
                 'entrada',
                 'saida',
                 'baixa',
-                'vencimento'
+                'vencimento',
+                'em_dia',
+                'sem_estoque'
             ];
         }
 
@@ -129,6 +135,7 @@ class RelatorioController extends Controller
 
                             switch($tipo) {
                                 case 'entrada':
+                                case 'em_dia':
                                     $dados["quantidade"] = $relatorio->quantidade;
                                 break;
                                 case 'saida':
@@ -169,6 +176,7 @@ class RelatorioController extends Controller
 
                             switch($tipo) {
                                 case 'entrada':
+                                case 'em_dia':
                                     $dados["quantidade"] = $relatorio->quantidade;
                                 break;
                                 case 'saida':
@@ -191,6 +199,8 @@ class RelatorioController extends Controller
                     }
             }
         }
+
+        dd($data);
 
         return \PDF::loadView('relatorio_pdf', compact('data'))
             ->setPaper('a4', 'portrait')
