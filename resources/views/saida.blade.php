@@ -68,7 +68,7 @@
             <div class="input-field col s6">
                 <i class="material-icons prefix">account_circle</i>
                 @if(isset($entrada))
-                <input required min="1" max="{{$entrada->quantidade}}" placeholder="10" id="qtd" name="quantidade" type="number" >
+                <input required min="1" max="{{$entrada->quantidade}}" placeholder="Quantidade: {{$entrada->quantidade}}" id="qtd" name="quantidade" type="number" >
                 @endif
                 <label for="qtd">Quantidade</label>
             </div>
