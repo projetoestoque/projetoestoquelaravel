@@ -140,13 +140,37 @@ h4{
 <script>
     function submitForm() {
         
-        if(document.getElementById('data_final').value == "" || document.getElementById('data_inicial').value == "") {
+        if(data_valida() && ambos() && geral() && todos()) {
+            document.form1.submit()
+        }
+    }
+
+    function data_valida() {
+        let data_inicial = document.getElementById('data_inicial')
+        let data_final = document.getElementById('data_final')
+        let retorno = true
+
+        if(data_final.value == "" || data_inicial.value == "") {
             alert("Preencha as datas!")
+            retorno = false
         } else {
-            if(ambos() && geral() && todos()) {
-                document.form1.submit()
+            //verifica se a data final é depois de hoje ou se é antes da data inicial
+            let date_final = new Date(data_final.value.split('/').reverse().join('/'))
+            let date_inicial = new Date(data_inicial.value.split('/').reverse().join('/'))
+            let hoje = new Date();
+
+            if(date_final > hoje) {
+                alert("Data final ainda não chegou!");
+                retorno = false
+            } 
+            
+            if(date_final < date_inicial) {
+                alert("A data final não pode ser menor que a data inicial!")
+                retorno = false
             }
         }
+
+        return retorno
     }
 
     function ambos() {

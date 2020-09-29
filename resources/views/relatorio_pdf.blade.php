@@ -152,6 +152,6 @@
     
     <div style="position:absolute;bottom:0;width:100%;">
     <hr/>
-    <p>Relatório Gerado as 13:54 de Terça-Feira pelo Sysong©</p>
+    <p>Relatório Gerado em {{date("d/m/Y")}} as {{date("H:i")}} pelo Sysong©</p>
     </div>
 @endsection
