@@ -1,15 +1,10 @@
 @extends('template.pdf')
 @section('cssLinks')
 <link href="{{public_path('css/pdf.css')}}" rel="stylesheet">
-@if(isset($data))
-    <script>
-    alert('oie')
-    console.log(data)
-    </script>
-@endif
 @endsection
 @section('titulo','Relatório dia ' .date("d/m/Y"))
 @section('cabecalho')
+
 <table style="border: 0px;width:100%" cellspacing="0">
         <tr bgcolor="#0083b0">
             <td style="font-size: 0; line-height: 0;" width="30" >
@@ -98,9 +93,21 @@
             <tr>
                 <th>{{$data['filtragem']['data_inicial']}}</th>
                 <th>{{$data['filtragem']['data_final']}}</th>
-                <th>{{$data['filtragem']['tipo']}}</th>
-                <th>{{$data['filtragem']['usuario']}}</th>
-                <th>{{$data['filtragem']['produto']}}</th>
+                <th>
+                @foreach($data['filtragem']['tipo'] as $tipos)
+                {{$tipos}}
+                @endforeach
+                </th>
+                <th>
+                @foreach($data['filtragem']['usuario'] as $usuarios)
+                {{$usuarios}}
+                @endforeach
+                </th>
+                <th>
+                @foreach($data['filtragem']['produto'] as $produtos)
+                {{$produtos}}
+                @endforeach
+                </th>
             </tr>
         </tbody>
     </table>
@@ -108,11 +115,12 @@
     <br>
     <h2 style="margin-bottom:0">Relatório</h2>
     <hr>
+    <br/>
     @foreach($data['relatorio'] as $data_key=> $datas)
-    <b>{{$data_key}}</b>
-    <br>
+    <b>{{ucwords(str_replace('_', " ", $data_key))}}</b>
     <br>
     @if(key_exists('0',$datas))
+    <br>
     <table cellspacing="0px" style="text-align:center;width: 100%;">
         <thead>
             <tr bgcolor="#0083b0" style="color:#fff">
@@ -129,7 +137,7 @@
             <tr bgcolor="#e0e0e0">
             @endif
                 @foreach($array as $acao_key=>$value)
-                    <th>{{$value}}</th>
+                    <th style="padding:15px 10px">{{$value}}</th>
                 @endforeach
             </tr>
             @endforeach
@@ -142,4 +150,8 @@
     @endforeach
     <br><br>
     
+    <div style="position:absolute;bottom:0;width:100%;">
+    <hr/>
+    <p>Relatório Gerado as 13:54 de Terça-Feira pelo Sysong©</p>
+    </div>
 @endsection
