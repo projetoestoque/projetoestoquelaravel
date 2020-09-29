@@ -74,7 +74,7 @@
             </div>
             <div class="input-field col s6">
             @if(isset($entrada))
-            <p>{{$entrada->medida}}</p>
+            <p>{{$entrada->medida}}(s)</p>
             @endif
             </div>
             <!-- Tipo de unidade de medida que foi inserida nesse produto-->
@@ -98,7 +98,7 @@
             <input type="hidden" name="Id_doador" value="{{$entrada->Id_doador}}">
             <input type="hidden" name="Id_entrada" value="{{$entrada->id}}">
         @endif
-        <button class="btn waves-effect waves-light red darken-2 " type="submit">Retirar</button>
+        <button class="btn waves-effect waves-light blue darken-2 " type="submit">Retirar</button>
         <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
     </div>
     </form>

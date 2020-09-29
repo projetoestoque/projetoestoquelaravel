@@ -96,26 +96,6 @@
                 <span class="tooltiptext">O produto serve pra identificar qual produto será inserido</span>
             </div></div>
             </div>
-            <div class="input-field col s12 l4">
-            <i class="material-icons prefix">plus_one</i>
-                @if(isset($produto_em_estoque))
-                    <input required type="number" value="{{$produto_em_estoque->quantidade}}" placeholder="5" name="quantidade">
-                @else
-                    <input required type="number"  placeholder="5" name="quantidade">
-                @endif
-                <label>Quantidade <span class="important">*</span></label>
-                <div class="tooltip desktop-hide">
-                <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">Quantidade de produtos que será inserida</span>
-                </div>
-            </div>
-            <div class="mobile-hide"><div class="tooltip">
-                <i class="material-icons">info_outline</i>
-                <span class="tooltiptext">Quantidade de produtos que será inserida</span>
-            </div></div>
-        </div>
-        <div class="row">
-            <div class="col l1"></div>
             <div class="desktop-hide">
              <div class="input-field col s12 l4">
                 @if(isset($doador))
@@ -164,11 +144,33 @@
                 @endif
                 </div>
             </div>
-            <div class="col l2">
+
             <div class="mobile-hide"><div class="tooltip">
                 <i class="material-icons">info_outline</i>
                 <span class="tooltiptext">O Doador é de quem recebeu o produto que será inserido</span>
             </div></div>
+        </div>
+        <div class="row">
+            <div class="col l1"></div>
+            <div class="input-field col s12 l4">
+            <i class="material-icons prefix">plus_one</i>
+                @if(isset($produto_em_estoque))
+                    <input required type="number" value="{{$produto_em_estoque->quantidade}}" placeholder="5" name="quantidade">
+                @else
+                    <input required type="number"  placeholder="5" name="quantidade">
+                @endif
+                <label>Quantidade <span class="important">*</span></label>
+                <div class="tooltip desktop-hide">
+                <i class="material-icons">info_outline</i>
+                <span class="tooltiptext">Quantidade de produtos que será inserida</span>
+                </div>
+            </div>
+            
+            <div class="col l2">
+                <div class="mobile-hide"><div class="tooltip">
+                    <i class="material-icons">info_outline</i>
+                    <span class="tooltiptext">Quantidade de produtos que será inserida</span>
+                </div></div>
             </div>
             <div class="input-field col s12 l4">
                 <i class="material-icons prefix">view_compact</i>

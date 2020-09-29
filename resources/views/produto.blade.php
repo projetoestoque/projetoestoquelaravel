@@ -157,7 +157,6 @@
                     <i class="material-icons right">send</i>
             </button>
             <br>
-            <br>
             <label ><span class="important">*</span> Campos Obrigatórios</label>
         </div>
         <br>

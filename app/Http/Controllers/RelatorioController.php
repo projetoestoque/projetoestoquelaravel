@@ -200,8 +200,6 @@ class RelatorioController extends Controller
             }
         }
 
-        dd($data);
-
         return \PDF::loadView('relatorio_pdf', compact('data'))
             ->setPaper('a4', 'portrait')
             ->stream();

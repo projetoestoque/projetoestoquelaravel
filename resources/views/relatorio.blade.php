@@ -55,7 +55,6 @@ h4{
         <a onclick="baixarPdf()" class="btn-floating btn-large waves-effect waves-light white"><i class="material-icons black-text">picture_as_pdf</i></a>
     </div> -->
     <br>
-<div class="container">
 <div class="container z-depth-2 ">
 <nav class="nav-form blue lighten-1"></nav>
     <form name="form1" method="post" action="{{route('relatorio.gerar')}}" target="_blank">
@@ -100,7 +99,7 @@ h4{
         </div>
         </div>
         <div class="row">
-        <div class="input-field col s12 l5 offset-l1">
+        <div class="input-field col s12 l4 offset-l1">
             <i class="material-icons prefix">portrait</i>
             @if(isset($_GET['produto']))
                 <select name="produto[]" id="produto" multiple>
@@ -134,7 +133,6 @@ h4{
             </button>
         </div>
     <br>
-</div>
 </div>
 <br>
 <br>
